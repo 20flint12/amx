@@ -16,10 +16,10 @@ DEFINE_DEVICE
 dvModbus  = 5001:2:0;
 
 vdvModbus = 33001:1:0;
-
 vdvDebug  = 32999:1:0;
 
-panel = 11001:1:1;
+//panel = 11001:1:1;
+panel = 10000:1:1;
 
 
 
