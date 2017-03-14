@@ -124,7 +124,7 @@
 <VirtualNetLinxMasterFlag>1</VirtualNetLinxMasterFlag>
 <VNMRestoreIPSettings>193.178.251.2:44480:1:NI3100 Roma::</VNMRestoreIPSettings>
 <VNMSystemID>1</VNMSystemID>
-<VNMIPAddress>192.168.0.135</VNMIPAddress>
+<VNMIPAddress>10.0.2.15</VNMIPAddress>
 <VNMMaskAddress>255.255.255.0</VNMMaskAddress>
 <IsAuthenticationEnabled>0</IsAuthenticationEnabled>
 <UserName></UserName>

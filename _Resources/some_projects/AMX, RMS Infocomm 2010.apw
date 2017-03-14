@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Workspace [
+
+<!-- Common Elements -->
+<!ELEMENT Identifier (#PCDATA)>
+<!ELEMENT Comments (#PCDATA)>
+<!ELEMENT CreationDate (#PCDATA)>
+
+<!-- Workspace Elements-->
+<!ELEMENT Workspace ( Identifier,
+               CreateVersion,
+               PJS_File?,
+               PJS_ConvertDate?,
+               PJS_CreateDate?,
+               Comments?,
+               Project*)>
+
+<!ATTLIST Workspace 
+      CurrentVersion CDATA   #REQUIRED> 
+
+<!ELEMENT CreateVersion     (#PCDATA)>
+
+
+<!-- Conversion data only: only included for files converted from the old .pjs database -->
+<!ELEMENT PJS_File (#PCDATA)>
+<!ELEMENT PJS_ConvertDate (#PCDATA)>
+<!ELEMENT PJS_CreateDate (#PCDATA)>
+
+<!ELEMENT Project ( Identifier,
+               Designer?,
+               DealerID?,
+               SalesOrder?,
+               PurchaseOrder?,
+               Comments?,
+               System*)>
+
+<!ELEMENT Designer (#PCDATA)>
+<!ELEMENT DealerID (#PCDATA)>
+<!ELEMENT SalesOrder (#PCDATA)>
+<!ELEMENT PurchaseOrder (#PCDATA)>
+
+
+<!ELEMENT System  (  Identifier,
+                 SysID,
+                 TransSerial?,
+                 TransModem?,
+                 TransTCPIP?,
+                 VirtualNetLinxMasterFlag?,
+                 VNMRestoreIPSettings?,
+                 VNMSystemID?,
+                 VNMIPAddress?,
+                 VNMMaskAddress?,
+                 IsAuthenticationEnabled?,
+                 UserName?,
+                 Password?,
+                 Comments?,
+                 File*)>
+
+<!ATTLIST System
+      IsActive   (true | false)   "false"
+      Platform   (Axcess | Netlinx)   "Axcess"
+      Transport   (Serial | Modem | TCPIP) "Serial">
+
+<!ELEMENT SysID (#PCDATA)>
+<!ELEMENT TransSerial (#PCDATA)>
+<!ELEMENT TransModem (#PCDATA)>
+<!ELEMENT TransTCPIP (#PCDATA)>
+<!ELEMENT VirtualNetLinxMasterFlag (#PCDATA)>
+<!ELEMENT VNMRestoreIPSettings (#PCDATA)>
+<!ELEMENT VNMSystemID (#PCDATA)>
+<!ELEMENT VNMIPAddress (#PCDATA)>
+<!ELEMENT VNMMaskAddress (#PCDATA)>
+<!ELEMENT IsAuthenticationEnabled (#PCDATA)>
+<!ELEMENT UserName (#PCDATA)>
+<!ELEMENT Password (#PCDATA)>
+
+
+<!ELEMENT File ( Identifier,
+               FilePathName,
+               Comments?,
+               DeviceMap*,
+               IRDB*)>
+
+<!ATTLIST File 
+       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB ) "Other"
+       CompileType (Axcess | Netlinx | None) "None"> 
+
+<!ELEMENT FilePathName	(#PCDATA)>
+                            
+<!ELEMENT DeviceMap (DevName)>
+       <!ATTLIST DeviceMap DevAddr CDATA #REQUIRED>
+
+       <!ELEMENT DevName (#PCDATA)>
+
+<!ELEMENT IRDB    (Property,
+                 DOSName,
+                 UserDBPathName,
+                 Notes)>
+       <!ATTLIST IRDB DBKey CDATA #REQUIRED>
+
+       <!ELEMENT Property (#PCDATA)>
+       <!ELEMENT DOSName (#PCDATA)>
+       <!ELEMENT UserDBPathName (#PCDATA)>
+       <!ELEMENT Notes (#PCDATA)>
+]>
+
+<Workspace CurrentVersion="3.2"><Identifier>AMX, RMS Infocomm 2010</Identifier>
+<CreateVersion>3.2</CreateVersion>
+<PJS_File></PJS_File>
+<PJS_ConvertDate></PJS_ConvertDate>
+<PJS_CreateDate></PJS_CreateDate>
+<Comments></Comments>
+<Project><Identifier>AMX, RMS Infocomm 2010</Identifier>
+<Designer></Designer>
+<DealerID></DealerID>
+<SalesOrder></SalesOrder>
+<PurchaseOrder></PurchaseOrder>
+<Comments></Comments>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>01_DigitalMedia</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransTCPIP>192.168.1.110:1319:1:01_DigitalMedia</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>01_DigitalMedia</Identifier>
+<FilePathName>01_DigitalMedia\01_DigitalMedia.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSDigitalMedia</Identifier>
+<FilePathName>01_DigitalMedia\_Includes\RMSDigitalMedia.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>RMS Signage</Identifier>
+<FilePathName>01_DigitalMedia\_UI\RMS Signage.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP"><DevName>dvTP</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>i!-ConnectLinxEngineMod</Identifier>
+<FilePathName>_RMS\i!-ConnectLinxEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSBasicDeviceMod</Identifier>
+<FilePathName>_RMS\RMSBasicDeviceMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSCommon</Identifier>
+<FilePathName>_RMS\RMSCommon.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSEngineMod</Identifier>
+<FilePathName>_RMS\RMSEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSGlobals</Identifier>
+<FilePathName>_RMS\RMSGlobals.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSSrcUsageMod</Identifier>
+<FilePathName>_RMS\RMSSrcUsageMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSUIMod</Identifier>
+<FilePathName>_RMS\RMSUIMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSWelcomeOnlyUIMod</Identifier>
+<FilePathName>_RMS\RMSWelcomeOnlyUIMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>02_BuildingAccess</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransTCPIP>192.168.1.120:1319:1:02_BuildingAccess</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>02_BuildingAccess</Identifier>
+<FilePathName>02_BuildingAccess\02_BuildingAccess.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>Brivo_ACS5000_Comm_dr1_0_0</Identifier>
+<FilePathName>02_BuildingAccess\_Modules\Brivo_ACS5000_Comm_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>IC2010-Security-800x600</Identifier>
+<FilePathName>02_BuildingAccess\_UI\IC2010-Security-800x600.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP1a"><DevName>dvTP1a</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="Other"><Identifier>02_BuildingAccess (cgp)</Identifier>
+<FilePathName>_RMS\02_BuildingAccess.cgp</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>02_BuildingAccess_RMSMain</Identifier>
+<FilePathName>_RMS\02_BuildingAccess_RMSMain.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>i!-ConnectLinxEngineMod</Identifier>
+<FilePathName>_RMS\i!-ConnectLinxEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSCommon</Identifier>
+<FilePathName>_RMS\RMSCommon.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSEngineMod</Identifier>
+<FilePathName>_RMS\RMSEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSGlobals</Identifier>
+<FilePathName>_RMS\RMSGlobals.axi</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>03_CCTV</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransTCPIP>192.168.1.130:1319:1:03_CCTV</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>03_CCTV</Identifier>
+<FilePathName>03_CCTV\03_CCTV.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>Super Circuits,DMR-27U,DMR-27U,Security,1</Identifier>
+<FilePathName>03_CCTV\_IR\Super Circuits,DMR-27U,DMR-27U,Security,1.irl</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvCCTV01"><DevName>dvCCTV01</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>CCTV_15</Identifier>
+<FilePathName>03_CCTV\_UI\CCTV_15.tp4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP1a"><DevName>dvTP1a</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="Other"><Identifier>03_CCTV (cgp)</Identifier>
+<FilePathName>_RMS\03_CCTV.cgp</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>03_CCTV_RMSMain</Identifier>
+<FilePathName>_RMS\03_CCTV_RMSMain.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>i!-ConnectLinxEngineMod</Identifier>
+<FilePathName>_RMS\i!-ConnectLinxEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSCommon</Identifier>
+<FilePathName>_RMS\RMSCommon.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSEngineMod</Identifier>
+<FilePathName>_RMS\RMSEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSGlobals</Identifier>
+<FilePathName>_RMS\RMSGlobals.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSSrcUsageMod</Identifier>
+<FilePathName>_RMS\RMSSrcUsageMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>04_AVControl</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransTCPIP>192.168.1.140:1319:1:04_AVControl</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>04_AVControl</Identifier>
+<FilePathName>04_AVControl\04_AVControl.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>__SHINER__</Identifier>
+<FilePathName>04_AVControl\_Includes\__SHINER__.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>AV Control_800x600</Identifier>
+<FilePathName>04_AVControl\_UI\AV Control_800x600.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP1a"><DevName>dvTP1a</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="Other"><Identifier>04_AVControl (cgp)</Identifier>
+<FilePathName>_RMS\04_AVControl.cgp</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>04_AVControl_RMSMain</Identifier>
+<FilePathName>_RMS\04_AVControl_RMSMain.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>i!-ConnectLinxEngineMod</Identifier>
+<FilePathName>_RMS\i!-ConnectLinxEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSCommon</Identifier>
+<FilePathName>_RMS\RMSCommon.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSEngineMod</Identifier>
+<FilePathName>_RMS\RMSEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSGlobals</Identifier>
+<FilePathName>_RMS\RMSGlobals.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSSrcUsageMod</Identifier>
+<FilePathName>_RMS\RMSSrcUsageMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>05_Fire</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransTCPIP>192.168.1.150:1319:1:05_Fire</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>05_Fire</Identifier>
+<FilePathName>05_Fire\05_Fire.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Other"><Identifier>05_FIRE (cgp)</Identifier>
+<FilePathName>_RMS\05_Fire.cgp</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>05_Fire_RMSMain</Identifier>
+<FilePathName>_RMS\05_Fire_RMSMain.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>i!-ConnectLinxEngineMod</Identifier>
+<FilePathName>_RMS\i!-ConnectLinxEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSCommon</Identifier>
+<FilePathName>_RMS\RMSCommon.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSEngineMod</Identifier>
+<FilePathName>_RMS\RMSEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSGlobals</Identifier>
+<FilePathName>_RMS\RMSGlobals.axi</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>06_HVAC</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransTCPIP>192.168.1.160:1319:1:06_HVAC</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>06_HVAC</Identifier>
+<FilePathName>06_HVAC\06_HVAC.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>__FS_FSB3510__</Identifier>
+<FilePathName>06_HVAC\_Modules\__FS_FSB3510__.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>HVAC-800x480</Identifier>
+<FilePathName>06_HVAC\_UI\HVAC-800x480.TP4</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="dvTP1a"><DevName>dvTP1a</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="Other"><Identifier>06_HVAC (cgp)</Identifier>
+<FilePathName>_RMS\06_HVAC.cgp</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>06_HVAC_RMSMain</Identifier>
+<FilePathName>_RMS\06_HVAC_RMSMain.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>i!-ConnectLinxEngineMod</Identifier>
+<FilePathName>_RMS\i!-ConnectLinxEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSCommon</Identifier>
+<FilePathName>_RMS\RMSCommon.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSEngineMod</Identifier>
+<FilePathName>_RMS\RMSEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSGlobals</Identifier>
+<FilePathName>_RMS\RMSGlobals.axi</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>07_Lighting</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransTCPIP>192.168.1.170:1319:1:07_Lighting</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>07_Lighting</Identifier>
+<FilePathName>07_Lighting\07_Lighting.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>AMX_Radia_Comm_dr1_0_0</Identifier>
+<FilePathName>07_Lighting\_Modules\AMX_Radia_Comm_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Other"><Identifier>07_Lighting (cgp)</Identifier>
+<FilePathName>_RMS\07_Lighting.cgp</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>07_Lighting_RMSMain</Identifier>
+<FilePathName>_RMS\07_Lighting_RMSMain.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>i!-ConnectLinxEngineMod</Identifier>
+<FilePathName>_RMS\i!-ConnectLinxEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSCommon</Identifier>
+<FilePathName>_RMS\RMSCommon.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSEngineMod</Identifier>
+<FilePathName>_RMS\RMSEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSGlobals</Identifier>
+<FilePathName>_RMS\RMSGlobals.axi</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>08_Power</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransTCPIP>192.168.1.180:1319:1:08_Power</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>08_Power</Identifier>
+<FilePathName>08_Power\08_Power.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>__DENT_SCOUT__</Identifier>
+<FilePathName>08_Power\_Modules\__DENT_SCOUT__.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>__DENT_SCOUT__</Identifier>
+<FilePathName>08_Power\_Modules\__DENT_SCOUT__.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TP4"><Identifier>Power-800x480</Identifier>
+<FilePathName>08_Power\_UI\Power-800x480.TP4</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Other"><Identifier>08_Power (cgp)</Identifier>
+<FilePathName>_RMS\08_Power.cgp</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>08_Power_RMSMain</Identifier>
+<FilePathName>_RMS\08_Power_RMSMain.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>i!-ConnectLinxEngineMod</Identifier>
+<FilePathName>_RMS\i!-ConnectLinxEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSCommon</Identifier>
+<FilePathName>_RMS\RMSCommon.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>RMSEngineMod</Identifier>
+<FilePathName>_RMS\RMSEngineMod.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>RMSGlobals</Identifier>
+<FilePathName>_RMS\RMSGlobals.axi</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+</Project>
+</Workspace>

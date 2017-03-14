@@ -1,0 +1,287 @@
+//================================================================================,,
+//,,
+//                           delivery.csv,,
+//,,
+//    FST Customer         :  AMX,,
+//    Ultimate Destination :,,
+//    FST Sales Order      :  cc09403000,,
+//    Driver Configuration :  DCC740,,
+//    Configured By        :  CBR,,
+//,,
+//    Copyright (c) 2000-2002 FieldServer Technologies,,
+//       1991 Tarob Court, Milpitas, CA 95035
+//       (408) 262 2299   Fax: (408) 262 9042,,
+//       support@fieldserver.com,,
+//,,
+//================================================================================,,
+//
+//   1.00aA  12 Mar 10 CBR  Created
+//   1.00aB  22 Mar 10 NCT  Updated to poll for Mac Address
+//   1.00aC  30 Mar 10 NCT  Updated to add second BACnet device as per SI8954
+//   2.00  14 May 2010  added multiple thermostats Also added Occupancy tracking BF
+
+//==============================================================================*/
+
+
+//================================================================================
+//
+// Notes :  None.
+//
+//
+//================================================================================
+
+
+//================================================================================,,
+//,,
+//    Common Information,,
+//,,
+
+Bridge,,
+Title             , System_Node_Id , Network_number
+cc09403000 v1.00a ,11,1
+
+
+//================================================================================,,
+//,,
+//    Data Arrays,,
+//,,
+
+Data_Arrays,,
+Data_Array_Name , Data_Format , Data_Array_Length
+DA_AO_01        , Float       ,20
+DA_AI_01        , Float       ,20
+DA_AV_01        , Float       ,20
+DA_BO_01        , Bit         ,20
+DA_BV_01        , Bit         ,20
+
+DA_AO_S_01      , Float       ,20
+DA_AV_S_01      , Float       ,20
+DA_BO_S_01      , Bit         ,20
+DA_BV_S_01      , Bit         ,20
+
+DA_AO_02, Float       ,20
+DA_AI_02, Float       ,20
+DA_AV_02, Float       ,20
+DA_BO_02, Bit         ,20
+DA_BV_02, Bit         ,20
+
+DA_AO_S_02, Float       ,20
+DA_AV_S_02, Float       ,20
+DA_BO_S_02, Bit         ,20
+DA_BV_S_02, Bit         ,20
+
+DA_AO_03, Float       ,20
+DA_AI_03, Float       ,20
+DA_AV_03, Float       ,20
+DA_BO_03, Bit         ,20
+DA_BV_03, Bit         ,20
+
+DA_AO_S_03, Float       ,20
+DA_AV_S_03, Float       ,20
+DA_BO_S_03, Bit         ,20,,,,,,
+DA_BV_S_03, Bit         ,20,,,,,,
+
+
+//================================================================================,,,,,,,,
+//,,,,,,,,
+//    Client Side Connections,,,,,,,,
+//,,,,,,,,
+
+Connections,,,,,,,,
+Port , Baud  , Data_Bits , Parity , Protocol    , Timeout , Connection_Type , Poll_delay,Max_Master
+R1   ,38400,8, None   , BACnet_MSTP ,30, MSTP_Master_Node, 0.01s,11
+
+
+//================================================================================,,,,,,,,
+//,,,,,,,,
+//    Client Side Nodes,,,
+//,,,
+
+Nodes,,,
+Node_Name , Node_ID , Protocol    , Port
+Viconics_01,73004, Bacnet_MSTP , R1
+Viconics_02,73005, Bacnet_MSTP , R1
+Viconics_03,73006, Bacnet_MSTP , R1
+
+
+//================================================================================,,,
+//,,,
+//    Client Side Map Descriptors,,,
+//,,,
+
+Map_Descriptors,,,
+Map_Descriptor_Name , Data_Array_Name , Data_Array_Offset , Function , Node_Name , Data_Type , Object_ID , Property      , Scan_Interval
+Room Temp Override  , DA_BV_01        ,0, Rdbc     , Viconics_01, BV        ,7, Present_Value , 0.000s    // BV     8
+Room Temp           , DA_AV_01        ,0, Rdbc     , Viconics_01, AV        ,6, Present_Value , 0.000s    // AV     7
+Occ Heat SP         , DA_AV_01        ,1, Rdbc     , Viconics_01, AV        ,49, Present_Value , 0.000s    // AV     39
+Occ Cool SP         , DA_AV_01        ,2, Rdbc     , Viconics_01, AV        ,50, Present_Value , 0.000s    // AV     40
+UnOcc Heat SP       , DA_AV_01        ,3, Rdbc     , Viconics_01, AV        ,51, Present_Value , 0.000s    // AV     43
+UnOcc Cool SP       , DA_AV_01        ,4, Rdbc     , Viconics_01, AV        ,52, Present_Value , 0.000s    // AV     44
+PI Heating Demand   , DA_AV_01        ,5, Rdbc     , Viconics_01, AV        ,54, Present_Value , 0.000s    // AV     21
+PI Cooling Demand   , DA_AV_01        ,6, Rdbc     , Viconics_01, AV        ,55, Present_Value , 0.000s    // AV     22
+Fan Mode Seq        , DA_AV_01        ,7, Rdbc     , Viconics_01, MV        ,26, Present_Value , 0.000s    // MV     58
+System Mode         , DA_AV_01        ,8, Rdbc     , Viconics_01, MV        ,13, Present_Value , 0.000s    // MV     16
+Fan Status, DA_AV_01        ,9, Rdbc     , Viconics_01, MV        ,68, Present_Value , 0.000s    // MV     68
+Occupancy, DA_AV_01        ,10, Rdbc     , Viconics_01, MV        ,18, Present_Value , 0.000s
+
+Room Temp Override  , DA_BV_02,0, Rdbc     , Viconics_02, BV        ,7, Present_Value , 0.000s    // BV     8
+Room Temp           , DA_AV_02,0, Rdbc     , Viconics_02, AV        ,6, Present_Value , 0.000s    // AV     7
+Occ Heat SP         , DA_AV_02,1, Rdbc     , Viconics_02, AV        ,49, Present_Value , 0.000s    // AV     39
+Occ Cool SP         , DA_AV_02,2, Rdbc     , Viconics_02, AV        ,50, Present_Value , 0.000s    // AV     40
+UnOcc Heat SP       , DA_AV_02,3, Rdbc     , Viconics_02, AV        ,51, Present_Value , 0.000s    // AV     43
+UnOcc Cool SP       , DA_AV_02,4, Rdbc     , Viconics_02, AV        ,52, Present_Value , 0.000s    // AV     44
+PI Heating Demand   , DA_AV_02,5, Rdbc     , Viconics_02, AV        ,54, Present_Value , 0.000s    // AV     21
+PI Cooling Demand   , DA_AV_02,6, Rdbc     , Viconics_02, AV        ,55, Present_Value , 0.000s    // AV     22
+Fan Mode Seq        , DA_AV_02,7, Rdbc     , Viconics_02, MV        ,26, Present_Value , 0.000s    // MV     58
+System Mode         , DA_AV_02,8, Rdbc     , Viconics_02, MV        ,13, Present_Value , 0.000s    // MV     16
+Fan Status, DA_AV_02,9, Rdbc     , Viconics_02, MV        ,68, Present_Value , 0.000s    // MV     68
+Occupancy, DA_AV_02,10, Rdbc     , Viconics_02, MV        ,18, Present_Value , 0.000s
+
+Room Temp Override  , DA_BV_03,0, Rdbc     , Viconics_03, BV        ,7, Present_Value , 0.000s    // BV     8
+Room Temp           , DA_AV_03,0, Rdbc     , Viconics_03, AV        ,6, Present_Value , 0.000s    // AV     7
+Occ Heat SP         , DA_AV_03,1, Rdbc     , Viconics_03, AV        ,49, Present_Value , 0.000s    // AV     39
+Occ Cool SP         , DA_AV_03,2, Rdbc     , Viconics_03, AV        ,50, Present_Value , 0.000s    // AV     40
+UnOcc Heat SP       , DA_AV_03,3, Rdbc     , Viconics_03, AV        ,51, Present_Value , 0.000s    // AV     43
+UnOcc Cool SP       , DA_AV_03,4, Rdbc     , Viconics_03, AV        ,52, Present_Value , 0.000s    // AV     44
+PI Heating Demand   , DA_AV_03,5, Rdbc     , Viconics_03, AV        ,54, Present_Value , 0.000s    // AV     21
+PI Cooling Demand   , DA_AV_03,6, Rdbc     , Viconics_03, AV        ,55, Present_Value , 0.000s    // AV     22
+Fan Mode Seq        , DA_AV_03,7, Rdbc     , Viconics_03, MV        ,26, Present_Value , 0.000s    // MV     58
+System Mode         , DA_AV_03,8, Rdbc     , Viconics_03, MV        ,13, Present_Value , 0.000s    // MV     16
+Fan Status, DA_AV_03,9, Rdbc     , Viconics_03, MV        ,68, Present_Value , 0.000s    // MV     68
+Occupancy, DA_AV_03,10, Rdbc     , Viconics_03, MV        ,18, Present_Value , 0.000s
+
+
+//================================================================================,,,,,,,,
+//,,,,,,,,
+//    Moves,,,,,,,,
+//,,,,,,,,
+
+Moves,,,,,,,,
+//Viconics Thermostat #1,,,,,,,,
+Source_Data_Array , Source_Offset , Target_Data_Array , Target_Offset , Length , Function
+DA_AO_S_01        ,0, DA_AO_01          ,0,1, Move_Only
+DA_AO_S_01        ,1, DA_AO_01          ,1,1, Move_Only
+DA_AO_S_01        ,2, DA_AO_01          ,2,1, Move_Only
+DA_AO_S_01        ,3, DA_AO_01          ,3,1, Move_Only
+DA_AO_S_01        ,4, DA_AO_01          ,4,1, Move_Only
+DA_AO_S_01        ,5, DA_AO_01          ,5,1, Move_Only
+DA_AO_S_01        ,6, DA_AO_01          ,6,1, Move_Only
+DA_AO_S_01        ,7, DA_AO_01          ,7,1, Move_Only
+DA_AO_S_01        ,8, DA_AO_01          ,8,1, Move_Only
+DA_AO_S_01        ,9, DA_AO_01          ,9,1, Move_Only
+DA_AO_S_01        ,10, DA_AO_01          ,10,1, Move_Only
+DA_AO_S_01        ,11, DA_AO_01          ,11,1, Move_Only
+
+DA_BO_S_01        ,0, DA_BO_01          ,0,1, Move_Only
+DA_BO_S_01        ,1, DA_BO_01          ,1,1, Move_Only
+DA_BO_S_01        ,2, DA_BO_01          ,2,1, Move_Only
+DA_BO_S_01        ,3, DA_BO_01          ,3,1, Move_Only
+DA_BO_S_01        ,4, DA_BO_01          ,4,1, Move_Only
+
+DA_AV_S_01        ,0, DA_AV_01          ,0,1, Move_Only
+DA_AV_S_01        ,1, DA_AV_01          ,1,1, Move_Only
+DA_AV_S_01        ,2, DA_AV_01          ,2,1, Move_Only
+DA_AV_S_01        ,3, DA_AV_01          ,3,1, Move_Only
+DA_AV_S_01        ,4, DA_AV_01          ,4,1, Move_Only
+DA_AV_S_01        ,5, DA_AV_01          ,5,1, Move_Only
+DA_AV_S_01        ,6, DA_AV_01          ,6,1, Move_Only
+DA_AV_S_01        ,7, DA_AV_01          ,7,1, Move_Only
+DA_AV_S_01        ,8, DA_AV_01          ,8,1, Move_Only
+DA_AV_S_01        ,9, DA_AV_01          ,9,1, Move_Only
+DA_AV_S_01        ,10, DA_AV_01          ,10,1, Move_Only
+DA_AV_S_01        ,11, DA_AV_01          ,11,1, Move_Only
+
+DA_BV_S_01        ,0, DA_BV_01          ,0,1, Move_Only
+//Viconics Thermostat #2,,,,,
+DA_AO_S_02,0, DA_AO_02,0,1, Move_Only
+DA_AO_S_02,1, DA_AO_02,1,1, Move_Only
+DA_AO_S_02,2, DA_AO_02,2,1, Move_Only
+DA_AO_S_02,3, DA_AO_02,3,1, Move_Only
+DA_AO_S_02,4, DA_AO_02,4,1, Move_Only
+DA_AO_S_02,5, DA_AO_02,5,1, Move_Only
+DA_AO_S_02,6, DA_AO_02,6,1, Move_Only
+DA_AO_S_02,7, DA_AO_02,7,1, Move_Only
+DA_AO_S_02,8, DA_AO_02,8,1, Move_Only
+DA_AO_S_02,9, DA_AO_02,9,1, Move_Only
+DA_AO_S_02,10, DA_AO_02,10,1, Move_Only
+DA_AO_S_02,11, DA_AO_02,11,1, Move_Only
+
+DA_BO_S_02,0, DA_BO_02,0,1, Move_Only
+DA_BO_S_02,1, DA_BO_02,1,1, Move_Only
+DA_BO_S_02,2, DA_BO_02,2,1, Move_Only
+DA_BO_S_02,3, DA_BO_02,3,1, Move_Only
+DA_BO_S_02,4, DA_BO_02,4,1, Move_Only
+
+DA_AV_S_02,0, DA_AV_02,0,1, Move_Only
+DA_AV_S_02,1, DA_AV_02,1,1, Move_Only
+DA_AV_S_02,2, DA_AV_02,2,1, Move_Only
+DA_AV_S_02,3, DA_AV_02,3,1, Move_Only
+DA_AV_S_02,4, DA_AV_02,4,1, Move_Only
+DA_AV_S_02,5, DA_AV_02,5,1, Move_Only
+DA_AV_S_02,6, DA_AV_02,6,1, Move_Only
+DA_AV_S_02,7, DA_AV_02,7,1, Move_Only
+DA_AV_S_02,8, DA_AV_02,8,1, Move_Only
+DA_AV_S_02,9, DA_AV_02,9,1, Move_Only
+DA_AV_S_02,10, DA_AV_02,10,1, Move_Only
+DA_AV_S_02,11, DA_AV_02,11,1, Move_Only
+
+DA_BV_S_02,0, DA_BV_02,0,1, Move_Only
+//Viconics Thermostat #3,,,,,
+DA_AO_S_03,0, DA_AO_03,0,1, Move_Only
+DA_AO_S_03,1, DA_AO_03,1,1, Move_Only
+DA_AO_S_03,2, DA_AO_03,2,1, Move_Only
+DA_AO_S_03,3, DA_AO_03,3,1, Move_Only
+DA_AO_S_03,4, DA_AO_03,4,1, Move_Only
+DA_AO_S_03,5, DA_AO_03,5,1, Move_Only
+DA_AO_S_03,6, DA_AO_03,6,1, Move_Only
+DA_AO_S_03,7, DA_AO_03,7,1, Move_Only
+DA_AO_S_03,8, DA_AO_03,8,1, Move_Only
+DA_AO_S_03,9, DA_AO_03,9,1, Move_Only
+DA_AO_S_03,10, DA_AO_03,10,1, Move_Only
+DA_AO_S_03,11, DA_AO_03,11,1, Move_Only
+
+DA_BO_S_03,0, DA_BO_03,0,1, Move_Only
+DA_BO_S_03,1, DA_BO_03,1,1, Move_Only
+DA_BO_S_03,2, DA_BO_03,2,1, Move_Only
+DA_BO_S_03,3, DA_BO_03,3,1, Move_Only
+DA_BO_S_03,4, DA_BO_03,4,1, Move_Only
+
+DA_AV_S_03,0, DA_AV_03,0,1, Move_Only
+DA_AV_S_03,1, DA_AV_03,1,1, Move_Only
+DA_AV_S_03,2, DA_AV_03,2,1, Move_Only
+DA_AV_S_03,3, DA_AV_03,3,1, Move_Only
+DA_AV_S_03,4, DA_AV_03,4,1, Move_Only
+DA_AV_S_03,5, DA_AV_03,5,1, Move_Only
+DA_AV_S_03,6, DA_AV_03,6,1, Move_Only
+DA_AV_S_03,7, DA_AV_03,7,1, Move_Only
+DA_AV_S_03,8, DA_AV_03,8,1, Move_Only
+DA_AV_S_03,9, DA_AV_03,9,1, Move_Only
+DA_AV_S_03,10, DA_AV_03,10,1, Move_Only
+DA_AV_S_03,11, DA_AV_03,11,1, Move_Only
+
+DA_BV_S_03,0, DA_BV_03,0,1, Move_Only
+
+//================================================================================,,,,,
+//,,,,,
+//    Server Side Connections,,,,,
+//,,,,,
+
+Connections,,,,,
+Connection , Protocol,,,,
+N1         , http,,,,
+
+
+//================================================================================
+//
+//    Server Side Nodes
+//
+
+//    No Server Side Nodes need to be defined for XML application
+
+
+//================================================================================
+//
+//    Server Side Map Descriptors
+//
+
+//    No Server Side Map Descriptors need to be defined for XML application

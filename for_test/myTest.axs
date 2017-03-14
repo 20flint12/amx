@@ -70,13 +70,13 @@ DATA_EVENT[SYSTEM4]
     ONLINE:
     {
 	SYSTEM4_STATUS = 1
-	SEND_STRING 0, "'onnn'";
+	SEND_STRING 0, 'onnn';
     }
     
     OFFLINE:
     {
 	SYSTEM4_STATUS = 0
-	SEND_STRING 0, "'offff'";
+	SEND_STRING 0, 'offff';
     }
 
 }
