@@ -89,8 +89,6 @@ Define_Call 'Modbus - Write Multiple Registers - Single register' (Char DeviceAd
 
 
 
-
-
 Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Address, Integer Value)
 {
 	// TODO : Process answers there
