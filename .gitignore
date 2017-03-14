@@ -1,21 +1,4 @@
-.idea/
-
-*.pyc
-media/*
-static/*
-env/*
-lib/*
 
 
-notes.txt
-
-
-axcela/.env
-__pycache__/
-env/
-test.md
-
-
-
-
-*.tko
+*.tkn
+*.src
