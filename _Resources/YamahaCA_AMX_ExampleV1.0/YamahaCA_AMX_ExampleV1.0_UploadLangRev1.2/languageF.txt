@@ -1,0 +1,368 @@
+﻿#version 1.2#
+#START#
+DRUK HIER OM TE STARTEN
+selecteer|een ander|product
+voorbeeld|toepassing
+meer|parameters
+standaard|parameters
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+selecteer een taal
+kies een product
+#SECTION#
+DME24N
+inputs
+outputs
+algemeen
+mute
+scenes
+samples
+load
+play
+stop
+matrix mixer
+input
+output
+level
+source selector
+input
+SPX reverb
+bypass
+intensiteit
+delay
+room combiner
+combinaties
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volume
+level
+meters
+Technicus
+Aankondigingen
+Zaal 1
+Zaal 2
+Zaal 3
+Zaal 4
+alle|zalen
+aankondiging|1
+aankondiging|2
+aankondiging|3
+aankondiging|4
+verbind|zalen
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Zaal 1
+Bron
+PC
+laptop
+aux
+TV
+off
+microfoons
+1
+2
+3
+4
+alle
+volume
+bekijk de|DME Designer|configuratie
+terug naar|toepassing
+licht
+Digital Mixing Engine
+GPI
+output
+#SECTION#
+DME64N
+inputs
+outputs
+algemeen
+mute
+scenes
+samples
+load
+play
+stop
+matrix mixer
+input
+output
+level
+source selector
+input
+SPX reverb
+bypass
+intensiteit
+delay
+room combiner
+links
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volume
+level
+meters
+Technicus
+aankondiging
+zaal 1
+zaal 2
+zaal 3
+zaal 4
+alle|zalen
+aankondiging|1
+aankondiging|2
+aankondiging|3
+aankondiging|4
+combineer|zalen
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Zaal 1
+Bron
+PC
+laptop
+aux
+TV
+off
+microfoons
+1
+2
+3
+4
+alle
+volume
+Bekijk de|DME Designer|configuratie
+terug naar|toepassing
+licht
+Digital Mixing Engine
+GPI
+output
+#SECTION#
+DME4io
+inputs
+outputs
+algemeen
+mute
+scenes
+samples
+load
+play
+stop
+matrix mixer
+input
+output
+level
+source selector
+input
+SPX reverb
+bypass
+intensiteit
+delay
+room combiner
+links
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volume
+level
+meters
+Technicus
+aankondingen
+zaal 1
+zaal 2
+zaal 3
+zaal 4
+alle|zalen
+aankondiging|1
+aankondiging|2
+aankondiging|3
+aankondiging|4
+combineer|zalen
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Zaal 1
+bron
+PC
+laptop
+aux
+TV
+off
+microfoons
+1
+2
+3
+4
+alle
+volume
+bekijk de|DME Designer|configuratie
+terug naar|toepassing
+licht
+Digital Mixing Engine Satellite
+GPI
+output
+#SECTION#
+LS9 Digital Mixing Console
+scenes,|levels &|recorder
+Meer|kanalen
+(Pagina 3)
+(Pagina 4)
+(Pagina 5)
+scenes
+recorder
+track
+transport
+inputs
+output
+stereo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+up
+down
+#SECTION#
+M7CL Digital Mixing Console
+scenes &|levels
+meer|kanalen
+(Pagina 3)
+(Pagina 4)
+(Pagina 5)
+scenes
+recorder
+track
+transport
+inputs
+output
+stereo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+up
+down
+#SECTION#
+01V96 Digital Mixing Console
+scenes|& levels
+meer|kanalen
+(Pagina 3)
+(Pagina 4)
+(Pagina 5)
+scenes
+recorder
+track
+transport
+inputs
+output
+stereo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+up
+down
+#SECTION#
+BD-S2900 Blu-ray Disc Player
+(Pagina 1)
+(Pagina 2)
+(Pagina 3)
+(Pagina 4)
+(Pagina 5)
+Hoofd|menu
+Popup|menu
+Sub|menu
+Terug
+OK
+audio
+second|audio
+BD|SD
+clear
+power on
+standby
+speelt
+gestopt
+pause
+zoeken
+zoeken
+menu
+lade open
+lade sluit
+leest disc
+geen disc
+setup
+leest disc
+geen disc
+CD
+DVD
+BD
+track
+-
+-
+-
+-
+disc
+transport
+track
+timecode
+#SECTION#
+IMX644
+Digital Installation Mixer
+mono inputs
+stereo inputs
+outputs
+scenes
+#SECTION#
+productI
+#SECTION#
+productJ
+#SECTION#
+productK
+#SECTION#
+productL
+#SECTION#
+productM
+#SECTION#
+productN
+#SECTION#
+productO
+#END#

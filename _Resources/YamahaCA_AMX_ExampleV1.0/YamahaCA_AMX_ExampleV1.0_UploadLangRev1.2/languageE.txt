@@ -1,0 +1,368 @@
+﻿#version 1.2#
+#START#
+Berühren zum Starten
+Anderes|Produkt|wählen
+Beispiel|anwendung
+Weitere|Einstellungen
+Grund|Einstellungen
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+Wählen Sie eine Sprache
+Wählen Sie ein Produkt
+#SECTION#
+DME24N
+Eingänge
+Ausgänge
+Global
+Mute
+Szenen
+WAV-Dateien
+Laden
+Wiedergabe 
+Stop
+Matrix Mixer
+Eingang
+Ausgang
+Pegel
+Quellenwahl
+Eingang
+SPX reverb
+Bypass
+Intensität
+Delay
+Room combiner
+Verbindungen
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+Lautstärke
+Pegel
+Meter
+Techniker
+Ankündigungen
+Raum 1
+Raum 2
+Raum 3
+Raum 4
+Alle|Räume
+Nachricht 1
+Nachricht 2
+Nachricht 3
+Nachricht 4
+Verbinde|Räume
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Raum 1
+Quelle
+PC
+Laptop
+Aux
+TV
+aus
+Mikrofone
+1
+2
+3
+4
+Alle
+Lautstärke
+DME Designer|Schematic|anschauen
+Zurück zur|Anwendung
+Licht
+Digital Mixing Engine
+GPI
+Ausgang
+#SECTION#
+DME64N
+Eingänge
+Ausgänge
+Global
+Mute
+Szenen
+WAV-Dateien
+Laden
+Play
+Stop
+Matrix Mixer
+Eingang
+Ausgang
+Pegel
+Quellenwahl
+Eingang
+SPX reverb
+Bypass
+Intensität
+Delay
+Room combiner
+Verknüpfe
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+Lautstärke
+Pegel
+Meter
+Techniker
+Ankündigung
+Raum 1
+Raum 2
+Raum 3
+Raum 4
+Alle|Räume
+Nachricht 1
+Nachricht 2
+Nachricht 3
+Nachricht 4
+Verbinde|Räume
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Raum 1
+Quelle
+PC
+Laptop
+Aux
+TV
+aus
+Mikrofone
+1
+2
+3
+4
+Alle
+Lautstärke
+DME Designer|Schematic|anschauen
+Zurück zur|Anwendung
+Licht
+Digital Mixing Engine
+GPI
+Ausgang
+#SECTION#
+DME4io
+Eingänge
+Ausgänge
+Global
+Mute
+Szenen
+WAV-Dateien
+Laden
+Wiedergabe 
+Stop
+Matrix Mixer
+Eingang
+Ausgang
+Pegel
+Quellenwahl
+Eingang
+SPX reverb
+Bypass
+Intensität
+Delay
+Room combiner
+Verbindungen
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+Lautstärke
+Pegel
+Meter
+Techniker
+Ankündigungen
+Raum 1
+Raum 2
+Raum 3
+Raum 4
+Alle|Räume
+Nachricht 1
+Nachricht 2
+Nachricht 3
+Nachricht 4
+Verbinde|Räume
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Raum 1
+Quelle
+PC
+Laptop
+Aux
+TV
+aus
+Mikrofone
+1
+2
+3
+4
+Alle
+Lautstärke
+DME Designer|Schematic|anschauen
+Zurück zur|Anwendung
+Licht
+Digital Mixing Engine
+GPI
+Ausgang
+#SECTION#
+LS9 Digital Mixing Console
+Szenen,|Pegel &|Recorder
+Mehr|Kanäle
+(Seite 3)
+(Seite 4)
+(Seite 5)
+Szenen
+Recorder
+Spur
+Transport
+Eingänge
+Ausgang
+Stereo
+Master
+ST 1
+ST 2
+ST 3
+ST 4
+On
+Up
+Down
+#SECTION#
+M7CL Digital Mixing Console
+Szenen &|Pegel
+Mehr|Kanäle
+(Seite 3)
+(Seite 4)
+(Seite 5)
+Szenen
+Recorder
+Titel
+Transport
+Eingänge
+Ausgang
+Stereo
+Master
+ST 1
+ST 2
+ST 3
+ST 4
+On
+Up
+Down
+#SECTION#
+01V96 Digital Mixing Console
+Szenen|& Pegel
+mehr|Kanäle
+(Seite 3)
+(Seite 4)
+(Seite 5)
+Szenen
+Recorder
+Titel
+Transport
+Eingänge
+Ausgang
+Stereo
+Master
+ST 1
+ST 2
+ST 3
+ST 4
+On
+Up
+Down
+#SECTION#
+BD-S2900 Blu-ray Disc Player
+(Seite 1)
+(Seite 2)
+(Seite 3)
+(Seite 4)
+(Seite 5)
+Top|menu
+Popup|menu
+Sub|menu
+zurück
+OK
+audio
+second|audio
+BD|SD
+clear
+power on
+standby
+playing
+stopped
+paused
+searching
+searching
+menu
+tray open
+tray closing
+reading disc
+no disc
+setup
+reading disc
+no disc
+CD
+DVD
+BD
+track
+-
+-
+-
+-
+disc
+transport
+track
+timecode
+#SECTION#
+IMX644
+Digital Installation Mixer
+Monoeingang
+Stereoeingang
+Ausgang
+Speicherplätze
+#SECTION#
+productI
+#SECTION#
+productJ
+#SECTION#
+productK
+#SECTION#
+productL
+#SECTION#
+productM
+#SECTION#
+productN
+#SECTION#
+productO
+#END#

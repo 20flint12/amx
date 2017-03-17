@@ -1,0 +1,368 @@
+﻿#version 1.2#
+#START#
+PULSAR PARA EMPEZAR
+seleccione|otro|producto
+aplicación|de ejemplo
+más|controles
+controles|básicos
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+seleccione un idioma
+seleccionar un producto
+#SECTION#
+DME24N
+entradas
+salidas
+general
+mute
+escenas
+ficheros wav
+cargar
+reproducir
+parar
+matriz mezcladora
+entradas
+salidas
+nivel
+selector de fuentes
+entrada
+reverb SPX
+bypass
+intensidad
+retardo
+combinador de salas
+links
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volumen
+nivel
+medidores
+Técnico
+mensages
+sala 1
+sala 2
+sala 3
+sala 4
+todas las|salas
+mensage|1
+mensage|2
+mensage|3
+mensage|4
+combinador|de salas
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Sala 1
+fuente
+PC
+portátil
+aux
+TV
+off
+micros
+1
+2
+3
+4
+todo
+volumen
+mire el|esquema del|DME Designer
+retornar a la|aplicación
+luces
+Digital Mixing Engine
+GPI
+salida
+#SECTION#
+DME64N
+entradas
+salidas
+general
+mute
+escenas
+ficheros wav
+cargar
+reproducir
+parar
+matriz mezcladora
+entrada
+salida
+nivel
+selector de fuentes
+entrada
+reverb SPX
+bypass
+intensidad
+retardo
+combinador de salas
+links
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volumen
+nivel
+medidores
+Técnico
+mensages
+sala 1
+sala 2
+sala 3
+sala 4
+todas las|salas
+mensage|1
+mensage|2
+mensage|3
+mensage|4
+combinador|de salas
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Sala 1
+fuente
+PC
+portátil
+aux
+TV
+off
+micros
+1
+2
+3
+4
+todo
+volumen
+mire el|esquema del|DME Designer
+retornar a la|aplicación
+luces
+Digital Mixing Engine
+GPI
+salida
+#SECTION#
+DME4io
+entradas
+salidas
+general
+mute
+escenas
+ficheros wav
+cargar
+reproducir
+parar
+matriz mezcladora
+entrada
+salida
+nivel
+selector de fuentes
+entrada
+reverb SPX
+bypass
+intensidad
+retardo
+combinador|de salas
+links
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volumen
+nivel
+medidores
+Técnico
+mensages
+sala 1
+sala 2
+sala 3
+sala 4
+todas las|salas
+mensage|1
+mensage|2
+mensage|3
+mensage|4
+combinador|de salas
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Sala 1
+fuente
+PC
+portátil
+aux
+TV
+off
+micros
+1
+2
+3
+4
+todo
+volumen
+mire el|esquema del|DME Designer
+retornar a la|aplicación
+luces
+Digital Mixing Engine Satellite
+GPI
+salida
+#SECTION#
+LS9 Digital Mixing Console
+escenas,|niveles y|grabador
+más|canales
+(página 3)
+(página 4)
+(página 5)
+escenas
+grabador
+pista
+transporte
+entradas
+salidas
+estéreo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+arriba
+abajo
+#SECTION#
+M7CL Digital Mixing Console
+escenas y|niveles
+más|canales
+(página 3)
+(página 4)
+(página 5)
+escenas
+grabador
+pista
+transporte
+entradas
+salidas
+estéreo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+arriba
+abajo
+#SECTION#
+01V96 Digital Mixing Console
+escenas|y niveles
+más|canales
+(página 3)
+(página 4)
+(página 5)
+escenas
+grabador
+pista
+transporte
+entradas
+salidas
+estéreo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+arriba
+abajo
+#SECTION#
+BD-S2900 Blu-ray Disc Player
+(page 1)
+(page 2)
+(page 3)
+(page 4)
+(page 5)
+menú|principal
+menú|superior
+menú|inferior
+retorno
+OK
+audio
+segundo|audio
+BD|SD
+borrar
+encendido
+standby
+reproduciendo
+parado
+pausado
+buscando
+buscando
+menú
+abriendo
+cerrando
+leyendo disco
+no hay disco
+configuración
+leyendo disco
+no hay disco
+CD
+DVD
+BD
+pista
+-
+-
+-
+-
+disco
+transporte
+pista
+código de tiempo
+#SECTION#
+IMX644
+Digital Installation Mixer
+entrada monoaural
+entrada estereofónica
+salidas
+memoria
+#SECTION#
+productoI
+#SECTION#
+productoJ
+#SECTION#
+productoK
+#SECTION#
+productoL
+#SECTION#
+productoM
+#SECTION#
+productoN
+#SECTION#
+productoO
+#END#

@@ -1,0 +1,76 @@
+﻿MODULE_NAME='HW_KEYPAD_RELISE' (DEV vdvHW, DEV dvTP[], INTEGER BUTTONS[],INTEGER LUTRON_OnLine)
+
+
+
+DEFINE_VARIABLE
+VOLATILE CHAR KEYPAD_STATUS[24] = ""
+VOLATILE INTEGER A,I
+
+
+
+
+
+DEFINE_FUNCTION ShowStatus()
+{
+	STACK_VAR CHAR btnIndex
+	for(btnIndex = LENGTH_ARRAY(BUTTONS); btnIndex > 0; btnIndex--)
+		[dvTP,BUTTONS[btnIndex]] = (KEYPAD_STATUS[btnIndex] = '1')
+}
+
+DEFINE_START
+SET_VIRTUAL_LEVEL_COUNT(vdvHW, 1)
+
+
+
+
+
+
+DEFINE_EVENT
+
+DATA_EVENT[dvTP]
+{
+	ONLINE: 
+	{
+		wait 50 
+			if(LENGTH_STRING(KEYPAD_STATUS))
+				ShowStatus()
+	}
+}
+
+BUTTON_EVENT[dvTP,BUTTONS]
+{
+	PUSH:
+	{
+		STACK_VAR INTEGER btnIndex
+		btnIndex = GET_LAST(BUTTONS)
+		SEND_COMMAND vdvHW,"'PUSH_BUTTON:',ITOA(btnIndex)"
+	}
+	RELEASE:
+	{
+		STACK_VAR INTEGER btnIndex
+		btnIndex = GET_LAST(BUTTONS)
+		switch(btnIndex)
+		{
+		CASE 23:{SEND_COMMAND vdvHW,"'RELISE_BUTTON:',ITOA(btnIndex)"}
+		CASE 24:{SEND_COMMAND vdvHW,"'RELISE_BUTTON:',ITOA(btnIndex)"}
+		}
+	}
+	
+}
+
+DATA_EVENT[vdvHW]
+{
+	STRING:
+	{
+		LOCAL_VAR VOLATILE CHAR CMD[20]
+		CMD = REMOVE_STRING(DATA.Text,':',1)
+		SELECT
+		{
+			ACTIVE(FIND_STRING(CMD,'KEYPAD_STATUS',1)):
+			{
+				KEYPAD_STATUS = LEFT_STRING(DATA.TEXT,24)
+				ShowStatus()
+			}
+		}
+	}
+}

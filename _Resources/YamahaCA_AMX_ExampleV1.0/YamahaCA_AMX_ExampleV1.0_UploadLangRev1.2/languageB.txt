@@ -1,0 +1,368 @@
+﻿#version 1.2#
+#START#
+画面をタッチしてください
+機器選択
+システム事例
+詳細項目
+基本操作
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+言語を選択してください
+製品を選択してください
+#SECTION#
+DME24N
+入力
+出力
+全体
+ミュート
+シーン
+音声ファイル
+読み込み
+再生
+停止
+マトリクス
+入力
+出力
+音量
+入力選択
+入力
+エコー
+バイパス
+残響量
+時間
+室分割設定
+連結
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+音量
+レベル
+メーター
+管理者
+アナウンス
+部屋１
+部屋２
+部屋３
+部屋４
+全室
+再生|１
+再生|２
+再生|３
+再生|４
+分割/連結
+1+2|3|4
+1+2|3+4
+1+2+3|4
+1+2+3+4
+1, 2,|3, 4
+部屋１
+入力ソース
+Desktop|PC
+Note|PC
+外部入力
+TV
+Off
+マイク
+1
+2
+3
+4
+ALL
+ボリューム
+DME内|系統図
+戻る
+照明
+Digital Mixing Engine
+GPI
+出力
+#SECTION#
+DME64N
+入力
+出力
+全体
+ミュート
+シーン
+音声ファイル
+読み込み
+再生
+停止
+マトリクス
+入力
+出力
+音量
+入力選択
+入力
+エコー
+バイパス
+残響量
+時間
+室分割設定
+連結
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+音量
+レベル
+メーター
+管理者
+アナウンス
+部屋１
+部屋２
+部屋３
+部屋４
+全室
+再生|１
+再生|２
+再生|３
+再生|４
+分割/連結
+1+2|3|4
+1+2|3+4
+1+2+3|4
+1+2+3+4
+1, 2,|3, 4
+部屋１
+入力ソース
+Desktop|PC
+Note|PC
+外部入力
+TV
+Off
+マイク
+1
+2
+3
+4
+ALL
+ボリューム
+DME内|系統図
+戻る
+照明
+Digital Mixing Engine
+GPI
+出力
+#SECTION#
+DME4io
+入力
+出力
+全体
+ミュート
+シーン
+音声ファイル
+読み込み
+再生
+停止
+マトリクス
+入力
+出力
+音量
+入力選択
+入力
+エコー
+バイパス
+残響量
+時間
+室分割設定
+連結
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+音量
+レベル
+メーター
+管理者
+アナウンス
+部屋１
+部屋２
+部屋３
+部屋４
+全室
+再生|１
+再生|２
+再生|３
+再生|４
+分割/連結
+1+2|3|4
+1+2|3+4
+1+2+3|4
+1+2+3+4
+1, 2,|3, 4
+部屋１
+入力ソース
+Desktop|PC
+Note|PC
+外部入力
+TV
+Off
+マイク
+1
+2
+3
+4
+ALL
+ボリューム
+DME内|系統図
+戻る
+照明
+Digital Mixing Engine
+GPI
+出力
+#SECTION#
+LS9 Digital Mixing Console
+シーン・レベル|レコーダー|操作
+全チャンネル|操作
+(page 3)
+(page 4)
+(page 5)
+シーン
+レコーダー
+トラック
+操作
+入力
+出力
+ステレオ
+マスター
+ST 1
+ST 2
+ST 3
+ST 4
+On
+Up
+Down
+#SECTION#
+M7CL Digital Mixing Console
+シーン・レベル|操作
+全チャンネル|操作
+(page 3)
+(page 4)
+(page 5)
+シーン
+レコーダー
+トラック
+操作
+入力
+出力
+ステレオ
+マスター
+ST 1
+ST 2
+ST 3
+ST 4
+On
+Up
+Down
+#SECTION#
+01V96 Digital Mixing Console
+シーン・レベル|操作
+全チャンネル|操作
+(page 3)
+(page 4)
+(page 5)
+シーン
+レコーダー
+トラック
+操作
+入力
+出力
+ステレオ
+マスター
+ST 1
+ST 2
+ST 3
+ST 4
+On
+Up
+Down
+#SECTION#
+BD-S2900 Blu-ray Disc Player
+(page 1)
+(page 2)
+(page 3)
+(page 4)
+(page 5)
+top|menu
+popup|menu
+sub|menu
+return
+OK
+audio
+second|audio
+BD|SD
+clear
+power on
+standby
+playing
+stopped
+paused
+searching
+searching
+menu
+tray open
+tray closing
+reading disc
+no disc
+setup
+reading disc
+no disc
+CD
+DVD
+BD
+track
+-
+-
+-
+-
+disc
+transport
+track
+timecode
+#SECTION#
+IMX644
+Digital Installation Mixer
+モノラル入力
+ステレオ入力
+出力
+メモリー
+#SECTION#
+productI
+#SECTION#
+productJ
+#SECTION#
+productK
+#SECTION#
+productL
+#SECTION#
+productM
+#SECTION#
+productN
+#SECTION#
+productO
+#END#

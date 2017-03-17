@@ -16,8 +16,10 @@ DEFINE_DEVICE
 dvModbus  = 5001:2:0;
 
 vdvModbus = 33001:1:0;
-
 vdvDebug  = 32999:1:0;
+
+panel = 11001:1:1;
+//panel = 10000:1:1;
 
 
 
@@ -27,8 +29,19 @@ DEFINE_CONSTANT
 
 DEFINE_VARIABLE
 
-
-
+VOLATILE INTEGER VAR_1
+VOLATILE INTEGER VAR_2
+VOLATILE INTEGER VAR_3
+VOLATILE INTEGER VAR_4
+VOLATILE INTEGER VAR_5
+VOLATILE INTEGER VAR_6
+VOLATILE INTEGER VAR_7
+VOLATILE INTEGER VAR_8
+VOLATILE INTEGER VAR_9
+                   
+		   
+		   
+		   
 (* ************************************* ModBus ************************************* *)
 
 // ModBus
@@ -89,6 +102,8 @@ Define_Call 'Modbus - Write Multiple Registers - Single register' (Char DeviceAd
 
 
 
+
+
 Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Address, Integer Value)
 {
 	// TODO : Process answers there
@@ -96,11 +111,17 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	Select
 	{
 		// Обработка ответа от устройства с адресом $10 на запрос функции 4 с регистровым адресом $1400
-		Active (Function == 3 && Device == 1 && Address == $40004) : { }
-	}
+		Active (Function == 3 && Address == 40004) : { VAR_1 = Value }
+		Active (Function == 3 && Address == 40008) : { VAR_2 = Value }
+		Active (Function == 3 && Address == 40012) : { VAR_3 = Value }
+		Active (Function == 3 && Address == 40013) : { VAR_4 = Value }
+		Active (Function == 3 && Address == 40014) : { VAR_5 = Value }
+		Active (Function == 3 && Address == 40015) : { VAR_6 = Value }
+		Active (Function == 3 && Address == 40016) : { VAR_7 = Value }
+		Active (Function == 3 && Address == 40033) : { VAR_8 = Value }
+		Active (Function == 3 && Address == 43005) : { VAR_9 = Value }
+	}                                                                        
 }
-
-
 
 
 
@@ -245,7 +266,7 @@ DATA_EVENT [vdvModbus]
 		// Send_Command Data.Device, 'SET BAUD 9600,N,8,1 485 DISABLE';
 		// "485 DISABLE" - это правильно, для родных AMX Com-портов порт всегда работает в полнодуплексном режиме (RS422) и для правильной обработки
 		// "эха" отправленной посылки и используется данная команда.
-		Send_Command Data.Device, 'RS485_2WIRE = ON'; // Для работы по двухпроводной RS485 шине
+		Send_Command Data.Device, 'RS485_2WIRE = OFF'; // Для работы по двухпроводной RS485 шине
 
 
 		// *****************************************************************************************************************************************
@@ -316,16 +337,44 @@ Wait 100 'Modbus Requests'
 
 	// Прочитать функцией 4 у устройства с адресом $10 регистровые значения начиная с адреса $1400 в количесте 20 штук подряд
 	// Т.е. прийдют ответы от регистров $1400, $1401, ..., $1412 (итого 20 значений, которые надо будет обработать в функции 'ModBus - Process Answer'
-	Call 'ModBus - Call Function' (3, 1, 40004, 1);
-	//Wait 25 Call 'ModBus - Call Function' (3, 1, 40004, 1); 
+	Call 'ModBus - Call Function' (3, 1, 40004, 1); //Outdoortemperature
+	wait 10 Call 'ModBus - Call Function' (3, 1, 40008, 1); //Flowtemperature
+	send_string 0, "'Flowtemperature'";
+	wait 15 Call 'ModBus - Call Function' (3, 1, 40012, 1); //Returntemperature
+	send_string 0, "'Returntemperature'";
+	wait 20 Call 'ModBus - Call Function' (3, 1, 40013, 1); //Hotwater,top
+	send_string 0, "'Hotwater,top'";
+	wait 25 Call 'ModBus - Call Function' (3, 1, 40014, 1); //Hotwatermiddle
+	send_string 0, "'Hotwatermiddle'";	
+	wait 30 Call 'ModBus - Call Function' (3, 1, 40015, 1); //Brinein
+	send_string 0, "'Brinein'";
+	wait 35 Call 'ModBus - Call Function' (3, 1, 40016, 1); //Brineout
+	send_string 0, "'Brineout'";
+	wait 40 Call 'ModBus - Call Function' (3, 1, 40033, 1); //Roomtemperature
+	send_string 0, "'Roomtemperature'";
+	wait 45 Call 'ModBus - Call Function' (3, 1, 43005, 1); //Degreeminutes
+	send_string 0, "'Degreeminutes'";
+	
+	//Wait 25 Call 'ModBus - Call Function' (3, 1, 40004, 1);
 	//Wait 15 Call 'ModBus - Call Function' (3, 1 , 40004, 1);
 	//Wait 40 Call 'ModBus - Call Function' (3, 1, 40014, 1);
 	//Wait 60 Call 'ModBus - Call Function' (3, 1, 40016, 1);
 	//Wait 30 Call 'ModBus - Call Function' (3, 1, 40018, 1);
-	//Wait 35 Call 'ModBus - Call Function' (3, 1, 40033, 1);
-             
+	//Wait 35 Call 'ModBus - Call Function' (3, 1, 40033, 1);     
 
 }
+
+SEND_COMMAND Panel,"'^TXT-1,0,',ITOA(var_1)"
+SEND_COMMAND Panel,"'^TXT-2,0,',ITOA(var_2)"
+SEND_COMMAND Panel,"'^TXT-3,0,',ITOA(var_3)"
+SEND_COMMAND Panel,"'^TXT-4,0,',ITOA(var_4)"
+SEND_COMMAND Panel,"'^TXT-5,0,',ITOA(var_5)"
+SEND_COMMAND Panel,"'^TXT-6,0,',ITOA(var_6)"
+SEND_COMMAND Panel,"'^TXT-7,0,',ITOA(var_7)"
+SEND_COMMAND Panel,"'^TXT-8,0,',ITOA(var_8)"
+SEND_COMMAND Panel,"'^TXT-9,0,',ITOA(var_9)"
+
+//SEND_STRING 11001:1:1, "ITOA(var_1)";
 
 
 (***********************************************************)

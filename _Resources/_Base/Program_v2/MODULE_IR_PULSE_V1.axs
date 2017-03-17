@@ -1,0 +1,20 @@
+MODULE_NAME='MODULE_IR_PULSE_V1' (DEV IRPort, DEV MVP[], INTEGER BUTTONS[], INTEGER OFFSET, INTEGER PULSE_TIME)
+
+DEFINE_VARIABLE
+
+
+
+DEFINE_EVENT
+
+
+BUTTON_EVENT [MVP,BUTTONS]    
+{
+PUSH:   {
+         SET_PULSE_TIME (PULSE_TIME) PULSE [IRPort,button.input.channel - OFFSET]
+        }
+HOLD[3,REPEAT]:{
+       PULSE [IRPort,button.input.channel - OFFSET]
+	}
+}
+
+

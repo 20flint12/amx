@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Workspace [
+
+<!-- Common Elements -->
+<!ELEMENT Identifier (#PCDATA)>
+<!ELEMENT Comments (#PCDATA)>
+<!ELEMENT CreationDate (#PCDATA)>
+
+<!-- Workspace Elements-->
+<!ELEMENT Workspace ( Identifier,
+               CreateVersion,
+               PJS_File?,
+               PJS_ConvertDate?,
+               PJS_CreateDate?,
+               Comments?,
+               Project*)>
+
+<!ATTLIST Workspace 
+      CurrentVersion CDATA   #REQUIRED> 
+
+<!ELEMENT CreateVersion     (#PCDATA)>
+
+
+<!-- Conversion data only: only included for files converted from the old .pjs database -->
+<!ELEMENT PJS_File (#PCDATA)>
+<!ELEMENT PJS_ConvertDate (#PCDATA)>
+<!ELEMENT PJS_CreateDate (#PCDATA)>
+
+<!ELEMENT Project ( Identifier,
+               Designer?,
+               DealerID?,
+               SalesOrder?,
+               PurchaseOrder?,
+               Comments?,
+               System*)>
+
+<!ELEMENT Designer (#PCDATA)>
+<!ELEMENT DealerID (#PCDATA)>
+<!ELEMENT SalesOrder (#PCDATA)>
+<!ELEMENT PurchaseOrder (#PCDATA)>
+
+
+<!ELEMENT System  (  Identifier,
+                 SysID,
+                 TransSerial?,
+                 TransModem?,
+                 TransTCPIP?,
+                 VirtualNetLinxMasterFlag?,
+                 VNMRestoreIPSettings?,
+                 VNMSystemID?,
+                 VNMIPAddress?,
+                 VNMMaskAddress?,
+                 IsAuthenticationEnabled?,
+                 UserName?,
+                 Password?,
+                 Comments?,
+                 File*)>
+
+<!ATTLIST System
+      IsActive   (true | false)   "false"
+      Platform   (Axcess | Netlinx)   "Axcess"
+      Transport   (Serial | Modem | TCPIP) "Serial">
+
+<!ELEMENT SysID (#PCDATA)>
+<!ELEMENT TransSerial (#PCDATA)>
+<!ELEMENT TransModem (#PCDATA)>
+<!ELEMENT TransTCPIP (#PCDATA)>
+<!ELEMENT VirtualNetLinxMasterFlag (#PCDATA)>
+<!ELEMENT VNMRestoreIPSettings (#PCDATA)>
+<!ELEMENT VNMSystemID (#PCDATA)>
+<!ELEMENT VNMIPAddress (#PCDATA)>
+<!ELEMENT VNMMaskAddress (#PCDATA)>
+<!ELEMENT IsAuthenticationEnabled (#PCDATA)>
+<!ELEMENT UserName (#PCDATA)>
+<!ELEMENT Password (#PCDATA)>
+
+
+<!ELEMENT File ( Identifier,
+               FilePathName,
+               Comments?,
+               DeviceMap*,
+               IRDB*)>
+
+<!ATTLIST File 
+       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB ) "Other"
+       CompileType (Axcess | Netlinx | None) "None"> 
+
+<!ELEMENT FilePathName	(#PCDATA)>
+                            
+<!ELEMENT DeviceMap (DevName)>
+       <!ATTLIST DeviceMap DevAddr CDATA #REQUIRED>
+
+       <!ELEMENT DevName (#PCDATA)>
+
+<!ELEMENT IRDB    (Property,
+                 DOSName,
+                 UserDBPathName,
+                 Notes)>
+       <!ATTLIST IRDB DBKey CDATA #REQUIRED>
+
+       <!ELEMENT Property (#PCDATA)>
+       <!ELEMENT DOSName (#PCDATA)>
+       <!ELEMENT UserDBPathName (#PCDATA)>
+       <!ELEMENT Notes (#PCDATA)>
+]>
+
+<Workspace CurrentVersion="3.2"><Identifier>Program</Identifier>
+<CreateVersion>3.2</CreateVersion>
+<PJS_File></PJS_File>
+<PJS_ConvertDate></PJS_ConvertDate>
+<PJS_CreateDate></PJS_CreateDate>
+<Comments></Comments>
+<Project><Identifier>Program</Identifier>
+<Designer></Designer>
+<DealerID></DealerID>
+<SalesOrder></SalesOrder>
+<PurchaseOrder></PurchaseOrder>
+<Comments></Comments>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>1</Identifier>
+<SysID>0</SysID>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransModem></TransModem>
+<TransTCPIP>192.168.4.4:1319:0:192.168.4.4::</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>192.168.4.4:1319:0:192.168.4.4::</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="None" Type="IR"><Identifier>APPLE_TV_STATIONS</Identifier>
+<FilePathName>..\IR\APPLE_TV_STATIONS.IRL</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="IR7"><DevName>IR7</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="IR"><Identifier>AUDIOSYSTEM_Panasonic</Identifier>
+<FilePathName>..\IR\AUDIOSYSTEM_Panasonic.IRL</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>AvrHarman_3770</Identifier>
+<FilePathName>..\IR\AvrHarman_3770.irl</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="IR8"><DevName>IR8</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="IR"><Identifier>NAD_S170i</Identifier>
+<FilePathName>..\IR\NAD_S170i.irl</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>openbox S7</Identifier>
+<FilePathName>..\IR\openbox S7.irl</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="IR1"><DevName>IR1</DevName>
+</DeviceMap>
+<DeviceMap DevAddr="IR2"><DevName>IR2</DevName>
+</DeviceMap>
+<DeviceMap DevAddr="IR3"><DevName>IR3</DevName>
+</DeviceMap>
+<DeviceMap DevAddr="IR4"><DevName>IR4</DevName>
+</DeviceMap>
+<DeviceMap DevAddr="IR5"><DevName>IR5</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="IR"><Identifier>Pioneer_AV</Identifier>
+<FilePathName>..\IR\Pioneer_AV.irl</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>Strong_DTV</Identifier>
+<FilePathName>..\IR\Strong_DTV.irl</FilePathName>
+<Comments></Comments>
+<DeviceMap DevAddr="IR6"><DevName>IR6</DevName>
+</DeviceMap>
+</File>
+<File CompileType="None" Type="IR"><Identifier>IRBENK</Identifier>
+<FilePathName>..\IR\TV\IRBENK.irl</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>JVC TV</Identifier>
+<FilePathName>..\IR\TV\JVC TV.IRL</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>LG TV</Identifier>
+<FilePathName>..\IR\TV\LG TV.irl</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>Panasonic_2010</Identifier>
+<FilePathName>..\IR\TV\Panasonic_2010.irl</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>Philips_TV_PDL</Identifier>
+<FilePathName>..\IR\TV\Philips_TV_PDL.IRL</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>Pineer_Plasm</Identifier>
+<FilePathName>..\IR\TV\Pineer_Plasm.IRL</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>Samsung</Identifier>
+<FilePathName>..\IR\TV\Samsung.irl</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="IR"><Identifier>Sony_V5E</Identifier>
+<FilePathName>..\IR\TV\Sony_V5E.IRL</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>ADA_Cinema_Rhapsody_Mach_v1</Identifier>
+<FilePathName>ADA_Cinema_Rhapsody_Mach_v1.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Channel_Zone</Identifier>
+<FilePathName>Channel_Zone.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>CoolMaster_COMM</Identifier>
+<FilePathName>CoolMaster_COMM.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>CoolMaster_UI_Master</Identifier>
+<FilePathName>CoolMaster_UI_Master.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>Daikin_ModBus_COMM_1</Identifier>
+<FilePathName>Daikin_ModBus_COMM_1.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>HW_COMM</Identifier>
+<FilePathName>HW_COMM.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>HW_KEYPAD_RELISE</Identifier>
+<FilePathName>HW_KEYPAD_RELISE.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>HW_KEYPAD_RELISE_VIRTUAL</Identifier>
+<FilePathName>HW_KEYPAD_RELISE_VIRTUAL.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Integra_Port_6</Identifier>
+<FilePathName>Integra_Port_6.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Keypad_MIO_Z1</Identifier>
+<FilePathName>Keypad_MIO_Z1.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Keypad_Port_1</Identifier>
+<FilePathName>Keypad_Port_1.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Keypad_Port_2</Identifier>
+<FilePathName>Keypad_Port_2.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Keypad_Port_3</Identifier>
+<FilePathName>Keypad_Port_3.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Keypad_Port_4</Identifier>
+<FilePathName>Keypad_Port_4.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>KRAMER_3232_COMM</Identifier>
+<FilePathName>KRAMER_3232_COMM.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>KRAMER_3232_UI</Identifier>
+<FilePathName>KRAMER_3232_UI.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>KRAMER_VS_16x16HDMI_v2</Identifier>
+<FilePathName>KRAMER_VS_16x16HDMI_v2.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>Main</Identifier>
+<FilePathName>Main.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Misc</Identifier>
+<FilePathName>Misc.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Miscc</Identifier>
+<FilePathName>Miscc.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="TKO"><Identifier>module ModBus Master</Identifier>
+<FilePathName>module ModBus Master.tko</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>MODULE_IR_PULSE_V1</Identifier>
+<FilePathName>MODULE_IR_PULSE_V1.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>MODULE_IR_V1</Identifier>
+<FilePathName>MODULE_IR_V1.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>MODULE_IRP_COMMAND_V1</Identifier>
+<FilePathName>MODULE_IRP_COMMAND_V1.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>NUVO_Tuner</Identifier>
+<FilePathName>NUVO_Tuner.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>Reboot_SAT_IO</Identifier>
+<FilePathName>Reboot_SAT_IO.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>Reboot_SAT_Kramer</Identifier>
+<FilePathName>Reboot_SAT_Kramer.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>Runco_LS_4_5</Identifier>
+<FilePathName>Runco_LS_4_5.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Text</Identifier>
+<FilePathName>Text.axi</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+<System IsActive="false" Platform="Netlinx" Transport="TCPIP"><Identifier>Cinema</Identifier>
+<SysID>2</SysID>
+<TransSerial>COM1,38400,8,None,1,None</TransSerial>
+<TransModem></TransModem>
+<TransTCPIP>192.168.4.5:1319:1:192.168.4.5::</TransTCPIP>
+<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
+<VNMRestoreIPSettings>0.0.0.0:1319:1</VNMRestoreIPSettings>
+<VNMSystemID>1</VNMSystemID>
+<VNMIPAddress>10.0.0.1</VNMIPAddress>
+<VNMMaskAddress>255.255.255.0</VNMMaskAddress>
+<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
+<UserName></UserName>
+<Password></Password>
+<Comments></Comments>
+<File CompileType="Netlinx" Type="Module"><Identifier>Autonomic Controls MCS Comm</Identifier>
+<FilePathName>Autonomic Controls MCS Comm.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>Autonomic Controls MCS UI</Identifier>
+<FilePathName>Autonomic Controls MCS UI.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Keypad_Port_2</Identifier>
+<FilePathName>Keypad_Port_2.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="MasterSrc"><Identifier>Main_Cinema</Identifier>
+<FilePathName>Main_Cinema.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>Text</Identifier>
+<FilePathName>Text.axi</FilePathName>
+<Comments></Comments>
+</File>
+</System>
+</Project>
+</Workspace>

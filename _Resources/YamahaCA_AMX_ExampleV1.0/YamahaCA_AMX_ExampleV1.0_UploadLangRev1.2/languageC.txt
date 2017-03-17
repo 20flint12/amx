@@ -1,0 +1,736 @@
+﻿#version 1.2#
+#START#
+DÉMARRER ICI
+sélectionner|un autre+D258produit
+exemple|d'application
+autres|contrôles
+contrôles|de base
+0
+1
+2
+3
+4
+5#version 1.2#
+#START#
+DÉMARRER ICI
+sélectionner|un autre|produit
+exemple|d'application
+autres|contrôles
+contrôles|de base
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+sélectionner une langue
+sélectionner un produit
+#SECTION#
+DME24N
+entrées
+sorties
+général
+mute
+scènes
+lecteur wav
+chargement
+lecture
+stop
+mixage
+entrée
+sortie
+niveau
+sources
+entrée
+SPX
+bypass
+intensité
+retard
+salles
+liens
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volume
+niveau
+VU
+Technicien
+annonces
+salle 1
+salle 2
+salle 3
+salle 4
+toutes|les salles
+message|1
+message|2
+message|3
+message|4
+salles
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Salle 1
+source
+PC
+PC portable
+aux
+TV
+off
+micros
+1
+2
+3
+4
+tous
+volume
+voir le|schéma|DME Designer
+retour à|l'application
+éclairage
+DME
+GPI
+sortie
+#SECTION#
+DME64N
+entrées
+sorties
+général
+mute
+scènes
+lecteur wav
+chargement
+lecture
+stop
+mixage
+entrée
+sortie
+niveau
+sources
+entrée
+SPX
+bypass
+intensité
+retard
+salles
+liens
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volume
+niveau
+VU
+Technicien
+annonces
+salle 1
+salle 2
+salle 3
+salle 4
+toutes|les salles
+message|1
+message|2
+message|3
+message|4
+salles
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Salle 1
+source
+PC
+PC portable
+aux
+TV
+off
+micros
+1
+2
+3
+4
+tous
+volume
+voir le|schéma|DME Designer
+retour à|l'application
+éclairage
+DME
+GPI
+sortie
+#SECTION#
+DME4io
+entrées
+sorties
+général
+mute
+scènes
+lecteur wav
+chargement
+lecture
+stop
+mixage
+entrée
+sortie
+niveau
+sources
+entrée
+SPX
+bypass
+intensité
+retard
+salles
+liens
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volume
+niveau
+VU 
+Technicien
+annonces
+salle 1
+salle 2
+salle 3
+salle 4
+toutes|les salles
+message|1
+message|2
+message|3
+message|4
+salles
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Salle 1
+source
+PC
+PC portable
+aux
+TV
+off
+micros
+1
+2
+3
+4
+tous
+volume
+voir le|schéma|DME Designer
+retour à|l'application
+éclairage
+DME Satellite
+GPI
+sortie
+#SECTION#
+Console de mixage numérique LS9
+scènes,|niveaux &|enregistreur
+plus de|canaux
+(page 3)
+(page 4)
+(page 5)
+scènes
+enregistreur
+piste
+transport
+entrée
+sortie
+stéréo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+haut
+bas
+#SECTION#
+Console de mixage numérique M7CL
+scènes &|niveaux
+plus de|canaux
+(page 3)
+(page 4)
+(page 5)
+scènes
+enregistreur
+piste
+transport
+entrées
+sortie
+stéréo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+haut
+bas
+#SECTION#
+Console de mixage numérique 01V96
+scènes|& niveaux
+plus de|canaux
+(page 3)
+(page 4)
+(page 5)
+scènes
+enregistreur
+piste
+transport
+entrées
+sortie
+stéréo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+haut
+bas
+#SECTION#
+Lecteur Blu-ray BD-S2900
+(page 1)
+(page 2)
+(page 3)
+(page 4)
+(page 5)
+top|menu
+popup|menu
+sub|menu
+retour
+OK
+audio 1
+audio 2
+BD|SD
+clear
+Mise en marche
+standby
+lecture
+arrêt
+pause
+recherche
+recherche
+menu
+ouvrir le tiroir
+fermer le tiroir
+lecture du disque
+pas de disque
+setup
+lecture du disque
+pas de disque
+CD
+DVD
+BD
+piste
+-
+-
+-
+-
+disque
+transport
+piste
+timecode
+#SECTION#
+IMX644
+console de mixage|numérique installation
+entrée mono
+entrée stéréo
+sortie
+mémoire
+#SECTION#
+productI
+#SECTION#
+productJ
+#SECTION#
+productK
+#SECTION#
+productL
+#SECTION#
+productM
+#SECTION#
+productN
+#SECTION#
+productO
+#END#
+
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+sélectionner une langue
+sélectionner un produit
+#SECTION#
+DME24N
+entrées
+sorties
+général
+mute
+scènes
+lecteur wav
+chargement
+lecture
+stop
+mixage
+entrée
+sortie
+niveau
+sources
+entrée
+SPX
+bypass
+intensité
+retard
+salles
+liens
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volume
+niveau
+VU
+Technicien
+annonces
+salle 1
+salle 2
+salle 3
+salle 4
+toutes|les salles
+message|1
+message|2
+message|3
+message|4
+salles
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Salle 1
+source
+PC
+PC portable
+aux
+TV
+off
+micros
+1
+2
+3
+4
+tous
+volume
+voir le|schéma|DME Designer
+retour à|l'application
+éclairage
+DME
+GPI
+sortie
+#SECTION#
+DME64N
+entrées
+sorties
+général
+mute
+scènes
+lecteur wav
+chargement
+lecture
+stop
+mixage
+entrée
+sortie
+niveau
+sources
+entrée
+SPX
+bypass
+intensité
+retard
+salles
+liens
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volume
+niveau
+VU
+Technicien
+annonces
+salle 1
+salle 2
+salle 3
+salle 4
+toutes|les salles
+message|1
+message|2
+message|3
+message|4
+salles
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Salle 1
+source
+PC
+PC portable
+aux
+TV
+off
+micros
+1
+2
+3
+4
+tous
+volume
+voir le|schéma|DME Designer
+retour à|l'application
+éclairage
+DME
+GPI
+sortie
+#SECTION#
+DME4io
+entrées
+sorties
+général
+mute
+scènes
+lecteur wav
+chargement
+lecture
+stop
+mixage
+entrée
+sortie
+niveau
+sources
+entrée
+SPX
+bypass
+intensité
+retard
+salles
+liens
+1 + 2
+1 + 3
+1 + 4
+2 + 3
+2 + 4
+3 + 4
+volume
+niveau
+VU 
+Technicien
+annonces
+salle 1
+salle 2
+salle 3
+salle 4
+toutes|les salles
+message|1
+message|2
+message|3
+message|4
+salles
+1+2,|3,|4
+1+2,|3+4
+1+2+3,|4
+1+2+3+4
+1, 2,|3, 4
+Salle 1
+source
+PC
+PC portable
+aux
+TV
+off
+micros
+1
+2
+3
+4
+tous
+volume
+voir le|schéma|DME Designer
+retour à|l'application
+éclairage
+DME Satellite
+GPI
+sortie
+#SECTION#
+Console de mixage numérique LS9
+scènes,|niveaux &|enregistreur
+plus de|canaux
+(page 3)
+(page 4)
+(page 5)
+scènes
+enregistreur
+piste
+transport
+entrée
+sortie
+stéréo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+haut
+bas
+#SECTION#
+Console de mixage numérique M7CL
+scènes &|niveaux
+plus de|canaux
+(page 3)
+(page 4)
+(page 5)
+scènes
+enregistreur
+piste
+transport
+entrées
+sortie
+stéréo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+haut
+bas
+#SECTION#
+Console de mixage numérique 01V96
+scènes|& niveaux
+plus de|canaux
+(page 3)
+(page 4)
+(page 5)
+scènes
+enregistreur
+piste
+transport
+entrées
+sortie
+stéréo
+master
+ST 1
+ST 2
+ST 3
+ST 4
+on
+haut
+bas
+#SECTION#
+Lecteur Blu-ray BD-S2900
+(page 1)
+(page 2)
+(page 3)
+(page 4)
+(page 5)
+top|menu
+popup|menu
+sub|menu
+retour
+OK
+audio 1
+audio 2
+BD|SD
+clear
+Mise en marche
+standby
+lecture
+arrêt
+pause
+recherche
+recherche
+menu
+ouvrir le tiroir
+fermer le tiroir
+lecture du disque
+pas de disque
+setup
+lecture du disque
+pas de disque
+CD
+DVD
+BD
+piste
+-
+-
+-
+-
+disque
+transport
+piste
+timecode
+#SECTION#
+IMX644
+console de mixage|numérique installation
+entrée mono
+entrée stéréo
+sortie
+mémoire
+#SECTION#
+productI
+#SECTION#
+productJ
+#SECTION#
+productK
+#SECTION#
+productL
+#SECTION#
+productM
+#SECTION#
+productN
+#SECTION#
+productO
+#END#
