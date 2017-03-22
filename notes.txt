@@ -1,0 +1,92 @@
+
+ ---------------------------------------------------------------------------
+ NetLinx Studio - V3.3.1.525                               03-21-2017  23:50
+ ---------------------------------------------------------------------------
+
+  System     1 Devices [192.168.1.189]
+     00000 - NI Master
+           + Version............: v3.60.453
+           + Manufacturer.......: AMX LLC
+           + Manufacturer ID....: 1
+           + Serial Number......: 210505x41d0381
+           + Firmware ID........: 0x017C (380)
+           + Device ID..........: 0x012B (299)
+           + Port Count.........: 1
+           + NDP Device.........: TRUE
+           + IP Address.........: 192.168.1.189
+           + MAC Address........: 00:60:9f:99:f6:71
+           + [OID=1] - vxWorks Image
+                     + Version........: v3.60.453
+                     + Firmware ID....: 0x017A (378)
+                     + Device ID......: 0x012B (299)
+           + [OID=2] - BootROM
+                     + Version........: v3.60.453
+                     + Firmware ID....: 0x017B (379)
+                     + Device ID......: 0x012B (299)
+           + [OID=3] - AXLink I/F uController  
+                     + Version........: v-.--
+                     + Firmware ID....: 0x0000 (0)
+                     + Device ID......: 0x0100 (256)
+
+     05001 - NI-3100
+           + Version............: v1.30.8
+           + Manufacturer.......: AMX LLC
+           + Manufacturer ID....: 1
+           + Serial Number......: N/A
+           + Firmware ID........: 0x017F (383)
+           + Device ID..........: 0x011E (286)
+           + Port Count.........: 17
+           + Device Mapping.....: dvModbus [5001:2:0]
+
+     32001 - NSX Application
+           + Version............: v3.3.1.525
+           + Manufacturer.......: AMX LLC
+           + Manufacturer ID....: 1
+           + Serial Number......: 
+           + Firmware ID........: 0x0119 (281)
+           + Device ID..........: 0x0106 (262)
+           + Port Count.........: 1
+           + IP Address.........: 10.0.2.15
+
+     32999 - Virtual
+           + Version............: v3.60.453
+           + Manufacturer.......: AMX LLC
+           + Manufacturer ID....: 1
+           + Serial Number......: 210505x41d0381
+           + Firmware ID........: 0x017C (380)
+           + Device ID..........: 0xFFFE (65534)
+           + Port Count.........: 1
+           + Device Mapping.....: vdvDebug [32999:1:0]
+
+     33001 - Virtual
+           + Version............: v3.60.453
+           + Manufacturer.......: AMX LLC
+           + Manufacturer ID....: 1
+           + Serial Number......: 210505x41d0381
+           + Firmware ID........: 0x017C (380)
+           + Device ID..........: 0xFFFE (65534)
+           + Port Count.........: 1
+           + Device Mapping.....: vdvModbus [33001:1:0]
+
+
+
+  Coded Devices Not Shown Online
+     11001 - 
+           + Version............: 
+           + Manufacturer.......: 
+           + Manufacturer ID....: 0
+           + Serial Number......: 
+           + Firmware ID........: 0x0000 (0)
+           + Device ID..........: 0x0000 (0)
+           + Port Count.........: 0
+
+
+
+
+
+ ---------------------------------------------------------------------------
+ ---------------------------------------------------------------------------
+      Coded Devices Not Online (   1 Devices)
+ ---------------------------------------------------------------------------
+ ---------------------------------------------------------------------------
+   panel [11001:1:1]

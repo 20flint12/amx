@@ -1,16 +1,37 @@
-PROGRAM_NAME='Modbus'
+PROGRAM_NAME='NewModbusProject'
+(***********************************************************)
+(*  FILE REVISION: Rev 2                                   *)
+(*  REVISION DATE: 03/22/2017  AT: 21:39:33                *)
+(*                                                         *)
+(*  COMMENTS:                                              *)
+(*                                                         *)
+(***********************************************************)
+(*  FILE REVISION: Rev 1                                   *)
+(*  REVISION DATE: 03/22/2017  AT: 21:37:31                *)
+(*                                                         *)
+(*  COMMENTS:                                              *)
+(*                                                         *)
+(***********************************************************)
+(*  FILE REVISION: Rev 0                                   *)
+(*  REVISION DATE: 03/18/2017  AT: 09:59:49                *)
+(*                                                         *)
+(*  COMMENTS:                                              *)
+(*                                                         *)
+(***********************************************************)
 (***********************************************************)
 (* System Type : Netlinx                                   *)
 (***********************************************************)
 
 /*
-[8:59:35 PM] Игорь_peanball: 44421 ftp
-44422 22 порт
-44423 telnet 
-44480 web
-41319 рабочий 
 IP 193.178.251.2
+
+44421 ftp
+44422 22 порт
+44423 telnet 
+44480 web
+41319 рабочий 
 */
+
 
 
 #include 'Misc.axi'
@@ -21,14 +42,14 @@ IP 193.178.251.2
 (***********************************************************)
 DEFINE_DEVICE
 
-
 dvModbus  = 5001:2:0;
-
 vdvModbus = 33001:1:0;
 vdvDebug  = 32999:1:0;
 
 panel = 11001:1:1;
-//panel = 10000:1:1;
+//panel = 10000:1:0;
+
+
 
 
 
@@ -116,13 +137,12 @@ Define_Call 'Modbus - Write Multiple Registers - Single register' (Char DeviceAd
 Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Address, Integer Value)
 {
 	// TODO : Process answers there
-
 	Select
 	{
 		// Обработка ответа от устройства с адресом $10 на запрос функции 4 с регистровым адресом $1400
-		Active (Function == 3 && Address == 40004) : { VAR_1 = Value }
-		Active (Function == 3 && Address == 40008) : { VAR_2 = Value }
-		Active (Function == 3 && Address == 40012) : { VAR_3 = Value }
+		Active (Function == 3 && Address == 40004) : { VAR_1 = Value } 	// 0x9C44
+		Active (Function == 3 && Address == 40008) : { VAR_2 = Value }	// 0x9C48
+		Active (Function == 3 && Address == 40012) : { VAR_3 = Value }	// 0x9C4C
 		Active (Function == 3 && Address == 40013) : { VAR_4 = Value }
 		Active (Function == 3 && Address == 40014) : { VAR_5 = Value }
 		Active (Function == 3 && Address == 40015) : { VAR_6 = Value }
@@ -345,7 +365,8 @@ Wait 100 'Modbus Requests'
 	// Read values
 
 	// Прочитать функцией 4 у устройства с адресом $10 регистровые значения начиная с адреса $1400 в количесте 20 штук подряд
-	// Т.е. прийдют ответы от регистров $1400, $1401, ..., $1412 (итого 20 значений, которые надо будет обработать в функции 'ModBus - Process Answer'
+	// Т.е. прийдют ответы от регистров $1400, $1401, ..., $1412 
+	// (итого 20 значений, которые надо будет обработать в функции 'ModBus - Process Answer'
 	Call 'ModBus - Call Function' (3, 1, 40004, 1); //Outdoortemperature
 	wait 10 Call 'ModBus - Call Function' (3, 1, 40008, 1); //Flowtemperature
 	send_string 0, "'Flowtemperature'";

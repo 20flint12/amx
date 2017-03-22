@@ -1,0 +1,58 @@
+http://tpcloud.touchpanelcontrol.com/en/wizard
+
+Thank you for requesting a trial token.
+Your token: BLT-0-WCAL-YBNX
+
+
+Welcome to NetLinx v3.60.453 Copyright AMX LLC 2010
+>
+>show device
+Show Device
+-----------
+
+Local devices for system #1 (This System)
+----------------------------------------------------------------------------
+Device (ID)Model                 (ID)Mfg                    FWID  Version
+00000  (00299)NI Master          (00001)AMX LLC             00380 v3.60.453
+       (PID=0:OID=0) Serial='210505x41d0381',0,0            Failed Pings=0
+       Physical Address=IP 192.168.1.189:80 (00:60:9f:99:f6:71)
+         (00299)vxWorks Image    (00001)                    00378 v3.60.453
+         (PID=0:OID=1) Serial=N/A
+         (00299)BootROM          (00001)                    00379 v3.60.453
+         (PID=0:OID=2) Serial=N/A
+         (00256)AXLink I/F uContr(00001)                    00270 v1.30.8
+         (PID=0:OID=3) Serial=0000000000000000
+05001  (00286)NI-3100            (00001)AMX LLC             00383 v1.30.8
+       (PID=0:OID=0) Serial='N/A',0,0,0,0,0,0,0,0,0,        Failed Pings=0
+       Physical Address=Internal Connection
+32999  (65534)Virtual            (00001)AMX LLC             00380 v3.60.453
+       (PID=0:OID=0) Serial='210505x41d0381',0,0            Failed Pings=0
+       Physical Address=None
+33001  (65534)Virtual            (00001)AMX LLC             00380 v3.60.453
+       (PID=0:OID=0) Serial='210505x41d0381',0,0            Failed Pings=0
+       Physical Address=None
+>
+
+00609f99f671
+
+ftp://193.178.251.2:44421
+
+
+
+*******************************************************************************
+Smartphone
+Thank you for requesting a trial token.
+Your token: TPC-0-TTRD-MAEU
+Your 21 day trial for a TPControl Device License will begin when you activate your device.
+
+
+http://tpcloud.touchpanelcontrol.com/en/tokens
+
+*******************************************************************************
+Tablet
+Thank you for requesting a trial token.
+Your token: TPC-0-WMBU-GYQS
+Your 21 day trial for a TPControl Device License will begin when you activate your device.
+
+
+
