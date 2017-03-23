@@ -33,7 +33,6 @@ IP 193.178.251.2
 */
 
 
-
 #include 'Misc.axi'
 
 
@@ -46,15 +45,16 @@ dvModbus  = 5001:2:0;
 vdvModbus = 33001:1:0;
 vdvDebug  = 32999:1:0;
 
-panel = 11001:1:1;
-//panel = 10000:1:0;
-
+Panel = 11001:1:1;
 
 
 DEFINE_CONSTANT
 
+(*------------ Short description ------------------------*)
+CHAR PROGRAM_DESCRIPTION[] = 'Prepared for testing'
 
 
+// ############################################################################
 DEFINE_VARIABLE
 
 VOLATILE INTEGER VAR_1
@@ -66,11 +66,19 @@ VOLATILE INTEGER VAR_6
 VOLATILE INTEGER VAR_7
 VOLATILE INTEGER VAR_8
 VOLATILE INTEGER VAR_9
-                   
+                  
+
+// Touch Panel Buttons
+VOLATILE INTEGER controlPanelButtons[] =
+{
+    140,	// btn_p1_up
+    141, 	// btn_p1_down
+    143, 	// btn_p2_up
+    144  	// btn_p2_down
+}		  
 		   
 		   
-		   
-(* ************************************* ModBus ************************************* *)
+(* ***************************** ModBus ************************************ *)
 
 // ModBus
 Define_Call 'ModBus - RS485 2-wire cable' (Char bValue) 
@@ -86,7 +94,9 @@ Define_Call 'ModBus - Call Function' (Char Function, Char Device, Integer Addres
 				      Integer QuantityOrValue) 
 { 
     If (Function == 5 && QuantityOrValue == 1) QuantityOrValue = $FF00;   
-    Send_Command vdvModbus, "'ADDCOMMAND = ', Format('%02X', Device), Format('%02X', Function), Format('%04X', Address), Format('%04X', QuantityOrValue)"; 
+    Send_Command vdvModbus, "'ADDCOMMAND = ', 
+			    Format('%02X', Device), Format('%02X', Function), 
+			    Format('%04X', Address), Format('%04X', QuantityOrValue)"; 
 }
 
 
@@ -94,7 +104,9 @@ Define_Call 'ModBus - Call Function Priority' (Char Function, Char Device, Integ
 					       Integer QuantityOrValue) 
 { 
     If (Function == 5 && QuantityOrValue == 1) QuantityOrValue = $FF00;   
-    Send_Command vdvModbus, "'ADDPRIORITYCOMMAND = ', Format('%02X', Device), Format('%02X', Function), Format('%04X', Address), Format('%04X', QuantityOrValue)"; 
+    Send_Command vdvModbus, "'ADDPRIORITYCOMMAND = ', 
+			    Format('%02X', Device), Format('%02X', Function), 
+			    Format('%04X', Address), Format('%04X', QuantityOrValue)"; 
 }
 
 
@@ -187,7 +199,6 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 (***********************************************************)
 DEFINE_EVENT
 
-
 DATA_EVENT [vdvModbus]
 {
     COMMAND:
@@ -236,7 +247,6 @@ DATA_EVENT [vdvModbus]
 						 hextoi(Mid_String(Data.Text, 12, 4)) );
 	    }
 
-
 	    Active (RemoveCmdLeft(Data.Text, 'ANSWER = ')):
 	    {
 		// FULL RESPONSE THAT RECEIVED ON THE REQUEST
@@ -251,7 +261,6 @@ DATA_EVENT [vdvModbus]
 		// TODO : or wait For same 'VALUE = ' messages
 		*/
 	    }
-
 
 	    Active (RemoveCmdLeft(Data.Text, 'WRONG_ANSWER = ')):
 	    {
@@ -268,18 +277,15 @@ DATA_EVENT [vdvModbus]
 		*/
 	    }
 
-
 	    Active (RemoveCmdFull(Data.Text, 'ANSWER_TIMEOUT')):
 	    {
 		// TODO : Didn't receive answer On command/request
 	    }
 
-
 	    Active (RemoveCmdLeft(Data.Text, 'REQUEST_ERROR = ')):
 	    {
 		// TODO : See error code in Data.Text
 	    }
-
 
 	    Active (RemoveCmdLeft(Data.Text, 'CRC_ERROR = ')):
 	    {
@@ -346,9 +352,9 @@ DATA_EVENT [vdvModbus]
 	// Send_Command Data.Device, 'DEBUGSTRING = Modbus[1]'; // Поменять начало на "Modbus[1]"
 
 
-	// *****************************************************************************************************************************************
+	// ********************************************************************
 	// Запрос информации о версии модуля
-	// *****************************************************************************************************************************************
+	// ********************************************************************
 	// Выводится информация о версии модуля ModBus.
 	// Поддерживается начиная с версии 2.0
 	// Пример сообщений в окне Диагностики:
@@ -367,6 +373,43 @@ DATA_EVENT [vdvModbus]
 (***********************************************************)
 
 
+DATA_EVENT [Panel]
+{
+    ONLINE:
+	send_string 0, "'Welcome Panel...'";
+    OFFLINE:
+	send_string 0, "'Panel offline...'";
+}
+
+BUTTON_EVENT[Panel, controlPanelButtons]
+{
+    PUSH:
+    {
+	send_string 0,"'btnEVT [dvTP,',ITOA(PUSH_CHANNEL),']'"
+	SWITCH(PUSH_CHANNEL)
+	{
+	    CASE 140:	// btn_p1_up
+	    {
+		send_string 0, "'btn_p1_up 140'";
+	    }	
+	    CASE 141:	// btn_p1_down
+	    {
+		send_string 0, "'btn_p1_down 141'";
+	    }
+	    CASE 143:	// btn_p2_up
+	    { 
+		send_string 0, "'btn_p2_up 143'";
+	    }
+	    CASE 144:	// btn_p2_down
+	    {
+		send_string 0, "'btn_p2_down 144'";
+	    }
+	}    
+    }
+}
+
+
+/* ######################################################################### */
 DEFINE_MODULE 'module Modbus Master' mdl_Modbus (dvModbus, vdvModbus);
 
 
@@ -376,8 +419,8 @@ DEFINE_MODULE 'module Modbus Master' mdl_Modbus (dvModbus, vdvModbus);
 (***********************************************************)
 DEFINE_START
 
-send_string 0, "'Programm starting...'";
-//send_string 0, PROGRAM_NAME;
+(*-- Print version ----------------------------------------*)
+send_string 0,"'Programm ',PROGRAM_NAME,' starting... Description: ',PROGRAM_DESCRIPTION"
 
 
 (***********************************************************)
@@ -387,9 +430,7 @@ DEFINE_PROGRAM
 
 
 Wait 100 'Modbus Requests'
-{
-    // Read values
-    
+{   
     /*
     Outdoor temperature (BT1) 40004
     Flow temperature (BT2) 40008
@@ -402,6 +443,7 @@ Wait 100 'Modbus Requests'
     Degree minutes 43005
     */
 
+    // Read values
     // Прочитать функцией 4 у устройства с адресом $10 регистровые значения начиная с адреса $1400 в количесте 20 штук подряд
     // Т.е. прийдют ответы от регистров $1400, $1401, ..., $1412 
     // (итого 20 значений, которые надо будет обработать в функции 'ModBus - Process Answer'
