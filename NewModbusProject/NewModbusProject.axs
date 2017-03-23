@@ -45,7 +45,7 @@ dvModbus  = 5001:2:0;
 vdvModbus = 33001:1:0;
 vdvDebug  = 32999:1:0;
 
-Panel = 11001:1:1;
+dvPanel = 11001:1:1;
 
 
 DEFINE_CONSTANT
@@ -53,19 +53,44 @@ DEFINE_CONSTANT
 (*------------ Short description ------------------------*)
 CHAR PROGRAM_DESCRIPTION[] = 'Prepared for testing'
 
+/*
+Outdoor temperature (BT1) 40004
+Flow temperature (BT2) 40008
+Return temperature (BT3) 40012
+Hot water, top (BT7) 40013
+Hot water middle (BT6) 40014
+Brine in (BT10) 40015
+Brine out (BT11) 40016
+Room temperature (BT50) 40033
+Degree minutes 43005
+*/
+INTEGER REG_BT1  = 40004
+INTEGER REG_BT2  = 40008
+INTEGER REG_BT3  = 40012
+INTEGER REG_BT7  = 40013
+INTEGER REG_BT6  = 40014
+INTEGER REG_BT10 = 40015
+INTEGER REG_BT11 = 40016
+INTEGER REG_BT50 = 40033
+INTEGER REG_DEGREE = 43005
+
+INTEGER UP_INC   = 10
+INTEGER DN_INC   = 10
+
+
 
 // ############################################################################
 DEFINE_VARIABLE
 
-VOLATILE INTEGER VAR_1
-VOLATILE INTEGER VAR_2
-VOLATILE INTEGER VAR_3
-VOLATILE INTEGER VAR_4
-VOLATILE INTEGER VAR_5
-VOLATILE INTEGER VAR_6
-VOLATILE INTEGER VAR_7
-VOLATILE INTEGER VAR_8
-VOLATILE INTEGER VAR_9
+VOLATILE INTEGER VAR_BT1
+VOLATILE INTEGER VAR_BT2
+VOLATILE INTEGER VAR_BT3
+VOLATILE INTEGER VAR_BT7
+VOLATILE INTEGER VAR_BT6
+VOLATILE INTEGER VAR_BT10
+VOLATILE INTEGER VAR_BT11
+VOLATILE INTEGER VAR_BT50
+VOLATILE INTEGER VAR_DEGREE
                   
 
 // Touch Panel Buttons
@@ -94,9 +119,9 @@ Define_Call 'ModBus - Call Function' (Char Function, Char Device, Integer Addres
 				      Integer QuantityOrValue) 
 { 
     If (Function == 5 && QuantityOrValue == 1) QuantityOrValue = $FF00;   
-    Send_Command vdvModbus, "'ADDCOMMAND = ', 
-			    Format('%02X', Device), Format('%02X', Function), 
-			    Format('%04X', Address), Format('%04X', QuantityOrValue)"; 
+    Send_Command vdvModbus, "'ADDCOMMAND = ', Format('%02X', Device), 
+			    Format('%02X', Function), Format('%04X', Address), 
+			    Format('%04X', QuantityOrValue)"; 
 }
 
 
@@ -167,11 +192,11 @@ Define_Call 'Modbus - Write Multiple Registers' (Char DeviceAddress, Integer Sta
 
 Define_Call 'Modbus - Write Multiple Registers - Single register' (Char DeviceAddress, Integer RegisterAddress, Integer Value)
 {
-    Send_Command vdvModbus, "'ADDCOMMAND = ', Format('%02X', DeviceAddress), Format('%02X', $10), 
-					      Format('%04X', RegisterAddress), 
-					      Format('%04X', 1 /* QuantityOfRegisters */), 
-					      Format('%02X', 2 /* QuantityOfRegisters * 2 */), 
-					      Format('%04X', Value)";
+    Send_Command vdvModbus, "'ADDCOMMAND = ', Format('%02X', DeviceAddress), 
+			    Format('%02X', $10), Format('%04X', RegisterAddress), 
+			    Format('%04X', 1 /* QuantityOfRegisters */), 
+			    Format('%02X', 2 /* QuantityOfRegisters * 2 */), 
+			    Format('%04X', Value)";
 }
 
 
@@ -181,15 +206,15 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
     Select
     {
 	// Обработка ответа от устройства с адресом $10 на запрос функции 4 с регистровым адресом $1400
-	Active (Function == 3 && Address == 40004) : { VAR_1 = Value } 	// 0x9C44
-	Active (Function == 3 && Address == 40008) : { VAR_2 = Value }	// 0x9C48
-	Active (Function == 3 && Address == 40012) : { VAR_3 = Value }	// 0x9C4C
-	Active (Function == 3 && Address == 40013) : { VAR_4 = Value }
-	Active (Function == 3 && Address == 40014) : { VAR_5 = Value }
-	Active (Function == 3 && Address == 40015) : { VAR_6 = Value }
-	Active (Function == 3 && Address == 40016) : { VAR_7 = Value }
-	Active (Function == 3 && Address == 40033) : { VAR_8 = Value }
-	Active (Function == 3 && Address == 43005) : { VAR_9 = Value }
+	Active (Function == 3 && Address == REG_BT1)  : { VAR_BT1  = Value } 	// 0x9C44
+	Active (Function == 3 && Address == REG_BT2)  : { VAR_BT2  = Value }	// 0x9C48
+	Active (Function == 3 && Address == REG_BT3)  : { VAR_BT3  = Value }	// 0x9C4C
+	Active (Function == 3 && Address == REG_BT7)  : { VAR_BT7  = Value }
+	Active (Function == 3 && Address == REG_BT6)  : { VAR_BT6  = Value }
+	Active (Function == 3 && Address == REG_BT10) : { VAR_BT10 = Value }
+	Active (Function == 3 && Address == REG_BT11) : { VAR_BT11 = Value }
+	Active (Function == 3 && Address == REG_BT50) : { VAR_BT50 = Value }
+	Active (Function == 3 && Address == REG_DEGREE) : { VAR_DEGREE = Value }
     }                                                                        
 }
 
@@ -373,7 +398,7 @@ DATA_EVENT [vdvModbus]
 (***********************************************************)
 
 
-DATA_EVENT [Panel]
+DATA_EVENT [dvPanel]
 {
     ONLINE:
 	send_string 0, "'Welcome Panel...'";
@@ -381,27 +406,54 @@ DATA_EVENT [Panel]
 	send_string 0, "'Panel offline...'";
 }
 
-BUTTON_EVENT[Panel, controlPanelButtons]
+BUTTON_EVENT[dvPanel, controlPanelButtons]
 {
+/*
+Outdoor temperature (BT1) 40004
+Flow temperature (BT2) 40008
+Return temperature (BT3) 40012
+Hot water, top (BT7) 40013
+Hot water middle (BT6) 40014
+Brine in (BT10) 40015
+Brine out (BT11) 40016
+Room temperature (BT50) 40033
+Degree minutes 43005
+
+INTEGER REG_BT1  = 40004
+INTEGER REG_BT2  = 40008
+INTEGER REG_BT3  = 40012
+INTEGER REG_BT7  = 40013
+INTEGER REG_BT6  = 40014
+INTEGER REG_BT10 = 40015
+INTEGER REG_BT11 = 40016
+INTEGER REG_BT50 = 40033
+INTEGER REG_DEGREE = 43005
+*/
     PUSH:
     {
 	send_string 0,"'btnEVT [dvTP,',ITOA(PUSH_CHANNEL),']'"
 	SWITCH(PUSH_CHANNEL)
 	{
-	    CASE 140:	// btn_p1_up
+	    CASE 140: //controlPanelButtons[0]:	// btn_p1_up
 	    {
+		IF( (VAR_BT3 + UP_INC) >= 2500) { VAR_BT3 = 2500 }
+		ELSE { VAR_BT3 = (VAR_BT3 + UP_INC) } 
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT3, VAR_BT3)		
 		send_string 0, "'btn_p1_up 140'";
 	    }	
 	    CASE 141:	// btn_p1_down
 	    {
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT3, 2500)		
 		send_string 0, "'btn_p1_down 141'";
 	    }
 	    CASE 143:	// btn_p2_up
 	    { 
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT7, 2500)		
 		send_string 0, "'btn_p2_up 143'";
 	    }
 	    CASE 144:	// btn_p2_down
 	    {
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT7, 2500)		
 		send_string 0, "'btn_p2_down 144'";
 	    }
 	}    
@@ -419,91 +471,100 @@ DEFINE_MODULE 'module Modbus Master' mdl_Modbus (dvModbus, vdvModbus);
 (***********************************************************)
 DEFINE_START
 
-(*-- Print version ----------------------------------------*)
-send_string 0,"'Programm ',PROGRAM_NAME,' starting... Description: ',PROGRAM_DESCRIPTION"
-
+send_string 0,"'Programm starting... Description: ',PROGRAM_DESCRIPTION"
+//SEND_STRING 0,"'  Running ',AXS_NAME,' v',AXS_VER"
 
 (***********************************************************)
 (*            THE ACTUAL PROGRAM GOES BELOW                *)
 (***********************************************************)
 DEFINE_PROGRAM
 
+/*
+Outdoor temperature (BT1) 40004
+Flow temperature (BT2) 40008
+Return temperature (BT3) 40012
+Hot water, top (BT7) 40013
+Hot water middle (BT6) 40014
+Brine in (BT10) 40015
+Brine out (BT11) 40016
+Room temperature (BT50) 40033
+Degree minutes 43005
+
+INTEGER REG_BT1  = 40004
+INTEGER REG_BT2  = 40008
+INTEGER REG_BT3  = 40012
+INTEGER REG_BT7  = 40013
+INTEGER REG_BT6  = 40014
+INTEGER REG_BT10 = 40015
+INTEGER REG_BT11 = 40016
+INTEGER REG_BT50 = 40033
+INTEGER REG_DEGREE = 43005
+*/
 
 Wait 100 'Modbus Requests'
-{   
-    /*
-    Outdoor temperature (BT1) 40004
-    Flow temperature (BT2) 40008
-    Return temperature (BT3) 40012
-    Hot water, top (BT7) 40013
-    Hot water middle (BT6) 40014
-    Brine in (BT10) 40015
-    Brine out (BT11) 40016
-    Room temperature (BT50) 40033
-    Degree minutes 43005
-    */
-
+{       
     // Read values
-    // Прочитать функцией 4 у устройства с адресом $10 регистровые значения начиная с адреса $1400 в количесте 20 штук подряд
+    // TODO Прочитать функцией 4 у устройства с адресом $10 регистровые значения начиная с адреса $1400 в количесте 20 штук подряд
     // Т.е. прийдют ответы от регистров $1400, $1401, ..., $1412 
     // (итого 20 значений, которые надо будет обработать в функции 'ModBus - Process Answer'
     wait 0
     {
-	Call 'ModBus - Call Function' (3, 1, 40004, 1); //Outdoortemperature
+	Call 'ModBus - Call Function' (3, 1, REG_BT1, 1); 	// Outdoor temperature (BT1) 40004
 	send_string 0, "'Outdoor temperature'";
     }
     wait 10
     {
-	Call 'ModBus - Call Function' (3, 1, 40008, 1); //Flowtemperature
+	Call 'ModBus - Call Function' (3, 1, REG_BT2, 1); 	// Flow temperature (BT2) 40008
+
 	send_string 0, "'Flow temperature'";
     }
     wait 15
     {
-	Call 'ModBus - Call Function' (3, 1, 40012, 1); //Returntemperature
-	send_string 0, "'Return temperature'";
+	Call 'ModBus - Call Function' (3, 1, REG_BT3, 1); // Return temperature (BT3) 40012
+	send_string 0, "'Call','Return temperature (BT3) 40012'";
     }
     wait 20
     {	
-	Call 'ModBus - Call Function' (3, 1, 40013, 1); //Hotwater,top
-	send_string 0, "'Hot water, top'";
+	Call 'ModBus - Call Function' (3, 1, REG_BT7, 1); // Hot water, top (BT7) 40013
+	send_string 0, "'Call','Hot water, top (BT7) 40013'";
     }
     wait 25
     {
-	Call 'ModBus - Call Function' (3, 1, 40014, 1); //Hotwatermiddle
-	send_string 0, "'Hot water middle'";	
+	Call 'ModBus - Call Function' (3, 1, REG_BT6, 1); // Hot water middle (BT6) 40014
+	send_string 0, "'Call','Hot water middle (BT6) 40014'";	
     }
     wait 30
     {
-	Call 'ModBus - Call Function' (3, 1, 40015, 1); //Brinein
-	send_string 0, "'Brine in'";
+	Call 'ModBus - Call Function' (3, 1, REG_BT10, 1); // Brine in (BT10) 40015
+	send_string 0, "'Call','Brine in (BT10) 40015'";
     }
     wait 35
     {
-	Call 'ModBus - Call Function' (3, 1, 40016, 1); //Brineout
-	send_string 0, "'Brine out'";
+	Call 'ModBus - Call Function' (3, 1, REG_BT11, 1); // Brine out (BT11) 40016
+	send_string 0, "'Call','Brine out (BT11) 40016'";
     }	    
     wait 40
     {	
-	Call 'ModBus - Call Function' (3, 1, 40033, 1); //Roomtemperature
-	send_string 0, "'Room temperature'";
+	Call 'ModBus - Call Function' (3, 1, REG_BT50, 1); // Room temperature (BT50) 40033
+	send_string 0, "'Call','Room temperature (BT50) 40033'";
     }
     wait 45
     {
-	Call 'ModBus - Call Function' (3, 1, 43005, 1); //Degreeminutes
-	send_string 0, "'Degree minutes'";
+	Call 'ModBus - Call Function' (3, 1, REG_DEGREE, 1); // Degree minutes 43005
+	send_string 0, "'Call','Degree minutes 43005'";
     }
-
+    
 }
 
-SEND_COMMAND Panel, "'^TXT-1,0,', ITOA(var_1)"
-SEND_COMMAND Panel, "'^TXT-2,0,', ITOA(var_2)"
-SEND_COMMAND Panel, "'^TXT-3,0,', ITOA(var_3)"
-SEND_COMMAND Panel, "'^TXT-4,0,', ITOA(var_4)"
-SEND_COMMAND Panel, "'^TXT-5,0,', ITOA(var_5)"
-SEND_COMMAND Panel, "'^TXT-6,0,', ITOA(var_6)"
-SEND_COMMAND Panel, "'^TXT-7,0,', ITOA(var_7)"
-SEND_COMMAND Panel, "'^TXT-8,0,', ITOA(var_8)"
-SEND_COMMAND Panel, "'^TXT-9,0,', ITOA(var_9)"
+SEND_COMMAND dvPanel, "'^TXT-1,0,', ITOA(VAR_BT1)"
+SEND_COMMAND dvPanel, "'^TXT-2,0,', ITOA(VAR_BT2)"
+SEND_COMMAND dvPanel, "'^TXT-3,0,', ITOA(VAR_BT3)"
+SEND_COMMAND dvPanel, "'^TXT-4,0,', ITOA(VAR_BT7)"
+SEND_COMMAND dvPanel, "'^TXT-5,0,', ITOA(VAR_BT6)"
+SEND_COMMAND dvPanel, "'^TXT-6,0,', ITOA(VAR_BT10)"
+SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_BT11)"
+SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_BT50)"
+SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_DEGREE)"
 
 
 (***********************************************************)
