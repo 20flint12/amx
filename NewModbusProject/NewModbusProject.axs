@@ -103,6 +103,12 @@ VOLATILE INTEGER controlPanelButtons[] =
 }		  
 		   
 		   
+		   
+		   
+(***********************************************************)
+(*        SUBROUTINE/FUNCTION DEFINITIONS GO BELOW         *)
+(***********************************************************)
+		   
 (* ***************************** ModBus ************************************ *)
 
 // ModBus
@@ -432,6 +438,8 @@ INTEGER REG_DEGREE = 43005
     PUSH:
     {
 	send_string 0,"'btnEVT [dvTP,',ITOA(PUSH_CHANNEL),']'"
+	Send_String 0,"'Button ',ITOA(BUTTON.INPUT.CHANNEL),' of dvTp was pushed'"
+	
 	SWITCH(PUSH_CHANNEL)
 	{
 	    CASE 140: //controlPanelButtons[0]:	// btn_p1_up
