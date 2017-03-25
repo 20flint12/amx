@@ -66,7 +66,7 @@ Degree minutes 43005
 */
 INTEGER REG_BT1  = 40004
 INTEGER REG_BT2  = 40008
-INTEGER REG_BT3  = 40012
+INTEGER REG_BT3  = 47398
 INTEGER REG_BT7  = 40013
 INTEGER REG_BT6  = 40014
 INTEGER REG_BT10 = 40015
@@ -203,6 +203,7 @@ Define_Call 'Modbus - Write Multiple Registers - Single register' (Char DeviceAd
 			    Format('%04X', 1 /* QuantityOfRegisters */), 
 			    Format('%02X', 2 /* QuantityOfRegisters * 2 */), 
 			    Format('%04X', Value)";
+    send_string 0, "'####################'";			    
 }
 
 
@@ -518,48 +519,48 @@ Wait 100 'Modbus Requests'
     wait 0
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT1, 1); 	// Outdoor temperature (BT1) 40004
-	send_string 0, "'Outdoor temperature'";
+	//send_string 0, "'Outdoor temperature'";
     }
     wait 10
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT2, 1); 	// Flow temperature (BT2) 40008
 
-	send_string 0, "'Flow temperature'";
+	//send_string 0, "'Flow temperature'";
     }
     wait 15
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT3, 1); // Return temperature (BT3) 40012
-	send_string 0, "'Call','Return temperature (BT3) 40012'";
+	//send_string 0, "'Call','Return temperature (BT3) 40012'";
     }
     wait 20
     {	
 	Call 'ModBus - Call Function' (3, 1, REG_BT7, 1); // Hot water, top (BT7) 40013
-	send_string 0, "'Call','Hot water, top (BT7) 40013'";
+	//send_string 0, "'Call','Hot water, top (BT7) 40013'";
     }
     wait 25
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT6, 1); // Hot water middle (BT6) 40014
-	send_string 0, "'Call','Hot water middle (BT6) 40014'";	
+	//send_string 0, "'Call','Hot water middle (BT6) 40014'";	
     }
     wait 30
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT10, 1); // Brine in (BT10) 40015
-	send_string 0, "'Call','Brine in (BT10) 40015'";
+	//send_string 0, "'Call','Brine in (BT10) 40015'";
     }
     wait 35
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT11, 1); // Brine out (BT11) 40016
-	send_string 0, "'Call','Brine out (BT11) 40016'";
+	//send_string 0, "'Call','Brine out (BT11) 40016'";
     }	    
     wait 40
     {	
 	Call 'ModBus - Call Function' (3, 1, REG_BT50, 1); // Room temperature (BT50) 40033
-	send_string 0, "'Call','Room temperature (BT50) 40033'";
+	//send_string 0, "'Call','Room temperature (BT50) 40033'";
     }
     wait 45
     {
 	Call 'ModBus - Call Function' (3, 1, REG_DEGREE, 1); // Degree minutes 43005
-	send_string 0, "'Call','Degree minutes 43005'";
+	//send_string 0, "'Call','Degree minutes 43005'";
     }
     
 }
@@ -574,6 +575,12 @@ SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_BT11)"
 SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_BT50)"
 SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_DEGREE)"
 
+/*
+Wait 100 'Write Modbus Requests'
+{
+    Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT3, 190)		
+}
+*/
 
 (***********************************************************)
 (*                     END OF PROGRAM                      *)
