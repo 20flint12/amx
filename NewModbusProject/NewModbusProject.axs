@@ -74,8 +74,8 @@ INTEGER REG_BT11 = 40016
 INTEGER REG_BT50 = 40033
 INTEGER REG_DEGREE = 43005
 
-INTEGER UP_INC   = 10
-INTEGER DN_INC   = 10
+INTEGER UP_INC   = 1
+INTEGER DN_INC   = 1
 
 
 
@@ -445,14 +445,16 @@ INTEGER REG_DEGREE = 43005
 	{
 	    CASE 140: //controlPanelButtons[0]:	// btn_p1_up
 	    {
-		IF( (VAR_BT3 + UP_INC) >= 2500) { VAR_BT3 = 2500 }
+		IF( (VAR_BT3 + UP_INC) >= 250) { VAR_BT3 = 250 }
 		ELSE { VAR_BT3 = (VAR_BT3 + UP_INC) } 
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT3, VAR_BT3)		
 		send_string 0, "'btn_p1_up 140'";
 	    }	
 	    CASE 141:	// btn_p1_down
 	    {
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT3, 2500)		
+		IF( (VAR_BT3 + UP_INC) >= 250) { VAR_BT3 = 250 }
+		ELSE { VAR_BT3 = (VAR_BT3 - DN_INC) } 
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT3, VAR_BT3)		
 		send_string 0, "'btn_p1_down 141'";
 	    }
 	    CASE 143:	// btn_p2_up

@@ -1,0 +1,909 @@
+Line      1 (16:17:47)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line      2 (16:17:47)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line      3 (16:17:47)::  Memory Available = 39187832 <40784>
+Line      4 (16:17:47)::  CIpEvent::OnLine 32002:1:1
+Line      5 (16:17:47)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line      6 (16:17:47)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line      7 (16:17:47)::  CIpEvent::OffLine 32002:1:1
+Line      8 (16:17:48)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line      9 (16:17:48)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line     10 (16:17:50)::  ModBus: Packet received: 01 03 02 00 45 79 B7 
+Line     11 (16:17:50)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line     12 (16:17:52)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     13 (16:17:52)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line     14 (16:17:53)::  CIpEvent::OnLine 32002:1:1
+Line     15 (16:17:53)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line     16 (16:17:53)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line     17 (16:17:53)::  CIpEvent::OffLine 32002:1:1
+Line     18 (16:17:54)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line     19 (16:17:54)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line     20 (16:17:56)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     21 (16:17:56)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line     22 (16:17:58)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line     23 (16:17:58)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line     24 (16:17:59)::  CIpEvent::OnLine 32002:1:1
+Line     25 (16:17:59)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line     26 (16:17:59)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line     27 (16:17:59)::  CIpEvent::OffLine 32002:1:1
+Line     28 (16:18:00)::  ModBus: Packet received: 01 03 02 00 45 79 B7 
+Line     29 (16:18:00)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line     30 (16:18:02)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     31 (16:18:02)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line     32 (16:18:04)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line     33 (16:18:04)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line     34 (16:18:05)::  CIpEvent::OnLine 32002:1:1
+Line     35 (16:18:05)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line     36 (16:18:05)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line     37 (16:18:05)::  CIpEvent::OffLine 32002:1:1
+Line     38 (16:18:06)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     39 (16:18:06)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line     40 (16:18:08)::  ModBus: Packet received: 01 03 02 FF C9 39 E2 
+Line     41 (16:18:08)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line     42 (16:18:10)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line     43 (16:18:10)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line     44 (16:18:11)::  CIpEvent::OnLine 32002:1:1
+Line     45 (16:18:11)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line     46 (16:18:11)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line     47 (16:18:11)::  CIpEvent::OffLine 32002:1:1
+Line     48 (16:18:12)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     49 (16:18:12)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line     50 (16:18:14)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line     51 (16:18:14)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line     52 (16:18:16)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     53 (16:18:16)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line     54 (16:18:16)::  CIpEvent::OnLine 32002:1:1
+Line     55 (16:18:16)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line     56 (16:18:16)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line     57 (16:18:16)::  CIpEvent::OffLine 32002:1:1
+Line     58 (16:18:18)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line     59 (16:18:18)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line     60 (16:18:20)::  ModBus: Packet received: 01 03 02 00 45 79 B7 
+Line     61 (16:18:20)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line     62 (16:18:22)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     63 (16:18:22)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line     64 (16:18:22)::  CIpEvent::OnLine 32002:1:1
+Line     65 (16:18:22)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line     66 (16:18:22)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line     67 (16:18:22)::  CIpEvent::OffLine 32002:1:1
+Line     68 (16:18:24)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line     69 (16:18:24)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line     70 (16:18:26)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     71 (16:18:26)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line     72 (16:18:28)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line     73 (16:18:28)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line     74 (16:18:28)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line     75 (16:18:28)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line     76 (16:18:28)::  CIpEvent::OnLine 32002:1:1
+Line     77 (16:18:28)::  CIpEvent::OffLine 32002:1:1
+Line     78 (16:18:30)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line     79 (16:18:30)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line     80 (16:18:32)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     81 (16:18:32)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line     82 (16:18:34)::  CIpEvent::OnLine 32002:1:1
+Line     83 (16:18:34)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line     84 (16:18:34)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line     85 (16:18:34)::  CIpEvent::OffLine 32002:1:1
+Line     86 (16:18:34)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line     87 (16:18:34)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line     88 (16:18:36)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     89 (16:18:36)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line     90 (16:18:38)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line     91 (16:18:38)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line     92 (16:18:40)::  CIpEvent::OnLine 32002:1:1
+Line     93 (16:18:40)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line     94 (16:18:40)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line     95 (16:18:40)::  CIpEvent::OffLine 32002:1:1
+Line     96 (16:18:40)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line     97 (16:18:40)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line     98 (16:18:42)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line     99 (16:18:42)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    100 (16:18:44)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    101 (16:18:44)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    102 (16:18:46)::  CIpEvent::OnLine 32002:1:1
+Line    103 (16:18:46)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    104 (16:18:46)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    105 (16:18:46)::  CIpEvent::OffLine 32002:1:1
+Line    106 (16:18:46)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    107 (16:18:46)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    108 (16:18:48)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    109 (16:18:48)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    110 (16:18:50)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    111 (16:18:50)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    112 (16:18:52)::  CIpEvent::OnLine 32002:1:1
+Line    113 (16:18:52)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    114 (16:18:52)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    115 (16:18:52)::  CIpEvent::OffLine 32002:1:1
+Line    116 (16:18:52)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    117 (16:18:52)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    118 (16:18:54)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    119 (16:18:54)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    120 (16:18:56)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    121 (16:18:56)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    122 (16:18:58)::  CIpEvent::OnLine 32002:1:1
+Line    123 (16:18:58)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    124 (16:18:58)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    125 (16:18:58)::  CIpEvent::OffLine 32002:1:1
+Line    126 (16:18:58)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    127 (16:18:58)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    128 (16:19:00)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    129 (16:19:00)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    130 (16:19:02)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    131 (16:19:02)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    132 (16:19:04)::  CIpEvent::OnLine 32002:1:1
+Line    133 (16:19:04)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    134 (16:19:04)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    135 (16:19:04)::  CIpEvent::OffLine 32002:1:1
+Line    136 (16:19:04)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    137 (16:19:04)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    138 (16:19:06)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    139 (16:19:06)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    140 (16:19:08)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    141 (16:19:08)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    142 (16:19:10)::  CIpEvent::OnLine 32002:1:1
+Line    143 (16:19:10)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    144 (16:19:10)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    145 (16:19:10)::  CIpEvent::OffLine 32002:1:1
+Line    146 (16:19:10)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    147 (16:19:10)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    148 (16:19:12)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    149 (16:19:12)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    150 (16:19:14)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    151 (16:19:14)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    152 (16:19:15)::  CIpEvent::OnLine 32002:1:1
+Line    153 (16:19:15)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    154 (16:19:15)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    155 (16:19:16)::  CIpEvent::OffLine 32002:1:1
+Line    156 (16:19:16)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    157 (16:19:16)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    158 (16:19:18)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    159 (16:19:18)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    160 (16:19:20)::  btnEVT [dvTP,143]
+Line    161 (16:19:20)::  Button 143 of dvTp was pushed
+Line    162 (16:19:20)::  ####################
+Line    163 (16:19:20)::  btn_p2_up 143
+Line    164 (16:19:20)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    165 (16:19:20)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    166 (16:19:21)::  CIpEvent::OnLine 32002:1:1
+Line    167 (16:19:21)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    168 (16:19:21)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    169 (16:19:21)::  CIpEvent::OffLine 32002:1:1
+Line    170 (16:19:22)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    171 (16:19:22)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    172 (16:19:24)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    173 (16:19:24)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    174 (16:19:26)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    175 (16:19:26)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    176 (16:19:27)::  CIpEvent::OnLine 32002:1:1
+Line    177 (16:19:27)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    178 (16:19:27)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    179 (16:19:27)::  CIpEvent::OffLine 32002:1:1
+Line    180 (16:19:28)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    181 (16:19:28)::  ModBus: Packet sent: 01 10 9C 4D 00 01 02 09 C4 F2 47 
+Line    182 (16:19:30)::  ModBus: Packet received: 01 90 03 0C 01 
+Line    183 (16:19:30)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    184 (16:19:31)::  btnEVT [dvTP,140]
+Line    185 (16:19:31)::  Button 140 of dvTp was pushed
+Line    186 (16:19:31)::  ####################
+Line    187 (16:19:31)::  btn_p1_up 140
+Line    188 (16:19:32)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    189 (16:19:32)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    190 (16:19:33)::  CIpEvent::OnLine 32002:1:1
+Line    191 (16:19:33)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    192 (16:19:33)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    193 (16:19:33)::  CIpEvent::OffLine 32002:1:1
+Line    194 (16:19:34)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    195 (16:19:34)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    196 (16:19:36)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    197 (16:19:36)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    198 (16:19:38)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    199 (16:19:38)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C8 88 0B 
+Line    200 (16:19:39)::  CIpEvent::OnLine 32002:1:1
+Line    201 (16:19:39)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    202 (16:19:39)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    203 (16:19:39)::  CIpEvent::OffLine 32002:1:1
+Line    204 (16:19:40)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    205 (16:19:40)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    206 (16:19:42)::  ModBus: Packet received: 01 03 02 00 45 79 B7 
+Line    207 (16:19:42)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    208 (16:19:44)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    209 (16:19:44)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    210 (16:19:45)::  CIpEvent::OnLine 32002:1:1
+Line    211 (16:19:45)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    212 (16:19:45)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    213 (16:19:45)::  CIpEvent::OffLine 32002:1:1
+Line    214 (16:19:46)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    215 (16:19:46)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    216 (16:19:48)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    217 (16:19:48)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    218 (16:19:50)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    219 (16:19:50)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    220 (16:19:51)::  CIpEvent::OnLine 32002:1:1
+Line    221 (16:19:51)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    222 (16:19:51)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    223 (16:19:51)::  CIpEvent::OffLine 32002:1:1
+Line    224 (16:19:52)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    225 (16:19:52)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    226 (16:19:54)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    227 (16:19:54)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    228 (16:19:56)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    229 (16:19:56)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    230 (16:19:57)::  CIpEvent::OnLine 32002:1:1
+Line    231 (16:19:57)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    232 (16:19:57)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    233 (16:19:57)::  CIpEvent::OffLine 32002:1:1
+Line    234 (16:19:58)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    235 (16:19:58)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    236 (16:20:00)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    237 (16:20:00)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    238 (16:20:02)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    239 (16:20:02)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    240 (16:20:03)::  CIpEvent::OnLine 32002:1:1
+Line    241 (16:20:03)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    242 (16:20:03)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    243 (16:20:03)::  CIpEvent::OffLine 32002:1:1
+Line    244 (16:20:04)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    245 (16:20:04)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    246 (16:20:06)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    247 (16:20:06)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    248 (16:20:08)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    249 (16:20:08)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    250 (16:20:09)::  CIpEvent::OnLine 32002:1:1
+Line    251 (16:20:09)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    252 (16:20:09)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    253 (16:20:09)::  CIpEvent::OffLine 32002:1:1
+Line    254 (16:20:10)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    255 (16:20:10)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    256 (16:20:12)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    257 (16:20:12)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    258 (16:20:14)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    259 (16:20:14)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    260 (16:20:15)::  CIpEvent::OnLine 32002:1:1
+Line    261 (16:20:15)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    262 (16:20:15)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    263 (16:20:15)::  CIpEvent::OffLine 32002:1:1
+Line    264 (16:20:16)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    265 (16:20:16)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    266 (16:20:18)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    267 (16:20:18)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    268 (16:20:20)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    269 (16:20:20)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    270 (16:20:20)::  CIpEvent::OnLine 32002:1:1
+Line    271 (16:20:20)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    272 (16:20:20)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    273 (16:20:20)::  CIpEvent::OffLine 32002:1:1
+Line    274 (16:20:22)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    275 (16:20:22)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    276 (16:20:24)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    277 (16:20:24)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    278 (16:20:26)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    279 (16:20:26)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    280 (16:20:26)::  CIpEvent::OnLine 32002:1:1
+Line    281 (16:20:26)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    282 (16:20:26)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    283 (16:20:26)::  CIpEvent::OffLine 32002:1:1
+Line    284 (16:20:28)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    285 (16:20:28)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    286 (16:20:30)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    287 (16:20:30)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    288 (16:20:32)::  CIpEvent::OnLine 32002:1:1
+Line    289 (16:20:32)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    290 (16:20:32)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    291 (16:20:32)::  CIpEvent::OffLine 32002:1:1
+Line    292 (16:20:32)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    293 (16:20:32)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    294 (16:20:34)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    295 (16:20:34)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    296 (16:20:36)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    297 (16:20:36)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    298 (16:20:38)::  CIpEvent::OnLine 32002:1:1
+Line    299 (16:20:38)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    300 (16:20:38)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    301 (16:20:38)::  CIpEvent::OffLine 32002:1:1
+Line    302 (16:20:38)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    303 (16:20:38)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    304 (16:20:40)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    305 (16:20:40)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    306 (16:20:42)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    307 (16:20:42)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    308 (16:20:44)::  CIpEvent::OnLine 32002:1:1
+Line    309 (16:20:44)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    310 (16:20:44)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    311 (16:20:44)::  CIpEvent::OffLine 32002:1:1
+Line    312 (16:20:44)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    313 (16:20:44)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    314 (16:20:46)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    315 (16:20:46)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    316 (16:20:48)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    317 (16:20:48)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    318 (16:20:50)::  CIpEvent::OnLine 32002:1:1
+Line    319 (16:20:50)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    320 (16:20:50)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    321 (16:20:50)::  CIpEvent::OffLine 32002:1:1
+Line    322 (16:20:50)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    323 (16:20:50)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    324 (16:20:52)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    325 (16:20:52)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    326 (16:20:54)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    327 (16:20:54)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    328 (16:20:56)::  CIpEvent::OnLine 32002:1:1
+Line    329 (16:20:56)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    330 (16:20:56)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    331 (16:20:56)::  CIpEvent::OffLine 32002:1:1
+Line    332 (16:20:56)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    333 (16:20:56)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    334 (16:20:58)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    335 (16:20:58)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    336 (16:21:00)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    337 (16:21:00)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    338 (16:21:02)::  CIpEvent::OnLine 32002:1:1
+Line    339 (16:21:02)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    340 (16:21:02)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    341 (16:21:02)::  CIpEvent::OffLine 32002:1:1
+Line    342 (16:21:02)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    343 (16:21:02)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    344 (16:21:04)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    345 (16:21:04)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    346 (16:21:06)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    347 (16:21:06)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    348 (16:21:08)::  CIpEvent::OnLine 32002:1:1
+Line    349 (16:21:08)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    350 (16:21:08)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    351 (16:21:08)::  CIpEvent::OffLine 32002:1:1
+Line    352 (16:21:08)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    353 (16:21:08)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    354 (16:21:10)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    355 (16:21:10)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    356 (16:21:12)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    357 (16:21:12)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    358 (16:21:14)::  CIpEvent::OnLine 32002:1:1
+Line    359 (16:21:14)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    360 (16:21:14)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    361 (16:21:14)::  CIpEvent::OffLine 32002:1:1
+Line    362 (16:21:14)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    363 (16:21:14)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    364 (16:21:16)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    365 (16:21:16)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    366 (16:21:18)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    367 (16:21:18)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    368 (16:21:19)::  CIpEvent::OnLine 32002:1:1
+Line    369 (16:21:19)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    370 (16:21:19)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    371 (16:21:20)::  CIpEvent::OffLine 32002:1:1
+Line    372 (16:21:20)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    373 (16:21:20)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    374 (16:21:22)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    375 (16:21:22)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    376 (16:21:24)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    377 (16:21:24)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    378 (16:21:25)::  CIpEvent::OnLine 32002:1:1
+Line    379 (16:21:25)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    380 (16:21:25)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    381 (16:21:25)::  CIpEvent::OffLine 32002:1:1
+Line    382 (16:21:26)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    383 (16:21:26)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    384 (16:21:28)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    385 (16:21:28)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    386 (16:21:30)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    387 (16:21:30)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    388 (16:21:31)::  CIpEvent::OnLine 32002:1:1
+Line    389 (16:21:31)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    390 (16:21:31)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    391 (16:21:31)::  CIpEvent::OffLine 32002:1:1
+Line    392 (16:21:32)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    393 (16:21:32)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    394 (16:21:34)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    395 (16:21:34)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    396 (16:21:36)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    397 (16:21:36)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    398 (16:21:37)::  CIpEvent::OnLine 32002:1:1
+Line    399 (16:21:37)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    400 (16:21:37)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    401 (16:21:37)::  CIpEvent::OffLine 32002:1:1
+Line    402 (16:21:38)::  ModBus: Packet received: 01 03 02 FF C9 39 E2 
+Line    403 (16:21:38)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    404 (16:21:40)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    405 (16:21:40)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    406 (16:21:42)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    407 (16:21:42)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    408 (16:21:43)::  ModBus: ***** AMX will be rebooted by FAILED validation of serial number *****
+Line    409 (16:21:43)::  CIpEvent::OnLine 32002:1:1
+Line    410 (16:21:43)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    411 (16:21:43)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    412 (16:21:43)::  CIpEvent::OffLine 32002:1:1
+Line    413 (16:21:44)::  ModBus: Packet received: 01 03 02 00 C8 B9 D2 
+Line    414 (16:21:44)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    415 (16:21:46)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    416 (16:21:46)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    417 (16:24:12)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    418 (16:24:12)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    419 (16:24:14)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    420 (16:24:14)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    421 (16:24:15)::  Memory Available = 39183776 <36696>
+Line    422 (16:24:15)::  CIpEvent::OnLine 32002:1:1
+Line    423 (16:24:15)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    424 (16:24:15)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    425 (16:24:15)::  CIpEvent::OffLine 32002:1:1
+Line    426 (16:24:16)::  ModBus: Packet received: 01 03 02 00 C7 F9 D6 
+Line    427 (16:24:16)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    428 (16:24:18)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    429 (16:24:18)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    430 (16:24:20)::  ModBus: Packet received: 01 03 02 00 F2 39 C1 
+Line    431 (16:24:20)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    432 (16:24:21)::  CIpEvent::OnLine 32002:1:1
+Line    433 (16:24:21)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    434 (16:24:21)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    435 (16:24:21)::  CIpEvent::OffLine 32002:1:1
+Line    436 (16:24:22)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    437 (16:24:22)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    438 (16:24:23)::  btnEVT [dvTP,141]
+Line    439 (16:24:23)::  Button 141 of dvTp was pushed
+Line    440 (16:24:23)::  ####################
+Line    441 (16:24:23)::  btn_p1_down 141
+Line    442 (16:24:24)::  btnEVT [dvTP,141]
+Line    443 (16:24:24)::  Button 141 of dvTp was pushed
+Line    444 (16:24:24)::  ####################
+Line    445 (16:24:24)::  btn_p1_down 141
+Line    446 (16:24:24)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    447 (16:24:24)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    448 (16:24:25)::  btnEVT [dvTP,141]
+Line    449 (16:24:25)::  Button 141 of dvTp was pushed
+Line    450 (16:24:25)::  ####################
+Line    451 (16:24:25)::  btn_p1_down 141
+Line    452 (16:24:25)::  btnEVT [dvTP,141]
+Line    453 (16:24:25)::  Button 141 of dvTp was pushed
+Line    454 (16:24:25)::  ####################
+Line    455 (16:24:25)::  btn_p1_down 141
+Line    456 (16:24:26)::  ModBus: Packet received: 01 03 02 00 C7 F9 D6 
+Line    457 (16:24:26)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    458 (16:24:26)::  btnEVT [dvTP,141]
+Line    459 (16:24:26)::  Button 141 of dvTp was pushed
+Line    460 (16:24:26)::  ####################
+Line    461 (16:24:26)::  btn_p1_down 141
+Line    462 (16:24:27)::  CIpEvent::OnLine 32002:1:1
+Line    463 (16:24:27)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    464 (16:24:27)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    465 (16:24:27)::  CIpEvent::OffLine 32002:1:1
+Line    466 (16:24:27)::  btnEVT [dvTP,141]
+Line    467 (16:24:27)::  Button 141 of dvTp was pushed
+Line    468 (16:24:27)::  ####################
+Line    469 (16:24:27)::  btn_p1_down 141
+Line    470 (16:24:28)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    471 (16:24:28)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    472 (16:24:30)::  ModBus: Packet received: 01 03 02 00 F1 79 C0 
+Line    473 (16:24:30)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    474 (16:24:32)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    475 (16:24:32)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C4 88 0E 
+Line    476 (16:24:33)::  CIpEvent::OnLine 32002:1:1
+Line    477 (16:24:33)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    478 (16:24:33)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    479 (16:24:33)::  CIpEvent::OffLine 32002:1:1
+Line    480 (16:24:34)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    481 (16:24:34)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C3 C9 CC 
+Line    482 (16:24:36)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    483 (16:24:36)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C6 09 CF 
+Line    484 (16:24:38)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    485 (16:24:38)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C5 49 CE 
+Line    486 (16:24:39)::  CIpEvent::OnLine 32002:1:1
+Line    487 (16:24:39)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    488 (16:24:39)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    489 (16:24:39)::  CIpEvent::OffLine 32002:1:1
+Line    490 (16:24:40)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    491 (16:24:40)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    492 (16:24:42)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    493 (16:24:42)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    494 (16:24:44)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    495 (16:24:44)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    496 (16:24:45)::  CIpEvent::OnLine 32002:1:1
+Line    497 (16:24:45)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    498 (16:24:45)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    499 (16:24:45)::  CIpEvent::OffLine 32002:1:1
+Line    500 (16:24:46)::  ModBus: Packet received: 01 03 02 00 C5 78 17 
+Line    501 (16:24:46)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    502 (16:24:48)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    503 (16:24:48)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    504 (16:24:50)::  ModBus: Packet received: 01 03 02 00 F4 B9 C3 
+Line    505 (16:24:50)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    506 (16:24:50)::  CIpEvent::OnLine 32002:1:1
+Line    507 (16:24:50)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    508 (16:24:50)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    509 (16:24:51)::  CIpEvent::OffLine 32002:1:1
+Line    510 (16:24:52)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    511 (16:24:52)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    512 (16:24:54)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    513 (16:24:54)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    514 (16:24:56)::  ModBus: Packet received: 01 03 02 00 C5 78 17 
+Line    515 (16:24:56)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    516 (16:24:56)::  CIpEvent::OnLine 32002:1:1
+Line    517 (16:24:56)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    518 (16:24:56)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    519 (16:24:56)::  CIpEvent::OffLine 32002:1:1
+Line    520 (16:24:58)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    521 (16:24:58)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    522 (16:25:00)::  ModBus: Packet received: 01 03 02 00 F3 F8 01 
+Line    523 (16:25:00)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    524 (16:25:02)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    525 (16:25:02)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    526 (16:25:02)::  CIpEvent::OnLine 32002:1:1
+Line    527 (16:25:02)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    528 (16:25:02)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    529 (16:25:02)::  CIpEvent::OffLine 32002:1:1
+Line    530 (16:25:04)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    531 (16:25:04)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    532 (16:25:06)::  ModBus: Packet received: 01 03 02 00 C5 78 17 
+Line    533 (16:25:06)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    534 (16:25:08)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    535 (16:25:08)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    536 (16:25:09)::  CIpEvent::OnLine 32002:1:1
+Line    537 (16:25:09)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    538 (16:25:09)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    539 (16:25:09)::  CIpEvent::OffLine 32002:1:1
+Line    540 (16:25:10)::  ModBus: Packet received: 01 03 02 00 F6 38 02 
+Line    541 (16:25:10)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    542 (16:25:12)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    543 (16:25:12)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    544 (16:25:14)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    545 (16:25:14)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    546 (16:25:15)::  CIpEvent::OnLine 32002:1:1
+Line    547 (16:25:15)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    548 (16:25:15)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    549 (16:25:15)::  CIpEvent::OffLine 32002:1:1
+Line    550 (16:25:16)::  ModBus: Packet received: 01 03 02 00 C5 78 17 
+Line    551 (16:25:16)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    552 (16:25:18)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    553 (16:25:18)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    554 (16:25:20)::  ModBus: Packet received: 01 03 02 00 F4 B9 C3 
+Line    555 (16:25:20)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    556 (16:25:21)::  CIpEvent::OnLine 32002:1:1
+Line    557 (16:25:21)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    558 (16:25:21)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    559 (16:25:21)::  CIpEvent::OffLine 32002:1:1
+Line    560 (16:25:22)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    561 (16:25:22)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    562 (16:25:24)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    563 (16:25:24)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    564 (16:25:26)::  ModBus: Packet received: 01 03 02 00 C5 78 17 
+Line    565 (16:25:26)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    566 (16:25:27)::  CIpEvent::OnLine 32002:1:1
+Line    567 (16:25:27)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    568 (16:25:27)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    569 (16:25:27)::  CIpEvent::OffLine 32002:1:1
+Line    570 (16:25:28)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    571 (16:25:28)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    572 (16:25:30)::  ModBus: Packet received: 01 03 02 00 F5 78 03 
+Line    573 (16:25:30)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    574 (16:25:32)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    575 (16:25:32)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    576 (16:25:33)::  CIpEvent::OnLine 32002:1:1
+Line    577 (16:25:33)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    578 (16:25:33)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    579 (16:25:33)::  CIpEvent::OffLine 32002:1:1
+Line    580 (16:25:34)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    581 (16:25:34)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    582 (16:25:36)::  ModBus: Packet received: 01 03 02 00 C5 78 17 
+Line    583 (16:25:36)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    584 (16:25:38)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    585 (16:25:38)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    586 (16:25:39)::  CIpEvent::OnLine 32002:1:1
+Line    587 (16:25:39)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    588 (16:25:39)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    589 (16:25:39)::  CIpEvent::OffLine 32002:1:1
+Line    590 (16:25:40)::  ModBus: Packet received: 01 03 02 00 F3 F8 01 
+Line    591 (16:25:40)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    592 (16:25:42)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    593 (16:25:42)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    594 (16:25:44)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    595 (16:25:44)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    596 (16:25:45)::  CIpEvent::OnLine 32002:1:1
+Line    597 (16:25:45)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    598 (16:25:45)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    599 (16:25:45)::  CIpEvent::OffLine 32002:1:1
+Line    600 (16:25:46)::  ModBus: Packet received: 01 03 02 00 C5 78 17 
+Line    601 (16:25:46)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    602 (16:25:56)::  ModBus: Packet received: 01 03 02 00 C5 78 17 
+Line    603 (16:25:56)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    604 (16:25:56)::  CIpEvent::OnLine 32002:1:1
+Line    605 (16:25:56)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    606 (16:25:56)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    607 (16:25:56)::  CIpEvent::OffLine 32002:1:1
+Line    608 (16:25:58)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    609 (16:25:58)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    610 (16:26:00)::  ModBus: Packet received: 01 03 02 00 F1 79 C0 
+Line    611 (16:26:00)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    612 (16:26:02)::  ModBus: Packet received: 01 03 02 00 43 F9 B5 
+Line    613 (16:26:02)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    614 (16:26:02)::  CIpEvent::OnLine 32002:1:1
+Line    615 (16:26:02)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    616 (16:26:02)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    617 (16:26:02)::  CIpEvent::OffLine 32002:1:1
+Line    618 (16:26:04)::  btnEVT [dvTP,141]
+Line    619 (16:26:04)::  Button 141 of dvTp was pushed
+Line    620 (16:26:04)::  ####################
+Line    621 (16:26:04)::  btn_p1_down 141
+Line    622 (16:26:04)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    623 (16:26:04)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    624 (16:26:05)::  btnEVT [dvTP,141]
+Line    625 (16:26:05)::  Button 141 of dvTp was pushed
+Line    626 (16:26:05)::  ####################
+Line    627 (16:26:05)::  btn_p1_down 141
+Line    628 (16:26:06)::  btnEVT [dvTP,141]
+Line    629 (16:26:06)::  Button 141 of dvTp was pushed
+Line    630 (16:26:06)::  ####################
+Line    631 (16:26:06)::  btn_p1_down 141
+Line    632 (16:26:06)::  ModBus: Packet received: 01 03 02 00 C5 78 17 
+Line    633 (16:26:06)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    634 (16:26:07)::  btnEVT [dvTP,141]
+Line    635 (16:26:07)::  Button 141 of dvTp was pushed
+Line    636 (16:26:07)::  ####################
+Line    637 (16:26:07)::  btn_p1_down 141
+Line    638 (16:26:08)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    639 (16:26:08)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    640 (16:26:08)::  CIpEvent::OnLine 32002:1:1
+Line    641 (16:26:08)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    642 (16:26:08)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    643 (16:26:08)::  CIpEvent::OffLine 32002:1:1
+Line    644 (16:26:10)::  ModBus: Packet received: 01 03 02 00 F4 B9 C3 
+Line    645 (16:26:10)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    646 (16:26:12)::  ModBus: Packet received: 01 03 02 00 43 F9 B5 
+Line    647 (16:26:12)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C3 C9 CC 
+Line    648 (16:26:14)::  CIpEvent::OnLine 32002:1:1
+Line    649 (16:26:14)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    650 (16:26:14)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    651 (16:26:14)::  CIpEvent::OffLine 32002:1:1
+Line    652 (16:26:14)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    653 (16:26:14)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C2 08 0C 
+Line    654 (16:26:16)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    655 (16:26:16)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C4 88 0E 
+Line    656 (16:26:18)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    657 (16:26:18)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    658 (16:26:20)::  CIpEvent::OnLine 32002:1:1
+Line    659 (16:26:20)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    660 (16:26:20)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    661 (16:26:20)::  CIpEvent::OffLine 32002:1:1
+Line    662 (16:26:20)::  ModBus: Packet received: 01 03 02 00 F6 38 02 
+Line    663 (16:26:20)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    664 (16:26:22)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    665 (16:26:22)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    666 (16:26:24)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    667 (16:26:24)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    668 (16:26:26)::  CIpEvent::OnLine 32002:1:1
+Line    669 (16:26:26)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    670 (16:26:26)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    671 (16:26:26)::  CIpEvent::OffLine 32002:1:1
+Line    672 (16:26:26)::  ModBus: Packet received: 01 03 02 00 C4 B9 D7 
+Line    673 (16:26:26)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    674 (16:26:28)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    675 (16:26:28)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    676 (16:26:28)::  btnEVT [dvTP,141]
+Line    677 (16:26:28)::  Button 141 of dvTp was pushed
+Line    678 (16:26:28)::  ####################
+Line    679 (16:26:28)::  btn_p1_down 141
+Line    680 (16:26:30)::  ModBus: Packet received: 01 03 02 00 F9 78 06 
+Line    681 (16:26:30)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    682 (16:26:32)::  CIpEvent::OnLine 32002:1:1
+Line    683 (16:26:32)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    684 (16:26:32)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    685 (16:26:32)::  CIpEvent::OffLine 32002:1:1
+Line    686 (16:26:32)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    687 (16:26:32)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    688 (16:26:33)::  btnEVT [dvTP,141]
+Line    689 (16:26:33)::  Button 141 of dvTp was pushed
+Line    690 (16:26:33)::  ####################
+Line    691 (16:26:33)::  btn_p1_down 141
+Line    692 (16:26:34)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    693 (16:26:34)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    694 (16:26:36)::  ModBus: Packet received: 01 03 02 00 C4 B9 D7 
+Line    695 (16:26:36)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    696 (16:26:38)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    697 (16:26:38)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C3 C9 CC 
+Line    698 (16:26:39)::  btnEVT [dvTP,141]
+Line    699 (16:26:39)::  Button 141 of dvTp was pushed
+Line    700 (16:26:39)::  ####################
+Line    701 (16:26:39)::  btn_p1_down 141
+Line    702 (16:26:39)::  CIpEvent::OnLine 32002:1:1
+Line    703 (16:26:39)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    704 (16:26:39)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    705 (16:26:39)::  CIpEvent::OffLine 32002:1:1
+Line    706 (16:26:40)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    707 (16:26:40)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C2 08 0C 
+Line    708 (16:26:42)::  btnEVT [dvTP,141]
+Line    709 (16:26:42)::  Button 141 of dvTp was pushed
+Line    710 (16:26:42)::  ####################
+Line    711 (16:26:42)::  btn_p1_down 141
+Line    712 (16:26:42)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    713 (16:26:42)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    714 (16:26:44)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    715 (16:26:44)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    716 (16:26:45)::  CIpEvent::OnLine 32002:1:1
+Line    717 (16:26:45)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    718 (16:26:45)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    719 (16:26:45)::  CIpEvent::OffLine 32002:1:1
+Line    720 (16:26:46)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    721 (16:26:46)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    722 (16:26:48)::  btnEVT [dvTP,141]
+Line    723 (16:26:48)::  Button 141 of dvTp was pushed
+Line    724 (16:26:48)::  ####################
+Line    725 (16:26:48)::  btn_p1_down 141
+Line    726 (16:26:48)::  ModBus: Packet received: 01 03 02 00 C2 39 D5 
+Line    727 (16:26:48)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    728 (16:26:50)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    729 (16:26:50)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C3 C9 CC 
+Line    730 (16:26:51)::  CIpEvent::OnLine 32002:1:1
+Line    731 (16:26:51)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    732 (16:26:51)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    733 (16:26:51)::  CIpEvent::OffLine 32002:1:1
+Line    734 (16:26:52)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    735 (16:26:52)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C2 08 0C 
+Line    736 (16:26:54)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    737 (16:26:54)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    738 (16:26:56)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    739 (16:26:56)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    740 (16:26:56)::  CIpEvent::OnLine 32002:1:1
+Line    741 (16:26:56)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    742 (16:26:56)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    743 (16:26:56)::  CIpEvent::OffLine 32002:1:1
+Line    744 (16:26:58)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    745 (16:26:58)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C1 48 0D 
+Line    746 (16:27:00)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    747 (16:27:00)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    748 (16:27:00)::  btnEVT [dvTP,141]
+Line    749 (16:27:00)::  Button 141 of dvTp was pushed
+Line    750 (16:27:00)::  ####################
+Line    751 (16:27:00)::  btn_p1_down 141
+Line    752 (16:27:02)::  btnEVT [dvTP,141]
+Line    753 (16:27:02)::  Button 141 of dvTp was pushed
+Line    754 (16:27:02)::  ####################
+Line    755 (16:27:02)::  btn_p1_down 141
+Line    756 (16:27:02)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    757 (16:27:02)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    758 (16:27:02)::  CIpEvent::OnLine 32002:1:1
+Line    759 (16:27:02)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    760 (16:27:02)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    761 (16:27:02)::  CIpEvent::OffLine 32002:1:1
+Line    762 (16:27:04)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    763 (16:27:04)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    764 (16:27:05)::  btnEVT [dvTP,141]
+Line    765 (16:27:05)::  Button 141 of dvTp was pushed
+Line    766 (16:27:05)::  ####################
+Line    767 (16:27:05)::  btn_p1_down 141
+Line    768 (16:27:06)::  ModBus: Packet received: 01 03 02 00 C1 79 D4 
+Line    769 (16:27:06)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    770 (16:27:08)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    771 (16:27:08)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    772 (16:27:08)::  CIpEvent::OnLine 32002:1:1
+Line    773 (16:27:08)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    774 (16:27:08)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    775 (16:27:08)::  CIpEvent::OffLine 32002:1:1
+Line    776 (16:27:10)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    777 (16:27:10)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C1 48 0D 
+Line    778 (16:27:12)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    779 (16:27:12)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C0 89 CD 
+Line    780 (16:27:14)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    781 (16:27:14)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    782 (16:27:14)::  CIpEvent::OnLine 32002:1:1
+Line    783 (16:27:14)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    784 (16:27:14)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    785 (16:27:14)::  CIpEvent::OffLine 32002:1:1
+Line    786 (16:27:16)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    787 (16:27:16)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 BF C8 2D 
+Line    788 (16:27:18)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    789 (16:27:18)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    790 (16:27:19)::  btnEVT [dvTP,141]
+Line    791 (16:27:19)::  Button 141 of dvTp was pushed
+Line    792 (16:27:19)::  ####################
+Line    793 (16:27:19)::  btn_p1_down 141
+Line    794 (16:27:20)::  CIpEvent::OnLine 32002:1:1
+Line    795 (16:27:20)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    796 (16:27:20)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    797 (16:27:20)::  CIpEvent::OffLine 32002:1:1
+Line    798 (16:27:20)::  ModBus: Packet received: 01 03 02 FF C9 39 E2 
+Line    799 (16:27:20)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    800 (16:27:22)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    801 (16:27:22)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    802 (16:27:24)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    803 (16:27:24)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    804 (16:27:26)::  btnEVT [dvTP,141]
+Line    805 (16:27:26)::  Button 141 of dvTp was pushed
+Line    806 (16:27:26)::  ####################
+Line    807 (16:27:26)::  btn_p1_down 141
+Line    808 (16:27:26)::  CIpEvent::OnLine 32002:1:1
+Line    809 (16:27:26)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    810 (16:27:26)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    811 (16:27:26)::  CIpEvent::OffLine 32002:1:1
+Line    812 (16:27:26)::  ModBus: Packet received: 01 03 02 00 BF F9 F4 
+Line    813 (16:27:26)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    814 (16:27:28)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    815 (16:27:28)::  ModBus: Packet sent: 01 03 9C 61 00 01 FB 84 
+Line    816 (16:27:30)::  ModBus: Packet received: 01 03 02 00 F5 78 03 
+Line    817 (16:27:30)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 C0 89 CD 
+Line    818 (16:27:32)::  CIpEvent::OnLine 32002:1:1
+Line    819 (16:27:32)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    820 (16:27:32)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    821 (16:27:32)::  CIpEvent::OffLine 32002:1:1
+Line    822 (16:27:32)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    823 (16:27:32)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    824 (16:27:34)::  btnEVT [dvTP,141]
+Line    825 (16:27:34)::  Button 141 of dvTp was pushed
+Line    826 (16:27:34)::  ####################
+Line    827 (16:27:34)::  btn_p1_down 141
+Line    828 (16:27:34)::  ModBus: Packet received: 01 03 02 00 43 F9 B5 
+Line    829 (16:27:34)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 BF C8 2D 
+Line    830 (16:27:36)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    831 (16:27:36)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    832 (16:27:38)::  ModBus: Packet received: 01 03 02 00 BF F9 F4 
+Line    833 (16:27:38)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    834 (16:27:39)::  CIpEvent::OnLine 32002:1:1
+Line    835 (16:27:39)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    836 (16:27:39)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    837 (16:27:39)::  CIpEvent::OffLine 32002:1:1
+Line    838 (16:27:40)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    839 (16:27:40)::  ModBus: Packet sent: 01 10 B9 26 00 01 02 00 BE 09 ED 
+Line    840 (16:27:42)::  ModBus: Packet received: 01 10 B9 26 00 01 C5 5E 
+Line    841 (16:27:42)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    842 (16:27:44)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    843 (16:27:44)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    844 (16:27:45)::  CIpEvent::OnLine 32002:1:1
+Line    845 (16:27:45)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    846 (16:27:45)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    847 (16:27:45)::  CIpEvent::OffLine 32002:1:1
+Line    848 (16:27:46)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    849 (16:27:46)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    850 (16:27:48)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    851 (16:27:48)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    852 (16:27:50)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    853 (16:27:50)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    854 (16:27:51)::  CIpEvent::OnLine 32002:1:1
+Line    855 (16:27:51)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    856 (16:27:51)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    857 (16:27:51)::  CIpEvent::OffLine 32002:1:1
+Line    858 (16:27:52)::  ModBus: Packet received: 01 03 02 00 43 F9 B5 
+Line    859 (16:27:52)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    860 (16:27:54)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    861 (16:27:54)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    862 (16:27:56)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    863 (16:27:56)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    864 (16:27:57)::  CIpEvent::OnLine 32002:1:1
+Line    865 (16:27:57)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    866 (16:27:57)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    867 (16:27:57)::  CIpEvent::OffLine 32002:1:1
+Line    868 (16:27:58)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    869 (16:27:58)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    870 (16:28:00)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    871 (16:28:00)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    872 (16:28:02)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    873 (16:28:02)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    874 (16:28:02)::  CIpEvent::OnLine 32002:1:1
+Line    875 (16:28:02)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    876 (16:28:02)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    877 (16:28:02)::  CIpEvent::OffLine 32002:1:1
+Line    878 (16:28:04)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    879 (16:28:04)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    880 (16:28:06)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    881 (16:28:06)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    882 (16:28:08)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    883 (16:28:08)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    884 (16:28:08)::  CIpEvent::OnLine 32002:1:1
+Line    885 (16:28:08)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    886 (16:28:08)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    887 (16:28:08)::  CIpEvent::OffLine 32002:1:1
+Line    888 (16:28:10)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    889 (16:28:10)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    890 (16:28:12)::  ModBus: Packet received: 01 03 02 00 44 B8 77 
+Line    891 (16:28:12)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
+Line    892 (16:28:14)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    893 (16:28:14)::  ModBus: Packet sent: 01 03 B9 26 00 01 40 9D 
+Line    894 (16:28:14)::  CIpEvent::OnLine 32002:1:1
+Line    895 (16:28:14)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    896 (16:28:14)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    897 (16:28:14)::  CIpEvent::OffLine 32002:1:1
+Line    898 (16:28:16)::  ModBus: Packet received: 01 03 02 00 BE 38 34 
+Line    899 (16:28:16)::  ModBus: Packet sent: 01 03 9C 4D 00 01 3A 4D 
+Line    900 (16:28:18)::  ModBus: Packet received: 01 03 02 80 00 D9 84 
+Line    901 (16:28:18)::  ModBus: Packet sent: 01 03 9C 50 00 01 AA 4B 
+Line    902 (16:28:20)::  CIpEvent::OnLine 32002:1:1
+Line    903 (16:28:20)::  ModBus: Packet received: 01 03 02 FF CA 79 E3 
+Line    904 (16:28:20)::  CICSPTCP Rx connection to 93.76.255.39 has been closed locally or by peer
+Line    905 (16:28:20)::  ICSPTCPRx2::CloseSocket: Closing Socket
+Line    906 (16:28:20)::  ModBus: Packet sent: 01 03 9C 44 00 01 EA 4F 
+Line    907 (16:28:20)::  CIpEvent::OffLine 32002:1:1
+Line    908 (16:28:22)::  ModBus: Packet received: 01 03 02 00 43 F9 B5 
+Line    909 (16:28:22)::  ModBus: Packet sent: 01 03 9C 48 00 01 2A 4C 
