@@ -92,7 +92,7 @@
 
 
 
-Microsoft Telnet> o 192.178.251.2 44423
+Microsoft Telnet> o 193.178.251.2 44423
 
 
 

@@ -22,6 +22,9 @@ PROGRAM_NAME='NewModbusProject'
 (* System Type : Netlinx                                   *)
 (***********************************************************)
 
+#INCLUDE 'SubRoutines.axs'
+
+
 /*
 IP 193.178.251.2
 
@@ -64,9 +67,11 @@ Brine out (BT11) 40016
 Room temperature (BT50) 40033
 Degree minutes 43005
 */
+//BT1 Outdoor temp Outdoor temperature 40004 °C s16 10 R
 INTEGER REG_BT1  = 40004
+
 INTEGER REG_BT2  = 40008
-INTEGER REG_BT3  = 47398
+INTEGER REG_BT3  = 40012
 INTEGER REG_BT7  = 40013
 INTEGER REG_BT6  = 40014
 INTEGER REG_BT10 = 40015
@@ -74,10 +79,11 @@ INTEGER REG_BT11 = 40016
 INTEGER REG_BT50 = 40033
 INTEGER REG_DEGREE = 43005
 
-INTEGER UP_INC   = 1
-INTEGER DN_INC   = 1
+INTEGER UP_INC   = 5
+INTEGER DN_INC   = 5
 
-
+//Room sensor setpoint S1 Sets the room temperature setpoint for the system 47398 °C s16 10 R/W
+INTEGER REG_ROOM_TEMPERATURE_SETPOINT  = 47398
 
 // ############################################################################
 DEFINE_VARIABLE
@@ -92,6 +98,7 @@ VOLATILE INTEGER VAR_BT11
 VOLATILE INTEGER VAR_BT50
 VOLATILE INTEGER VAR_DEGREE
                   
+VOLATILE INTEGER VAR_ROOM_TEMPERATURE_SETPOINT		  
 
 // Touch Panel Buttons
 VOLATILE INTEGER controlPanelButtons[] =
@@ -209,19 +216,53 @@ Define_Call 'Modbus - Write Multiple Registers - Single register' (Char DeviceAd
 
 Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Address, Integer Value)
 {
+    LOCAL_VAR CHAR cText[100]
+    
     // TODO : Process answers there
     Select
     {
-	// Обработка ответа от устройства с адресом $10 на запрос функции 4 с регистровым адресом $1400
-	Active (Function == 3 && Address == REG_BT1)  : { VAR_BT1  = Value } 	// 0x9C44
-	Active (Function == 3 && Address == REG_BT2)  : { VAR_BT2  = Value }	// 0x9C48
-	Active (Function == 3 && Address == REG_BT3)  : { VAR_BT3  = Value }	// 0x9C4C
-	Active (Function == 3 && Address == REG_BT7)  : { VAR_BT7  = Value }
-	Active (Function == 3 && Address == REG_BT6)  : { VAR_BT6  = Value }
-	Active (Function == 3 && Address == REG_BT10) : { VAR_BT10 = Value }
-	Active (Function == 3 && Address == REG_BT11) : { VAR_BT11 = Value }
-	Active (Function == 3 && Address == REG_BT50) : { VAR_BT50 = Value }
-	Active (Function == 3 && Address == REG_DEGREE) : { VAR_DEGREE = Value }
+	// Обработка ответа от устройства
+	Active (Function == 3 && Address == REG_BT1)  : {
+	    VAR_BT1  = Value // 0x9C44
+	    //SEND_COMMAND dvPanel, "'^TXT-1,0,', ITOA(VAR_BT1),'grad'"
+	    //ButtonText(dvPanel, 1, cText)
+	    TemperatureText(dvPanel, 1, VAR_BT1)	    
+	} 	
+	Active (Function == 3 && Address == REG_ROOM_TEMPERATURE_SETPOINT) : {
+	    VAR_ROOM_TEMPERATURE_SETPOINT  = Value
+	    //SEND_COMMAND dvPanel, "'^TXT-2,0,', ITOA(VAR_ROOM_TEMPERATURE_SETPOINT)"
+    	    TemperatureText(dvPanel, 2, VAR_ROOM_TEMPERATURE_SETPOINT)	    
+	}	
+	Active (Function == 3 && Address == REG_BT3)  : {
+	    VAR_BT3  = Value // 0x9C4C
+	    //SEND_COMMAND dvPanel, "'^TXT-3,0,', ITOA(VAR_BT3)"
+    	    TemperatureText(dvPanel, 3, VAR_BT3)	    	    
+	}	
+	Active (Function == 3 && Address == REG_BT7)  : {
+	    VAR_BT7  = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-4,0,', ITOA(VAR_BT7)"
+	}
+	Active (Function == 3 && Address == REG_BT6)  : {
+	    VAR_BT6  = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-5,0,', ITOA(VAR_BT6)"
+	}
+	Active (Function == 3 && Address == REG_BT10) : {
+	    VAR_BT10 = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-6,0,', ITOA(VAR_BT10)"
+	}
+	Active (Function == 3 && Address == REG_BT11) : {
+	    VAR_BT11 = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_BT11)"	    
+	}
+	    
+	Active (Function == 3 && Address == REG_BT50) : {
+	    VAR_BT50 = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_BT50)"
+	}
+	Active (Function == 3 && Address == REG_DEGREE) : {
+	    VAR_DEGREE = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_DEGREE)"    
+	}
     }                                                                        
 }
 
@@ -445,17 +486,19 @@ INTEGER REG_DEGREE = 43005
 	{
 	    CASE 140: //controlPanelButtons[0]:	// btn_p1_up
 	    {
-		IF( (VAR_BT3 + UP_INC) >= 250) { VAR_BT3 = 250 }
-		ELSE { VAR_BT3 = (VAR_BT3 + UP_INC) } 
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT3, VAR_BT3)		
 		send_string 0, "'btn_p1_up 140'";
+		IF( (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) >= 250) { VAR_ROOM_TEMPERATURE_SETPOINT = 250 }
+		ELSE { VAR_ROOM_TEMPERATURE_SETPOINT = (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) } 
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_ROOM_TEMPERATURE_SETPOINT)		
+		Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);
 	    }	
 	    CASE 141:	// btn_p1_down
 	    {
-		IF( (VAR_BT3 + UP_INC) >= 250) { VAR_BT3 = 250 }
-		ELSE { VAR_BT3 = (VAR_BT3 - DN_INC) } 
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT3, VAR_BT3)		
 		send_string 0, "'btn_p1_down 141'";
+		IF( (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) >= 250) { VAR_ROOM_TEMPERATURE_SETPOINT = 250 }
+		ELSE { VAR_ROOM_TEMPERATURE_SETPOINT = (VAR_ROOM_TEMPERATURE_SETPOINT - DN_INC) } 
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_ROOM_TEMPERATURE_SETPOINT)		
+		Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);
 	    }
 	    CASE 143:	// btn_p2_up
 	    { 
@@ -518,48 +561,47 @@ Wait 100 'Modbus Requests'
     // TODO Прочитать функцией 4 у устройства с адресом $10 регистровые значения начиная с адреса $1400 в количесте 20 штук подряд
     // Т.е. прийдют ответы от регистров $1400, $1401, ..., $1412 
     // (итого 20 значений, которые надо будет обработать в функции 'ModBus - Process Answer'
-    wait 0
+    wait 15
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT1, 1); 	// Outdoor temperature (BT1) 40004
 	//send_string 0, "'Outdoor temperature'";
     }
-    wait 10
+    wait 15
     {
-	Call 'ModBus - Call Function' (3, 1, REG_BT2, 1); 	// Flow temperature (BT2) 40008
-
-	//send_string 0, "'Flow temperature'";
+	Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);
+	//send_string 0, "'REG_ROOM_TEMPERATURE_SETPOINT'";
     }
     wait 15
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT3, 1); // Return temperature (BT3) 40012
 	//send_string 0, "'Call','Return temperature (BT3) 40012'";
     }
-    wait 20
+    wait 15
     {	
 	Call 'ModBus - Call Function' (3, 1, REG_BT7, 1); // Hot water, top (BT7) 40013
 	//send_string 0, "'Call','Hot water, top (BT7) 40013'";
     }
-    wait 25
+    wait 15
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT6, 1); // Hot water middle (BT6) 40014
-	//send_string 0, "'Call','Hot water middle (BT6) 40014'";	
+	//send_string 0, "'Call','Hot water middle (BT6) 40014'";		
     }
-    wait 30
+    wait 15
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT10, 1); // Brine in (BT10) 40015
-	//send_string 0, "'Call','Brine in (BT10) 40015'";
+	//send_string 0, "'Call','Brine in (BT10) 40015'";	
     }
-    wait 35
+    wait 15
     {
 	Call 'ModBus - Call Function' (3, 1, REG_BT11, 1); // Brine out (BT11) 40016
 	//send_string 0, "'Call','Brine out (BT11) 40016'";
     }	    
-    wait 40
+    wait 15
     {	
 	Call 'ModBus - Call Function' (3, 1, REG_BT50, 1); // Room temperature (BT50) 40033
-	//send_string 0, "'Call','Room temperature (BT50) 40033'";
+	//send_string 0, "'Call','Room temperature (BT50) 40033'";	
     }
-    wait 45
+    wait 15
     {
 	Call 'ModBus - Call Function' (3, 1, REG_DEGREE, 1); // Degree minutes 43005
 	//send_string 0, "'Call','Degree minutes 43005'";
@@ -567,15 +609,13 @@ Wait 100 'Modbus Requests'
     
 }
 
-SEND_COMMAND dvPanel, "'^TXT-1,0,', ITOA(VAR_BT1)"
-SEND_COMMAND dvPanel, "'^TXT-2,0,', ITOA(VAR_BT2)"
-SEND_COMMAND dvPanel, "'^TXT-3,0,', ITOA(VAR_BT3)"
-SEND_COMMAND dvPanel, "'^TXT-4,0,', ITOA(VAR_BT7)"
-SEND_COMMAND dvPanel, "'^TXT-5,0,', ITOA(VAR_BT6)"
-SEND_COMMAND dvPanel, "'^TXT-6,0,', ITOA(VAR_BT10)"
-SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_BT11)"
-SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_BT50)"
-SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_DEGREE)"
+
+
+
+
+
+
+
 
 /*
 Wait 100 'Write Modbus Requests'
