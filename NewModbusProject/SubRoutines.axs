@@ -62,6 +62,15 @@ DEFINE_FUNCTION TemperatureText(DEV dvDevice, INTEGER iAddrCode, INTEGER Tempera
     SEND_COMMAND dvDevice, "'^TXT-',ITOA(iAddrCode),',0,',cText"
 }
 
+DEFINE_FUNCTION HotWaterModeText(DEV dvDevice, INTEGER iAddrCode, INTEGER hot_water_mode)
+{
+    LOCAL_VAR CHAR cText[20]
+    IF(hot_water_mode == 0) cText = "'Economy'"
+    else if(hot_water_mode == 1) cText = "'Normal'"
+    else if(hot_water_mode == 2) cText = "'Luxury'"
+    else cText = "'unknoun'"    
+    SEND_COMMAND dvDevice, "'^TXT-',ITOA(iAddrCode),',0,',cText"
+}
 
 
 

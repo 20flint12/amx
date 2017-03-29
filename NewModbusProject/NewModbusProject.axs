@@ -67,11 +67,10 @@ Brine out (BT11) 40016
 Room temperature (BT50) 40033
 Degree minutes 43005
 */
-//BT1 Outdoor temp Outdoor temperature 40004 °C s16 10 R
-INTEGER REG_BT1  = 40004
 
+INTEGER REG_BT1  = 40004
 INTEGER REG_BT2  = 40008
-INTEGER REG_BT3  = 40012
+INTEGER REG_BT3  = 40012	// !!!
 INTEGER REG_BT7  = 40013
 INTEGER REG_BT6  = 40014
 INTEGER REG_BT10 = 40015
@@ -82,8 +81,15 @@ INTEGER REG_DEGREE = 43005
 INTEGER UP_INC   = 5
 INTEGER DN_INC   = 5
 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//BT1 Outdoor temp Outdoor temperature 40004 °C s16 10 R
+INTEGER REG_OUTDOOR_TEMPERATURE  = 40004
+//BT50 Room Temp S1 40033 °C s16 10 R
+INTEGER REG_ROOM_TEMPERATURE  = 40033
 //Room sensor setpoint S1 Sets the room temperature setpoint for the system 47398 °C s16 10 R/W
 INTEGER REG_ROOM_TEMPERATURE_SETPOINT  = 47398
+//Hot water mode 0=Economy 1=Normal 2=Luxury 47041 s8 1 R/W
+INTEGER REG_HOT_WATER_MODE  = 47041
 
 // ############################################################################
 DEFINE_VARIABLE
@@ -98,7 +104,12 @@ VOLATILE INTEGER VAR_BT11
 VOLATILE INTEGER VAR_BT50
 VOLATILE INTEGER VAR_DEGREE
                   
-VOLATILE INTEGER VAR_ROOM_TEMPERATURE_SETPOINT		  
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+VOLATILE INTEGER VAR_OUTDOOR_TEMPERATURE
+VOLATILE INTEGER VAR_ROOM_TEMPERATURE
+VOLATILE INTEGER VAR_ROOM_TEMPERATURE_SETPOINT
+VOLATILE INTEGER VAR_HOT_WATER_MODE
+
 
 // Touch Panel Buttons
 VOLATILE INTEGER controlPanelButtons[] =
@@ -210,7 +221,7 @@ Define_Call 'Modbus - Write Multiple Registers - Single register' (Char DeviceAd
 			    Format('%04X', 1 /* QuantityOfRegisters */), 
 			    Format('%02X', 2 /* QuantityOfRegisters * 2 */), 
 			    Format('%04X', Value)";
-    send_string 0, "'####################'";			    
+    //send_string 0, "'####################'";			    
 }
 
 
@@ -222,26 +233,23 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
     Select
     {
 	// Обработка ответа от устройства
-	Active (Function == 3 && Address == REG_BT1)  : {
-	    VAR_BT1  = Value // 0x9C44
-	    //SEND_COMMAND dvPanel, "'^TXT-1,0,', ITOA(VAR_BT1),'grad'"
-	    //ButtonText(dvPanel, 1, cText)
-	    TemperatureText(dvPanel, 1, VAR_BT1)	    
+	Active (Function == 3 && Address == REG_OUTDOOR_TEMPERATURE)  : {
+	    VAR_OUTDOOR_TEMPERATURE = Value
+	    TemperatureText(dvPanel, 1, VAR_OUTDOOR_TEMPERATURE)	    
 	} 	
+	Active (Function == 3 && Address == REG_ROOM_TEMPERATURE)  : {
+	    VAR_ROOM_TEMPERATURE = Value
+    	    TemperatureText(dvPanel, 2, VAR_ROOM_TEMPERATURE)	    	    
+	}	
 	Active (Function == 3 && Address == REG_ROOM_TEMPERATURE_SETPOINT) : {
 	    VAR_ROOM_TEMPERATURE_SETPOINT  = Value
-	    //SEND_COMMAND dvPanel, "'^TXT-2,0,', ITOA(VAR_ROOM_TEMPERATURE_SETPOINT)"
-    	    TemperatureText(dvPanel, 2, VAR_ROOM_TEMPERATURE_SETPOINT)	    
+    	    TemperatureText(dvPanel, 3, VAR_ROOM_TEMPERATURE_SETPOINT)	    
 	}	
-	Active (Function == 3 && Address == REG_BT3)  : {
-	    VAR_BT3  = Value // 0x9C4C
-	    //SEND_COMMAND dvPanel, "'^TXT-3,0,', ITOA(VAR_BT3)"
-    	    TemperatureText(dvPanel, 3, VAR_BT3)	    	    
+	Active (Function == 3 && Address == REG_HOT_WATER_MODE) : {
+	    VAR_HOT_WATER_MODE  = Value
+    	    HotWaterModeText(dvPanel, 4, VAR_HOT_WATER_MODE)	    
 	}	
-	Active (Function == 3 && Address == REG_BT7)  : {
-	    VAR_BT7  = Value 
-	    SEND_COMMAND dvPanel, "'^TXT-4,0,', ITOA(VAR_BT7)"
-	}
+
 	Active (Function == 3 && Address == REG_BT6)  : {
 	    VAR_BT6  = Value 
 	    SEND_COMMAND dvPanel, "'^TXT-5,0,', ITOA(VAR_BT6)"
@@ -250,19 +258,23 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    VAR_BT10 = Value 
 	    SEND_COMMAND dvPanel, "'^TXT-6,0,', ITOA(VAR_BT10)"
 	}
-	Active (Function == 3 && Address == REG_BT11) : {
-	    VAR_BT11 = Value 
-	    SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_BT11)"	    
+	Active (Function == 3 && Address == REG_ROOM_TEMPERATURE) : {
+	    VAR_ROOM_TEMPERATURE = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_ROOM_TEMPERATURE)"
 	}
-	    
-	Active (Function == 3 && Address == REG_BT50) : {
-	    VAR_BT50 = Value 
-	    SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_BT50)"
+	Active (Function == 3 && Address == REG_HOT_WATER_MODE) : {
+	    VAR_HOT_WATER_MODE = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_HOT_WATER_MODE)"	    
 	}
 	Active (Function == 3 && Address == REG_DEGREE) : {
 	    VAR_DEGREE = Value 
 	    SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_DEGREE)"    
 	}
+	
+	Active (Function == 16 && Address == REG_ROOM_TEMPERATURE_SETPOINT) : {
+	    //SEND_COMMAND dvPanel, "'^TXT-2,0,', ITOA(VAR_ROOM_TEMPERATURE_SETPOINT)"
+    	    send_string 0, "'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'";    
+	}	
     }                                                                        
 }
 
@@ -298,7 +310,7 @@ DATA_EVENT [vdvModbus]
 
 	iPos = Find_String(Data.Text, '; ON_COMMAND = ', 1);
 	If (iPos)
-		Set_Length_String(Data.Text, iPos - 1);
+	    Set_Length_String(Data.Text, iPos - 1);
 
 	Select
 	{
@@ -490,7 +502,11 @@ INTEGER REG_DEGREE = 43005
 		IF( (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) >= 250) { VAR_ROOM_TEMPERATURE_SETPOINT = 250 }
 		ELSE { VAR_ROOM_TEMPERATURE_SETPOINT = (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) } 
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_ROOM_TEMPERATURE_SETPOINT)		
-		Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);
+		WAIT 30 
+		{
+		    Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);
+		    send_string 0, "'============='";
+		}
 	    }	
 	    CASE 141:	// btn_p1_down
 	    {
@@ -498,7 +514,11 @@ INTEGER REG_DEGREE = 43005
 		IF( (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) >= 250) { VAR_ROOM_TEMPERATURE_SETPOINT = 250 }
 		ELSE { VAR_ROOM_TEMPERATURE_SETPOINT = (VAR_ROOM_TEMPERATURE_SETPOINT - DN_INC) } 
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_ROOM_TEMPERATURE_SETPOINT)		
-		Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);
+		WAIT 30 
+		{
+		    Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);
+		    send_string 0, "'============='";
+		}
 	    }
 	    CASE 143:	// btn_p2_up
 	    { 
@@ -563,8 +583,13 @@ Wait 100 'Modbus Requests'
     // (итого 20 значений, которые надо будет обработать в функции 'ModBus - Process Answer'
     wait 15
     {
-	Call 'ModBus - Call Function' (3, 1, REG_BT1, 1); 	// Outdoor temperature (BT1) 40004
+	Call 'ModBus - Call Function' (3, 1, REG_OUTDOOR_TEMPERATURE, 1);
 	//send_string 0, "'Outdoor temperature'";
+    }
+    wait 15
+    {	
+	Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE, 1);
+	//send_string 0, "'Call','Room temperature (BT50) 40033'";	
     }
     wait 15
     {
@@ -573,7 +598,7 @@ Wait 100 'Modbus Requests'
     }
     wait 15
     {
-	Call 'ModBus - Call Function' (3, 1, REG_BT3, 1); // Return temperature (BT3) 40012
+	Call 'ModBus - Call Function' (3, 1, REG_HOT_WATER_MODE, 1);
 	//send_string 0, "'Call','Return temperature (BT3) 40012'";
     }
     wait 15
@@ -596,11 +621,6 @@ Wait 100 'Modbus Requests'
 	Call 'ModBus - Call Function' (3, 1, REG_BT11, 1); // Brine out (BT11) 40016
 	//send_string 0, "'Call','Brine out (BT11) 40016'";
     }	    
-    wait 15
-    {	
-	Call 'ModBus - Call Function' (3, 1, REG_BT50, 1); // Room temperature (BT50) 40033
-	//send_string 0, "'Call','Room temperature (BT50) 40033'";	
-    }
     wait 15
     {
 	Call 'ModBus - Call Function' (3, 1, REG_DEGREE, 1); // Degree minutes 43005
