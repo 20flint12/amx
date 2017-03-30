@@ -46,7 +46,7 @@ DEFINE_DEVICE
 
 dvModbus  = 5001:2:0;
 vdvModbus = 33001:1:0;
-vdvDebug  = 32999:1:0;
+//vdvDebug  = 32999:1:0;
 
 dvPanel = 11001:1:1;
 
@@ -90,6 +90,19 @@ INTEGER REG_ROOM_TEMPERATURE  = 40033
 INTEGER REG_ROOM_TEMPERATURE_SETPOINT  = 47398
 //Hot water mode 0=Economy 1=Normal 2=Luxury 47041 s8 1 R/W
 INTEGER REG_HOT_WATER_MODE  = 47041
+//HW Comfort hotwater temperature The desired hotwater temperature 48148 °C s8 10 R/W
+INTEGER REG_COMFORT_HOTWATER_TEMPERATURE  = 48148
+
+
+
+//Alarm lower room temp.
+//Lowers the room temperature during red light alarms to notify the occupants of the
+//building that something is the matter 0=Off 1=On 47388 u8 1 R/W
+//Alarm lower HW temp.
+//Lowers the hot water temperature during red light alarms to notify the occupants of
+//the building that something is the matter 0=Off 1=On 47389 u8 1 R/W
+
+
 
 // ############################################################################
 DEFINE_VARIABLE
@@ -109,6 +122,7 @@ VOLATILE INTEGER VAR_OUTDOOR_TEMPERATURE
 VOLATILE INTEGER VAR_ROOM_TEMPERATURE
 VOLATILE INTEGER VAR_ROOM_TEMPERATURE_SETPOINT
 VOLATILE INTEGER VAR_HOT_WATER_MODE
+VOLATILE INTEGER VAR_COMFORT_HOTWATER_TEMPERATURE
 
 
 // Touch Panel Buttons
@@ -249,10 +263,11 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    VAR_HOT_WATER_MODE  = Value
     	    HotWaterModeText(dvPanel, 4, VAR_HOT_WATER_MODE)	    
 	}	
-
-	Active (Function == 3 && Address == REG_BT6)  : {
-	    VAR_BT6  = Value 
-	    SEND_COMMAND dvPanel, "'^TXT-5,0,', ITOA(VAR_BT6)"
+	Active (Function == 3 && Address == REG_COMFORT_HOTWATER_TEMPERATURE)  : {
+	    VAR_COMFORT_HOTWATER_TEMPERATURE  = Value 	    
+	    //LOCAL_VAR CHAR cText[20]
+	    cText = "ITOA(VAR_COMFORT_HOTWATER_TEMPERATURE),'°C'"     
+	    SEND_COMMAND dvPanel, "'^TXT-5,0,', cText"
 	}
 	Active (Function == 3 && Address == REG_BT10) : {
 	    VAR_BT10 = Value 
@@ -271,7 +286,8 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_DEGREE)"    
 	}
 	
-	Active (Function == 16 && Address == REG_ROOM_TEMPERATURE_SETPOINT) : {
+	//Active (Function == 16 && Address == REG_ROOM_TEMPERATURE_SETPOINT) : {
+	Active (Function == 16) : {
 	    //SEND_COMMAND dvPanel, "'^TXT-2,0,', ITOA(VAR_ROOM_TEMPERATURE_SETPOINT)"
     	    send_string 0, "'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'";    
 	}	
@@ -425,7 +441,8 @@ DATA_EVENT [vdvModbus]
 	// Задание устройства, на которое будут дублироваться все сообщения, посылаемые модулем в окно Диагностики.
 	// По умолчанию дублирование отключено
 	// Для отключения дублирования послать адрес устройтва 0:1:0 : Send_Command Data.Device, 'VDVDEBUG = 0:1:0';
-	Send_Command Data.Device, "'VDVDEBUG = ', itoa(vdvDebug.Number), ':', itoa(vdvDebug.Port), ':', itoa(vdvDebug.System)"; // Включить дублирование диагностических сообщений на адрес vdvDebug
+	//Send_Command Data.Device, "'VDVDEBUG = ', itoa(vdvDebug.Number), ':', itoa(vdvDebug.Port), ':', itoa(vdvDebug.System)"; // Включить дублирование диагностических сообщений на адрес vdvDebug
+	//Send_Command Data.Device, 'VDVDEBUG = 0:1:0';    
 
 	// Включение/выключение режима отображания расширенной отладочной информации.
 	// Send_Command Data.Device, "'DEBUG = OFF'"; // Выключить режим отображания расширенной отладочной информации
@@ -511,7 +528,7 @@ INTEGER REG_DEGREE = 43005
 	    CASE 141:	// btn_p1_down
 	    {
 		send_string 0, "'btn_p1_down 141'";
-		IF( (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) >= 250) { VAR_ROOM_TEMPERATURE_SETPOINT = 250 }
+		IF( (VAR_ROOM_TEMPERATURE_SETPOINT - DN_INC) <= 100) { VAR_ROOM_TEMPERATURE_SETPOINT = 100 }
 		ELSE { VAR_ROOM_TEMPERATURE_SETPOINT = (VAR_ROOM_TEMPERATURE_SETPOINT - DN_INC) } 
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_ROOM_TEMPERATURE_SETPOINT)		
 		WAIT 30 
@@ -520,16 +537,40 @@ INTEGER REG_DEGREE = 43005
 		    send_string 0, "'============='";
 		}
 	    }
+	    
+	    // REG_COMFORT_HOTWATER_TEMPERATURE ###############################
 	    CASE 143:	// btn_p2_up
-	    { 
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT7, 2500)		
+	    { 	    	    
 		send_string 0, "'btn_p2_up 143'";
+		IF( (VAR_COMFORT_HOTWATER_TEMPERATURE + 1) >= 65) { VAR_COMFORT_HOTWATER_TEMPERATURE = 65 }
+		ELSE { VAR_COMFORT_HOTWATER_TEMPERATURE = (VAR_COMFORT_HOTWATER_TEMPERATURE + 1) } 
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE, 55)		
 	    }
 	    CASE 144:	// btn_p2_down
 	    {
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT7, 2500)		
 		send_string 0, "'btn_p2_down 144'";
+		IF( (VAR_COMFORT_HOTWATER_TEMPERATURE - 1) <= 45) { VAR_COMFORT_HOTWATER_TEMPERATURE = 45 }
+		ELSE { VAR_COMFORT_HOTWATER_TEMPERATURE = (VAR_COMFORT_HOTWATER_TEMPERATURE - 1) } 
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE, VAR_COMFORT_HOTWATER_TEMPERATURE)		
 	    }
+	    
+	    // REG_HOT_WATER_MODE #############################################
+	    CASE 145:	// economy
+	    { 	    	    	    
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0)		
+		send_string 0, "'btn_economy'";
+	    }
+	    CASE 146:	// normal
+	    {
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 1)		
+	    }
+	    CASE 147:	// luxury
+	    {
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)		
+	    }
+	    
+	    
+	    
 	}    
     }
 }
@@ -603,7 +644,7 @@ Wait 100 'Modbus Requests'
     }
     wait 15
     {	
-	Call 'ModBus - Call Function' (3, 1, REG_BT7, 1); // Hot water, top (BT7) 40013
+	Call 'ModBus - Call Function' (3, 1, REG_COMFORT_HOTWATER_TEMPERATURE, 1);
 	//send_string 0, "'Call','Hot water, top (BT7) 40013'";
     }
     wait 15
