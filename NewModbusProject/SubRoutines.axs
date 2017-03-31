@@ -54,11 +54,11 @@ DEFINE_FUNCTION ButtonText(DEV dvDevice, INTEGER nButton, CHAR cText[])
     SEND_COMMAND dvDevice, "'^TXT-',ITOA(nButton),',0,',cText"
 }
 
-DEFINE_FUNCTION TemperatureText(DEV dvDevice, INTEGER iAddrCode, INTEGER Temperature)
+DEFINE_FUNCTION TemperatureText(DEV dvDevice, INTEGER iAddrCode, SINTEGER Temperature)
 {
     LOCAL_VAR CHAR cText[20]
     //cText = "ITOA(Temperature),'°C', '++++'" 
-    cText = "ITOA(Temperature/10), '.', ITOA(Temperature%10),'°C'"          
+    cText = "ITOA(Temperature/10), '.', ITOA(ABS_VALUE(Temperature%10)),'°C'"          
     SEND_COMMAND dvDevice, "'^TXT-',ITOA(iAddrCode),',0,',cText"
 }
 

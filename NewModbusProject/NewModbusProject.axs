@@ -118,7 +118,7 @@ VOLATILE INTEGER VAR_BT50
 VOLATILE INTEGER VAR_DEGREE
                   
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-VOLATILE INTEGER VAR_OUTDOOR_TEMPERATURE
+VOLATILE SINTEGER VAR_OUTDOOR_TEMPERATURE
 VOLATILE INTEGER VAR_ROOM_TEMPERATURE
 VOLATILE INTEGER VAR_ROOM_TEMPERATURE_SETPOINT
 VOLATILE INTEGER VAR_HOT_WATER_MODE
@@ -265,7 +265,6 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	}	
 	Active (Function == 3 && Address == REG_COMFORT_HOTWATER_TEMPERATURE)  : {
 	    VAR_COMFORT_HOTWATER_TEMPERATURE  = Value 	    
-	    //LOCAL_VAR CHAR cText[20]
 	    cText = "ITOA(VAR_COMFORT_HOTWATER_TEMPERATURE),'°C'"     
 	    SEND_COMMAND dvPanel, "'^TXT-5,0,', cText"
 	}
