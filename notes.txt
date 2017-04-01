@@ -96,3 +96,6 @@ Microsoft Telnet> o 193.178.251.2 44423
 
 
 
+https://github.com/openhab/openhab1-addons/wiki/Nibe-Heat-Pump-Binding
+
+http://www.nibe.eu/For-partners/NIBE-Modbus/
