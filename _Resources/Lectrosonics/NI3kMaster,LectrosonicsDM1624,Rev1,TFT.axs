@@ -268,7 +268,7 @@ BUTTON_EVENT[dvARRAYTPGen,6]
         
         fLECNETSND("'xpmt(',ITOA(nCUR_CTL_INPUT_MATRIX),',',
                           ITOA(nCUR_CTL_OUTPUT_MATRIX),')=0'")
-                          
+			    
         uMATRIX[nCUR_CTL_MATRIX].nMIXMUTE = 0
       }
       ELSE

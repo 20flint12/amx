@@ -378,8 +378,7 @@ DATA_EVENT [vdvModbus]
 		    //Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);		    
 		    send_string 0, "'=============>>>>>>>>>>>>>>'";		    		    
 		}
-		
-		
+				
 	    }
 
 	    Active (RemoveCmdLeft(Data.Text, 'WRONG_ANSWER = ')):
@@ -570,6 +569,36 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
     }
 }
 
+
+BUTTON_EVENT[dvPanel,195]
+{
+    PUSH:
+    {
+	send_string 0,"'SEND_COMMAND dvPanel, *********************************'"
+    
+	//Deletes any existing data list at address 1
+	SEND_COMMAND dvPanel, "' ^LDD-100'"
+	//Creates new 5-column data list at port 1, address 1 named "my music"
+	SEND_COMMAND dvPanel, "' ^LDN-100,1,2,my music'"
+	//Specifies column types for the data list at address 1 starting at column 1
+	SEND_COMMAND dvPanel, "' ^LDT-100,1,0,0,0,0,3'"
+	    
+	//Adds rows to the data list at address 1
+	SEND_COMMAND dvPanel, "' ^LDA-100,0,01,The Shins"'"
+	SEND_COMMAND dvPanel, "' ^LDA-100,0,02,The Shins, Chutes Too Narrow, "Mine High Horse", "10,2"'"
+	SEND_COMMAND dvPanel, "' ^LDA-100,0,03,The Shins, Chutes Too Narrow, So Says I,"10,3"'"
+	SEND_COMMAND dvPanel, "' ^LDA-100,0,04,The Shins'"
+	SEND_COMMAND dvPanel, "' ^LDA-777,0,05,The Shins, Chutes Too Narrow, Saint Simon, "10,5"'"
+	//SEND_COMMAND dvPanel, "' ^LDA-1,0,06,The Shins, Chutes Too Narrow, Fighting in a Sack,"10,6"'"
+	//SEND_COMMAND dvPanel, "' ^LDA-1,0,07,The Shins, Chutes Too Narrow, Pink Bullets, "10,7"'"
+	//SEND_COMMAND dvPanel, "' ^LDA-1,0,08,The Shins, Chutes Too Narrow, Turn a Square,"10,8"'"
+	//SEND_COMMAND dvPanel, "' ^LDA-1,0,09,The Shins, Chutes Too Narrow, Gone for Good, "10,9"'"
+	
+	//Updates the view at address 2
+	SEND_COMMAND dvPanel, "' ^LVU-100'"
+	
+    }
+}    
 
 /* ######################################################################### */
 DEFINE_MODULE 'module Modbus Master' mdl_Modbus (dvModbus, vdvModbus);
