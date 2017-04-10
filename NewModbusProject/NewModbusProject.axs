@@ -316,7 +316,7 @@ DEFINE_EVENT
 
 
 
-BUTTON_EVENT [vdv_LUTRON, 100] //Калитка
+BUTTON_EVENT [vdv_LUTRON, 200] //Калитка
 {
     PUSH:
     {
@@ -325,7 +325,7 @@ BUTTON_EVENT [vdv_LUTRON, 100] //Калитка
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 101] //Дорожки
+BUTTON_EVENT [vdv_LUTRON, 201] //Дорожки
 {
     PUSH:
     {
@@ -334,7 +334,7 @@ BUTTON_EVENT [vdv_LUTRON, 101] //Дорожки
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 102] //Дальние
+BUTTON_EVENT [vdv_LUTRON, 202] //Дальние
 {
     PUSH:
     {
@@ -343,7 +343,7 @@ BUTTON_EVENT [vdv_LUTRON, 102] //Дальние
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 103] //Вход спа
+BUTTON_EVENT [vdv_LUTRON, 203] //Вход спа
 {
     PUSH:
     {
@@ -352,7 +352,7 @@ BUTTON_EVENT [vdv_LUTRON, 103] //Вход спа
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 104] //Беседка 1
+BUTTON_EVENT [vdv_LUTRON, 204] //Беседка 1
 {
     PUSH:
     {
@@ -361,7 +361,7 @@ BUTTON_EVENT [vdv_LUTRON, 104] //Беседка 1
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 105] //Беседка 2
+BUTTON_EVENT [vdv_LUTRON, 205] //Беседка 2
 {
     PUSH:
     {
@@ -370,7 +370,7 @@ BUTTON_EVENT [vdv_LUTRON, 105] //Беседка 2
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 106] //Беседка 3
+BUTTON_EVENT [vdv_LUTRON, 206] //Беседка 3
 {
     PUSH:
     {
@@ -379,7 +379,7 @@ BUTTON_EVENT [vdv_LUTRON, 106] //Беседка 3
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 107] //Беседка 4
+BUTTON_EVENT [vdv_LUTRON, 207] //Беседка 4
 {
     PUSH:
     {
@@ -388,7 +388,7 @@ BUTTON_EVENT [vdv_LUTRON, 107] //Беседка 4
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 108] //Прожектор
+BUTTON_EVENT [vdv_LUTRON, 208] //Прожектор
 {
     PUSH:
     {
@@ -397,7 +397,7 @@ BUTTON_EVENT [vdv_LUTRON, 108] //Прожектор
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 109] //Ель 1
+BUTTON_EVENT [vdv_LUTRON, 209] //Ель 1
 {
     PUSH:
     {
@@ -406,7 +406,7 @@ BUTTON_EVENT [vdv_LUTRON, 109] //Ель 1
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 110] //Ель 2
+BUTTON_EVENT [vdv_LUTRON, 210] //Ель 2
 {
     PUSH:
     {
@@ -415,7 +415,7 @@ BUTTON_EVENT [vdv_LUTRON, 110] //Ель 2
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 111] //Ель 3
+BUTTON_EVENT [vdv_LUTRON, 211] //Ель 3
 {
     PUSH:
     {
@@ -424,7 +424,7 @@ BUTTON_EVENT [vdv_LUTRON, 111] //Ель 3
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 112] //Ворота
+BUTTON_EVENT [vdv_LUTRON, 212] //Ворота
 {
     PUSH:
     {
@@ -433,7 +433,7 @@ BUTTON_EVENT [vdv_LUTRON, 112] //Ворота
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 113] //Гараж 1
+BUTTON_EVENT [vdv_LUTRON, 213] //Гараж 1
 {
     PUSH:
     {
@@ -442,7 +442,7 @@ BUTTON_EVENT [vdv_LUTRON, 113] //Гараж 1
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 114] //Гараж 2
+BUTTON_EVENT [vdv_LUTRON, 214] //Гараж 2
 {
     PUSH:
     {
@@ -451,7 +451,7 @@ BUTTON_EVENT [vdv_LUTRON, 114] //Гараж 2
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 116] //Гараж 2 закрыть
+BUTTON_EVENT [vdv_LUTRON, 216] //Гараж 2 закрыть
 {
     PUSH:
     {
@@ -460,7 +460,7 @@ BUTTON_EVENT [vdv_LUTRON, 116] //Гараж 2 закрыть
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 117] //Гараж 1 закрыть
+BUTTON_EVENT [vdv_LUTRON, 217] //Гараж 1 закрыть
 {
     PUSH:
     {
@@ -469,7 +469,7 @@ BUTTON_EVENT [vdv_LUTRON, 117] //Гараж 1 закрыть
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 118] //Ворота закрыть
+BUTTON_EVENT [vdv_LUTRON, 218] //Ворота закрыть
 {
     PUSH:
     {
@@ -478,7 +478,7 @@ BUTTON_EVENT [vdv_LUTRON, 118] //Ворота закрыть
     }
 }
 
-BUTTON_EVENT [vdv_LUTRON, 119] //Туман
+BUTTON_EVENT [vdv_LUTRON, 219] //Туман
 {
     PUSH:
     {
@@ -495,19 +495,19 @@ BUTTON_EVENT [vdv_LUTRON, 119] //Туман
 	{
 	    ACTIVE (FIND_STRING (Lutron_buffer,'[01:06:01], 100',1)):
 	    {
-		[IPAD,103] = 1;
+		[IPAD,203] = 1;
 		send_string 0, 'ON'
 	    }
 	    ACTIVE (FIND_STRING (Lutron_buffer,'[01:06:01], 000',1)):
 	    {
-		[IPAD,103] = 0;
+		[IPAD,203] = 0;
 		send_string 0, 'OFF'
 	    }
 	}
     }
 }*/
 
-BUTTON_EVENT [vdv_LUTRON, 120] //Въезд
+BUTTON_EVENT [vdv_LUTRON, 220] //Въезд
 {
     PUSH:
     {
@@ -845,31 +845,31 @@ DEFINE_START
 send_string 0,"'Programm starting... Description: ',PROGRAM_DESCRIPTION"
 //SEND_STRING 0,"'  Running ',AXS_NAME,' v',AXS_VER"
 
-COMBINE_CHANNELS (vdv_LUTRON, 100, ipad, 100)
-COMBINE_CHANNELS (vdv_LUTRON, 101, ipad, 101)
-COMBINE_CHANNELS (vdv_LUTRON, 102, ipad, 102)
-COMBINE_CHANNELS (vdv_LUTRON, 103, ipad, 103)
-COMBINE_CHANNELS (vdv_LUTRON, 104, ipad, 104)
-COMBINE_CHANNELS (vdv_LUTRON, 105, ipad, 105)
-COMBINE_CHANNELS (vdv_LUTRON, 106, ipad, 106)
-COMBINE_CHANNELS (vdv_LUTRON, 107, ipad, 107)
-COMBINE_CHANNELS (vdv_LUTRON, 108, ipad, 108)
-COMBINE_CHANNELS (vdv_LUTRON, 109, ipad, 109)
-COMBINE_CHANNELS (vdv_LUTRON, 110, ipad, 110)
-COMBINE_CHANNELS (vdv_LUTRON, 111, ipad, 111)
-COMBINE_CHANNELS (vdv_LUTRON, 112, ipad, 112)
-COMBINE_CHANNELS (vdv_LUTRON, 113, ipad, 113)
-COMBINE_CHANNELS (vdv_LUTRON, 114, ipad, 114)
-COMBINE_CHANNELS (vdv_LUTRON, 115, ipad, 115)
-COMBINE_CHANNELS (vdv_LUTRON, 116, ipad, 116)
-COMBINE_CHANNELS (vdv_LUTRON, 117, ipad, 117)
-COMBINE_CHANNELS (vdv_LUTRON, 118, ipad, 118)
-COMBINE_CHANNELS (vdv_LUTRON, 119, ipad, 119)
-COMBINE_CHANNELS (vdv_LUTRON, 120, ipad, 120)
-COMBINE_CHANNELS (vdv_LUTRON, 121, ipad, 121)
-COMBINE_CHANNELS (vdv_LUTRON, 122, ipad, 122)
-COMBINE_CHANNELS (vdv_LUTRON, 123, ipad, 123)  
-COMBINE_CHANNELS (vdv_LUTRON, 124, ipad, 124)  
+COMBINE_CHANNELS (vdv_LUTRON, 200, ipad, 200)
+COMBINE_CHANNELS (vdv_LUTRON, 201, ipad, 201)
+COMBINE_CHANNELS (vdv_LUTRON, 202, ipad, 202)
+COMBINE_CHANNELS (vdv_LUTRON, 203, ipad, 203)
+COMBINE_CHANNELS (vdv_LUTRON, 204, ipad, 204)
+COMBINE_CHANNELS (vdv_LUTRON, 205, ipad, 205)
+COMBINE_CHANNELS (vdv_LUTRON, 206, ipad, 206)
+COMBINE_CHANNELS (vdv_LUTRON, 207, ipad, 207)
+COMBINE_CHANNELS (vdv_LUTRON, 208, ipad, 208)
+COMBINE_CHANNELS (vdv_LUTRON, 209, ipad, 209)
+COMBINE_CHANNELS (vdv_LUTRON, 210, ipad, 210)
+COMBINE_CHANNELS (vdv_LUTRON, 211, ipad, 211)
+COMBINE_CHANNELS (vdv_LUTRON, 212, ipad, 212)
+COMBINE_CHANNELS (vdv_LUTRON, 213, ipad, 213)
+COMBINE_CHANNELS (vdv_LUTRON, 214, ipad, 214)
+COMBINE_CHANNELS (vdv_LUTRON, 215, ipad, 215)
+COMBINE_CHANNELS (vdv_LUTRON, 216, ipad, 216)
+COMBINE_CHANNELS (vdv_LUTRON, 217, ipad, 217)
+COMBINE_CHANNELS (vdv_LUTRON, 218, ipad, 218)
+COMBINE_CHANNELS (vdv_LUTRON, 219, ipad, 219)
+COMBINE_CHANNELS (vdv_LUTRON, 220, ipad, 220)
+COMBINE_CHANNELS (vdv_LUTRON, 221, ipad, 221)
+COMBINE_CHANNELS (vdv_LUTRON, 222, ipad, 222)
+COMBINE_CHANNELS (vdv_LUTRON, 223, ipad, 223)  
+COMBINE_CHANNELS (vdv_LUTRON, 224, ipad, 224)  
 
 CREATE_BUFFER Lutron, Lutron_buffer;
 
@@ -891,139 +891,139 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	//SEND_STRING 0, Lutron_device_buffer;
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 1, 1),'1'))
 	{
-	    [vdv_LUTRON,103] = 1;
+	    [vdv_LUTRON,203] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 1, 1),'0'))   
 	{
-	    [vdv_LUTRON,103] = 0;
+	    [vdv_LUTRON,203] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 2, 1),'1'))
 	{
-	    [vdv_LUTRON,108] = 1;
+	    [vdv_LUTRON,208] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 2, 1),'0'))   
 	{
-	    [vdv_LUTRON,108] = 0;
+	    [vdv_LUTRON,208] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 3, 1),'1'))
 	{
-	    [vdv_LUTRON,120] = 1;
+	    [vdv_LUTRON,220] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 3, 1),'0'))   
 	{
-	    [vdv_LUTRON,120] = 0;
+	    [vdv_LUTRON,220] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 4, 1),'1'))
 	{
-	    [vdv_LUTRON,119] = 1;
+	    [vdv_LUTRON,219] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 4, 1),'0'))   
 	{
-	    [vdv_LUTRON,119] = 0;
+	    [vdv_LUTRON,219] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 6, 1),'1'))
 	{
-	    [vdv_LUTRON,114] = 1;
+	    [vdv_LUTRON,214] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 6, 1),'0'))   
 	{
-	    [vdv_LUTRON,114] = 0;
+	    [vdv_LUTRON,214] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 9, 1),'1'))
 	{
-	    [vdv_LUTRON,101] = 1;
+	    [vdv_LUTRON,201] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 9, 1),'0'))   
 	{
-	    [vdv_LUTRON,101] = 0;
+	    [vdv_LUTRON,201] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 10, 1),'1'))
 	{
-	    [vdv_LUTRON,102] = 1;
+	    [vdv_LUTRON,202] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 10, 1),'0'))   
 	{
-	    [vdv_LUTRON,102] = 0;
+	    [vdv_LUTRON,202] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 11, 1),'1'))
 	{
-	    [vdv_LUTRON,109] = 1;
+	    [vdv_LUTRON,209] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 11, 1),'0'))   
 	{
-	    [vdv_LUTRON,109] = 0;
+	    [vdv_LUTRON,209] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 12, 1),'1'))
 	{
-	    [vdv_LUTRON,110] = 1;
+	    [vdv_LUTRON,210] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 12, 1),'0'))   
 	{
-	    [vdv_LUTRON,110] = 0;
+	    [vdv_LUTRON,210] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 13, 1),'1'))
 	{
-	    [vdv_LUTRON,111] = 1;
+	    [vdv_LUTRON,211] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 13, 1),'0'))   
 	{
-	    [vdv_LUTRON,111] = 0;
+	    [vdv_LUTRON,211] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 14, 1),'1'))
 	{
-	    [vdv_LUTRON,113] = 1;
+	    [vdv_LUTRON,213] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 14, 1),'0'))   
 	{
-	    [vdv_LUTRON,113] = 0;
+	    [vdv_LUTRON,213] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 17, 1),'1'))
 	{
-	    [vdv_LUTRON,100] = 1;
+	    [vdv_LUTRON,200] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 17, 1),'0'))   
 	{
-	    [vdv_LUTRON,100] = 0;
+	    [vdv_LUTRON,200] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 18, 1),'1'))
 	{
-	    [vdv_LUTRON,104] = 1;
+	    [vdv_LUTRON,204] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 18, 1),'0'))   
 	{
-	    [vdv_LUTRON,104] = 0;
+	    [vdv_LUTRON,204] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 19, 1),'1'))
 	{
-	    [vdv_LUTRON,105] = 1;
+	    [vdv_LUTRON,205] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 19, 1),'0'))   
 	{
-	    [vdv_LUTRON,105] = 0;
+	    [vdv_LUTRON,205] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 20, 1),'1'))
 	{
-	    [vdv_LUTRON,106] = 1;
+	    [vdv_LUTRON,206] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 20, 1),'0'))   
 	{
-	    [vdv_LUTRON,106] = 0;
+	    [vdv_LUTRON,206] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 21, 1),'1'))
 	{
-	    [vdv_LUTRON,107] = 1;
+	    [vdv_LUTRON,207] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 21, 1),'0'))   
 	{
-	    [vdv_LUTRON,107] = 0;
+	    [vdv_LUTRON,207] = 0;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 22, 1),'1'))
 	{
-	    [vdv_LUTRON,112] = 1;
+	    [vdv_LUTRON,212] = 1;
 	}
 	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 22, 1),'0'))   
 	{
-	    [vdv_LUTRON,112] = 0;
+	    [vdv_LUTRON,212] = 0;
 	}
     }    
     CLEAR_BUFFER Lutron_buffer;
