@@ -49,6 +49,12 @@ vdvModbus = 33001:1:0;
 //vdvDebug  = 32999:1:0;
 
 dvPanel = 11001:1:1;
+IPAD    = 11001:1:1;
+
+Lutron 	   = 5001:1:0;
+vdv_LUTRON = 33001:1:1
+
+
 
 
 DEFINE_CONSTANT
@@ -77,7 +83,7 @@ INTEGER REG_BT10 = 40015
 INTEGER REG_BT11 = 40016
 INTEGER REG_BT50 = 40033
 //INTEGER REG_DEGREE = 43005
-INTEGER REG_DEGREE = 45001 //	Alarm number
+INTEGER REG_ALARM = 45001 //	Alarm number
 
 INTEGER UP_INC   = 5
 INTEGER DN_INC   = 5
@@ -116,7 +122,7 @@ VOLATILE INTEGER VAR_BT6
 VOLATILE INTEGER VAR_BT10
 VOLATILE INTEGER VAR_BT11
 VOLATILE INTEGER VAR_BT50
-VOLATILE INTEGER VAR_DEGREE
+VOLATILE INTEGER VAR_ALARM
                   
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 VOLATILE SINTEGER VAR_OUTDOOR_TEMPERATURE
@@ -124,6 +130,8 @@ VOLATILE INTEGER VAR_ROOM_TEMPERATURE
 PERSISTENT INTEGER VAR_ROOM_TEMPERATURE_SETPOINT
 PERSISTENT INTEGER VAR_HOT_WATER_MODE
 PERSISTENT INTEGER VAR_COMFORT_HOTWATER_TEMPERATURE
+
+PERSISTENT CHAR Lutron_buffer[1000]
 
 
 // Touch Panel Buttons
@@ -285,9 +293,16 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    VAR_BT3 = Value 
 	    SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_BT3)"
 	}
-	Active (Function == 3 && Address == REG_DEGREE) : {
-	    VAR_DEGREE = Value 
-	    SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_DEGREE)"    
+	Active (Function == 3 && Address == REG_ALARM) : {
+	    VAR_ALARM = Value 
+	    if( VAR_ALARM == 0 )
+	    {
+		SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_ALARM)"
+	    }
+	    else
+	    {
+		SEND_COMMAND dvPanel, "'^TXT-9,0,The boiler has reported an error please check your equip. Code:', ITOA(VAR_ALARM)"
+	    }	    
 	}
 	
     }                                                                        
@@ -298,6 +313,223 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 (*                THE EVENTS GOES BELOW                    *)
 (***********************************************************)
 DEFINE_EVENT
+
+
+
+BUTTON_EVENT [vdv_LUTRON, 100] //Калитка
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 17',$0D";
+	SEND_STRING 0, "'KBP, [1:6:1], 17',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 101] //Дорожки
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 9',$0D";
+	SEND_STRING 0, "'KBP, [1:6:1], 09',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 102] //Дальние
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:06:1], 10',$0D";
+	SEND_STRING 0, "'KBP, [1:06:1], 10',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 103] //Вход спа
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 1',$0D";
+	SEND_STRING 0, "'KBP, [1:6:1], 1',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 104] //Беседка 1
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 18',$0D";
+	SEND_STRING 0, "'KBP, [1:6:1], 18',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 105] //Беседка 2
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 19',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 19',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 106] //Беседка 3
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 20',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 20',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 107] //Беседка 4
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 21',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 21',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 108] //Прожектор
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 2',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 2',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 109] //Ель 1
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 11',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 11',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 110] //Ель 2
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 12',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 12',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 111] //Ель 3
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 13',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 13',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 112] //Ворота
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 22',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 22',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 113] //Гараж 1
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 14',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 14',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 114] //Гараж 2
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 6',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 6',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 116] //Гараж 2 закрыть
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 7',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 7',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 117] //Гараж 1 закрыть
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 15',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 15',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 118] //Ворота закрыть
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 23',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 23',$0D"
+    }
+}
+
+BUTTON_EVENT [vdv_LUTRON, 119] //Туман
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 4',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 04',$0D"
+    }
+}
+
+/*DATA_EVENT [Lutron_buffer]
+{
+    STRING:
+    {
+	SELECT
+	{
+	    ACTIVE (FIND_STRING (Lutron_buffer,'[01:06:01], 100',1)):
+	    {
+		[IPAD,103] = 1;
+		send_string 0, 'ON'
+	    }
+	    ACTIVE (FIND_STRING (Lutron_buffer,'[01:06:01], 000',1)):
+	    {
+		[IPAD,103] = 0;
+		send_string 0, 'OFF'
+	    }
+	}
+    }
+}*/
+
+BUTTON_EVENT [vdv_LUTRON, 120] //Въезд
+{
+    PUSH:
+    {
+	SEND_STRING Lutron, "'KBP, [1:6:1], 3',$0D";
+	SEND_STRING 0, "'KBP, [01:06:01], 03',$0D"
+    }
+}
+
+DATA_EVENT[Lutron]
+{
+    ONLINE:
+    {
+	SEND_COMMAND Lutron,'SET BAUD 9600,N,8,1'
+	SEND_STRING  Lutron,"'KLMON',$0D" 
+	WAIT 20 
+	{
+	    SEND_STRING  Lutron,"'RKLS,[01:06:01]',13"
+	}
+    }
+}
+
+
 
 DATA_EVENT [vdvModbus]
 {
@@ -613,10 +845,190 @@ DEFINE_START
 send_string 0,"'Programm starting... Description: ',PROGRAM_DESCRIPTION"
 //SEND_STRING 0,"'  Running ',AXS_NAME,' v',AXS_VER"
 
+COMBINE_CHANNELS (vdv_LUTRON, 100, ipad, 100)
+COMBINE_CHANNELS (vdv_LUTRON, 101, ipad, 101)
+COMBINE_CHANNELS (vdv_LUTRON, 102, ipad, 102)
+COMBINE_CHANNELS (vdv_LUTRON, 103, ipad, 103)
+COMBINE_CHANNELS (vdv_LUTRON, 104, ipad, 104)
+COMBINE_CHANNELS (vdv_LUTRON, 105, ipad, 105)
+COMBINE_CHANNELS (vdv_LUTRON, 106, ipad, 106)
+COMBINE_CHANNELS (vdv_LUTRON, 107, ipad, 107)
+COMBINE_CHANNELS (vdv_LUTRON, 108, ipad, 108)
+COMBINE_CHANNELS (vdv_LUTRON, 109, ipad, 109)
+COMBINE_CHANNELS (vdv_LUTRON, 110, ipad, 110)
+COMBINE_CHANNELS (vdv_LUTRON, 111, ipad, 111)
+COMBINE_CHANNELS (vdv_LUTRON, 112, ipad, 112)
+COMBINE_CHANNELS (vdv_LUTRON, 113, ipad, 113)
+COMBINE_CHANNELS (vdv_LUTRON, 114, ipad, 114)
+COMBINE_CHANNELS (vdv_LUTRON, 115, ipad, 115)
+COMBINE_CHANNELS (vdv_LUTRON, 116, ipad, 116)
+COMBINE_CHANNELS (vdv_LUTRON, 117, ipad, 117)
+COMBINE_CHANNELS (vdv_LUTRON, 118, ipad, 118)
+COMBINE_CHANNELS (vdv_LUTRON, 119, ipad, 119)
+COMBINE_CHANNELS (vdv_LUTRON, 120, ipad, 120)
+COMBINE_CHANNELS (vdv_LUTRON, 121, ipad, 121)
+COMBINE_CHANNELS (vdv_LUTRON, 122, ipad, 122)
+COMBINE_CHANNELS (vdv_LUTRON, 123, ipad, 123)  
+COMBINE_CHANNELS (vdv_LUTRON, 124, ipad, 124)  
+
+CREATE_BUFFER Lutron, Lutron_buffer;
+
+
+
 (***********************************************************)
 (*            THE ACTUAL PROGRAM GOES BELOW                *)
 (***********************************************************)
 DEFINE_PROGRAM
+
+
+Wait 5
+{
+IF (FIND_STRING (Lutron_buffer, "$0D",1)) 
+    {
+        REMOVE_STRING (Lutron_buffer,"$0D",1);
+	REMOVE_STRING (Lutron_buffer,'KLS, [01:06:01], ',1);
+	SEND_STRING 0, Lutron_buffer;
+	//SEND_STRING 0, Lutron_device_buffer;
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 1, 1),'1'))
+	{
+	    [vdv_LUTRON,103] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 1, 1),'0'))   
+	{
+	    [vdv_LUTRON,103] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 2, 1),'1'))
+	{
+	    [vdv_LUTRON,108] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 2, 1),'0'))   
+	{
+	    [vdv_LUTRON,108] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 3, 1),'1'))
+	{
+	    [vdv_LUTRON,120] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 3, 1),'0'))   
+	{
+	    [vdv_LUTRON,120] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 4, 1),'1'))
+	{
+	    [vdv_LUTRON,119] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 4, 1),'0'))   
+	{
+	    [vdv_LUTRON,119] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 6, 1),'1'))
+	{
+	    [vdv_LUTRON,114] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 6, 1),'0'))   
+	{
+	    [vdv_LUTRON,114] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 9, 1),'1'))
+	{
+	    [vdv_LUTRON,101] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 9, 1),'0'))   
+	{
+	    [vdv_LUTRON,101] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 10, 1),'1'))
+	{
+	    [vdv_LUTRON,102] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 10, 1),'0'))   
+	{
+	    [vdv_LUTRON,102] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 11, 1),'1'))
+	{
+	    [vdv_LUTRON,109] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 11, 1),'0'))   
+	{
+	    [vdv_LUTRON,109] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 12, 1),'1'))
+	{
+	    [vdv_LUTRON,110] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 12, 1),'0'))   
+	{
+	    [vdv_LUTRON,110] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 13, 1),'1'))
+	{
+	    [vdv_LUTRON,111] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 13, 1),'0'))   
+	{
+	    [vdv_LUTRON,111] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 14, 1),'1'))
+	{
+	    [vdv_LUTRON,113] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 14, 1),'0'))   
+	{
+	    [vdv_LUTRON,113] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 17, 1),'1'))
+	{
+	    [vdv_LUTRON,100] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 17, 1),'0'))   
+	{
+	    [vdv_LUTRON,100] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 18, 1),'1'))
+	{
+	    [vdv_LUTRON,104] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 18, 1),'0'))   
+	{
+	    [vdv_LUTRON,104] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 19, 1),'1'))
+	{
+	    [vdv_LUTRON,105] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 19, 1),'0'))   
+	{
+	    [vdv_LUTRON,105] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 20, 1),'1'))
+	{
+	    [vdv_LUTRON,106] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 20, 1),'0'))   
+	{
+	    [vdv_LUTRON,106] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 21, 1),'1'))
+	{
+	    [vdv_LUTRON,107] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 21, 1),'0'))   
+	{
+	    [vdv_LUTRON,107] = 0;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 22, 1),'1'))
+	{
+	    [vdv_LUTRON,112] = 1;
+	}
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 22, 1),'0'))   
+	{
+	    [vdv_LUTRON,112] = 0;
+	}
+    }    
+    CLEAR_BUFFER Lutron_buffer;
+}
+
 
 
 Wait 300 'Modbus Requests'
@@ -682,7 +1094,7 @@ Wait 300 'Modbus Requests'
     wait 225
     {
 	send_string 0, "'=== Wait 225 ==='";
-	Call 'ModBus - Call Function' (3, 1, REG_DEGREE, 1);
+	Call 'ModBus - Call Function' (3, 1, REG_ALARM, 1);
 	SEND_COMMAND dvPanel, "'^TXT-9,0,', 'wait...'"	
     }
     
