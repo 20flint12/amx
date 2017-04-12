@@ -275,6 +275,18 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	Active (Function == 3 && Address == REG_HOT_WATER_MODE) : {
 	    VAR_HOT_WATER_MODE  = Value
     	    HotWaterModeText(dvPanel, 4, VAR_HOT_WATER_MODE)	    
+	    
+	    // ****************************************************************
+	    if( VAR_HOT_WATER_MODE == 0 ) { [dvPanel,145] = 1 }
+	    else { [dvPanel,145] = 0 }
+
+	    if( VAR_HOT_WATER_MODE == 1 ) { [dvPanel,146] = 1 }
+	    else { [dvPanel,146] = 0 }
+
+	    if( VAR_HOT_WATER_MODE == 2 ) { [dvPanel,147] = 1 }
+	    else { [dvPanel,147] = 0 }
+	    // ****************************************************************
+	    
 	}	
 	Active (Function == 3 && Address == REG_COMFORT_HOTWATER_TEMPERATURE)  : {
 	    VAR_COMFORT_HOTWATER_TEMPERATURE  = Value 	    
@@ -286,8 +298,8 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    SEND_COMMAND dvPanel, "'^TXT-6,0,', ITOA(VAR_BT10)"
 	}
 	Active (Function == 3 && Address == REG_BT11) : {
-	    VAR_HOT_WATER_MODE = Value 
-	    SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_BT11)"	    
+	    VAR_BT11 = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_BT11)"	 
 	}
 	Active (Function == 3 && Address == REG_BT3) : {
 	    VAR_BT3 = Value 
@@ -828,6 +840,15 @@ BUTTON_EVENT[dvPanel,195]
 	
 	//Updates the view at address 2
 	SEND_COMMAND dvPanel, "' ^LVU-100'"
+	
+	if( [dvPanel,195] == 0 ) 
+	{
+	    [dvPanel,195] = 1
+	}
+	else 
+	{
+	    [dvPanel,195] = 0
+	}
 	
     }
 }    
