@@ -140,6 +140,7 @@ PERSISTENT CHAR Lutron_buffer[1000]
 // Touch Panel Buttons
 VOLATILE INTEGER controlPanelButtons[] =
 {
+    138,
     139,	// btn_p1_defaul
     140,	// btn_p1_up
     141, 	// btn_p1_down
@@ -277,8 +278,21 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 
 	    if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == 0 ) { VAR_PREP_ROOM_TEMPERATURE_SETPOINT = VAR_ROOM_TEMPERATURE_SETPOINT; }
 	    
-	    if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) { [dvPanel,138] = 1 }
-	    else { [dvPanel,138] = 0 }
+	    send_string 0, "'111111111111'";
+	    if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) 
+	    { 
+		send_string 0, "'22222222222'";
+		[dvPanel,138] = 1;
+		[dvPanel,139] = 1;
+		[dvPanel,147] = 1;
+	    }
+	    else 
+	    { 
+		send_string 0, "'33333333333333333'";
+		[dvPanel,138] = 0;
+		[dvPanel,139] = 0;
+		[dvPanel,147] = 0;
+	    }
 		    
 	    TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);
 	    TemperatureText(dvPanel, 3, VAR_PREP_ROOM_TEMPERATURE_SETPOINT)	    
@@ -782,7 +796,7 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 		IF( (VAR_PREP_ROOM_TEMPERATURE_SETPOINT + UP_INC) >= 250) { VAR_PREP_ROOM_TEMPERATURE_SETPOINT = 250 }
 		ELSE { VAR_PREP_ROOM_TEMPERATURE_SETPOINT = (VAR_PREP_ROOM_TEMPERATURE_SETPOINT + UP_INC) } 
 		TemperatureText(dvPanel, 3, VAR_PREP_ROOM_TEMPERATURE_SETPOINT);
-		TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);    
+		//TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);    
 		if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) { [dvPanel,138] = 1 }
 		else { [dvPanel,138] = 0 }
 	    }	
@@ -796,7 +810,7 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 		IF( (VAR_PREP_ROOM_TEMPERATURE_SETPOINT - DN_INC) <= 100) { VAR_PREP_ROOM_TEMPERATURE_SETPOINT = 100 }
 		ELSE { VAR_PREP_ROOM_TEMPERATURE_SETPOINT = (VAR_PREP_ROOM_TEMPERATURE_SETPOINT - DN_INC) } 
 		TemperatureText(dvPanel, 3, VAR_PREP_ROOM_TEMPERATURE_SETPOINT);
-		TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);
+		//TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);
 		if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) { [dvPanel,138] = 1 }
 		else { [dvPanel,138] = 0 }
 	    }
