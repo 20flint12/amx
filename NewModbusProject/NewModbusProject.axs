@@ -153,7 +153,6 @@ VOLATILE INTEGER controlPanelButtons[] =
 }		  
 		   
 		   
-		   
 (***********************************************************)
 (*        SUBROUTINE/FUNCTION DEFINITIONS GO BELOW         *)
 (***********************************************************)
@@ -894,6 +893,24 @@ BUTTON_EVENT[dvPanel,195]
     }
 }    
 
+
+LEVEL_EVENT[dvPanel,8]
+{
+    
+    //IF (LEVEL.VALUE >= COOL_POINT)
+    //{
+	//ON[RELAY,FAN]
+    //}
+
+    Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' ****************'"
+}
+
+
+
+
+
+
+
 /* ######################################################################### */
 DEFINE_MODULE 'module Modbus Master' mdl_Modbus (dvModbus, vdvModbus);
 
@@ -1165,6 +1182,23 @@ Wait 300 'Modbus Requests'
 
 
 
+Wait 3
+{
+
+    //CHAR TimeStr[ ] = '9:30:08'
+    //SINTEGER nMinute
+    CURR_MINUTE = TIME_TO_MINUTE (TIME)
+    
+    IF( CURR_MINUTE != LAST_MINUTE )
+    {
+	LAST_MINUTE = CURR_MINUTE;
+	TIMER_MINUTES = TIMER_MINUTES + 1
+    }
+
+    Send_String 0,"'******** CURR_MINUTE= ',ITOA(CURR_MINUTE),' ****************',ITOA(TIMER_MINUTES)"
+    
+    
+}
 
 
 
