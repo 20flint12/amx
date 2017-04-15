@@ -1197,6 +1197,7 @@ Wait 3
 
     Send_String 0,"'******** CURR_MINUTE= ',ITOA(CURR_MINUTE),' ****************',ITOA(TIMER_MINUTES)"
     
+    SEND_COMMAND dvPanel, "'^TXT-1000,0,', ITOA(CURR_MINUTE), 'wait...'"	
     
 }
 
