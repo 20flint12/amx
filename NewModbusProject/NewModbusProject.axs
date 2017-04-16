@@ -110,6 +110,19 @@ INTEGER REG_COMFORT_HOTWATER_TEMPERATURE  = 48148
 //the building that something is the matter 0=Off 1=On 47389 u8 1 R/W
 
 
+ch_heating_temperature_up	= 130
+ch_heating_temperature_down	= 131
+ch_heating_temperature_ok 	= 132
+ch_heating_1_hour		= 135
+ch_heating_2_hour		= 136
+ch_heating_5_hour		= 137    
+
+ch_hotwater_temperature_up	= 140
+ch_hotwater_temperature_down	= 141
+ch_hotwater_temperature_ok	= 142
+ch_hotwater_mode_economy	= 145
+ch_hotwater_mode_normal		= 146
+ch_hotwater_mode_luxury		= 147
 
 // ############################################################################
 DEFINE_VARIABLE
@@ -140,6 +153,16 @@ PERSISTENT CHAR Lutron_buffer[1000]
 // Touch Panel Buttons
 VOLATILE INTEGER controlPanelButtons[] =
 {
+    ch_heating_1_hour,
+    ch_heating_2_hour,
+    ch_heating_5_hour,
+    
+    ch_heating_temperature_up,
+    ch_heating_temperature_down,
+    ch_heating_temperature_ok,
+    
+    ch_hotwater_temperature_up,
+    
     138,
     139,	// btn_p1_defaul
     140,	// btn_p1_up
@@ -780,12 +803,12 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 	SWITCH(PUSH_CHANNEL)
 	{
 	    // REG_ROOM_TEMPERATURE_SETPOINT ##################################
-	    CASE 139:
+	    CASE ch_heating_temperature_ok:
 	    {
 		//Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, 190);
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_PREP_ROOM_TEMPERATURE_SETPOINT);
 	    }	
-	    CASE 140: //controlPanelButtons[0]:	// btn_p1_up
+	    CASE ch_heating_temperature_up: //controlPanelButtons[0]:	// btn_p1_up
 	    {
 		send_string 0, "'btn_p1_up 140'";
 		//IF( (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) >= 250) { VAR_ROOM_TEMPERATURE_SETPOINT = 250 }
@@ -799,7 +822,7 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 		if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) { [dvPanel,138] = 1 }
 		else { [dvPanel,138] = 0 }
 	    }	
-	    CASE 141:	// btn_p1_down
+	    CASE ch_heating_temperature_down:	// btn_p1_down
 	    {
 		send_string 0, "'btn_p1_down 141'";
 		//IF( (VAR_ROOM_TEMPERATURE_SETPOINT - DN_INC) <= 100) { VAR_ROOM_TEMPERATURE_SETPOINT = 100 }
@@ -814,37 +837,51 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 		else { [dvPanel,138] = 0 }
 	    }
 	    
+    	    //  #############################################
+	    CASE ch_heating_1_hour:
+	    { 	    	    	    		
+		send_string 0, "'ch_heating_1_hour'";
+	    }
+	    CASE ch_heating_2_hour:
+	    {
+		send_string 0, "'ch_heating_2_hour'";
+	    }
+	    CASE ch_heating_5_hour:
+	    {
+		send_string 0, "'ch_heating_5_hour'";
+	    }	    	    
+
+	    
 	    // REG_COMFORT_HOTWATER_TEMPERATURE ###############################
-	    CASE 142:
+	    CASE ch_hotwater_temperature_ok:
 	    { 	    	    
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE, 55)		
 	    }
-	    CASE 143:	// btn_p2_up
+	    CASE ch_hotwater_temperature_up:
 	    { 	    	    
-		send_string 0, "'btn_p2_up 143'";
+		send_string 0, "'ch_hotwater_temperature_up'";
 		IF( (VAR_COMFORT_HOTWATER_TEMPERATURE + 1) >= 65) { VAR_COMFORT_HOTWATER_TEMPERATURE = 65 }
 		ELSE { VAR_COMFORT_HOTWATER_TEMPERATURE = (VAR_COMFORT_HOTWATER_TEMPERATURE + 1) } 
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE,VAR_COMFORT_HOTWATER_TEMPERATURE)		
 	    }
-	    CASE 144:	// btn_p2_down
+	    CASE ch_hotwater_temperature_down:
 	    {
-		send_string 0, "'btn_p2_down 144'";
+		send_string 0, "'ch_hotwater_temperature_down'";
 		IF( (VAR_COMFORT_HOTWATER_TEMPERATURE - 1) <= 45) { VAR_COMFORT_HOTWATER_TEMPERATURE = 45 }
 		ELSE { VAR_COMFORT_HOTWATER_TEMPERATURE = (VAR_COMFORT_HOTWATER_TEMPERATURE - 1) } 
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE, VAR_COMFORT_HOTWATER_TEMPERATURE)		
 	    }
-	    
 	    // REG_HOT_WATER_MODE #############################################
-	    CASE 145:	// economy
+	    CASE ch_hotwater_mode_economy:
 	    { 	    	    	    
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0)		
 		send_string 0, "'btn_economy'";
 	    }
-	    CASE 146:	// normal
+	    CASE ch_hotwater_mode_normal:
 	    {
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 1)		
 	    }
-	    CASE 147:	// luxury
+	    CASE ch_hotwater_mode_luxury:
 	    {
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)		
 	    }	    	    
