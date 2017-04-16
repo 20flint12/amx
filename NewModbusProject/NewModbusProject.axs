@@ -113,6 +113,7 @@ INTEGER REG_COMFORT_HOTWATER_TEMPERATURE  = 48148
 ch_heating_temperature_up	= 130
 ch_heating_temperature_down	= 131
 ch_heating_temperature_ok 	= 132
+ch_heating_temperature_view 	= 133
 ch_heating_1_hour		= 135
 ch_heating_2_hour		= 136
 ch_heating_5_hour		= 137    
@@ -120,6 +121,7 @@ ch_heating_5_hour		= 137
 ch_hotwater_temperature_up	= 140
 ch_hotwater_temperature_down	= 141
 ch_hotwater_temperature_ok	= 142
+ch_hotwater_temperature_view	= 143
 ch_hotwater_mode_economy	= 145
 ch_hotwater_mode_normal		= 146
 ch_hotwater_mode_luxury		= 147
@@ -153,26 +155,21 @@ PERSISTENT CHAR Lutron_buffer[1000]
 // Touch Panel Buttons
 VOLATILE INTEGER controlPanelButtons[] =
 {
+    ch_heating_temperature_up,
+    ch_heating_temperature_down,
+    ch_heating_temperature_ok,
+    ch_heating_temperature_view,
     ch_heating_1_hour,
     ch_heating_2_hour,
     ch_heating_5_hour,
     
-    ch_heating_temperature_up,
-    ch_heating_temperature_down,
-    ch_heating_temperature_ok,
-    
     ch_hotwater_temperature_up,
-    
-    138,
-    139,	// btn_p1_defaul
-    140,	// btn_p1_up
-    141, 	// btn_p1_down
-    142,	// btn_p2_defaul
-    143, 	// btn_p2_up
-    144,  	// btn_p2_down
-    145, 	// btn_p3_1
-    146, 	// btn_p3_2
-    147 	// btn_p3_3
+    ch_hotwater_temperature_down,
+    ch_hotwater_temperature_ok,
+    ch_hotwater_temperature_view,
+    ch_hotwater_mode_economy,
+    ch_hotwater_mode_normal,
+    ch_hotwater_mode_luxury
 }		  
 		   
 		   
@@ -304,16 +301,16 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) 
 	    { 
 		send_string 0, "'22222222222'";
-		[dvPanel,138] = 1;
-		[dvPanel,139] = 1;
-		[dvPanel,147] = 1;
+		[dvPanel, ch_heating_temperature_ok] = 1;
+		//[dvPanel,139] = 1;
+		//[dvPanel,147] = 1;
 	    }
 	    else 
 	    { 
 		send_string 0, "'33333333333333333'";
-		[dvPanel,138] = 0;
-		[dvPanel,139] = 0;
-		[dvPanel,147] = 0;
+		[dvPanel, ch_heating_temperature_ok] = 0;
+		//[dvPanel,139] = 0;
+		//[dvPanel,147] = 0;
 	    }
 		    
 	    TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);
@@ -797,44 +794,35 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 {
     PUSH:
     {
-	send_string 0,"'btnEVT [dvTP,',ITOA(PUSH_CHANNEL),']'"
-	Send_String 0,"'Button ',ITOA(BUTTON.INPUT.CHANNEL),' of dvTp was pushed'"
+	send_string 0,"'>>> btnEVT [dvTP,',ITOA(PUSH_CHANNEL),']'"
+	Send_String 0,"'>>> Button ',ITOA(BUTTON.INPUT.CHANNEL),' of dvTp was pushed'"
 	
 	SWITCH(PUSH_CHANNEL)
 	{
 	    // REG_ROOM_TEMPERATURE_SETPOINT ##################################
 	    CASE ch_heating_temperature_ok:
 	    {
+		send_string 0, "'ch_heating_temperature_ok'";
 		//Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, 190);
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_PREP_ROOM_TEMPERATURE_SETPOINT);
 	    }	
-	    CASE ch_heating_temperature_up: //controlPanelButtons[0]:	// btn_p1_up
+	    CASE ch_heating_temperature_up:
 	    {
-		send_string 0, "'btn_p1_up 140'";
-		//IF( (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) >= 250) { VAR_ROOM_TEMPERATURE_SETPOINT = 250 }
-		//ELSE { VAR_ROOM_TEMPERATURE_SETPOINT = (VAR_ROOM_TEMPERATURE_SETPOINT + UP_INC) } 
-		//Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_ROOM_TEMPERATURE_SETPOINT)		
-		
+		send_string 0, "'ch_heating_temperature_up'";
 		IF( (VAR_PREP_ROOM_TEMPERATURE_SETPOINT + UP_INC) >= 250) { VAR_PREP_ROOM_TEMPERATURE_SETPOINT = 250 }
 		ELSE { VAR_PREP_ROOM_TEMPERATURE_SETPOINT = (VAR_PREP_ROOM_TEMPERATURE_SETPOINT + UP_INC) } 
 		TemperatureText(dvPanel, 3, VAR_PREP_ROOM_TEMPERATURE_SETPOINT);
-		//TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);    
-		if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) { [dvPanel,138] = 1 }
-		else { [dvPanel,138] = 0 }
+		if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) { [dvPanel, ch_heating_temperature_ok] = 1 }
+		else { [dvPanel, ch_heating_temperature_ok] = 0 }
 	    }	
-	    CASE ch_heating_temperature_down:	// btn_p1_down
+	    CASE ch_heating_temperature_down:
 	    {
-		send_string 0, "'btn_p1_down 141'";
-		//IF( (VAR_ROOM_TEMPERATURE_SETPOINT - DN_INC) <= 100) { VAR_ROOM_TEMPERATURE_SETPOINT = 100 }
-		//ELSE { VAR_ROOM_TEMPERATURE_SETPOINT = (VAR_ROOM_TEMPERATURE_SETPOINT - DN_INC) } 
-		//Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_ROOM_TEMPERATURE_SETPOINT)		
-
+		send_string 0, "'ch_heating_temperature_down'";
 		IF( (VAR_PREP_ROOM_TEMPERATURE_SETPOINT - DN_INC) <= 100) { VAR_PREP_ROOM_TEMPERATURE_SETPOINT = 100 }
 		ELSE { VAR_PREP_ROOM_TEMPERATURE_SETPOINT = (VAR_PREP_ROOM_TEMPERATURE_SETPOINT - DN_INC) } 
 		TemperatureText(dvPanel, 3, VAR_PREP_ROOM_TEMPERATURE_SETPOINT);
-		//                 TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);
-		if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) { [dvPanel,138] = 1 }
-		else { [dvPanel,138] = 0 }
+		if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) { [dvPanel, ch_heating_temperature_ok] = 1 }
+		else { [dvPanel, ch_heating_temperature_ok] = 0 }
 	    }
 	    
     	    //  #############################################
@@ -933,7 +921,6 @@ BUTTON_EVENT[dvPanel,195]
 
 LEVEL_EVENT[dvPanel,8]
 {
-    
     //IF (LEVEL.VALUE >= COOL_POINT)
     //{
 	//ON[RELAY,FAN]
