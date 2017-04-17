@@ -16,11 +16,6 @@ PROGRAM_NAME='SubRoutines'
 DEFINE_DEVICE
 
 
-#IF_NOT_DEFINED dvPanel
-    //#WARN 'RMS: This Device Needs to be Defined in your Main Program: dvPanel'
-#END_IF
-
-
 
 (***********************************************************)
 (*               CONSTANT DEFINITIONS GO BELOW             *)
@@ -32,6 +27,19 @@ DEFINE_CONSTANT
 (***********************************************************)
 DEFINE_TYPE
 
+
+// Alarm list type
+STRUCTURE _Alarm
+{
+  //INTEGER iAlarmNo
+  CHAR    cAlarmTextDisplay[500]
+  CHAR    cCause[500]   
+  //CHAR	HeatPumpAction[500]
+  //CHAR    MayBeDueTo[500]
+}
+
+
+
 (***********************************************************)
 (*               VARIABLE DEFINITIONS GO BELOW             *)
 (***********************************************************)
@@ -39,9 +47,44 @@ DEFINE_VARIABLE
 
 
 
-SINTEGER CURR_MINUTE
-SINTEGER LAST_MINUTE
-INTEGER TIMER_MINUTES
+_Alarm AlarmList[500] 
+/*=
+{
+   {1, 'uj155426367', 'JOHN', 'DOE', '0.01'},    
+   {2, 'gh155426367', 'JOHN', 'DOE', '0.01'}    
+}
+*/
+
+/*
+DEFINE_FUNCTION CHAR[2000] AlarmText(INTEGER iAlarmNo)
+{
+    STACK_VAR CHAR cTemp[2000]
+    STACK_VAR INTEGER nLoop
+    
+    // Loop the command and escape it
+    FOR (nLoop = 1; nLoop <= LENGTH_ARRAY(AlarmList); nLoop++)
+    //for (loop = 1; loop <= max_length_array(controllerProperties); loop++)
+    {
+	Send_String 0,"'######### nLoop= ', ITOA(nLoop)"
+    
+	// Grab characters and process it based on state machine
+	IF( AlarmList[nLoop].iAlarmNo == iAlarmNo )
+	{
+	    cTemp =  AlarmList[nLoop].cAlarmTextDisplay
+	    Send_String 0,"'######### iAlarmNo= ', ITOA(iAlarmNo), ' ****************', cTemp"
+	    
+	    // cTemp is done
+	    RETURN cTemp;
+	}    
+    }    
+    
+    RETURN '--- UNKNOUN CODE ---';
+}
+*/
+
+
+
+
 
 
 
@@ -61,7 +104,7 @@ DEFINE_FUNCTION ButtonDynamicImage(DEV dvDevice, INTEGER nButton, CHAR cImage[])
     SEND_COMMAND dvDevice, "'^BBR-',ITOA(nButton),',0,',cImage"
 }
 
-DEFINE_FUNCTION ButtonText(DEV dvDevice, INTEGER nButton, CHAR cText[])
+DEFINE_FUNCTION SimpleText(DEV dvDevice, INTEGER nButton, CHAR cText[])
 {
     SEND_COMMAND dvDevice, "'^TXT-',ITOA(nButton),',0,',cText"
 }
@@ -123,6 +166,21 @@ DEFINE_MUTUALLY_EXCLUSIVE
 (***********************************************************)
 DEFINE_START
 
+AlarmList[1].cAlarmTextDisplay = 'Sensor flt:BT1'
+AlarmList[1].cCause = 'No contact with the sensor. (Temperature sensor, Outdoor)'
+
+AlarmList[3].cAlarmTextDisplay = 'Sensor flt:BT3'
+AlarmList[3].cCause = 'No contact with the sensor. (Temperature sensor, Heating medium return))'
+
+
+AlarmList[181].cAlarmTextDisplay = 'Problems at periodic increasing'
+AlarmList[181].cCause = 'Periodic hot water in- Only information crease did not reach the stop temperature in 5 hours.'
+
+AlarmList[182].cAlarmTextDisplay = 'Load monitor active'
+AlarmList[182].cCause = 'Measured power consumption exceeds set fuse size in menu 5.1.12.'
+
+
+
 (***********************************************************)
 (*                THE EVENTS GO BELOW                      *)
 (***********************************************************)
@@ -133,24 +191,20 @@ DEFINE_EVENT
 (***********************************************************)
 DEFINE_PROGRAM
 
-
+/*
 Wait 17
 {
-
     //CHAR TimeStr[ ] = '9:30:08'
     //SINTEGER nMinute
     CURR_MINUTE = TIME_TO_MINUTE (TIME)
-
     IF( CURR_MINUTE != LAST_MINUTE )
     {
 	LAST_MINUTE = CURR_MINUTE;
 	TIMER_MINUTES = TIMER_MINUTES + 1
     }
-
     Send_String 0,"'******** CURR_MINUTE= ',ITOA(CURR_MINUTE),' ****************',ITOA(TIMER_MINUTES)"
-
 }
-
+*/
 
 
 (***********************************************************)

@@ -173,14 +173,14 @@ INTEGER nButtonInputUp[]		= { nButtonInput1Up, nButtonInput2Up, nButtonInput3Up,
 									nButtonInput9Up, nButtonInput10Up, nButtonInput11Up, nButtonInput12Up, nButtonInput13Up, nButtonInput14Up, nButtonInput15Up, nButtonInput16Up }
 INTEGER nButtonInputDown[]		= { nButtonInput1Down, nButtonInput2Down, nButtonInput3Down, nButtonInput4Down, nButtonInput5Down, nButtonInput6Down, nButtonInput7Down, nButtonInput8Down,
 									nButtonInput9Down, nButtonInput10Down, nButtonInput11Down, nButtonInput12Down, nButtonInput13Down, nButtonInput14Down, nButtonInput15Down, nButtonInput16Down }
-INTEGER nButtonSceneRecall[]	= { nButtonScene1Recall, nButtonScene2Recall, nButtonScene3Recall, nButtonScene4Recall, nButtonScene5Recall, 
+INTEGER nButtonSceneRecall[]	= { nButtonScene1Recall, nButtonScene2Recall, nButtonScene3Recall, nButtonScene4Recall, nButtonScene5Recall,
 									nButtonScene6Recall, nButtonScene7Recall, nButtonScene8Recall, nButtonScene9Recall, nButtonScene10Recall,
 									nButtonScene11Recall, nButtonScene12Recall, nButtonScene13Recall, nButtonScene14Recall, nButtonScene15Recall }
-INTEGER nButtonRecorderTrack[]	= { nButtonRecorderTrack1, nButtonRecorderTrack2, nButtonRecorderTrack3, nButtonRecorderTrack4, nButtonRecorderTrack5, 
+INTEGER nButtonRecorderTrack[]	= { nButtonRecorderTrack1, nButtonRecorderTrack2, nButtonRecorderTrack3, nButtonRecorderTrack4, nButtonRecorderTrack5,
 									nButtonRecorderTrack6, nButtonRecorderTrack7, nButtonRecorderTrack8, nButtonRecorderTrack9, nButtonRecorderTrack10 }
-INTEGER nLevelInputFader[]		= { nLevelInput1Fader, nLevelInput2Fader, nLevelInput3Fader, nLevelInput4Fader, nLevelInput5Fader, nLevelInput6Fader, nLevelInput7Fader, nLevelInput8Fader, 
+INTEGER nLevelInputFader[]		= { nLevelInput1Fader, nLevelInput2Fader, nLevelInput3Fader, nLevelInput4Fader, nLevelInput5Fader, nLevelInput6Fader, nLevelInput7Fader, nLevelInput8Fader,
 									nLevelInput9Fader, nLevelInput10Fader, nLevelInput11Fader, nLevelInput12Fader, nLevelInput13Fader, nLevelInput14Fader, nLevelInput15Fader, nLevelInput16Fader }
-INTEGER nLevelInputBargraph[]	= { nLevelInput1bargraph, nLevelInput2bargraph, nLevelInput3bargraph, nLevelInput4bargraph, nLevelInput5bargraph, nLevelInput6bargraph, nLevelInput7bargraph, nLevelInput8bargraph, 
+INTEGER nLevelInputBargraph[]	= { nLevelInput1bargraph, nLevelInput2bargraph, nLevelInput3bargraph, nLevelInput4bargraph, nLevelInput5bargraph, nLevelInput6bargraph, nLevelInput7bargraph, nLevelInput8bargraph,
 									nLevelInput9bargraph, nLevelInput10bargraph, nLevelInput11bargraph, nLevelInput12bargraph, nLevelInput13bargraph, nLevelInput14bargraph, nLevelInput15bargraph, nLevelInput16bargraph }
 
 

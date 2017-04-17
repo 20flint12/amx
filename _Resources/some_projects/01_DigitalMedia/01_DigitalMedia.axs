@@ -101,7 +101,7 @@ BUTTON_EVENT[vdvCLActions,5] // Action 5
 	WAIT 2
 	{
 	  SEND_STRING dvIS_SPX,"'GET /update?RMSMENU=ALARM HTTP/1.1',$0D,$0A,'Host: 192.168.1.112:1234',$0D,$0A,'Connection: keep-alive',$0D,$0A"
-	}  
+	}
         SEND_COMMAND dvTP,'@PPN-RMS_ALERT'
 	nAutoIS = 0
       }

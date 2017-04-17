@@ -24,7 +24,6 @@ PROGRAM_NAME='NewModbusProject'
 
 #INCLUDE 'SubRoutines.axs'
 
-
 /*
 IP 193.178.251.2
 
@@ -49,11 +48,10 @@ vdvModbus = 33001:1:0;
 //vdvDebug  = 32999:1:0;
 
 dvPanel = 11001:1:1;
-IPAD    = 11001:1:1;
+//IPAD    = 11001:1:1;
 
-Lutron 	   = 5001:1:0;
-vdv_LUTRON = 33001:1:1
 
+#INCLUDE 'Lutron_routines.axs'
 
 
 
@@ -162,7 +160,6 @@ VOLATILE INTEGER VAR_PREP_ROOM_TEMPERATURE_SETPOINT
 PERSISTENT INTEGER VAR_HOT_WATER_MODE
 PERSISTENT INTEGER VAR_COMFORT_HOTWATER_TEMPERATURE
 
-PERSISTENT CHAR Lutron_buffer[1000]
 
 
 // Touch Panel Buttons
@@ -184,7 +181,15 @@ VOLATILE INTEGER controlPanelButtons[] =
     ch_hotwater_mode_normal,
     ch_hotwater_mode_luxury
 }		  
-		   
+		
+
+SINTEGER CURR_MINUTE
+SINTEGER LAST_MINUTE
+SINTEGER TIMER_MINUTES
+
+SINTEGER SET_MINUTES
+
+		
 		   
 (***********************************************************)
 (*        SUBROUTINE/FUNCTION DEFINITIONS GO BELOW         *)
@@ -313,15 +318,14 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    send_string 0, "'111111111111'";
 	    if( VAR_PREP_ROOM_TEMPERATURE_SETPOINT == VAR_ROOM_TEMPERATURE_SETPOINT ) 
 	    { 
-		send_string 0, "'22222222222'";
+		//send_string 0, "'22222222222'";
 		[dvPanel, ch_heating_temperature_view] = 1;
 	    }
 	    else 
 	    { 
-		send_string 0, "'33333333333333333'";
+		//send_string 0, "'33333333333333333'";
 		[dvPanel, ch_heating_temperature_view] = 0;
-	    }
-		    
+	    }		    
 	    //TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);
 	    TemperatureText(dvPanel, addr_room_temperature_setpoint, VAR_PREP_ROOM_TEMPERATURE_SETPOINT)	    
 	    
@@ -339,8 +343,7 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 
 	    if( VAR_HOT_WATER_MODE == 2 ) { [dvPanel,ch_hotwater_mode_luxury] = 1 }
 	    else { [dvPanel,ch_hotwater_mode_luxury] = 0 }
-	    // ****************************************************************
-	    
+	    // ****************************************************************	    
 	}	
 	Active (Function == 3 && Address == REG_COMFORT_HOTWATER_TEMPERATURE)  : {
 	    VAR_COMFORT_HOTWATER_TEMPERATURE  = Value 	    
@@ -361,13 +364,19 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	}
 	Active (Function == 3 && Address == REG_ALARM) : {
 	    VAR_ALARM = Value 
+	    SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_ALARM)"
+	    
 	    if( VAR_ALARM == 0 )
 	    {
-		SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_ALARM)"
+		//SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_ALARM)"
+		[dvPanel, addr_alarm_message] = 0;
 	    }
 	    else
 	    {
-		SEND_COMMAND dvPanel, "'^TXT-9,0,The boiler has reported an error please check your equip. Code:', ITOA(VAR_ALARM)"
+		//SEND_COMMAND dvPanel, "'^TXT-9,0,The boiler has reported an error please check your equip. Code:', ITOA(VAR_ALARM)"
+		[dvPanel, addr_alarm_message] = 1;
+		cText = "'Code:', ITOA(VAR_ALARM), ' ', AlarmList[VAR_ALARM].cAlarmTextDisplay"
+		SimpleText(dvPanel, addr_alarm_message, cText)
 	    }	    
 	}
 	
@@ -379,221 +388,6 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 (*                THE EVENTS GOES BELOW                    *)
 (***********************************************************)
 DEFINE_EVENT
-
-
-
-BUTTON_EVENT [vdv_LUTRON, 200] //Калитка
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 17',$0D";
-	SEND_STRING 0, "'KBP, [1:6:1], 17',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 201] //Дорожки
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 9',$0D";
-	SEND_STRING 0, "'KBP, [1:6:1], 09',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 202] //Дальние
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:06:1], 10',$0D";
-	SEND_STRING 0, "'KBP, [1:06:1], 10',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 203] //Вход спа
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 1',$0D";
-	SEND_STRING 0, "'KBP, [1:6:1], 1',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 204] //Беседка 1
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 18',$0D";
-	SEND_STRING 0, "'KBP, [1:6:1], 18',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 205] //Беседка 2
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 19',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 19',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 206] //Беседка 3
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 20',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 20',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 207] //Беседка 4
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 21',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 21',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 208] //Прожектор
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 2',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 2',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 209] //Ель 1
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 11',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 11',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 210] //Ель 2
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 12',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 12',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 211] //Ель 3
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 13',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 13',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 212] //Ворота
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 22',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 22',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 213] //Гараж 1
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 14',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 14',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 214] //Гараж 2
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 6',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 6',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 216] //Гараж 2 закрыть
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 7',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 7',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 217] //Гараж 1 закрыть
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 15',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 15',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 218] //Ворота закрыть
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 23',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 23',$0D"
-    }
-}
-
-BUTTON_EVENT [vdv_LUTRON, 219] //Туман
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 4',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 04',$0D"
-    }
-}
-
-/*DATA_EVENT [Lutron_buffer]
-{
-    STRING:
-    {
-	SELECT
-	{
-	    ACTIVE (FIND_STRING (Lutron_buffer,'[01:06:01], 100',1)):
-	    {
-		[IPAD,203] = 1;
-		send_string 0, 'ON'
-	    }
-	    ACTIVE (FIND_STRING (Lutron_buffer,'[01:06:01], 000',1)):
-	    {
-		[IPAD,203] = 0;
-		send_string 0, 'OFF'
-	    }
-	}
-    }
-}*/
-
-BUTTON_EVENT [vdv_LUTRON, 220] //Въезд
-{
-    PUSH:
-    {
-	SEND_STRING Lutron, "'KBP, [1:6:1], 3',$0D";
-	SEND_STRING 0, "'KBP, [01:06:01], 03',$0D"
-    }
-}
-
-DATA_EVENT[Lutron]
-{
-    ONLINE:
-    {
-	SEND_COMMAND Lutron,'SET BAUD 9600,N,8,1'
-	SEND_STRING  Lutron,"'KLMON',$0D" 
-	WAIT 20 
-	{
-	    SEND_STRING  Lutron,"'RKLS,[01:06:01]',13"
-	}
-    }
-}
 
 
 
@@ -846,14 +640,23 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 	    CASE ch_heating_1_hour:
 	    { 	    	    	    		
 		send_string 0, "'ch_heating_1_hour'";
+		SET_MINUTES = 5;
+		TIMER_MINUTES = 0;
+		[dvPanel, ch_heating_1_hour] = 1;
 	    }
 	    CASE ch_heating_2_hour:
 	    {
 		send_string 0, "'ch_heating_2_hour'";
+		SET_MINUTES = 10;
+		TIMER_MINUTES = 0;
+		[dvPanel, ch_heating_2_hour] = 1;
 	    }
 	    CASE ch_heating_5_hour:
 	    {
 		send_string 0, "'ch_heating_5_hour'";
+		SET_MINUTES = 20;
+		TIMER_MINUTES = 0;
+		[dvPanel, ch_heating_5_hour] = 1;
 	    }	    	    
 
 	    
@@ -938,12 +741,18 @@ BUTTON_EVENT[dvPanel,195]
 
 LEVEL_EVENT[dvPanel,8]
 {
+    STACK_VAR CHAR cTemp[2000]
+    
     //IF (LEVEL.VALUE >= COOL_POINT)
     //{
 	//ON[RELAY,FAN]
     //}
-
-    Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' ****************'"
+    
+    //cTemp = AlarmText( 1 )
+    Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' **************** ', AlarmList[2].cAlarmTextDisplay"    
+    
+    //Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' ****************'"    
+    
 }
 
 
@@ -965,190 +774,14 @@ DEFINE_START
 send_string 0,"'Programm starting... Description: ',PROGRAM_DESCRIPTION"
 //SEND_STRING 0,"'  Running ',AXS_NAME,' v',AXS_VER"
 
-COMBINE_CHANNELS (vdv_LUTRON, 200, ipad, 200)
-COMBINE_CHANNELS (vdv_LUTRON, 201, ipad, 201)
-COMBINE_CHANNELS (vdv_LUTRON, 202, ipad, 202)
-COMBINE_CHANNELS (vdv_LUTRON, 203, ipad, 203)
-COMBINE_CHANNELS (vdv_LUTRON, 204, ipad, 204)
-COMBINE_CHANNELS (vdv_LUTRON, 205, ipad, 205)
-COMBINE_CHANNELS (vdv_LUTRON, 206, ipad, 206)
-COMBINE_CHANNELS (vdv_LUTRON, 207, ipad, 207)
-COMBINE_CHANNELS (vdv_LUTRON, 208, ipad, 208)
-COMBINE_CHANNELS (vdv_LUTRON, 209, ipad, 209)
-COMBINE_CHANNELS (vdv_LUTRON, 210, ipad, 210)
-COMBINE_CHANNELS (vdv_LUTRON, 211, ipad, 211)
-COMBINE_CHANNELS (vdv_LUTRON, 212, ipad, 212)
-COMBINE_CHANNELS (vdv_LUTRON, 213, ipad, 213)
-COMBINE_CHANNELS (vdv_LUTRON, 214, ipad, 214)
-COMBINE_CHANNELS (vdv_LUTRON, 215, ipad, 215)
-COMBINE_CHANNELS (vdv_LUTRON, 216, ipad, 216)
-COMBINE_CHANNELS (vdv_LUTRON, 217, ipad, 217)
-COMBINE_CHANNELS (vdv_LUTRON, 218, ipad, 218)
-COMBINE_CHANNELS (vdv_LUTRON, 219, ipad, 219)
-COMBINE_CHANNELS (vdv_LUTRON, 220, ipad, 220)
-COMBINE_CHANNELS (vdv_LUTRON, 221, ipad, 221)
-COMBINE_CHANNELS (vdv_LUTRON, 222, ipad, 222)
-COMBINE_CHANNELS (vdv_LUTRON, 223, ipad, 223)  
-COMBINE_CHANNELS (vdv_LUTRON, 224, ipad, 224)  
-
-CREATE_BUFFER Lutron, Lutron_buffer;
-
 VAR_PREP_ROOM_TEMPERATURE_SETPOINT = 0
 
+SET_MINUTES = 0
 
 (***********************************************************)
 (*            THE ACTUAL PROGRAM GOES BELOW                *)
 (***********************************************************)
 DEFINE_PROGRAM
-
-
-Wait 5
-{
-IF (FIND_STRING (Lutron_buffer, "$0D",1)) 
-    {
-        REMOVE_STRING (Lutron_buffer,"$0D",1);
-	REMOVE_STRING (Lutron_buffer,'KLS, [01:06:01], ',1);
-	SEND_STRING 0, Lutron_buffer;
-	//SEND_STRING 0, Lutron_device_buffer;
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 1, 1),'1'))
-	{
-	    [vdv_LUTRON,203] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 1, 1),'0'))   
-	{
-	    [vdv_LUTRON,203] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 2, 1),'1'))
-	{
-	    [vdv_LUTRON,208] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 2, 1),'0'))   
-	{
-	    [vdv_LUTRON,208] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 3, 1),'1'))
-	{
-	    [vdv_LUTRON,220] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 3, 1),'0'))   
-	{
-	    [vdv_LUTRON,220] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 4, 1),'1'))
-	{
-	    [vdv_LUTRON,219] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 4, 1),'0'))   
-	{
-	    [vdv_LUTRON,219] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 6, 1),'1'))
-	{
-	    [vdv_LUTRON,214] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 6, 1),'0'))   
-	{
-	    [vdv_LUTRON,214] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 9, 1),'1'))
-	{
-	    [vdv_LUTRON,201] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 9, 1),'0'))   
-	{
-	    [vdv_LUTRON,201] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 10, 1),'1'))
-	{
-	    [vdv_LUTRON,202] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 10, 1),'0'))   
-	{
-	    [vdv_LUTRON,202] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 11, 1),'1'))
-	{
-	    [vdv_LUTRON,209] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 11, 1),'0'))   
-	{
-	    [vdv_LUTRON,209] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 12, 1),'1'))
-	{
-	    [vdv_LUTRON,210] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 12, 1),'0'))   
-	{
-	    [vdv_LUTRON,210] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 13, 1),'1'))
-	{
-	    [vdv_LUTRON,211] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 13, 1),'0'))   
-	{
-	    [vdv_LUTRON,211] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 14, 1),'1'))
-	{
-	    [vdv_LUTRON,213] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 14, 1),'0'))   
-	{
-	    [vdv_LUTRON,213] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 17, 1),'1'))
-	{
-	    [vdv_LUTRON,200] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 17, 1),'0'))   
-	{
-	    [vdv_LUTRON,200] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 18, 1),'1'))
-	{
-	    [vdv_LUTRON,204] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 18, 1),'0'))   
-	{
-	    [vdv_LUTRON,204] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 19, 1),'1'))
-	{
-	    [vdv_LUTRON,205] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 19, 1),'0'))   
-	{
-	    [vdv_LUTRON,205] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 20, 1),'1'))
-	{
-	    [vdv_LUTRON,206] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 20, 1),'0'))   
-	{
-	    [vdv_LUTRON,206] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 21, 1),'1'))
-	{
-	    [vdv_LUTRON,207] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 21, 1),'0'))   
-	{
-	    [vdv_LUTRON,207] = 0;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 22, 1),'1'))
-	{
-	    [vdv_LUTRON,212] = 1;
-	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 22, 1),'0'))   
-	{
-	    [vdv_LUTRON,212] = 0;
-	}
-    }    
-    CLEAR_BUFFER Lutron_buffer;
-}
 
 
 
@@ -1165,69 +798,69 @@ Wait 300 'Modbus Requests'
     {
 	send_string 0, "'=== Wait 0 ==='";	
 	Call 'ModBus - Call Function' (3, 1, REG_OUTDOOR_TEMPERATURE, 1);
-	//send_string 0, "'Outdoor temperature'";
-	SEND_COMMAND dvPanel, "'^TXT-1,0,', 'wait...'"
+	//SEND_COMMAND dvPanel, "'^TXT-1,0,', 'wait...'"
+	SimpleText(dvPanel, addr_outdoor_temperature, 'wait...')
     }
     wait 25
     {	
 	send_string 0, "'=== Wait 25 ==='";	
 	Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE, 1);
-	//send_string 0, "'Call','Room temperature (BT50) 40033'";	
-	SEND_COMMAND dvPanel, "'^TXT-2,0,', 'wait...'"
+	//SEND_COMMAND dvPanel, "'^TXT-2,0,', 'wait...'"
+	SimpleText(dvPanel, addr_room_temperature, 'wait...')
     }
     wait 50
     {
 	send_string 0, "'=== Wait 50 ==='";	
 	Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);
-	//send_string 0, "'REG_ROOM_TEMPERATURE_SETPOINT'";
-	SEND_COMMAND dvPanel, "'^TXT-3,0,', 'wait...'"
+	//SEND_COMMAND dvPanel, "'^TXT-3,0,', 'wait...'"
+	SimpleText(dvPanel, addr_room_temperature_setpoint, 'wait...')
     }
     wait 75
     {
 	send_string 0, "'=== Wait 75 ==='";	
 	Call 'ModBus - Call Function' (3, 1, REG_HOT_WATER_MODE, 1);
-	SEND_COMMAND dvPanel, "'^TXT-4,0,', 'wait...'"
+	//SEND_COMMAND dvPanel, "'^TXT-4,0,', 'wait...'"
+	SimpleText(dvPanel, addr_hotwater_mode, 'wait...')
     }    
     wait 100
     {	
 	send_string 0, "'=== Wait 100 ==='";	
 	Call 'ModBus - Call Function' (3, 1, REG_COMFORT_HOTWATER_TEMPERATURE, 1);
-	SEND_COMMAND dvPanel, "'^TXT-5,0,', 'wait...'"
+	//SEND_COMMAND dvPanel, "'^TXT-5,0,', 'wait...'"
+	SimpleText(dvPanel, addr_comfort_hotwater_temperature, 'wait...')
+	
     }
     wait 125
     {
 	send_string 0, "'=== Wait 125 ==='";	
 	Call 'ModBus - Call Function' (3, 1, REG_BT10, 1);
-	SEND_COMMAND dvPanel, "'^TXT-6,0,', 'wait...'"	
+	SimpleText(dvPanel, addr_brine_in, 'wait...')
     }    
     wait 150
     {
 	send_string 0, "'=== Wait 150 ==='";	
 	Call 'ModBus - Call Function' (3, 1, REG_BT11, 1);
-	SEND_COMMAND dvPanel, "'^TXT-7,0,', 'wait...'"	
+	SimpleText(dvPanel, addr_brine_out, 'wait...')
     }    
     wait 200
     {
 	send_string 0, "'=== Wait 200 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_BT3, 1); 
-	SEND_COMMAND dvPanel, "'^TXT-8,0,', 'wait...'"	
+	SimpleText(dvPanel, addr_return_temperature, 'wait...')
     }	
     wait 225
     {
 	send_string 0, "'=== Wait 225 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_ALARM, 1);
-	SEND_COMMAND dvPanel, "'^TXT-9,0,', 'wait...'"	
+	SimpleText(dvPanel, addr_alarm_number, 'wait...')
     }
     
 }
 
 
 
-Wait 3
+Wait 13
 {
-
-    //CHAR TimeStr[ ] = '9:30:08'
-    //SINTEGER nMinute
     CURR_MINUTE = TIME_TO_MINUTE (TIME)
     
     IF( CURR_MINUTE != LAST_MINUTE )
@@ -1237,22 +870,19 @@ Wait 3
     }
 
     Send_String 0,"'******** CURR_MINUTE= ',ITOA(CURR_MINUTE),' ****************',ITOA(TIMER_MINUTES)"
-    
-    SEND_COMMAND dvPanel, "'^TXT-200,0,', ITOA(CURR_MINUTE), ' minutes'"	
-    
+   
+    SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"	
+
+    IF( TIMER_MINUTES >= SET_MINUTES )
+    {
+	[dvPanel, ch_heating_1_hour] = 0;
+	[dvPanel, ch_heating_2_hour] = 0;
+	[dvPanel, ch_heating_5_hour] = 0;	
+    }
 }
 
 
 
-
-
-
-/*
-Wait 100 'Write Modbus Requests'
-{
-    Call 'Modbus - Write Multiple Registers - Single register' (1, REG_BT3, 190)		
-}
-*/
 
 (***********************************************************)
 (*                     END OF PROGRAM                      *)

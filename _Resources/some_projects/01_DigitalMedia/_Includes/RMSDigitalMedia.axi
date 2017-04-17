@@ -143,7 +143,7 @@ VOLATILE CHAR    acStringEnumArgValues[3][50]
 
 // i!-ConnectLinx Standard Actions
 VOLATILE INTEGER nchCLdvTPButtons[] =
-{  
+{
   1002,                             // Power Off
   1001,                             // Power On
   51,
@@ -190,8 +190,8 @@ DEFINE_MODULE 'RMSBasicDeviceMod' mdlBasicDev01(dvIS_SPX,
 DEFINE_MODULE 'RMSEngineMod' mdlRMSEng(vdvRMSEngine,
                                        dvRMSSocket,
                                        vdvCLActions)
-				       
-				
+
+
 // RMSUIMod - The RMS User Interface.  Requires KeyboardMod.
 // Channel And Variable Text Code Defined Inside The Module
 DEFINE_MODULE 'RMSUIMod' mdlRMSUI(vdvRMSEngine,
@@ -201,7 +201,7 @@ DEFINE_MODULE 'RMSUIMod' mdlRMSUI(vdvRMSEngine,
 				  dvRMSTPWelcome_Base,
 				  acRMS_MEETING_DEFAULT_SUBJECT,
 				  acRMS_MEETING_DEFAULT_MESSAGE)
-				  
+
 // RMSWelcomeOnlyUIMod - The RMS Welcome Panel User Interface.
 // Channel And Variable Text Code Defined Inside The Module
 DEFINE_MODULE 'RMSWelcomeOnlyUIMod' mdlRMSUI(vdvRMSEngine,
@@ -263,10 +263,10 @@ DATA_EVENT[vdvCLActions]
     }
   }
   ONLINE:
-  {    
+  {
     //SEND_COMMAND DATA.DEVICE,'SET ROOM INFO-Digital Media,InfoComm 2010,Doug Hall'
     //SEND_COMMAND DATA.DEVICE,'ADD STD-1001-1002'
-    //SEND_COMMAND DATA.DEVICE,'ADD ACTION-51,Select Playlist Emergency'        
+    //SEND_COMMAND DATA.DEVICE,'ADD ACTION-51,Select Playlist Emergency'
     //SEND_COMMAND DATA.DEVICE,'ADD FOLDER-Inspired Signage'
     //SEND_COMMAND DATA.DEVICE,'ADD FOLDER-Emergency Playlist,Inspired Signage'
     //SEND_COMMAND DATA.DEVICE,'ADD ACTION-52,Select Playlist AMX Demo'
@@ -291,11 +291,11 @@ BUTTON_EVENT[dvTP,nchCLdvTPPanelButtons]
       CASE 80://pwr off
       {
         OFF[dvTP,81]
-        ON[dvTP,PUSH_CHANNEL]	
+        ON[dvTP,PUSH_CHANNEL]
 	OFF[dvTP,51]
 	OFF[dvTP,52]
 	nAutoIS = 1
-      }	
+      }
       CASE 81://pwr on
       {
         OFF[dvTP,80]
@@ -303,12 +303,12 @@ BUTTON_EVENT[dvTP,nchCLdvTPPanelButtons]
 	nAutoIS = 1
       }
       CASE 51://rms schedule playlist
-      { 
+      {
         IP_CLIENT_OPEN(dvIS_SPX.PORT,'192.168.1.112',nIPPort,1)
 	WAIT 2
 	{
           OFF[dvTP,52]
-          ON[dvTP,PUSH_CHANNEL]       
+          ON[dvTP,PUSH_CHANNEL]
           SEND_STRING dvIS_SPX,"'GET /update?RMSMENU=RMS HTTP/1.1',$0D,$0A,'Host: 192.168.1.112:1234',$0D,$0A,'Connection: keep-alive',$0D,$0A"
         }
 	nAutoIS = 0
@@ -324,21 +324,21 @@ BUTTON_EVENT[dvTP,nchCLdvTPPanelButtons]
 	}
 	nAutoIS = 0
       }
-    }    
+    }
   }
 }
 CHANNEL_EVENT [dvTP,nchCLdvTPPanelButtons]
-{  
+{
   ON:
   {
     ON[vdvCLActions,nchCLdvTPButtons[GET_LAST(nchCLdvTPPanelButtons)]]
     send_string 0,"'chanEVT ON! [vdvCLActions,nchCLdvTPButtons[',ITOA(GET_LAST(nchCLdvTPPanelButtons)),']]'"
-  }  
+  }
   OFF:
   {
     OFF[vdvCLActions,nchCLdvTPButtons[GET_LAST(nchCLdvTPPanelButtons)]]
     send_string 0,"'chanEVT OFF! [vdvCLActions,nchCLdvTPButtons[',ITOA(GET_LAST(nchCLdvTPPanelButtons)),']]'"
-  }  
+  }
 }
 (***********************************************************)
 (*              THE ACTUAL PROGRAM GOES BELOW              *)

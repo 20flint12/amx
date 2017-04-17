@@ -233,9 +233,9 @@ VOLATILE INTEGER nButtonOutputUp[]			= { nButtonOutput1Up, nButtonOutput2Up, nBu
 VOLATILE INTEGER nButtonOutputDown[]		= { nButtonOutput1Down, nButtonOutput2Down, nButtonOutput3Down, nButtonOutput4Down, nButtonOutput5Down, nButtonOutput6Down, nButtonOutput7Down, nButtonOutput8Down }
 VOLATILE INTEGER nButtonGlobalPreset[]		= { nButtonGlobalPreset1, nButtonGlobalPreset2, nButtonGlobalPreset3, nButtonGlobalPreset4, nButtonGlobalPreset5, nButtonGlobalPreset6, nButtonGlobalPreset7, nButtonGlobalPreset8 }
 VOLATILE INTEGER nButtonWAVLoad[]			= { nButtonWAVLoad1, nButtonWAVLoad2, nButtonWAVLoad3, nButtonWAVLoad4, nButtonWAVLoad5, nButtonWAVLoad6, nButtonWAVLoad7, nButtonWAVLoad8 }
-VOLATILE INTEGER nButtonCrosspoint[]		= { nButtonCrosspointOut1In1, nButtonCrosspointOut1In2, nButtonCrosspointOut1In3, nButtonCrosspointOut1In4, nButtonCrosspointOut1In5, 
-												nButtonCrosspointOut1In6, nButtonCrosspointOut1In7, nButtonCrosspointOut1In8, nButtonCrosspointOut1In9, nButtonCrosspointOut1In10, 
-												nButtonCrosspointOut2In1, nButtonCrosspointOut2In2, nButtonCrosspointOut2In3, nButtonCrosspointOut2In4, nButtonCrosspointOut2In5, 
+VOLATILE INTEGER nButtonCrosspoint[]		= { nButtonCrosspointOut1In1, nButtonCrosspointOut1In2, nButtonCrosspointOut1In3, nButtonCrosspointOut1In4, nButtonCrosspointOut1In5,
+												nButtonCrosspointOut1In6, nButtonCrosspointOut1In7, nButtonCrosspointOut1In8, nButtonCrosspointOut1In9, nButtonCrosspointOut1In10,
+												nButtonCrosspointOut2In1, nButtonCrosspointOut2In2, nButtonCrosspointOut2In3, nButtonCrosspointOut2In4, nButtonCrosspointOut2In5,
 												nButtonCrosspointOut2In6, nButtonCrosspointOut2In7, nButtonCrosspointOut2In8, nButtonCrosspointOut2In9, nButtonCrosspointOut2In10 }
 VOLATILE INTEGER nButtonSource[]			= { nButtonSource0, nButtonSource1, nButtonSource2, nButtonSource3, nButtonSource4 }
 VOLATILE INTEGER nButtonMic[]				= { nButtonMicAll, nButtonMic1, nButtonMic2, nButtonMic3, nButtonMic4 }
@@ -317,7 +317,7 @@ DEFINE_FUNCTION SetPage(INTEGER nPage)
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-65,64:SLIDER'			// matrix mixer in 8 out 2
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-66,65:SLIDER'			// matrix mixer in 9 out 2
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-67,66:SLIDER'			// matrix mixer in 10 out 2
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-68,67:STATE'				// matrix mixer in 1 out 1 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-69,68:STATE'				// matrix mixer in 2 out 1 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-70,69:STATE'				// matrix mixer in 3 out 1 enable
@@ -338,41 +338,41 @@ DEFINE_FUNCTION SetPage(INTEGER nPage)
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-85,84:STATE'				// matrix mixer in 8 out 2 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-86,85:STATE'				// matrix mixer in 9 out 2 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-87,86:STATE'				// matrix mixer in 10 out 2 enable
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-92,91:LEVEL,0,4'			// source selector (0 - 4)
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-117,116:STATE'			// room combiner combination 1
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-118,117:STATE'			// room combiner combination 2
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-119,118:STATE'			// room combiner combination 3
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-120,119:STATE'			// room combiner combination 4
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-121,120:STATE'			// room combiner combination 5
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-122,121:STATE'			// room combiner combination 6
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-123,122:METER'			// stereo volume meters
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-124,123:SLIDER'			// stereo volume fader left
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-126,125:STATE'			// stereo volume enable left
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-132,131:STATE'			// mic mixer in 1 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-133,132:STATE'			// mic mixer in 2 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-134,133:STATE'			// mic mixer in 3 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-135,134:STATE'			// mic mixer in 4 enable
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-137,136:STATE'			// matrix mixer in 9 out 3 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-138,137:STATE'			// matrix mixer in 10 out 4 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-139,138:STATE'			// matrix mixer in 9 out 5 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-140,139:STATE'			// matrix mixer in 10 out 6 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-141,140:STATE'			// matrix mixer in 9 out 7 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-142,141:STATE'			// matrix mixer in 10 out 8 enable
-			
+
 			BREAK
 		}
 		CASE 2:
 		{
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-45,44:LEVEL,0,99'		// wav file number (0 - 99)
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-46,45:STATE'				// wav play / stop
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-48,47:SLIDER'			// matrix mixer in 1 out 1
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-49,48:SLIDER'			// matrix mixer in 2 out 1
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-50,49:SLIDER'			// matrix mixer in 3 out 1
@@ -393,7 +393,7 @@ DEFINE_FUNCTION SetPage(INTEGER nPage)
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-65,64:SLIDER'			// matrix mixer in 8 out 2
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-66,65:SLIDER'			// matrix mixer in 9 out 2
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-67,66:SLIDER'			// matrix mixer in 10 out 2
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-68,67:STATE'				// matrix mixer in 1 out 1 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-69,68:STATE'				// matrix mixer in 2 out 1 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-70,69:STATE'				// matrix mixer in 3 out 1 enable
@@ -414,31 +414,31 @@ DEFINE_FUNCTION SetPage(INTEGER nPage)
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-85,84:STATE'				// matrix mixer in 8 out 2 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-86,85:STATE'				// matrix mixer in 9 out 2 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-87,86:STATE'				// matrix mixer in 10 out 2 enable
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-92,91:LEVEL,0,4'			// source selector (0 - 4)
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-97,96:STATE'				// SPX bypass
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-98,97:LEVEL,0,100'		// SPX intensity
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-99,98:LEVEL,0,83'		// SPX delay
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-117,116:STATE'			// room combiner combination 1
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-118,117:STATE'			// room combiner combination 2
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-119,118:STATE'			// room combiner combination 3
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-120,119:STATE'			// room combiner combination 4
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-121,120:STATE'			// room combiner combination 5
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-122,121:STATE'			// room combiner combination 6
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-123,122:METER'			// stereo volume meters
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-124,123:SLIDER'			// stereo volume fader left
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-126,125:STATE'			// stereo volume enable left
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-132,131:STATE'			// mic mixer in 1 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-133,132:STATE'			// mic mixer in 2 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-134,133:STATE'			// mic mixer in 3 enable
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-135,134:STATE'			// mic mixer in 4 enable
-			
+
 			BREAK
 		}
 		CASE 3:
@@ -451,9 +451,9 @@ DEFINE_FUNCTION SetPage(INTEGER nPage)
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-7,6:METER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-8,7:METER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-9,8:METER'*/
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-10,9:METER'				// input meters
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-11,10:SLIDER'			// input levels
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-12,11:SLIDER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-13,12:SLIDER'
@@ -462,7 +462,7 @@ DEFINE_FUNCTION SetPage(INTEGER nPage)
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-16,15:SLIDER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-17,16:SLIDER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-18,17:SLIDER'
-			
+
 /*			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-19,18:METER'				// output detects
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-20,19:METER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-21,20:METER'
@@ -471,9 +471,9 @@ DEFINE_FUNCTION SetPage(INTEGER nPage)
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-24,23:METER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-25,24:METER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-26,25:METER'*/
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-27,26:METER'				// ouptput meters
-			
+
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-28,27:SLIDER'			// output levels
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-29,28:SLIDER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-30,29:SLIDER'
@@ -482,7 +482,7 @@ DEFINE_FUNCTION SetPage(INTEGER nPage)
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-33,32:SLIDER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-34,33:SLIDER'
 			SEND_COMMAND dvComms[1], 'AUDIOPROCADD-35,34:SLIDER'
-			
+
 			BREAK
 		}
 		CASE 4:

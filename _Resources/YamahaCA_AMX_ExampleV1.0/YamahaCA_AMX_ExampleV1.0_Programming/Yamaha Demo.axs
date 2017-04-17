@@ -562,8 +562,8 @@ VOLATILE DEV dvPanelProduct[]					= { dvPanelProduct1, dvPanelProduct2, dvPanelP
 													dvPanelProduct6, dvPanelProduct7, dvPanelProduct8, dvPanelProduct9, dvPanelProduct10,
 													dvPanelProduct11, dvPanelProduct12, dvPanelProduct13, dvPanelProduct14, dvPanelProduct15 }
 
-VOLATILE DEV vdvProduct[]						= { vdvProduct1, vdvProduct2, vdvProduct3, vdvProduct4, vdvProduct5, 
-													vdvProduct6, vdvProduct7, vdvProduct8, vdvProduct9, vdvProduct10, 
+VOLATILE DEV vdvProduct[]						= { vdvProduct1, vdvProduct2, vdvProduct3, vdvProduct4, vdvProduct5,
+													vdvProduct6, vdvProduct7, vdvProduct8, vdvProduct9, vdvProduct10,
 													vdvProduct11, vdvProduct12, vdvProduct13, vdvProduct14, vdvProduct15 }
 
 VOLATILE INTEGER nButtonTouchToStart			= 10
@@ -1417,7 +1417,7 @@ DEFINE_FUNCTION ParseFilePath()
 	{
 		cImageProtocol = '0'
 		cInput = RIGHT_STRING(cFilePath, LENGTH_STRING(cFilePath) - 7)
-		
+
 	}
 	ELSE IF (LEFT_STRING(cFilePath, 6) == 'ftp://')
 	{
@@ -1892,7 +1892,7 @@ BUTTON_EVENT[dvPanel, nButtonKeyboard]
 					cShiftOn = !cShiftOn
 				}
 				BREAK
-			}			
+			}
 			CASE 3:
 			{
 				cText = ''
@@ -1918,7 +1918,7 @@ BUTTON_EVENT[dvPanel, nButtonKeyboard]
 				}
 				cFilePath = cText
 				cText = ''
-				cFilePathActive = false	
+				cFilePathActive = false
 				ParseFilePath()
 				ImagesReload()
 				PanelRedraw()

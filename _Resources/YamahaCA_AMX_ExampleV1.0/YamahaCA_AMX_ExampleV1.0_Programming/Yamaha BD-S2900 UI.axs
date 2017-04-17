@@ -254,8 +254,8 @@ DEFINE_FUNCTION PanelFeedback()
 	//[dvPanel, nButtonForward] = (nPlayerStatus == $40)
 	//[dvPanel, nButtonReverse] = (nPlayerStatus == $50)
 	//[dvPanel, nButtonPowerToggle] = cPowerIsOn
-	[dvPanel, nButtonPowerOn] = ((nPlayerStatus == $00) || (nPlayerStatus == $02) || (nPlayerStatus == $03) || (nPlayerStatus == $04) || 
-								(nPlayerStatus == $09) || (nPlayerStatus == $0B) || (nPlayerStatus == $0D) || (nPlayerStatus == $0E) || 
+	[dvPanel, nButtonPowerOn] = ((nPlayerStatus == $00) || (nPlayerStatus == $02) || (nPlayerStatus == $03) || (nPlayerStatus == $04) ||
+								(nPlayerStatus == $09) || (nPlayerStatus == $0B) || (nPlayerStatus == $0D) || (nPlayerStatus == $0E) ||
 								(nPlayerStatus == $10) || (nPlayerStatus == $40) || (nPlayerStatus == $50) || (nPlayerStatus == $72))
 	[dvPanel, nButtonProductGraphic] = cGraphicOn
 }

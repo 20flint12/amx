@@ -5,24 +5,24 @@
 (*********************************************************************)
 /*
  *  Legal Notice :
- * 
+ *
  *     Copyright, AMX LLC, 2009
  *
  *     Private, proprietary information, the sole property of AMX LLC.  The
  *     contents, ideas, and concepts expressed herein are not to be disclosed
  *     except within the confines of a confidential relationship and only
  *     then on a need to know basis.
- * 
+ *
  *     Any entity in possession of this AMX Software shall not, and shall not
  *     permit any other person to, disclose, display, loan, publish, transfer
  *     (whether by sale, assignment, exchange, gift, operation of law or
  *     otherwise), license, sublicense, copy, or otherwise disseminate this
  *     AMX Software.
- * 
+ *
  *     This AMX Software is owned by AMX and is protected by United States
  *     copyright laws, patent laws, international treaty provisions, and/or
  *     state of Texas trade secret laws.
- * 
+ *
  *     Portions of this AMX Software may, from time to time, include
  *     pre-release code and such code may not be at the level of performance,
  *     compatibility and functionality of the final code. The pre-release code
@@ -30,7 +30,7 @@
  *     final release or certain features may not be generally released. AMX is
  *     not obligated to make or support any pre-release code. All pre-release
  *     code is provided "as is" with no warranties.
- * 
+ *
  *     This AMX Software is provided with restricted rights. Use, duplication,
  *     or disclosure by the Government is subject to restrictions as set forth
  *     in subparagraph (1)(ii) of The Rights in Technical Data and Computer
@@ -172,7 +172,7 @@ RMS_SYSTEM_MANUFACTURER[]    = 'AMX Corp.'
 RMS_SYSTEM_MODEL[]           = 'RMS'
 
 
-// Duet Device Feedback Channel: 
+// Duet Device Feedback Channel:
 //  Communication is established with device and device is initialized while channel is on
 RMS_DUET_CH_DATA_INITIALIZED = 252   (* - added in v3.3 to support Duet VDV API *)
 
@@ -316,7 +316,7 @@ DEFINE_FUNCTION CHAR[RMS_DUET_MAX_HDR_LEN] RMSDuetParseCmdHeader(CHAR cCmd[])
   // If we find the seperator, remove it from the command
   IF (FIND_STRING(cCmd,cSep,1) > 0)
   {
-    cTemp = REMOVE_STRING(cCmd,cSep,1) 
+    cTemp = REMOVE_STRING(cCmd,cSep,1)
     IF (LENGTH_STRING(cTemp))
       cTemp = LEFT_STRING(cTemp,LENGTH_STRING(cTemp)-LENGTH_STRING(cSep))
   }
@@ -336,7 +336,7 @@ DEFINE_FUNCTION CHAR[RMS_DUET_MAX_HDR_LEN] RMSDuetParseCmdHeader(CHAR cCmd[])
 // Notes  : Parses the strings sent to or from modules extracting the parameters.
 //          A single param is picked of the cmd string and removed, through the separator.
 //          The separator is NOT returned from the function.
-//          If the first character of the param is a double quote, the function will 
+//          If the first character of the param is a double quote, the function will
 //          remove up to (and including) the next double-quote and the separator without spaces.
 //          The double quotes will then be stripped from the parameter before it is returned.
 //          If the double-quote/separator sequence is not found, the function will remove up to (and including)
@@ -886,7 +886,7 @@ CHAR    cTempName[100]
     CASE RMS_PARAM_INITIALIZE: cData = "cData,'Init=',cInitial"
     DEFAULT:                   cData = "cData,cInitial"
   }
-	
+
 	// Add migration info?
 	IF (bMigrate == TRUE)
 	{
@@ -1098,10 +1098,10 @@ INTEGER nValue
         // determine which NI-series controller this is
         SELECT
         {
-	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-2000' || 
+	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-2000' ||
 	         sDevInfo.DEVICE_ID_STRING = 'NI-2100'):
 	  {
-	    // if the port number is within the range of 
+	    // if the port number is within the range of
 	    // physical IP ports on this model, return true
             IF (dvDPS.PORT >= 5 && dvDPS.PORT <= 8)
               RETURN TRUE;
@@ -1112,21 +1112,21 @@ INTEGER nValue
 	         sDevInfo.DEVICE_ID_STRING = 'NI-4000' ||
 	         sDevInfo.DEVICE_ID_STRING = 'NI-4100'):
 	  {
-	    // if the port number is within the range of 
+	    // if the port number is within the range of
 	    // physical IP ports on this model, return true
 	    IF (dvDPS.PORT >= 9 && dvDPS.PORT <= 16)
               RETURN TRUE;
 	  }
 	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-700'):
 	  {
-	    // if the port number is within the range of 
+	    // if the port number is within the range of
 	    // physical IP ports on this model, return true
 	    IF (dvDPS.PORT == 3)
               RETURN TRUE;
           }
 	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-900'):
 	  {
-	    // if the port number is within the range of 
+	    // if the port number is within the range of
 	    // physical IP ports on this model, return true
 	    IF (dvDPS.PORT >= 2 && dvDPS.PORT <= 4)
               RETURN TRUE;
@@ -1208,43 +1208,43 @@ INTEGER nValue
         // determine which NI-series controller this is
         SELECT
         {
-	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-2000' || 
+	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-2000' ||
 	         sDevInfo.DEVICE_ID_STRING = 'NI-2100'):
 	  {
-	    // if the port number is within the range of 
+	    // if the port number is within the range of
 	    // physical serial ports on this model, return true
 	    IF (dvDPS.PORT >= 1 && dvDPS.PORT <= 3)
 	      RETURN TRUE;
 	  }
 	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-3000' ||
-	         sDevInfo.DEVICE_ID_STRING = 'NI-3100' ||		 
+	         sDevInfo.DEVICE_ID_STRING = 'NI-3100' ||
 	         sDevInfo.DEVICE_ID_STRING = 'NI-4000' ||
 	         sDevInfo.DEVICE_ID_STRING = 'NI-4100'):
 	  {
-	    // if the port number is within the range of 
+	    // if the port number is within the range of
 	    // physical serial ports on this model, return true
 	    IF (dvDPS.PORT >= 1 && dvDPS.PORT <= 7)
 	      RETURN TRUE;
 	  }
 	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-3101'):
 	  {
-	    // if the port number is within the range of 
+	    // if the port number is within the range of
 	    // physical serial ports on this model, return true
 	    IF (dvDPS.PORT >= 1 && dvDPS.PORT <= 6)
 	      RETURN TRUE;
 	  }
 	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-700'):
 	  {
-	    // if the port number is within the range of 
+	    // if the port number is within the range of
 	    // physical serial ports on this model, return true
-  	    IF (dvDPS.PORT >= 1 && dvDPS.PORT <= 2)  
+  	    IF (dvDPS.PORT >= 1 && dvDPS.PORT <= 2)
 	      RETURN TRUE;
 	  }
 	  ACTIVE(sDevInfo.DEVICE_ID_STRING = 'NI-900'):
 	  {
-	    // if the port number is within the range of 
+	    // if the port number is within the range of
 	    // physical serial ports on this model, return true
-  	    IF (dvDPS.PORT == 1)  
+  	    IF (dvDPS.PORT == 1)
 	      RETURN TRUE;
 	  }
         }
