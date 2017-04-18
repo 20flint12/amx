@@ -45,47 +45,7 @@ STRUCTURE _Alarm
 (***********************************************************)
 DEFINE_VARIABLE
 
-
-
 _Alarm AlarmList[500] 
-/*=
-{
-   {1, 'uj155426367', 'JOHN', 'DOE', '0.01'},    
-   {2, 'gh155426367', 'JOHN', 'DOE', '0.01'}    
-}
-*/
-
-/*
-DEFINE_FUNCTION CHAR[2000] AlarmText(INTEGER iAlarmNo)
-{
-    STACK_VAR CHAR cTemp[2000]
-    STACK_VAR INTEGER nLoop
-    
-    // Loop the command and escape it
-    FOR (nLoop = 1; nLoop <= LENGTH_ARRAY(AlarmList); nLoop++)
-    //for (loop = 1; loop <= max_length_array(controllerProperties); loop++)
-    {
-	Send_String 0,"'######### nLoop= ', ITOA(nLoop)"
-    
-	// Grab characters and process it based on state machine
-	IF( AlarmList[nLoop].iAlarmNo == iAlarmNo )
-	{
-	    cTemp =  AlarmList[nLoop].cAlarmTextDisplay
-	    Send_String 0,"'######### iAlarmNo= ', ITOA(iAlarmNo), ' ****************', cTemp"
-	    
-	    // cTemp is done
-	    RETURN cTemp;
-	}    
-    }    
-    
-    RETURN '--- UNKNOUN CODE ---';
-}
-*/
-
-
-
-
-
 
 
 

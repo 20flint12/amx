@@ -134,14 +134,22 @@
 <FilePathName>_Includes\Misc.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="TP4"><Identifier>myNewPanel</Identifier>
-<FilePathName>_UI\myNewPanel.TP4</FilePathName>
+<File CompileType="None" Type="TP4"><Identifier>TPanel_iPAD</Identifier>
+<FilePathName>_UI\TPanel_iPAD.TP4</FilePathName>
 <Comments></Comments>
-<DeviceMap DevAddr="Panel"><DevName>Panel</DevName>
+<DeviceMap DevAddr="dvPanel"><DevName>dvPanel</DevName>
 </DeviceMap>
+</File>
+<File CompileType="Netlinx" Type="Source"><Identifier>Lutron_routines</Identifier>
+<FilePathName>Lutron_routines.axs</FilePathName>
+<Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="MasterSrc"><Identifier>NewModbusProject</Identifier>
 <FilePathName>NewModbusProject.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Source"><Identifier>SubRoutines</Identifier>
+<FilePathName>SubRoutines.axs</FilePathName>
 <Comments></Comments>
 </File>
 </System>
@@ -161,10 +169,6 @@
 <Comments></Comments>
 <File CompileType="Netlinx" Type="Module"><Identifier>module ModBus Master</Identifier>
 <FilePathName>module ModBus Master.axs</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Source"><Identifier>SubRoutines</Identifier>
-<FilePathName>SubRoutines.axs</FilePathName>
 <Comments></Comments>
 </File>
 </System>

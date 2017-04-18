@@ -124,6 +124,8 @@ ch_hotwater_mode_economy	= 145
 ch_hotwater_mode_normal		= 146
 ch_hotwater_mode_luxury		= 147
 
+ch_alarm_message 		= 160
+
 
 addr_outdoor_temperature	= 1
 addr_room_temperature		= 2
@@ -159,7 +161,7 @@ VOLATILE INTEGER VAR_PREP_ROOM_TEMPERATURE_SETPOINT
 
 PERSISTENT INTEGER VAR_HOT_WATER_MODE
 PERSISTENT INTEGER VAR_COMFORT_HOTWATER_TEMPERATURE
-
+VOLATILE INTEGER VAR_PREP_COMFORT_HOTWATER_TEMPERATURE
 
 
 // Touch Panel Buttons
@@ -185,9 +187,9 @@ VOLATILE INTEGER controlPanelButtons[] =
 
 SINTEGER CURR_MINUTE
 SINTEGER LAST_MINUTE
-SINTEGER TIMER_MINUTES
 
-SINTEGER SET_MINUTES
+VOLATILE SINTEGER TIMER_MINUTES
+VOLATILE SINTEGER SET_MINUTES
 
 		
 		   
@@ -326,7 +328,6 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 		//send_string 0, "'33333333333333333'";
 		[dvPanel, ch_heating_temperature_view] = 0;
 	    }		    
-	    //TemperatureText(dvPanel, 8, VAR_ROOM_TEMPERATURE_SETPOINT);
 	    TemperatureText(dvPanel, addr_room_temperature_setpoint, VAR_PREP_ROOM_TEMPERATURE_SETPOINT)	    
 	    
 	}	
@@ -346,9 +347,20 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    // ****************************************************************	    
 	}	
 	Active (Function == 3 && Address == REG_COMFORT_HOTWATER_TEMPERATURE)  : {
-	    VAR_COMFORT_HOTWATER_TEMPERATURE  = Value 	    
-	    cText = "ITOA(VAR_COMFORT_HOTWATER_TEMPERATURE),'°C'"     
-	    SEND_COMMAND dvPanel, "'^TXT-5,0,', cText"
+	    VAR_COMFORT_HOTWATER_TEMPERATURE  = Value 
+	    if( VAR_PREP_COMFORT_HOTWATER_TEMPERATURE == 0 ) { VAR_PREP_COMFORT_HOTWATER_TEMPERATURE = VAR_COMFORT_HOTWATER_TEMPERATURE; }	    
+	    
+    	    if( VAR_PREP_COMFORT_HOTWATER_TEMPERATURE == VAR_COMFORT_HOTWATER_TEMPERATURE ) 
+	    { 
+		[dvPanel, ch_hotwater_temperature_view] = 1;
+	    }
+	    else 
+	    { 
+		[dvPanel, ch_hotwater_temperature_view] = 0;
+	    }		    
+	    cText = "ITOA(VAR_PREP_COMFORT_HOTWATER_TEMPERATURE),'°C'"     
+	    SEND_COMMAND dvPanel, "'^TXT-5,0,', cText"	    
+	    // ****************************************************************
 	}
 	Active (Function == 3 && Address == REG_BT10) : {
 	    VAR_BT10 = Value 
@@ -369,12 +381,14 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    if( VAR_ALARM == 0 )
 	    {
 		//SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_ALARM)"
-		[dvPanel, addr_alarm_message] = 0;
+		[dvPanel, ch_alarm_message] = 0;
+		cText = "'Code:', ITOA(VAR_ALARM)"
+		SimpleText(dvPanel, addr_alarm_message, cText)
 	    }
 	    else
 	    {
 		//SEND_COMMAND dvPanel, "'^TXT-9,0,The boiler has reported an error please check your equip. Code:', ITOA(VAR_ALARM)"
-		[dvPanel, addr_alarm_message] = 1;
+		[dvPanel, ch_alarm_message] = 1;
 		cText = "'Code:', ITOA(VAR_ALARM), ' ', AlarmList[VAR_ALARM].cAlarmTextDisplay"
 		SimpleText(dvPanel, addr_alarm_message, cText)
 	    }	    
@@ -641,57 +655,74 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 	    { 	    	    	    		
 		send_string 0, "'ch_heating_1_hour'";
 		SET_MINUTES = 5;
-		TIMER_MINUTES = 0;
+		TIMER_MINUTES = 1;
 		[dvPanel, ch_heating_1_hour] = 1;
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }
 	    CASE ch_heating_2_hour:
 	    {
 		send_string 0, "'ch_heating_2_hour'";
 		SET_MINUTES = 10;
-		TIMER_MINUTES = 0;
+		TIMER_MINUTES = 1;
 		[dvPanel, ch_heating_2_hour] = 1;
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }
 	    CASE ch_heating_5_hour:
 	    {
 		send_string 0, "'ch_heating_5_hour'";
 		SET_MINUTES = 20;
-		TIMER_MINUTES = 0;
+		TIMER_MINUTES = 1;
 		[dvPanel, ch_heating_5_hour] = 1;
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }	    	    
 
 	    
 	    // REG_COMFORT_HOTWATER_TEMPERATURE ###############################
 	    CASE ch_hotwater_temperature_ok:
 	    { 	    	    
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE, 55)		
+		if( VAR_PREP_COMFORT_HOTWATER_TEMPERATURE != 0 ) 
+		{
+		    send_string 0, "'ch_hotwater_temperature_ok'";
+		    //Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE, 55)		
+		    Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE, VAR_PREP_COMFORT_HOTWATER_TEMPERATURE);
+		}
 	    }
 	    CASE ch_hotwater_temperature_up:
 	    { 	    	    
-		send_string 0, "'ch_hotwater_temperature_up'";
-		IF( (VAR_COMFORT_HOTWATER_TEMPERATURE + 1) >= 65) { VAR_COMFORT_HOTWATER_TEMPERATURE = 65 }
-		ELSE { VAR_COMFORT_HOTWATER_TEMPERATURE = (VAR_COMFORT_HOTWATER_TEMPERATURE + 1) } 
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE,VAR_COMFORT_HOTWATER_TEMPERATURE)		
-	    }
+		if( VAR_PREP_COMFORT_HOTWATER_TEMPERATURE != 0 ) 
+		{
+		    IF( (VAR_PREP_COMFORT_HOTWATER_TEMPERATURE + 1) >= 65) { VAR_PREP_COMFORT_HOTWATER_TEMPERATURE = 65 }
+		    ELSE { VAR_PREP_COMFORT_HOTWATER_TEMPERATURE = (VAR_PREP_COMFORT_HOTWATER_TEMPERATURE + 1) } 
+		    SEND_COMMAND dvPanel, "'^TXT-5,0,', ITOA(VAR_PREP_COMFORT_HOTWATER_TEMPERATURE),'°C'"	  
+		    if( VAR_PREP_COMFORT_HOTWATER_TEMPERATURE == VAR_COMFORT_HOTWATER_TEMPERATURE ) { [dvPanel, ch_hotwater_temperature_view] = 1 }
+		    else { [dvPanel, ch_hotwater_temperature_view] = 0 }
+		}
+	    }	    
 	    CASE ch_hotwater_temperature_down:
 	    {
-		send_string 0, "'ch_hotwater_temperature_down'";
-		IF( (VAR_COMFORT_HOTWATER_TEMPERATURE - 1) <= 45) { VAR_COMFORT_HOTWATER_TEMPERATURE = 45 }
-		ELSE { VAR_COMFORT_HOTWATER_TEMPERATURE = (VAR_COMFORT_HOTWATER_TEMPERATURE - 1) } 
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_COMFORT_HOTWATER_TEMPERATURE, VAR_COMFORT_HOTWATER_TEMPERATURE)		
+		if( VAR_PREP_COMFORT_HOTWATER_TEMPERATURE != 0 ) 
+		{
+		    IF( (VAR_PREP_COMFORT_HOTWATER_TEMPERATURE - 1) <= 45) { VAR_PREP_COMFORT_HOTWATER_TEMPERATURE = 45 }
+		    ELSE { VAR_PREP_COMFORT_HOTWATER_TEMPERATURE = (VAR_PREP_COMFORT_HOTWATER_TEMPERATURE - 1) } 
+		    SEND_COMMAND dvPanel, "'^TXT-5,0,', ITOA(VAR_PREP_COMFORT_HOTWATER_TEMPERATURE),'°C'"	  
+		    if( VAR_PREP_COMFORT_HOTWATER_TEMPERATURE == VAR_COMFORT_HOTWATER_TEMPERATURE ) { [dvPanel, ch_hotwater_temperature_view] = 1 }
+		    else { [dvPanel, ch_hotwater_temperature_view] = 0 }
+		}	    
 	    }
+	    
 	    // REG_HOT_WATER_MODE #############################################
 	    CASE ch_hotwater_mode_economy:
 	    { 	    	    	    
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0)		
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0);
 		send_string 0, "'btn_economy'";
 	    }
 	    CASE ch_hotwater_mode_normal:
 	    {
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 1)		
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 1);		
 	    }
 	    CASE ch_hotwater_mode_luxury:
 	    {
-		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)		
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2);		
 	    }	    	    
 	    
 	}    
@@ -871,13 +902,18 @@ Wait 13
 
     Send_String 0,"'******** CURR_MINUTE= ',ITOA(CURR_MINUTE),' ****************',ITOA(TIMER_MINUTES)"
    
-    SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"	
-
+   
     IF( TIMER_MINUTES >= SET_MINUTES )
     {
 	[dvPanel, ch_heating_1_hour] = 0;
 	[dvPanel, ch_heating_2_hour] = 0;
-	[dvPanel, ch_heating_5_hour] = 0;	
+	[dvPanel, ch_heating_5_hour] = 0;
+	SEND_COMMAND dvPanel, "'^TXT-20,0,', ' stopped'"
+	Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0) // Economy		    
+    }
+    ELSE
+    {
+	SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"	
     }
 }
 
