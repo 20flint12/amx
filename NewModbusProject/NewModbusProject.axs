@@ -163,6 +163,8 @@ PERSISTENT INTEGER VAR_HOT_WATER_MODE
 PERSISTENT INTEGER VAR_COMFORT_HOTWATER_TEMPERATURE
 VOLATILE INTEGER VAR_PREP_COMFORT_HOTWATER_TEMPERATURE
 
+PERSISTENT INTEGER VAR_TERM_LUXURY
+
 
 // Touch Panel Buttons
 VOLATILE INTEGER controlPanelButtons[] =
@@ -181,15 +183,17 @@ VOLATILE INTEGER controlPanelButtons[] =
     ch_hotwater_temperature_view,
     ch_hotwater_mode_economy,
     ch_hotwater_mode_normal,
-    ch_hotwater_mode_luxury
+    ch_hotwater_mode_luxury,
+    
+    ch_alarm_message
 }		  
 		
 
 SINTEGER CURR_MINUTE
 SINTEGER LAST_MINUTE
 
-VOLATILE SINTEGER TIMER_MINUTES
-VOLATILE SINTEGER SET_MINUTES
+PERSISTENT SINTEGER TIMER_MINUTES
+PERSISTENT SINTEGER SET_MINUTES
 
 		
 		   
@@ -344,6 +348,18 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 
 	    if( VAR_HOT_WATER_MODE == 2 ) { [dvPanel,ch_hotwater_mode_luxury] = 1 }
 	    else { [dvPanel,ch_hotwater_mode_luxury] = 0 }
+	    
+	    IF( VAR_TERM_LUXURY == 1 ) [dvPanel, ch_heating_1_hour] = 1;
+	    ELSE 
+	    IF( VAR_TERM_LUXURY == 2 ) [dvPanel, ch_heating_2_hour] = 1;
+	    ELSE 
+	    IF( VAR_TERM_LUXURY == 3 ) [dvPanel, ch_heating_5_hour] = 1;
+	    ELSE
+	    {
+		[dvPanel, ch_heating_1_hour] = 0;
+		[dvPanel, ch_heating_2_hour] = 0;
+		[dvPanel, ch_heating_5_hour] = 0;
+	    }	     
 	    // ****************************************************************	    
 	}	
 	Active (Function == 3 && Address == REG_COMFORT_HOTWATER_TEMPERATURE)  : {
@@ -382,8 +398,8 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    {
 		//SEND_COMMAND dvPanel, "'^TXT-9,0,', ITOA(VAR_ALARM)"
 		[dvPanel, ch_alarm_message] = 0;
-		cText = "'Code:', ITOA(VAR_ALARM)"
-		SimpleText(dvPanel, addr_alarm_message, cText)
+		//cText = "'Code:', ITOA(VAR_ALARM)"
+		//SimpleText(dvPanel, addr_alarm_message, cText)
 	    }
 	    else
 	    {
@@ -655,27 +671,29 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 	    { 	    	    	    		
 		send_string 0, "'ch_heating_1_hour'";
 		SET_MINUTES = 5;
-		TIMER_MINUTES = 1;
+		TIMER_MINUTES = 0;		
 		[dvPanel, ch_heating_1_hour] = 1;
+		VAR_TERM_LUXURY = 1;
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }
 	    CASE ch_heating_2_hour:
 	    {
 		send_string 0, "'ch_heating_2_hour'";
 		SET_MINUTES = 10;
-		TIMER_MINUTES = 1;
+		TIMER_MINUTES = 0;
 		[dvPanel, ch_heating_2_hour] = 1;
+		VAR_TERM_LUXURY = 2;
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }
 	    CASE ch_heating_5_hour:
 	    {
 		send_string 0, "'ch_heating_5_hour'";
 		SET_MINUTES = 20;
-		TIMER_MINUTES = 1;
+		TIMER_MINUTES = 0;
 		[dvPanel, ch_heating_5_hour] = 1;
+		VAR_TERM_LUXURY = 3;
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }	    	    
-
 	    
 	    // REG_COMFORT_HOTWATER_TEMPERATURE ###############################
 	    CASE ch_hotwater_temperature_ok:
@@ -714,7 +732,7 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 	    CASE ch_hotwater_mode_economy:
 	    { 	    	    	    
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0);
-		send_string 0, "'btn_economy'";
+		//send_string 0, "'btn_economy'";
 	    }
 	    CASE ch_hotwater_mode_normal:
 	    {
@@ -807,7 +825,6 @@ send_string 0,"'Programm starting... Description: ',PROGRAM_DESCRIPTION"
 
 VAR_PREP_ROOM_TEMPERATURE_SETPOINT = 0
 
-SET_MINUTES = 0
 
 (***********************************************************)
 (*            THE ACTUAL PROGRAM GOES BELOW                *)
@@ -890,21 +907,27 @@ Wait 300 'Modbus Requests'
 
 
 
-Wait 13
+Wait 300
 {
-    CURR_MINUTE = TIME_TO_MINUTE (TIME)
-    
-    IF( CURR_MINUTE != LAST_MINUTE )
+    IF( SET_MINUTES != -1 )
     {
-	LAST_MINUTE = CURR_MINUTE;
-	TIMER_MINUTES = TIMER_MINUTES + 1
+	CURR_MINUTE = TIME_TO_MINUTE (TIME)
+	
+	IF( CURR_MINUTE != LAST_MINUTE )
+	{
+	    LAST_MINUTE = CURR_MINUTE;
+	    TIMER_MINUTES = TIMER_MINUTES + 1
+	}    
+	Send_String 0,"'******** CURR_MINUTE= ',ITOA(CURR_MINUTE),' ****************',ITOA(TIMER_MINUTES)"
+    }   
+    ELSE
+    {
+	VAR_TERM_LUXURY = 0;
     }
-
-    Send_String 0,"'******** CURR_MINUTE= ',ITOA(CURR_MINUTE),' ****************',ITOA(TIMER_MINUTES)"
-   
    
     IF( TIMER_MINUTES >= SET_MINUTES )
     {
+	SET_MINUTES = -1	// stop timer
 	[dvPanel, ch_heating_1_hour] = 0;
 	[dvPanel, ch_heating_2_hour] = 0;
 	[dvPanel, ch_heating_5_hour] = 0;
