@@ -672,8 +672,9 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 		send_string 0, "'ch_heating_1_hour'";
 		SET_MINUTES = 5;
 		TIMER_MINUTES = 0;		
-		[dvPanel, ch_heating_1_hour] = 1;
 		VAR_TERM_LUXURY = 1;
+		[dvPanel, ch_heating_1_hour] = 1;
+		SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }
 	    CASE ch_heating_2_hour:
@@ -681,8 +682,9 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 		send_string 0, "'ch_heating_2_hour'";
 		SET_MINUTES = 10;
 		TIMER_MINUTES = 0;
-		[dvPanel, ch_heating_2_hour] = 1;
 		VAR_TERM_LUXURY = 2;
+		[dvPanel, ch_heating_2_hour] = 1;
+		SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }
 	    CASE ch_heating_5_hour:
@@ -690,8 +692,9 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 		send_string 0, "'ch_heating_5_hour'";
 		SET_MINUTES = 20;
 		TIMER_MINUTES = 0;
-		[dvPanel, ch_heating_5_hour] = 1;
 		VAR_TERM_LUXURY = 3;
+		[dvPanel, ch_heating_5_hour] = 1;
+		SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }	    	    
 	    
@@ -919,25 +922,30 @@ Wait 300
 	    TIMER_MINUTES = TIMER_MINUTES + 1
 	}    
 	Send_String 0,"'******** CURR_MINUTE= ',ITOA(CURR_MINUTE),' ****************',ITOA(TIMER_MINUTES)"
+
+	IF( TIMER_MINUTES >= SET_MINUTES )
+	{
+	    SET_MINUTES = -1;	// stop timer
+
+	    SEND_COMMAND dvPanel, "'^TXT-20,0,', ' stopped'"
+	    Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0) // Economy
+
+    	    [dvPanel, ch_heating_1_hour] = 0;
+	    [dvPanel, ch_heating_2_hour] = 0;
+	    [dvPanel, ch_heating_5_hour] = 0;
+	}
+	ELSE
+	{
+	    SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' / ', ITOA(SET_MINUTES), ' minutes'"	
+	}	
+	
     }   
     ELSE
     {
 	VAR_TERM_LUXURY = 0;
     }
    
-    IF( TIMER_MINUTES >= SET_MINUTES )
-    {
-	SET_MINUTES = -1	// stop timer
-	[dvPanel, ch_heating_1_hour] = 0;
-	[dvPanel, ch_heating_2_hour] = 0;
-	[dvPanel, ch_heating_5_hour] = 0;
-	SEND_COMMAND dvPanel, "'^TXT-20,0,', ' stopped'"
-	Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0) // Economy		    
-    }
-    ELSE
-    {
-	SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"	
-    }
+
 }
 
 
