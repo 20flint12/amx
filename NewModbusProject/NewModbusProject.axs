@@ -405,7 +405,8 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    {
 		//SEND_COMMAND dvPanel, "'^TXT-9,0,The boiler has reported an error please check your equip. Code:', ITOA(VAR_ALARM)"
 		[dvPanel, ch_alarm_message] = 1;
-		cText = "'Code:', ITOA(VAR_ALARM), ' ', AlarmList[VAR_ALARM].cAlarmTextDisplay"
+		//cText = "'Code:', ITOA(VAR_ALARM), ' ', AlarmList[VAR_ALARM].cAlarmTextDisplay"
+		cText = "'Code:', ITOA(VAR_ALARM), ' The boiler has reported an error!'"
 		SimpleText(dvPanel, addr_alarm_message, cText)
 	    }	    
 	}
@@ -910,7 +911,7 @@ Wait 300 'Modbus Requests'
 
 
 
-Wait 300
+Wait 200
 {
     IF( SET_MINUTES != -1 )
     {
@@ -943,6 +944,9 @@ Wait 300
     ELSE
     {
 	VAR_TERM_LUXURY = 0;
+	[dvPanel, ch_heating_1_hour] = 0;
+	[dvPanel, ch_heating_2_hour] = 0;
+	[dvPanel, ch_heating_5_hour] = 0;
     }
    
 
