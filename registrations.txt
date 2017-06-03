@@ -56,3 +56,9 @@ Your 21 day trial for a TPControl Device License will begin when you activate yo
 
 
 
+"Anton Kuchin"
+"gmail": "20lustrat14@gmail.com" 88888878
+
+Tablet
+Thank you for requesting a trial token.
+Your token: TPC-0-QKKP-NBBS
