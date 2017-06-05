@@ -1,5 +1,5 @@
-MODULE_NAME='Kaleidescape' (dev m_KPort, dev m_Interface[], integer m_VT[32], 
-			    char m_UIPages[20][], char m_UIPopups[10][], 
+MODULE_NAME='Kaleidescape' (dev m_KPort, dev m_Interface[], integer m_VT[32],
+			    char m_UIPages[20][], char m_UIPopups[10][],
 			    char m_UIImages[3][], char m_UIIcons[3])
 /*
  *  m_VT is an array of variable text fields on the touch
@@ -25,39 +25,39 @@ MODULE_NAME='Kaleidescape' (dev m_KPort, dev m_Interface[], integer m_VT[32],
  *
  *  m_UIIcons are touch panel icon number used for SATP.
  *
- */			    
+ */
 
 /*******************************************************************************************
  * Module Information
  *******************************************************************************************/
 
-/*     
+/*
  * (c) 2004-2014 Kaleidescape Inc.  Please see legal notice below.
- * 
- * Version 8.4.0       
- * Dated Feb 27, 2014  
- * 
+ *
+ * Version 8.4.0
+ * Dated Feb 27, 2014
+ *
  * This module has been created and supported by Kaleidescape Inc.
  * This module is supported directly by Kaleidescape Inc.  Please
  * direct all inquiries regarding this module to  Kaleidescape support
  * at (650) 625-6160.  AMX does not support this module itself.
- * 
+ *
  * ----------------------------------------------------------------------
- * 
+ *
  * LEGAL NOTICE
- *     (c) 2004-2014 Kaleidescape Inc. This Source Code is the intellectual 
- * property of Kaleidescape, Inc. Kaleidescape grants the non-exclusive 
- * right to modify and/or compile and/or compress the Source Code, and 
- * upload such modified and/or compiled and/or compressed Source Code 
- * to control systems that control at least one licensed Kaleidescape 
- * System. No right is granted to otherwise copy, reproduce, modify, 
- * upload, download, transmit, or distribute the Source Code, or 
- * derivative works, in any way. The Source Code, and derivative works, 
- * are protected by copyright, trade secret, and other intellectual 
- * property laws and by international treaties, which provide rights 
+ *     (c) 2004-2014 Kaleidescape Inc. This Source Code is the intellectual
+ * property of Kaleidescape, Inc. Kaleidescape grants the non-exclusive
+ * right to modify and/or compile and/or compress the Source Code, and
+ * upload such modified and/or compiled and/or compressed Source Code
+ * to control systems that control at least one licensed Kaleidescape
+ * System. No right is granted to otherwise copy, reproduce, modify,
+ * upload, download, transmit, or distribute the Source Code, or
+ * derivative works, in any way. The Source Code, and derivative works,
+ * are protected by copyright, trade secret, and other intellectual
+ * property laws and by international treaties, which provide rights
  * and obligations in addition to the rights and obligations set forth here.
  */
- 
+
 /*******************************************************************************************
  * Compiler Directives
  *******************************************************************************************/
@@ -69,7 +69,7 @@ DEFINE_VARIABLE
 #ELSE
   constant char ModuleDescription[] = 'Kaleidescape Player AMX Module 8.4.0        (OSD only) Release date: Feb 27, 2014   '
 #END_IF
- 
+
 /*******************************************************************************************
  * Constant Definitions
  *******************************************************************************************/
@@ -90,7 +90,7 @@ CLEAR 			= 0
 UNKNOWN			= 254	//used for setting a value that's not TRUE (1) or FALSE (0)
 
 /*
- * All feedback is offset by this amount.  Thus, the Play button is 1, the 
+ * All feedback is offset by this amount.  Thus, the Play button is 1, the
  * Play feedback is 1+FEEDBACK_OFFSET
  */
 FEEDBACK_OFFSET		= 1000
@@ -134,11 +134,11 @@ BTN_SPECIAL_BLURAY_STOP = 38
 /*
  During Blu-ray playback, sends the "Blu-ray Stop" command to the disc that is playing.
  For all other content, it behaves as a Kaleidescape Stop command.
-CAUTION: Using this command could trap the user.  
+CAUTION: Using this command could trap the user.
  Depending on how the disc was authored, this command may not return the user to a Kaleidescape movie
- place like the STOP OR CANCEL command; some discs may instead use it for accessing special features.  
- If used as the only Stop command, the remote must provide another mechanism to get to the 
- Kaleidescape menu or a Kaleidescape movie place to prevent the user getting "trapped" in Blu-ray 
+ place like the STOP OR CANCEL command; some discs may instead use it for accessing special features.
+ If used as the only Stop command, the remote must provide another mechanism to get to the
+ Kaleidescape menu or a Kaleidescape movie place to prevent the user getting "trapped" in Blu-ray
  playback.
 */
 
@@ -199,7 +199,7 @@ BTN_GREEN		= 96
 BTN_BLUE		= 97
 BTN_YELLOW		= 98
 
-/* 
+/*
  * The following buttons are defined for controlling in a stand alone state (SATP) using a text
  * list.  These commands do not directly send commands and are thus parsed differently.
  */
@@ -276,14 +276,14 @@ BTN_RETRY_CONNECTION_ATTEMPT = 151
 
 //These channels are used internally as flags on the interface
 CHN_PAGE_OFFSET		= 800 /*
-			       * Set high to instruct the interface to go to the corresponding 
-			       * page in the m_UIPages array. pulse[interface,801] will send 
+			       * Set high to instruct the interface to go to the corresponding
+			       * page in the m_UIPages array. pulse[interface,801] will send
 			       * the touch panel to m_UIPages[1] if it is defined
 			       */
 CHN_POPUP_OFFSET	= 850 /*
-			       * Set high to instruct the interface to open the corresponding 
-			       * popup in the m_UIPopups array. on[interface,851] will open 
-			       * m_UIPopups[1] and off[interface,851] will close m_UIPopups[1] 
+			       * Set high to instruct the interface to open the corresponding
+			       * popup in the m_UIPopups array. on[interface,851] will open
+			       * m_UIPopups[1] and off[interface,851] will close m_UIPopups[1]
 			       * (if defined).
 			       */
 
@@ -298,13 +298,13 @@ CHN_LIST_ACTIVE		= 911 //set high when a get_list is requested, but blocked by t
 CHN_LIST_PENDING	= 912 //timeout indicating that we're receiving get_list results.
 
 //when this goes low, runs get_list - used to compress multiple requests into 1
-CHN_GET_LIST_DELAYED	= 913 
+CHN_GET_LIST_DELAYED	= 913
 
 //When this is high, override following the now playing in the Now Playing place
-CHN_OVERRIDE_NP_FOLLOW	= 914 
+CHN_OVERRIDE_NP_FOLLOW	= 914
 
 //When this goes low, the interface pulls the highlighted details, if available
-CHN_RESET_HIGHLIGHTED_DETAILS = 915 
+CHN_RESET_HIGHLIGHTED_DETAILS = 915
 
 //Pulse this channel to refresh the interface
 CHN_REFRESH		= 999
@@ -490,7 +490,7 @@ SET_TIMELINE		= 5
 DEFINE_TYPE
 
 // Structure to hold details information
-structure STRUCT_Details	
+structure STRUCT_Details
 {
     char 	library[MAX_RESPONSE_ARG_LEN]
     char 	title[MAX_RESPONSE_ARG_LEN]
@@ -520,13 +520,13 @@ structure STRUCT_BrowseNode
     char 	moved
     integer 	position
     integer 	selection
-    
+
     //Pointers to implement the doubly-linked list.
     integer 	previousNode //accessed when back is pressed
     integer	nextNode //to ensure this node is the right one when moving back
 }
 
-//an array to define a node array user.  
+//an array to define a node array user.
 structure STRUCT_BrowseNodeStack
 {
     integer 	current //pointer to the top node in the stack
@@ -536,7 +536,7 @@ structure STRUCT_BrowseNodeStack
 
 structure STRUCT_ControlID
 {
-/* 
+/*
  * The Kaleidescape_Device_ID is a two-digit number assigned to all Kaleidescape
  * devices.  You can use device IDs to route messages through the
  * Kaleidescape system, controlling every device using only a single
@@ -544,8 +544,8 @@ structure STRUCT_ControlID
  * connected to.  You can set device IDs using the installer web utility.
  */
     char deviceId[13]
-    
-/* 
+
+/*
  * The stream ID defines what audio output port to control.  If set to 0,
  * then the OSD is controlled.  If set to any other number, the interface
  * will use the text mode (SATP).  If the intent is to use the text mode on
@@ -553,9 +553,9 @@ structure STRUCT_ControlID
  * the stream ID indicates which audio output will be controlled
  */
     char zoneId
-    
-/* 
- * The sequence ID allows multiple virtual devices to control a single 
+
+/*
+ * The sequence ID allows multiple virtual devices to control a single
  * stream.  This is particularly useful for SATP control, where 2 different
  * touch panels have different numbers of lines shown on their display.
  * SequenceID defaults to 1, and can be set between 1 and 9
@@ -637,7 +637,7 @@ volatile integer		SentTraceInfo
 //volatile Kaleidescape_Stream_ID[MAX_NUMBER_OF_PLAYERS]
 volatile STRUCT_ControlID 	KaleidescapeID[MAX_NUMBER_OF_PLAYERS]
 
-/* 
+/*
  * Keep track of the connected device to determine if we need to provide
  * additional redirection commands and if we need to find the actual device
  * ID when the interface is set to 01, but the device's ID is actually different.
@@ -645,10 +645,10 @@ volatile STRUCT_ControlID 	KaleidescapeID[MAX_NUMBER_OF_PLAYERS]
 volatile char 			ConnectedDeviceID[2]
 volatile char			ConnectedDeviceSN[13]
 
-/* 
+/*
  * DeviceIndirect is used to indicate that the Kaleidescape being
  * controlled is not the one directly connected to, and that messages
- * will have to be routed.  When this is high, this module will set 
+ * will have to be routed.  When this is high, this module will set
  * up the interface to route events through our connected port
  * Setting is memorized per possible player
  */
@@ -668,48 +668,48 @@ volatile STRUCT_Details 	ContentDetail
  * and will not be compiled if SATP is not desired
  */
 #IF_DEFINED SATP
-    /* 
-     * This array of structures is used to remember the command and 
+    /*
+     * This array of structures is used to remember the command and
      * action to take for every line on a text list.  One set is needed
-     * per player. 
+     * per player.
      */
     volatile STRUCT_ListItem 	List[MAX_NUMBER_OF_PLAYERS][MAX_LIST_WINDOW_LENGTH]
-    
-    /* 
+
+    /*
      * Keep track of the number of lines available to display on each
      * virtual device
      */
     volatile 			ListWindowLength[MAX_NUMBER_OF_PLAYERS]
-    
+
     //length of the entire list (not just the returned items)
     volatile integer 		ListLength[MAX_NUMBER_OF_PLAYERS]
-    
+
     //The offset of the list items - if line 1 is list line 5, offset is 4
     volatile integer 		ListOffset[MAX_NUMBER_OF_PLAYERS]
-    
+
     /*
      * create a browse node array for use by each list
      * The BrowseNodeResource array is used to store the various nodes
      * used by the BrowseNodeStacks.  Each stack is a double linked list.
      */
     volatile STRUCT_BrowseNode BrowseNodeResource[MAX_BROWSE_NODES]
-    
+
     //Variables to track information about the available browse node resources.
     volatile integer		AvailableResources;
     volatile integer		NextFreeNode;
-    
+
     //Manages the actual stacks stored within the BrowseNodeResource array.
     volatile STRUCT_BrowseNodeStack BrowseNodeStack[MAX_NUMBER_OF_PLAYERS][2]
-    
-    /* 
-     * keep track of whether we're looking at the BROWSE or NOWPLAYING list 
+
+    /*
+     * keep track of whether we're looking at the BROWSE or NOWPLAYING list
      * (the second ref in the BrowseNodeStack)
      */
     volatile char 		CurrentList[MAX_NUMBER_OF_PLAYERS]
-    
+
     //keep track of what function the keyboard is currently serving
     volatile char 		KeyboardStatus[MAX_NUMBER_OF_PLAYERS]
-    
+
     //an array of a single time (1 second), used for repeating the up/down command
     long 			Timeline1Second[1] =
     {
@@ -749,11 +749,11 @@ DEFINE_CALL 'TRACE' (integer interfaceRef, char line[256])
     }
 }
 
-//handle feedback going through virtual device 
+//handle feedback going through virtual device
 DEFINE_CALL 'FB' (dev fbDevice, integer fbChan, integer state)
 {
     stack_var integer ch
-    
+
     if(fbChan > FEEDBACK_OFFSET)
     {
 	ch = fbChan
@@ -762,7 +762,7 @@ DEFINE_CALL 'FB' (dev fbDevice, integer fbChan, integer state)
     {
 	ch = fbChan + FEEDBACK_OFFSET
     }
-    
+
     if(state)
     {
 	on[fbDevice, ch]
@@ -771,7 +771,7 @@ DEFINE_CALL 'FB' (dev fbDevice, integer fbChan, integer state)
     {
 	off[fbDevice, ch]
     }
-	
+
     if(SentTraceInfo = 3) //detailed trace
     {
 	send_string 0, "'Setting channel ', itoa(ch), ' to ', itoa(state)"
@@ -801,7 +801,7 @@ DEFINE_FUNCTION char[40] formatHMS(hours, minutes, seconds)
     //h hour(s) m minute(s)
     //h hour(s) m minute(s) s second(s)
     //leave out if any of them are 0
-    
+
     select
     {
 	active (hours = 1):
@@ -810,7 +810,7 @@ DEFINE_FUNCTION char[40] formatHMS(hours, minutes, seconds)
 	    timeString = "itoa(hours), ' hours'"
     }
     if(hours and minutes) timeString = "timeString, ' '"
-    
+
     select
     {
 	active (minutes = 1):
@@ -819,7 +819,7 @@ DEFINE_FUNCTION char[40] formatHMS(hours, minutes, seconds)
 	    timeString = "timeString, itoa(minutes), ' minutes'"
     }
     if( (hours or minutes) and seconds ) timeString = "timeString, ' '"
-    
+
     select
     {
 	active (seconds = 1):
@@ -827,7 +827,7 @@ DEFINE_FUNCTION char[40] formatHMS(hours, minutes, seconds)
 	active (seconds > 1):
 	    timeString = "timeString, itoa(seconds), ' seconds'"
     }
-    
+
     return timeString
 }
 
@@ -837,15 +837,15 @@ DEFINE_FUNCTION char devEQ(dev deviceA, dev deviceB)
     //if the number or port don't match, discard
     if(deviceA.number <> deviceB.number || deviceA.port <> deviceB.port) return false
     if(deviceA.system = deviceB.system) return true //if the systems match exactly, return true
-    
-    /* 
-     * system number 0 is shorthand for "this system".  So, we need to 
+
+    /*
+     * system number 0 is shorthand for "this system".  So, we need to
      * check any 0 instead against get_system_number()
      */
     if(!deviceA.system) //if deviceA's system is 0
     {
 	//check if b's system is the same as system_number
-	if( deviceB.system = get_system_number() ) 
+	if( deviceB.system = get_system_number() )
 	    return true
 	return false
     }
@@ -863,7 +863,7 @@ DEFINE_FUNCTION char devEQ(dev deviceA, dev deviceB)
 DEFINE_FUNCTION integer getDevRef(dev deviceArray[], dev deviceToFind)
 {
     local_var integer loop
-    
+
     for(loop = 1; loop <= length_array(deviceArray); loop++) //step through the array
     {
 	if(devEQ(deviceArray[loop], deviceToFind)) //if it matches
@@ -871,7 +871,7 @@ DEFINE_FUNCTION integer getDevRef(dev deviceArray[], dev deviceToFind)
 	    return loop //return the first reference found
 	}
     }
-    
+
     return 0 //if we're here, we didn't find anything
 }
 
@@ -895,39 +895,39 @@ DEFINE_FUNCTION char[255] escapeInvalidChars(char in[])
 }
 
 // Function to determine if a given integer is an upper case letter
-DEFINE_FUNCTION char isUpperLetter(char character)  
+DEFINE_FUNCTION char isUpperLetter(char character)
 {
     return ((character >= 'A') && (character <= 'Z'))
 }
 
 // Function to determine if a given integer is an lower case letter
-DEFINE_FUNCTION char isLowerLetter(char character)  
+DEFINE_FUNCTION char isLowerLetter(char character)
 {
     return ((character >= 'a') && (character <= 'z'))
 }
 
 //Function to determine if a given integer is a valid letter
-DEFINE_FUNCTION char isLetter(char character) 
+DEFINE_FUNCTION char isLetter(char character)
 {
     return (isUpperLetter(character) || isLowerLetter(character))
 }
 
 //Function to convert a string to title caps
-DEFINE_FUNCTION char[255] toTitleCaps(char inputString[])	
+DEFINE_FUNCTION char[255] toTitleCaps(char inputString[])
 {
     integer 	loop
     char 	character[1]
     char 	inWord
     char 	responseString[255]
-    
+
     inWord = false
     responseString = ''
-    
+
     for(loop = 1;loop <= length_string(inputString);loop++) //step through every character of s
-    { 
+    {
 	character = "inputString[loop]" //extract it
 	if(isLetter(character[1])) //check if it's a letter
-	{ 
+	{
 	    if(inWord) //if we're already in a word
 	    {
 		//set the letter to lower case
@@ -955,7 +955,7 @@ DEFINE_FUNCTION char isFuzzySearch(integer nodeRef)
     if(length_string(BrowseNodeResource[nodeRef].searchText) = 0)
     {
 	return 0;
-    }    
+    }
     return (BrowseNodeResource[nodeRef].searchText[1] = '[')
 }
 #END_IF
@@ -965,7 +965,7 @@ DEFINE_CALL 'SEND LONG TEXT'(integer interfaceRef, integer field, char textToSen
     stack_var char 	sendBuffer[50]
     stack_var integer position
     stack_var char	commandString[5]
-    
+
     commandString = '^TXT-' //send the first line as a txt to replace the field
     position = 1
     while(position <= length_array(textToSend))
@@ -973,7 +973,7 @@ DEFINE_CALL 'SEND LONG TEXT'(integer interfaceRef, integer field, char textToSen
 	sendBuffer = mid_string(textToSend, position, 50)
 	position = position + 50
 	send_string m_Interface[interfaceRef], "commandString, itoa(field), ',0,', sendBuffer"
-	commandString= '^BAT-' //append any subsequent text	
+	commandString= '^BAT-' //append any subsequent text
     }
 }
 
@@ -996,12 +996,12 @@ DEFINE_FUNCTION char isSequence(char character)
 }
 
 //determine if a message is valid
-DEFINE_FUNCTION char isValidMessage(char message[], char deviceId[], integer deviceZoneId, 
+DEFINE_FUNCTION char isValidMessage(char message[], char deviceId[], integer deviceZoneId,
 				    integer sequenceSent, integer dataBegin)
 {
     stack_var integer messageLength
     stack_var char segmentDelimiter;
-    
+
     messageLength = length_array(message)
     if(message[messageLength] = 2)		//if this is a binary delimited message, the last character will be a chr(2)
     {
@@ -1011,13 +1011,13 @@ DEFINE_FUNCTION char isValidMessage(char message[], char deviceId[], integer dev
     {
 	segmentDelimiter = '/'			//otherwise, this is a printable delimiter message, using / between segments
     }
-    
+
     select
     {
 	/*
 	 * The shortest response is "01x1x000y", so if we have something
 	 * shorter than that, then we can just ignore it since we know it's
-	 * corrupted. 
+	 * corrupted.
 	 */
 	active(messageLength < 9):
 	{
@@ -1038,7 +1038,7 @@ DEFINE_FUNCTION char isValidMessage(char message[], char deviceId[], integer dev
 	 * #00000000FFFF.00/0/xxx.../00
 	 * #00000000FFFF.00/!/xxx.../00
 	 */
-	active(message[1] = '#' && message[14] = '.'):	
+	active(message[1] = '#' && message[14] = '.'):
 	{
 	    if (!isHex(message[2]) || 	//char isn't a hex digit
 	        !isHex(message[3]) || 	//char isn't a hex digit
@@ -1055,19 +1055,19 @@ DEFINE_FUNCTION char isValidMessage(char message[], char deviceId[], integer dev
 	 	!isDigit(message[15]) || //char isn't a digit
 	 	!isDigit(message[16]) || //char isn't a digit
 		message[17] != segmentDelimiter ||
-		!isSequence(message[18]) || //char isn't a sequence 
+		!isSequence(message[18]) || //char isn't a sequence
 		message[19] != segmentDelimiter)
 	    {
 		call 'TRACE' (0, "'Garbled header: ', message")
 		return(0)
 	    }
-	    
+
 	    set_length_array(deviceId, 13)
 	    deviceId = left_string(message, 13)
 	    deviceZoneId = atoi("message[15], message[16]") //retreive the stream
 	    sequenceSent = message[18]
 	    dataBegin = 20
-	    
+
 	    call 'TRACE' (0, "'Parsing message for ', deviceId, '.', deviceZoneId")
 	    //return(0)
 	}
@@ -1091,22 +1091,22 @@ DEFINE_FUNCTION char isValidMessage(char message[], char deviceId[], integer dev
 	        !isHex(message[12]) || 	//char isn't a hex digit
 	        !isHex(message[13]) || 	//char isn't a hex digit
 		message[14] != segmentDelimiter ||
-		!isSequence(message[15]) ||	//char isn't a sequence 
+		!isSequence(message[15]) ||	//char isn't a sequence
 		message[16] != segmentDelimiter)
 	    {
 		call 'TRACE' (0, "'Garbled header: ', message")
 		return(0)
 	    }
-	    
+
 	    set_length_array(deviceId, 13)
 	    deviceId = left_string(message, 13)
 	    deviceZoneId = 0 //no stream
 	    sequenceSent = message[15]
 	    dataBegin = 17
-	    
+
 	    call 'TRACE' (0, "'Parsing message ', deviceId")
 	    //return(0)
-	    
+
 	}
 	/*
 	 * feedback contains a zone ID
@@ -1126,10 +1126,10 @@ DEFINE_FUNCTION char isValidMessage(char message[], char deviceId[], integer dev
 		call 'TRACE' (0, "'Garbled header: ', message")
 		return(0)
 	    }
-	    
+
 	    set_length_array(deviceId, 2)
 	    deviceId = left_string(message, 2)
-	    deviceZoneId = atoi("message[4], message[5]") //retreive the stream 
+	    deviceZoneId = atoi("message[4], message[5]") //retreive the stream
 	    sequenceSent = message[7]
 	    dataBegin = 9
 	}
@@ -1139,10 +1139,10 @@ DEFINE_FUNCTION char isValidMessage(char message[], char deviceId[], integer dev
 	 * 00/!/xxx.../00
 	 */
 	active(1):
-	{    
-	    /* 
+	{
+	    /*
 	     * Check that the first two characters are digits, then a slash, then
-	     * one digit, then a slash.  Also third-to-last character must be a slash. 
+	     * one digit, then a slash.  Also third-to-last character must be a slash.
 	     */
 	    if (!isDigit(message[1]) ||	//char isn't a digit
 		!isDigit(message[2]) ||	//char isn't a digit
@@ -1153,7 +1153,7 @@ DEFINE_FUNCTION char isValidMessage(char message[], char deviceId[], integer dev
 		call 'TRACE' (0, "'Garbled header: ', message")
 		return(0)
 	    }
-		
+
 	    set_length_array(deviceId, 2)
 	    deviceId = left_string(message, 2)
 	    deviceZoneId = 0 //no stream
@@ -1169,11 +1169,11 @@ DEFINE_FUNCTION char verifyChecksum (char message[])
     stack_var long 	calculatedChecksum
     stack_var long 	responseChecksum
     stack_var integer 	index
-    
+
     //Calculate the checksum and verify it.
     calculatedChecksum = 0
     index = 1
-    
+
     //skip last two characters, that's the checksum itself.
     for(index = 1; index <= length_array(message) - 2; index++)
     {
@@ -1186,7 +1186,7 @@ DEFINE_FUNCTION char verifyChecksum (char message[])
         call 'TRACE' (0, "'Bad checksum: ', itoa(calculatedChecksum), ' vs ', itoa(responseChecksum)")
         return(0)
     }
-    
+
     return(1)
 }
 
@@ -1210,18 +1210,18 @@ DEFINE_FUNCTION integer getArgumentsBinary(char message[], char arguments[MAX_RE
     stack_var integer messageLength
     stack_var integer delimiterPosition
     stack_var integer fieldLength
-    
+
     messagePosition = 1
     messageLength = length_array(message)
     numargs = 0
-    
+
     while( messagePosition < messageLength and
 	    numargs < MAX_RESPONSE_ARGS )
     {
 	delimiterPosition = find_string(message, "2", messagePosition)	//find the field delimiter
 	if(!delimiterPosition)						//if we didn't find a delimiter
 	    break							//we're done, exit the loop
-	
+
 	numargs++
 	fieldLength = delimiterPosition - messagePosition		//calculate the length of the field
 	arguments[numargs] = mid_string(message, messagePosition, fieldLength)	//pull it out of the message
@@ -1239,28 +1239,28 @@ DEFINE_FUNCTION integer getArgumentsPrintable(char message[], char arguments[MAX
     stack_var integer	messageLength
     stack_var integer argumentLength
     stack_var integer numArgs
-    
-    /* 
+
+    /*
      * Parse the command and the arguments.  Make sure we translate all
      * escape sequences. Escape sequences start with a backslash.  See
-     * the control programming documentation for the list. 
+     * the control programming documentation for the list.
      */
-     
+
     escaped = 0 //Keep track of whether we've just seen a backslash.
     messagePosition = 1
     argumentLength = 1
     numArgs = 1
     messageLength = length_array(message)
-    
+
     // step through each character.
-    while(messagePosition < messageLength AND 
-	    argumentLength <= MAX_RESPONSE_ARG_LEN AND 
+    while(messagePosition < messageLength AND
+	    argumentLength <= MAX_RESPONSE_ARG_LEN AND
 	    numArgs < MAX_RESPONSE_ARGS)
     {
         // Character being examined.
         character = message[messagePosition]
 	messagePosition++
-        
+
         if (escaped)
         {
             // The previous character was a backslash, treat this character specially.
@@ -1301,9 +1301,9 @@ DEFINE_FUNCTION integer getArgumentsPrintable(char message[], char arguments[MAX
             arguments[numArgs][argumentLength] = character
 	    argumentLength ++
 
-            /* 
+            /*
 	     * The escape only applies to the next character.  After that we're
-	     * back to normal. 
+	     * back to normal.
 	     */
             escaped = 0
         }
@@ -1319,9 +1319,9 @@ DEFINE_FUNCTION integer getArgumentsPrintable(char message[], char arguments[MAX
                 }
                 case ':':
                 {
-                    //Colons separate arguments, so we're done.                    
+                    //Colons separate arguments, so we're done.
 		    set_length_array(arguments[numArgs], argumentLength - 1)
-		    
+
 		    numArgs ++
 		    argumentLength = 1
                     break
@@ -1332,10 +1332,10 @@ DEFINE_FUNCTION integer getArgumentsPrintable(char message[], char arguments[MAX
 		    arguments[numArgs][argumentLength] = character
 		    argumentLength ++
                     break
-                }                    
+                }
             }
         }
-        
+
     }
     return(numArgs - 1) //no terminating colon, not a field
 }
@@ -1350,14 +1350,14 @@ DEFINE_FUNCTION managePort(integer portStatus, long error)
 	{
 	    managePort(IP_PORT_OPENING, 0)
 	}
-	
+
 	case IP_PORT_OPEN /*1*/: // Stop all reconnection attempts, dismiss popup
 	{
 	    connectionAttempt = 0
     	    IPPortStatus = IP_PORT_OPEN
 	    showConnectionPopup(CONNECTION_POP_SUCCEEDED)
 	}
-	
+
 	case IP_PORT_ERROR /*2*/: // Error conditions handled below
 	{
 	    if(!PauseSendingToPort || error = 7 || error = 8)
@@ -1365,11 +1365,11 @@ DEFINE_FUNCTION managePort(integer portStatus, long error)
 		processPortError(error)
 	    }
 	}
-	
+
 	case IP_PORT_RESET /*3*/: // Close and reopen port
 	{
 	    connectionAttempt = 0
-	    
+
 	    if(IPPortStatus = IP_PORT_OPEN)
 	    {
 		IP_CLIENT_CLOSE(m_Kport.port)
@@ -1381,19 +1381,19 @@ DEFINE_FUNCTION managePort(integer portStatus, long error)
 		showConnectionPopup(CONNECTION_POP_RESET)
 	    }
 	}
-	
+
 	case IP_PORT_OPENING /*4*/: // Wait for feedback indicating port is available again.
 	{
 	    cancel_wait 'Reconnect dead port'
 	    connectionAttempt = connectionAttempt + 1
 	    call 'TRACE'(0, "'Connection attempt changed to ', itoa(connectionAttempt)")
-		
+
 	    if(connectionAttempt <= MAX_CONNECTION_ATTEMPTS && !pauseSendingToPort)
 	    {
     		call 'TRACE' (0, "'Opening IP port ', IPAddress, ':10000'")
 		IP_CLIENT_OPEN(m_Kport.port, IPAddress, 10000, 1)
 		IPPortStatus = IP_PORT_OPENING
-		    
+
 		    tlConnectionTimes[1] = 0
 		    tlConnectionTimes[2] = 90000
 		    manageTimeline(CREATE_TIMELINE, TL_CONNECTION_TIMEOUT, tlConnectionTimes, 2, 0, timeline_absolute, timeline_once)
@@ -1402,7 +1402,7 @@ DEFINE_FUNCTION managePort(integer portStatus, long error)
 	    {
 		showConnectionPopup(CONNECTION_POP_FAILED)
 		IPPortStatus = IP_PORT_CLOSED
-		
+
 		wait 3000 'Reconnect dead port'
 		{
     		    call 'TRACE' (0, "'Resetting port from Reconnect dead port wait'")
@@ -1432,34 +1432,34 @@ DEFINE_FUNCTION processPortError(long error)
 	case 6:  // Connection refused
 	case 10:  // Binding error
 	case 11:  // Listening error
-	case 16:  // Too many open sockets 
+	case 16:  // Too many open sockets
 	{
 	    managePort(IP_PORT_CLOSED, 0) //set the port back to closed
 	}
-	
+
 	case 7:  // Connection timed out
 	case 8:  // Unknown connection error
 	{
 	    manageTimeline(END_TIMELINE, TL_CONNECTION_TIMEOUT, tlConnectionTimes, 0, 0, 0, 0)
 	    manageTimeline(END_TIMELINE, TL_ANIMATE_PROGRESS_BAR, tlConnectionTimes, 0, 0, 0, 0)
-	    
+
     	    PauseSendingToPort = False
 	    managePort(IP_PORT_CLOSED, 0) //set the port back to closed
 	}
-	    
+
 	case 9:  // Already closed
 	{
 	    managePort(IP_PORT_OPENING, 0)
 	}
-	    
-	    
+
+
 	case 14:  // Local port already used
 	case 15:  // UDP socket already listening
 	{
 	    PauseSendingToPort = True
 	    managePort(IP_PORT_OPENING, 0)
 	}
-	
+
 	case 17:  // writing to a closed port
 	{
 	    //if we thought the port was open, set to error condition
@@ -1472,7 +1472,7 @@ DEFINE_FUNCTION processPortError(long error)
 		managePort(IP_PORT_CLOSED, 0)
 	    }
 	}
-	
+
 	default: //other unknown error
 	{
 	    managePort(IP_PORT_RESET, 0)
@@ -1521,7 +1521,7 @@ DEFINE_FUNCTION showConnectionPopup(integer state)
 	    	    showConnectionButtons(True, m_VT[VT_CONNECT_RETRY_BTN])
 		}
     }
-    
+
     lastConnectionMessage = state
 }
 
@@ -1549,7 +1549,7 @@ DEFINE_FUNCTION char[150] connectionResetMessage()
 }
 
 /*
- * Create the message shown on the touch panel that indicates the timeline has expired and display 
+ * Create the message shown on the touch panel that indicates the timeline has expired and display
  * the IP address of the Kaleidescape component the AMX is trying to connect to.
  */
 DEFINE_FUNCTION char[150] connectionFailedMessage(char targetIPAddress[])
@@ -1579,7 +1579,7 @@ DEFINE_FUNCTION showConnectionProgressBar(integer state, integer vtAddress)
 DEFINE_FUNCTION manageTimeline(integer action, long TLid, long times[], long length, long step, long sentence, long repetition)
 {
     set_length_array(times, length)
-    
+
     if(timeline_active(TLid))
     {
 	switch(action)
@@ -1595,7 +1595,7 @@ DEFINE_FUNCTION manageTimeline(integer action, long TLid, long times[], long len
     {
 	switch(action)
 	{
-	    case CREATE_TIMELINE: 
+	    case CREATE_TIMELINE:
 	    {
 		timeline_create(TLid, times, length, sentence, repetition)
 	    }
@@ -1606,7 +1606,7 @@ DEFINE_FUNCTION manageTimeline(integer action, long TLid, long times[], long len
 
 /*******************************************************************************************
  **                  Connection routines                                                  **
- *******************************************************************************************/ 
+ *******************************************************************************************/
 DEFINE_FUNCTION setPortOpened(state)
 {
     if(state != portOpened)
@@ -1646,8 +1646,8 @@ DEFINE_FUNCTION setPortInitialized(state)
 	    }
 	    case false:
 	    {
-		setPortPassingCommands(false)   	//Commands cannot be passed if we've lost comms 
-		
+		setPortPassingCommands(false)   	//Commands cannot be passed if we've lost comms
+
 		//if we've lost comms, but the port status is open (and we're using IP)
 		if(IPConnection && IPPortStatus = IP_PORT_OPEN)
 		{
@@ -1682,24 +1682,24 @@ DEFINE_FUNCTION setPortPassingCommands(state)
 			call 'SEND TO TARGET'('01', 0, '0', 'SET_PROTOCOL_SETTINGS:BINARY_DELIMITERS:LATIN-1:')
 			binaryDelimiters = true
 		    }
-			
+
 		    //Determine what devices can be reached and what their state is
 		    if(usingCPDAddressing) call 'SEND TO TARGET'('01', 0, '0', 'GET_AVAILABLE_DEVICES:')
 		    if(usingSNAddressing) call 'SEND TO TARGET'('01', 0, '0', 'GET_AVAILABLE_DEVICES_BY_SERIAL_NUMBER:')
-		    
+
 		    reportModuleInfo()
 		}
 	    }
 	    case false:		// if the port is no longer passing commands
 	    {
 		stack_var integer index
-		
+
 		call 'TRACE'(0, 'Port no longer passing commands')
-		
+
 		for(index = 1; index <= length_array(m_Interface); index++)
 		{
 		    //indicate that this device is not on
-		    
+
 		    if(DeviceIndirect[index])
 		    {
 			//if not directly connected, indicate that it's offline
@@ -1710,7 +1710,7 @@ DEFINE_FUNCTION setPortPassingCommands(state)
 			//if it's directly connected, indicate that it's off
 			ON[m_Interface[index], BTN_POWER_OFF_FB]
 		    }
-		}	
+		}
 		cancel_wait 'SEND DATA TO SYSLOG'
 	    }
 	}
@@ -1725,7 +1725,7 @@ DEFINE_FUNCTION reportModuleInfo()
 	//tell the syslog about this module
 	call 'SEND TO TARGET'('01', 0, '0', "'SEND_TO_SYSLOG:INFORMATION:',
 		escapeInvalidChars(ModuleDescription), ':'")
-		
+
 	wait 864000 'SEND DATA TO SYSLOG' //in exactly one day
 	{
 	    reportModuleInfo()	//send it again
@@ -1735,8 +1735,8 @@ DEFINE_FUNCTION reportModuleInfo()
 
 /*******************************************************************************************
  **                  End Connection routines                                              **
- *******************************************************************************************/ 
- 
+ *******************************************************************************************/
+
 DEFINE_FUNCTION formatId(char deviceID[])
 {
     local_var integer loop
@@ -1762,15 +1762,15 @@ DEFINE_CALL 'RECEIVE BUFFER' (char data[])
     local_var char parseFails
     stack_var char message[KALEIDESCAPE_BUFFER_SIZE]
     stack_var char terminater[1]
-    
-    /* 
+
+    /*
      * The Kaleidescape sends its commands terminated with CR/LF or chr(4).  So
      * we shouldn't process anything until there's a terminater in
      * the buffer, otherwise we might try to process a partial command.
      * Also, after processing the command, remove it from the buffer
-     * and keep going until there are no more terminaters. 
-     */		
-        
+     * and keep going until there are no more terminaters.
+     */
+
     if(length_array(receiveBuffer) + length_array(data) > KALEIDESCAPE_BUFFER_SIZE)
     {
 	send_string 0, "13, 'ERROR!  Kaleidescape buffer overflow!',13"
@@ -1779,7 +1779,7 @@ DEFINE_CALL 'RECEIVE BUFFER' (char data[])
     {
 	receiveBuffer = "receiveBuffer, data"
     }
-    
+
     if(binaryDelimiters)
     {
 	terminater = "4"
@@ -1788,19 +1788,19 @@ DEFINE_CALL 'RECEIVE BUFFER' (char data[])
     {
 	terminater = "LF"
     }
-    
+
     //while theres data in the buffer, try and process it
     while( length_array(receiveBuffer) )
     {
 	//remove everything up to and including the first terminater
 	message = remove_string(receiveBuffer, terminater, 1)
 	if(message = '') break;	//if the message is null (term not found), break out of the loop
-	
+
 	cancel_wait 'SWITCH DELIMITERS'	//don't switch delimiters
-	parseFails = 0				//clear out the failure count	
+	parseFails = 0				//clear out the failure count
 	call 'PROCESS_KALEIDESCAPE_RESPONSE' (message)
     }
-    
+
     if(receiveBuffer != '')		//if there is still data in the receive buffer
     {
 	wait 20 'SWITCH DELIMITERS'
@@ -1813,13 +1813,13 @@ DEFINE_CALL 'RECEIVE BUFFER' (char data[])
 		call 'RECEIVE BUFFER'('')		//call this routine again with no additional data
 	    }
 	}
-	
+
 	wait_until (parseFails > 3) 'CLEAR BUFFER'
 	{
 	    clear_buffer receiveBuffer 	//clear the buffer
 	    parseFails = 0		 	//reset the count
 	    cancel_wait 'SWITCH DELIMITERS'	//don't bother retrying - buffer in empty
-	    send_string 0, "13,'Warning!  Kaleidescape buffer contains bad data.  Clearing.'"	    
+	    send_string 0, "13,'Warning!  Kaleidescape buffer contains bad data.  Clearing.'"
 	}
     }
 
@@ -1840,25 +1840,25 @@ DEFINE_CALL 'PROCESS_KALEIDESCAPE_RESPONSE' (message[256])
     stack_var char 	arguments[MAX_RESPONSE_ARGS][MAX_RESPONSE_ARG_LEN] //The arguments themselves
     stack_var integer 	matches 	//General purpose flag
 
-    /* 
+    /*
      * Kaleidescape responses and events have this format:
      *
-     *     01/1/000:COMMAND:ARG1:ARG2:ARG3:/28 
-     *       
+     *     01/1/000:COMMAND:ARG1:ARG2:ARG3:/28
+     *
      *   where:
-     *   
-     *       01 is the device ID 
+     *
+     *       01 is the device ID
      *       1 is the sequence number (the same one we sent it in the command)
      *       000 is the status (000 means "success", anything else is an error)
      *       COMMAND identifies the kind of data being sent to us
      *       ARGn are the arguments of the command
-     *       28 is the checksum of the message (always two digits)   
-     *       
+     *       28 is the checksum of the message (always two digits)
+     *
      *   So we will parse the response from the beginning to the end.
      *   Since we may be dealing with a serial connection, we must assume
      *   that this buffer may have been corrupted in transit.  We must be
      *   very careful to check that the syntax of the response is valid.
-     *   (This is not really necessary when using TCP/IP since the TCP 
+     *   (This is not really necessary when using TCP/IP since the TCP
      *   layer ensures this for us.)
      */
 
@@ -1872,17 +1872,17 @@ DEFINE_CALL 'PROCESS_KALEIDESCAPE_RESPONSE' (message[256])
         message = left_string(message, messageLength - 1)
         messageLength = messageLength - 1
     }
-    
+
     //check for valid message, passing the deviceZoneId by reference
-    if(NOT isValidMessage(message, deviceId, deviceZoneId, sequence, dataStart)) return    
-    
+    if(NOT isValidMessage(message, deviceId, deviceZoneId, sequence, dataStart)) return
+
     if(message[messageLength] != 2)			//if this is not a binary delimited message
     {
 	if(NOT verifyChecksum(message)) return	//verify the checksum
     }
-	
+
     message = right_string(message, messageLength - dataStart + 1)	//remove the header
-    
+
     numArgs = getArguments(message, arguments)
 
     if (SentTraceInfo = 2) //detailed trace info
@@ -1892,9 +1892,9 @@ DEFINE_CALL 'PROCESS_KALEIDESCAPE_RESPONSE' (message[256])
 	for(index = 1; index <= numArgs; index++)
 	{
 	    call 'TRACE' (0, "'Argument ', itoa(index), ': ', arguments[index]")
-	}     
+	}
     }
-    
+
     //Be sure there's something in the message.
     if (numArgs = 0)
     {
@@ -1906,13 +1906,13 @@ DEFINE_CALL 'PROCESS_KALEIDESCAPE_RESPONSE' (message[256])
     if (arguments[1] != '000' and
 	arguments[1] != '004' and
         arguments[1] != '017' and
-	arguments[1] != '020' and 
+	arguments[1] != '020' and
 	length_array(arguments[1]) = 3)
     {
         call 'ERROR DECODER' (atoi(arguments[1]), arguments[2])
         return
     }
-    
+
     //if we've reached this point, the message is valid and the port is communicating normally
     setPortInitialized(true)
 
@@ -1921,7 +1921,7 @@ DEFINE_CALL 'PROCESS_KALEIDESCAPE_RESPONSE' (message[256])
     {
 	return
     }
-    
+
     matches = 0;
     //First handle system messages from the local port.
     if( (deviceId = ConnectedDeviceID || deviceId = ConnectedDeviceSN || deviceId = '01') && deviceZoneId = 0)
@@ -1945,7 +1945,7 @@ DEFINE_CALL 'PROCESS_KALEIDESCAPE_RESPONSE' (message[256])
 	}
     }
     if(matches = 0) //if the above code failed to find any valid references
-    {	
+    {
 	if(deviceZoneId)
 	{
 	    call 'TRACE'(0, "'Ignoring Player ID: ', deviceId,
@@ -1961,23 +1961,23 @@ DEFINE_CALL 'PROCESS_KALEIDESCAPE_RESPONSE' (message[256])
 DEFINE_CALL 'PARSE SYSTEM MESSAGE' (char arguments[][], integer numArgs, char sequence)
 {
     call 'TRACE' (0, 'Parsing system message')
-    
+
     select
     {
 	active (arguments[2] = 'DEVICE_INFO' and sequence = '0' ):
 	{
 	    setPortPassingCommands(true)
-	    
+
 	    //remember the control ID of the connected device
 	    ConnectedDeviceID = arguments[5] //determine the ID of the connected device
-	    	    
+
 	    //if the ID is 0 (not routable), set to 1
 	    if(ConnectedDeviceID = '00') ConnectedDeviceID = '01'
-	    
+
 	    //remember the serial number of the connected device
 	    ConnectedDeviceSN = "'#', right_string(arguments[4], 12)"
 	}
-	
+
 	//we'll receive this combo when the connected device is in standby
 	active (arguments[1] = '020' and sequence = '!'):
 	{
@@ -1990,53 +1990,53 @@ DEFINE_CALL 'PARSE SYSTEM MESSAGE' (char arguments[][], integer numArgs, char se
 	{
 	    //indicate (possibly belatedly) that the port wasn't passing commands
 	    setportPassingCommands(false)
-	    
+
 	    //then, try to turn that back on to re-init everything
 	    call 'CHECK COMMAND PASSING'()
-	    
+
 	}
-	
+
 	active (arguments[2] = 'AVAILABLE_DEVICES' ):
 	{
 	    stack_var integer	interfaceRef
 	    stack_var char 	playerId[2]
 	    stack_var integer	index
 	    stack_var char 	playerOnline[MAX_NUMBER_OF_PLAYERS]
-		    
+
 	    call 'TRACE' (0, 'Handling available devices message.')
-	    
+
 	    setPortPassingCommands(true)
-	    
+
 	    //Initialize the playerOnline list.
 	    for(interfaceRef = 1; interfaceRef <= MAX_NUMBER_OF_PLAYERS; interfaceRef++)
 	    {
 		playerOnline[interfaceRef] = 0;
 	    }
-	    
+
 	    //Evaluate all of the online players.
 	    for(index = 3; index <= numArgs; index++)
-	    {	
+	    {
 		//Convert the id string to an integer.
 		playerId = arguments[index]
 		call 'TRACE'(0, "'Examining ID ',itoa(playerID)")
-		
+
 		//Search through the player list to see if that player exists.
 		for(interfaceRef = 1; interfaceRef <= length_array(m_Interface); interfaceRef++)
 		{
 		    //If the player is found.
 		    if(KaleidescapeID[interfaceRef].deviceId = playerId)
-		    {		
+		    {
 			//Record that we found the player online.
 			playerOnline[interfaceRef] = 1;
-			
+
 			call 'TRACE'(interfaceRef, "'Player is online (ID=', KaleidescapeID[interfaceRef].deviceId,')'")
-			
+
 			//indicate that this device is online
 			ON[m_Interface[interfaceRef],CHN_DEVICE_ONLINE]
 		    }
 		}
 	    }
-	    	    
+
 	    //Set devices to reinitialize if they went offline.
 	    for(interfaceRef = 1; interfaceRef <= length_array(m_Interface); interfaceRef++)
 	    {
@@ -2044,53 +2044,53 @@ DEFINE_CALL 'PARSE SYSTEM MESSAGE' (char arguments[][], integer numArgs, char se
 		if(NOT playerOnline[interfaceRef] && KaleidescapeID[interfaceRef].deviceId[1] != '#')
 		{
 		    call 'TRACE'(interfaceRef, "'Player is offline (ID=',KaleidescapeID[interfaceRef].deviceId,')'")
-			
+
 		    OFF[m_Interface[interfaceRef],CHN_DEVICE_ONLINE]
 		}
 	    }
 	}
-	
+
 	active (arguments[2] = 'AVAILABLE_DEVICES_BY_SERIAL_NUMBER' ):
 	{
 	    stack_var integer	interfaceRef
 	    stack_var char 	playerId[13]
 	    stack_var integer	index
 	    stack_var char 	playerOnline[MAX_NUMBER_OF_PLAYERS]
-		    
+
 	    call 'TRACE' (0, 'Handling available devices by serial number message.')
-	    
+
 	    setPortPassingCommands(true)
-	    
+
 	    //Initialize the playerOnline list.
 	    for(interfaceRef = 1; interfaceRef <= MAX_NUMBER_OF_PLAYERS; interfaceRef++)
 	    {
 		playerOnline[interfaceRef] = 0;
 	    }
-	    
+
 	    //Evaluate all of the online players.
 	    for(index = 3; index <= numArgs; index++)
-	    {	
+	    {
 		//Convert the id string to an integer.
 		playerId = arguments[index]
 		call 'TRACE'(0, "'Examining ID ', playerID")
-		
+
 		//Search through the player list to see if that player exists.
 		for(interfaceRef = 1; interfaceRef <= length_array(m_Interface); interfaceRef++)
 		{
 		    //If the player is found.
 		    if(KaleidescapeID[interfaceRef].deviceId = "'#', playerId")
-		    {		
+		    {
 			//Record that we found the player online.
 			playerOnline[interfaceRef] = 1;
-			
+
 			call 'TRACE'(interfaceRef, "'Player is online (ID=',KaleidescapeID[interfaceRef].deviceId,')'")
-			
+
 			//indicate that this device is online
 			ON[m_Interface[interfaceRef],CHN_DEVICE_ONLINE]
 		    }
 		}
 	    }
-	    
+
 	    //Set devices to reinitialize if they went offline.
 	    for(interfaceRef = 1; interfaceRef <= length_array(m_Interface); interfaceRef++)
 	    {
@@ -2098,41 +2098,41 @@ DEFINE_CALL 'PARSE SYSTEM MESSAGE' (char arguments[][], integer numArgs, char se
 		if(NOT playerOnline[interfaceRef] && KaleidescapeID[interfaceRef].deviceId[1] = '#')
 		{
 		    call 'TRACE'(interfaceRef, "'Player is offline (ID=',KaleidescapeID[interfaceRef].deviceId,')'")
-			
+
 		    OFF[m_Interface[interfaceRef],CHN_DEVICE_ONLINE]
 		}
 	    }
 	}
-	
+
 	active(arguments[2] = 'MUSIC_PRESET_INFORMATION'):
-	{	    
+	{
 	    stack_var char 	presetIDTest[MAX_RESPONSE_ARG_LEN]
 	    stack_var char	presetTag[MAX_RESPONSE_ARG_LEN]
 	    stack_var integer 	presetNumber
 	    stack_var integer	interfaceRef
-	    
+
 	    for(interfaceRef = 1; interfaceRef <= length_array(m_Interface); interfaceRef++)
 	    {
 		//Pull the Preset ID out of the Preset Tag.
 		presetTag = arguments[3]
 		presetIDTest = remove_string(presetTag, PresetID[interfaceRef], 1)
-		    
+
 		//Check to see if this ID is the one we're interested in.
 		if(presetIDTest = PresetID[interfaceRef])
 		{
-		    call 'TRACE' (interfaceRef, "'Setting preset data for preset ', arguments[3], 
+		    call 'TRACE' (interfaceRef, "'Setting preset data for preset ', arguments[3],
 					' with handle: ', arguments[4], ' and label: ', arguments[5]")
-		    
+
 		    //The rest of presetTag is the numeric ID of the preset.
 		    presetNumber = atoi(presetTag)
-		    
+
 		    //Drop the handle into the table for later identification.
 		    PresetHandleTable[interfaceRef][presetNumber] = arguments[4]
 		    //if the preset label VT has been defined
-		    if(m_VT[VT_PRESET_LABEL_1 + presetNumber - 1] <> 0) 
+		    if(m_VT[VT_PRESET_LABEL_1 + presetNumber - 1] <> 0)
 		    {
 			//send the preset label text to the VT
-			send_string m_Interface[interfaceRef], "'!T', 
+			send_string m_Interface[interfaceRef], "'!T',
 			    m_VT[VT_PRESET_LABEL_1 + presetNumber - 1], arguments[5]"
 		    }
 		    call 'FEEDBACK PRESET' (interfaceRef, arguments[4])
@@ -2142,7 +2142,7 @@ DEFINE_CALL 'PARSE SYSTEM MESSAGE' (char arguments[][], integer numArgs, char se
     }
 }
 
-DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequence, 
+DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequence,
 			     integer matches, char arguments[][], integer numArgs)
 {
     local_var integer numberOfDetails
@@ -2166,12 +2166,12 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 	     * keep track of the last values to prevent re-sending the same info over and over
 	     * this will help the bus speed and prevent flickering on older panels
 	     */
-	    
+
             PlayMode[interfaceRef] = atoi(arguments[3])
 	    TitleLength[interfaceRef] = atoi(arguments[6])
 	    titlePosition = atoi(arguments[7])
 	    titleRemaining = TitleLength[interfaceRef] - titlePosition
-	    
+
 	    if (TitleLength[interfaceRef] = 0) //avoid div by 0 error
 	    {
 		titleProgress 	= 0
@@ -2180,66 +2180,66 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 	    {
 		titleProgress	= titlePosition * 255 / TitleLength[interfaceRef]
 	    }
-		
+
     	    Chapter[interfaceRef] = atoi(arguments[8])
-	    
+
 	    call 'TRACE' (interfaceRef, "'TitleLength=', itoa(TitleLength[interfaceRef])")
 	    call 'TRACE' (interfaceRef, "'TitlePosition=', itoa(titlePosition)")
 	    call 'TRACE' (interfaceRef, "'TitleRemaining=', itoa(titleRemaining)")
 	    call 'TRACE' (interfaceRef, "'TitleProgress=', itoa(titleProgress)")
-	    
-	    call 'FB' (m_Interface[interfaceRef], BTN_PLAY + FEEDBACK_OFFSET, 
+
+	    call 'FB' (m_Interface[interfaceRef], BTN_PLAY + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_PLAYING))
-	    call 'FB' (m_Interface[interfaceRef], BTN_PLAY_OR_PAUSE + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_PLAY_OR_PAUSE + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_PLAYING))
-	    call 'FB' (m_Interface[interfaceRef], BTN_STOP + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_STOP + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_NOT_PLAYING))
-	    call 'FB' (m_Interface[interfaceRef], BTN_SPECIAL_BLURAY_STOP + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_SPECIAL_BLURAY_STOP + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_NOT_PLAYING))
-	    call 'FB' (m_Interface[interfaceRef], BTN_PAUSE + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_PAUSE + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_PAUSED))
-	    call 'FB' (m_Interface[interfaceRef], BTN_SCAN_FORWARD + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_SCAN_FORWARD + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_SCAN_FORWARD))
-	    call 'FB' (m_Interface[interfaceRef], BTN_SCAN_REVERSE + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_SCAN_REVERSE + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_SCAN_REVERSE))
-	    
-	    
-	    if( (m_VT[VT_CHAPTER_NUMBER] <> 0) && 
+
+
+	    if( (m_VT[VT_CHAPTER_NUMBER] <> 0) &&
 		( Chapter[interfaceRef] <> lastChapter[interfaceRef] ) )
 	    {
 		//send chapter info to TP if defined
 		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_CHAPTER_NUMBER],
 				itoa(Chapter[interfaceRef])"
 	    }
-		
+
 	    lastChapter[interfaceRef] = Chapter[interfaceRef]
-	    
-	    if( (m_VT[VT_TRACK_TOTAL_TIME] <> 0) && 
+
+	    if( (m_VT[VT_TRACK_TOTAL_TIME] <> 0) &&
 		( TitleLength[interfaceRef] <> lastTitleLength[interfaceRef] ) )
 	    {
 		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_TRACK_TOTAL_TIME],
 				displayHMS(TitleLength[interfaceRef])"
 	    }
-		
+
 	    lastTitleLength[interfaceRef] = TitleLength[interfaceRef]
-		
+
 	    if( m_VT[VT_TRACK_CURRENT_TIME] <> 0 )
 	    {
 		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_TRACK_CURRENT_TIME],
 				displayHMS(titlePosition)"
 	    }
-		
+
 	    if( m_VT[VT_TRACK_REMAIN_TIME] <> 0 )
 	    {
 		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_TRACK_REMAIN_TIME],
 				displayHMS(titleRemaining)"
 	    }
-		
+
 	    send_level m_Interface[interfaceRef], LVL_MOVIE_LOCATION_RELATIVE, titleProgress
-	    	    
+
             call 'TRACE' (interfaceRef, 'Setting play status')
         }
-        
+
 	active (arguments[2] = 'MUSIC_PLAY_STATUS') :
 	{
 	    stack_var integer songPosition
@@ -2249,12 +2249,12 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 	    local_var integer lastPlayMode[MAX_NUMBER_OF_PLAYERS]
 	    stack_var integer loop
 	    stack_var integer npPop
-	    
+
 	    PlayMode[interfaceRef] = atoi(arguments[3])
 	    TitleLength[interfaceRef] = atoi(arguments[5])
 	    songPosition = atoi(arguments[6])
 	    songRemaining = TitleLength[interfaceRef] - songPosition
-	    
+
 	    if (TitleLength[interfaceRef] = 0)
 	    {
 		songProgress = 0
@@ -2263,48 +2263,48 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 	    {
 		songProgress = songPosition * 255 / TitleLength[interfaceRef]
 	    }
-		
-	    call 'FB' (m_Interface[interfaceRef], BTN_PLAY + FEEDBACK_OFFSET, 
+
+	    call 'FB' (m_Interface[interfaceRef], BTN_PLAY + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_PLAYING))
-	    call 'FB' (m_Interface[interfaceRef], BTN_PLAY_OR_PAUSE + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_PLAY_OR_PAUSE + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_PLAYING))
-	    call 'FB' (m_Interface[interfaceRef], BTN_STOP + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_STOP + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_NOT_PLAYING))
-	    call 'FB' (m_Interface[interfaceRef], BTN_SPECIAL_BLURAY_STOP + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_SPECIAL_BLURAY_STOP + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_NOT_PLAYING))
-	    call 'FB' (m_Interface[interfaceRef], BTN_PAUSE + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_PAUSE + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_PAUSED))
-	    call 'FB' (m_Interface[interfaceRef], BTN_SCAN_FORWARD + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_SCAN_FORWARD + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_SCAN_FORWARD))
-	    call 'FB' (m_Interface[interfaceRef], BTN_SCAN_REVERSE + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_SCAN_REVERSE + FEEDBACK_OFFSET,
 			(PlayMode[interfaceRef] = PLAY_MODE_SCAN_REVERSE))
-	    
-	    
-	    if( (m_VT[VT_TRACK_TOTAL_TIME] <> 0) && 
+
+
+	    if( (m_VT[VT_TRACK_TOTAL_TIME] <> 0) &&
 		( TitleLength[interfaceRef] <> lastTitleLength[interfaceRef] ) )
 	    {
 		send_string m_Interface[interfaceRef], "'!T',m_VT[VT_TRACK_TOTAL_TIME],
 				displayMS(TitleLength[interfaceRef])"
 	    }
-		
+
 	    lastTitleLength[interfaceRef] = TitleLength[interfaceRef]
-		
+
 	    if( m_VT[VT_TRACK_CURRENT_TIME] <> 0 )
 	    {
 		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_TRACK_CURRENT_TIME],
 				displayMS(songPosition)"
 	    }
-		
+
 	    if( m_VT[VT_TRACK_REMAIN_TIME] <> 0 )
 	    {
 		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_TRACK_REMAIN_TIME],
 				displayMS(songRemaining)"
 	    }
-		
+
 	    send_level m_Interface[interfaceRef], LVL_MOVIE_LOCATION_RELATIVE, songProgress
-	      
+
 	    npPop = POP_NOW_PLAYING + CHN_POPUP_OFFSET
-	    
+
 	    #IF_DEFINED SATP
 		//if this is an SATP, and the SATP now playing is non-zero len
 		if(KaleidescapeID[interfaceRef].zoneId && (length_string(m_UIPopups[POP_SATP_NOW_PLAYING]) > 0) )
@@ -2312,18 +2312,18 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		    npPop = POP_SATP_NOW_PLAYING + CHN_POPUP_OFFSET
 		}
 	    #END_IF
-	    
+
 	    //Pop or hide the now playing popup
 	    [m_Interface[interfaceRef], npPop] = (PlayMode[interfaceRef] <> PLAY_MODE_NOT_PLAYING)
-	    
-	    
+
+
             call 'TRACE' (interfaceRef, 'Setting music play status')
-	    
+
    	    #IF_DEFINED SATP
 		//if the play status has changed
 		if(lastPlayMode[interfaceRef] != PlayMode[interfaceRef])
 		{
-		    if(KaleidescapeID[interfaceRef].zoneId) 
+		    if(KaleidescapeID[interfaceRef].zoneId)
 		    {
 			//update the list in a moment, if shown
 			do_push_timed(m_Interface[interfaceRef], CHN_GET_LIST_DELAYED,
@@ -2331,20 +2331,20 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		    }
 		}
 	    #END_IF
-	    
+
 	    lastPlayMode[interfaceRef] = PlayMode[interfaceRef]
 	}
-	
+
 	active (arguments[2] = 'SCREEN_MASK2') :
 	{
 	    //DO NOTHING YET
 	}
-	
+
         active (arguments[2] = 'SCREEN_MASK') :
         {
-            /* 
+            /*
 	     * arguments[3] is the "closest mask".  Use arguments[6] if you want the "safe mask",
-             *  i.e., the mask that doesn't ever overlap into the picture. 
+             *  i.e., the mask that doesn't ever overlap into the picture.
 	     */
 	    send_level m_Interface[interfaceRef], LVL_MASK_DATA, atoi(arguments[3])
 	    send_level m_Interface[interfaceRef], LVL_MASK_TRIM_TOP, atoi(arguments[4])
@@ -2353,34 +2353,34 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 	    send_level m_Interface[interfaceRef], LVL_MASK_TOP_ABSOLUTE, atoi(arguments[7])
 	    send_level m_Interface[interfaceRef], LVL_MASK_BOTTOM_ABSOLUTE, atoi(arguments[8])
         }
-        
+
         active (arguments[2] = 'TITLE_NAME' && numArgs = 3) :
         {
             //Set the movie title.
 	    if(m_VT[VT_MOVIE_TITLE] <> 0)
 	    {
-		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_MOVIE_TITLE], 
+		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_MOVIE_TITLE],
 				arguments[3]"
 	    }
             call 'TRACE' (interfaceRef, "'Movie title is ', arguments[3]")
         }
-	
+
 	active (arguments[2] = 'MUSIC_TITLE') :
 	{
-	    
-	    if(m_VT[VT_SONG_NAME]) 
+
+	    if(m_VT[VT_SONG_NAME])
 	    {
-		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_SONG_NAME], 
+		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_SONG_NAME],
 				arguments[3]"
 	    }
 	    if(m_VT[VT_ARTIST_NAME])
 	    {
-		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_ARTIST_NAME], 
+		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_ARTIST_NAME],
 				arguments[4]"
 	    }
 	    if(m_VT[VT_ALBUM_NAME])
 	    {
-		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_ALBUM_NAME], 
+		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_ALBUM_NAME],
 				arguments[5]"
 	    }
 
@@ -2394,26 +2394,26 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 			    '0', "'GET_CONTENT_DETAILS:', arguments[7],'::'")
 		}
 	    }
-	    
+
 	    #IF_DEFINED SATP
-		if(KaleidescapeID[interfaceRef].zoneId) 
+		if(KaleidescapeID[interfaceRef].zoneId)
 		{
 		    //update the list in a moment, if shown
-		    do_push_timed(m_Interface[interfaceRef], CHN_GET_LIST_DELAYED, 
+		    do_push_timed(m_Interface[interfaceRef], CHN_GET_LIST_DELAYED,
 				    LIST_REQUEST_TIMEOUT)
 		}
-	    #END_IF	    
+	    #END_IF
 	}
 
 	active (arguments[2] = 'SYSTEM_READINESS_STATE' && numArgs = 3):
 	{
 	    // When a sytsem is unused for a period of time the system may spin down the disks and enter idle mode. The system
-	    // can be removed from idle mode using LEAVE_IDLE_MODE or any user interaction. It takes at least 15 seconds to 
+	    // can be removed from idle mode using LEAVE_IDLE_MODE or any user interaction. It takes at least 15 seconds to
 	    // exit idle mode. Possible values are:
 	    //	0 - system is ready
 	    //	1 - system is exiting idle mode
 	    //	2 - system is idle
-	    
+
     	    send_level m_Interface[interfaceRef], LVL_IDLE_MODE, atoi(arguments[3])
 	}
 
@@ -2421,31 +2421,31 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
         {
 	    stack_var integer MoviePlace
 	    stack_var integer MusicPlace
-	    
+
 	    call 'TRACE'(interfaceRef, 'Found UI_STATE')
-	    
+
             //Set the OSD state.
             OSDScreen[interfaceRef] = atoi(arguments[3])
             OSDPopup[interfaceRef] = atoi(arguments[4])
             OSDDialog[interfaceRef] = atoi(arguments[5])
             OSDSaver[interfaceRef] = atoi(arguments[6])
-	    
+
 	    //if this comes back as zero, make it movie list
-	    if(OSDScreen[interfaceRef] = 0) OSDScreen[interfaceRef] = 1	    
+	    if(OSDScreen[interfaceRef] = 0) OSDScreen[interfaceRef] = 1
 
 	    //if a page has been defined for this screen
 	    if(length_array(m_UIPages[OSDScreen[interfaceRef]]) > 0)
 	    {
-		send_string m_Interface[interfaceRef], "'PAGE-', 
+		send_string m_Interface[interfaceRef], "'PAGE-',
 		    m_UIPages[OSDScreen[interfaceRef]]"
 	    }
-	    
+
 	    call 'FB' (m_Interface[interfaceRef], BTN_KALEIDESCAPE_MENU + FEEDBACK_OFFSET,
 			(OSDDialog[interfaceRef] = OSD_DIALOG_KALEIDESCAPE_MENU))
             call 'FB' (m_Interface[interfaceRef], BTN_STATUS_AND_SETTINGS + FEEDBACK_OFFSET,
 			( (OSDPopup[interfaceRef] = OSD_DIALOG_STATUS) ||
 			(OSDPopup[interfaceRef] = OSD_DIALOG_SETTINGS) ) )
-	    
+
             call 'FB' (m_Interface[interfaceRef], BTN_COVER_ART + FEEDBACK_OFFSET,
 			(OSDScreen[interfaceRef] = OSD_SCREEN_COVER_ART))
             call 'FB' (m_Interface[interfaceRef], BTN_MOVIE_LIST + FEEDBACK_OFFSET,
@@ -2454,9 +2454,9 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 			(OSDScreen[interfaceRef] = OSD_SCREEN_COLLECTIONS))
             call 'FB' (m_Interface[interfaceRef], BTN_PARENTAL_CONTROL + FEEDBACK_OFFSET,
 			(OSDScreen[interfaceRef] = OSD_SCREEN_PARENTAL_CONTROL))
-            call 'FB' (m_Interface[interfaceRef], BTN_SYSTEM_STATUS + FEEDBACK_OFFSET, 
+            call 'FB' (m_Interface[interfaceRef], BTN_SYSTEM_STATUS + FEEDBACK_OFFSET,
 			(OSDScreen[interfaceRef] = OSD_SCREEN_SYSTEM_STATUS))
-	    
+
             call 'FB' (m_Interface[interfaceRef], BTN_MUSIC_COLLECTIONS + FEEDBACK_OFFSET,
 			(OSDScreen[interfaceRef] = OSD_SCREEN_MUSIC_COLLECTIONS))
             call 'FB' (m_Interface[interfaceRef], BTN_MUSIC_COVERS + FEEDBACK_OFFSET,
@@ -2467,8 +2467,8 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 			(OSDScreen[interfaceRef] = OSD_SCREEN_MUSIC_NOW_PLAYING))
 
             call 'FB' (m_Interface[interfaceRef], BTN_SCREEN_SAVER + FEEDBACK_OFFSET,
-			(OSDSaver[interfaceRef] = 1))	    
-	    
+			(OSDSaver[interfaceRef] = 1))
+
 	    MoviePlace = false
 	    MusicPlace = false
 	    switch (OSDScreen[interfaceRef]) //determine what type of page is showing
@@ -2477,25 +2477,25 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		case OSD_SCREEN_MOVIE_LIST: MoviePlace = true
 		case OSD_SCREEN_COLLECTIONS: MoviePlace = true
 		case OSD_SCREEN_MOVIE_PLAYING: MoviePlace = true
-		
+
 		case OSD_SCREEN_MUSIC_COVERS: MusicPlace = true
 		case OSD_SCREEN_MUSIC_COLLECTIONS: MusicPlace = true
 		case OSD_SCREEN_MUSIC_LIST: MusicPlace = true
-		case OSD_SCREEN_MUSIC_NOW_PLAYING: MusicPlace = true		
+		case OSD_SCREEN_MUSIC_NOW_PLAYING: MusicPlace = true
 	    }
-	    
-	    call 'FB' (m_Interface[interfaceRef], BTN_MOVIE_OSD_PLACE + FEEDBACK_OFFSET, 
+
+	    call 'FB' (m_Interface[interfaceRef], BTN_MOVIE_OSD_PLACE + FEEDBACK_OFFSET,
 			MoviePlace)
-	    call 'FB' (m_Interface[interfaceRef], BTN_MUSIC_OSD_PLACE + FEEDBACK_OFFSET, 
+	    call 'FB' (m_Interface[interfaceRef], BTN_MUSIC_OSD_PLACE + FEEDBACK_OFFSET,
 			MusicPlace)
-	    
+
             call 'TRACE' (interfaceRef, 'Setting OSD place')
         }
-        
+
 	active (arguments[2] = 'MOVIE_LOCATION') :
 	{
 	    MovieLocation[interfaceRef] = atoi(arguments[3])
-	    
+
 	    call 'FB' (m_Interface[interfaceRef], FB_LIGHTS_MOVIE,
 			(MovieLocation[interfaceRef] = MOVIE_LOCATION_PLAYING))
 	    call 'FB' (m_Interface[interfaceRef], FB_LIGHTS_INTERMISSION,
@@ -2507,7 +2507,7 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 	    call 'FB' (m_Interface[interfaceRef], FB_LIGHTS_CREDITS,
 			(MovieLocation[interfaceRef] = MOVIE_LOCATION_CREDITS))
 	}
-	
+
 	active (arguments[2] = 'MOVIE_MEDIA_TYPE') :
 	{
 	    //arguments[3] = Media Type
@@ -2515,24 +2515,24 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		//01 = DVD
 		//02 = Video Stream
 		//03 = Blu-ray
-		
-	    [m_Interface[interfaceRef],POP_BLURAY_CONTROLS + CHN_POPUP_OFFSET] = (arguments[3] = '03')	    
+
+	    [m_Interface[interfaceRef],POP_BLURAY_CONTROLS + CHN_POPUP_OFFSET] = (arguments[3] = '03')
 	}
-	
+
 	active (arguments[2] = 'MUSIC_NOW_PLAYING_STATUS') :
 	{
 	    call 'FB' (m_Interface[interfaceRef], BTN_REPEAT_TOGGLE + FEEDBACK_OFFSET,
 			(arguments[5]='1'))
 	    call 'FB' (m_Interface[interfaceRef], BTN_RANDOM_TOGGLE + FEEDBACK_OFFSET,
 			(arguments[6]='1'))
-	    
+
 	    #IF_DEFINED SATP
 		if(KaleidescapeID[interfaceRef].zoneId) //if this is an SATP device
 		{
 		    //update the list in a moment, if shown
-		    do_push_timed(m_Interface[interfaceRef], CHN_GET_LIST_DELAYED, 
+		    do_push_timed(m_Interface[interfaceRef], CHN_GET_LIST_DELAYED,
 				    LIST_REQUEST_TIMEOUT)
-		    
+
 		    if(CenterNowPlayingList(interfaceRef)) //if the center has changed
 		    {
 			//and if we're looking at the now playing window
@@ -2549,34 +2549,34 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 	    stack_var char 	presetIDTest[MAX_RESPONSE_ARG_LEN]
 	    stack_var char	presetTag[MAX_RESPONSE_ARG_LEN]
 	    stack_var integer 	presetNumber
-	    
+
 	    //Pull the Preset ID out of the Preset Tag.
-	    presetTag = arguments[3]	    
+	    presetTag = arguments[3]
 	    presetIDTest = remove_string(presetTag, PresetID[interfaceRef], 1)
-	    
+
 	    //Check to see if this ID is the one we're interested in.
 	    if(presetIDTest = PresetID[interfaceRef])
 	    {
-		call 'TRACE' (interfaceRef, "'Setting preset data for preset ', arguments[3], 
+		call 'TRACE' (interfaceRef, "'Setting preset data for preset ', arguments[3],
 				    ' with handle: ', arguments[4], ' and label: ', arguments[5]")
-	    
+
 		//The rest of presetTag is the numeric ID of the preset.
 		presetNumber = atoi(presetTag)
-		
+
 		//Drop the handle into the table for later identification.
 		PresetHandleTable[interfaceRef][presetNumber] = arguments[4]
 		//if the prest label VT has been defined
-		if(m_VT[VT_PRESET_LABEL_1 + presetNumber - 1] <> 0) 
+		if(m_VT[VT_PRESET_LABEL_1 + presetNumber - 1] <> 0)
 		{
 		    //send the preset label text to the VT
-		    send_string m_Interface[interfaceRef], "'!T', 
+		    send_string m_Interface[interfaceRef], "'!T',
 			m_VT[VT_PRESET_LABEL_1 + presetNumber - 1], arguments[5]"
 		}
 		call 'FEEDBACK PRESET' (interfaceRef, arguments[4])
 	    }
 	}
 	active(arguments[2] = 'PLAYING_MUSIC_INFORMATION') :
-	{	    	    
+	{
 	    call 'FEEDBACK PRESET' (interfaceRef, arguments[3])
 	    if(m_VT[VT_NOW_PLAYING_ITEM] <> 0)
 	    {
@@ -2585,30 +2585,30 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		    m_VT[VT_NOW_PLAYING_ITEM], arguments[4]"
 	    }
 	}
-	
+
 	active (arguments[2] = 'DEVICE_INFO') :
 	{
 	    //pass the sn and device ID to refactor the interface
-	    call 'REFACTOR DEVICE ID' (interfaceRef, arguments[4], arguments[5])	    
+	    call 'REFACTOR DEVICE ID' (interfaceRef, arguments[4], arguments[5])
 	    call 'GET ADDITIONAL DEVICE DATA'(interfaceRef)
 	}
-	
+
 	active (arguments[2] = 'DEVICE_TYPE_NAME'):
 	{
 	    DeviceTypeName[interfaceRef] = arguments[3]
 	}
-	
+
 	active (arguments[2] = 'NUM_ZONES') :
 	{
 	    stack_var integer vid_zones
 	    stack_var integer aud_zones
-	    
+
 	    vid_zones = atoi(arguments[3])
 	    aud_zones = atoi(arguments[4])
-	    
+
 	    call 'CHECK CONFIGURATION'(interfaceRef, vid_zones, aud_zones)
 	}
-	
+
 	//handle zone-in-standby error
 	active (arguments[1] = '020') :
 	{
@@ -2616,33 +2616,33 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 	    call 'TRACE'(interfaceRef, 'Device receive the 020 error')
 	    ON[m_Interface[interfaceRef], BTN_POWER_OFF_FB]
 	}
-	
+
 	//invalid device error
 	active (arguments[1] = '004') :
 	{
 	    OFF[m_Interface[interfaceRef], CHN_DEVICE_ONLINE]
 	}
-	
+
 	active (arguments[2] = 'DEVICE_POWER_STATE') :
 	{
 	    stack_var integer offset
 	    //When we get the power state feedback, check if our zone is on or off
-	    
+
 	    offset = KaleidescapeID[interfaceRef].zoneId + 3
-	    
+
 	    call 'TRACE'(interfaceRef, "'Received power change notice.  My state=',arguments[offset]")
-	    
+
 	    [m_Interface[interfaceRef],BTN_POWER_ON_FB]  = not (arguments[offset] = '0')
 	    [m_Interface[interfaceRef],BTN_POWER_OFF_FB] =     (arguments[offset] = '0')
-	    
+
 	}
-	
+
 	active (arguments[2] = 'VIDEO_MODE') :
 	{
 	    send_level m_Interface[interfaceRef], LVL_VIDEO_MODE_COMPOSITE, atoi(arguments[3])
 	    send_level m_Interface[interfaceRef], LVL_VIDEO_MODE_COMPONENT, atoi(arguments[4])
 	    send_level m_Interface[interfaceRef], LVL_VIDEO_MODE_HDMI, atoi(arguments[5])
-	    
+
 	    if (SentTraceInfo)
 	    {
 		call 'VIDEO MODE TRACE' ('Composite/Svideo', atoi(arguments[3]),interfaceRef)
@@ -2650,86 +2650,86 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		call 'VIDEO MODE TRACE' ('HDMI            ', atoi(arguments[5]),interfaceRef)
 	    }
 	}
-	
+
 	active (arguments[2] = 'CINEMASCAPE_MODE') :	//Added for CinemaScape support, 10/26/11
 	{
 	    CinemaScape_Mode[interfaceRef] = atoi(arguments[3])
-	    
+
 		send_level m_Interface[interfaceref], LVL_CINEMASCAPE_MODE, CinemaScape_Mode[interfaceRef]
-		   
-		call 'FB' (m_Interface[interfaceRef], FB_CINEMASCAPE_OFF, 
+
+		call 'FB' (m_Interface[interfaceRef], FB_CINEMASCAPE_OFF,
 			    (CinemaScape_Mode[interfaceRef] = FB_CINEMASCAPE_OFF - 130))
-		call 'FB' (m_Interface[interfaceRef], FB_CINEMASCAPE_ANAMORPHIC, 
+		call 'FB' (m_Interface[interfaceRef], FB_CINEMASCAPE_ANAMORPHIC,
 			    (CinemaScape_Mode[interfaceRef] = FB_CINEMASCAPE_ANAMORPHIC - 130))
-		call 'FB' (m_Interface[interfaceRef], FB_CINEMASCAPE_LETTERBOX, 
+		call 'FB' (m_Interface[interfaceRef], FB_CINEMASCAPE_LETTERBOX,
 			    (CinemaScape_Mode[interfaceRef] = FB_CINEMASCAPE_LETTERBOX - 130))
-		call 'FB' (m_Interface[interfaceRef], FB_CINEMASCAPE_NATIVE, 
+		call 'FB' (m_Interface[interfaceRef], FB_CINEMASCAPE_NATIVE,
 			    (CinemaScape_Mode[interfaceRef] = FB_CINEMASCAPE_NATIVE - 130))
-	    
+
 	    if(CinemaScape_Mode[interfaceRef])
 	    {
 		call 'SEND_REQUEST' (interfaceRef, 'GET_SCALE_MODE:')
 		call 'SEND_REQUEST' (interfaceRef, 'GET_CINEMASCAPE_MASK:')
 	    }
 	}
-	
+
 	active (arguments[2] = 'SCALE_MODE') :	//Added for CinemaScape support, 02/13/12
 	{
 	    Scale_Mode[interfaceRef] = atoi(arguments[3])
-	    
+
 	    send_level m_Interface[interfaceRef], LVL_CINEMASCAPE_SCALE_MODE, Scale_Mode[interfaceRef]
 	}
-	
+
 	active (arguments[2] = 'CINEMASCAPE_MASK') :	//Added for CinemaScape support, 10/26/11
 	{
 	    CinemaScape_Mask[interfaceRef] = atoi(arguments[3])
-	
+
 	    send_level m_Interface[interfaceRef], LVL_CINEMASCAPE_MASK, CinemaScape_Mask[interfaceRef]
 	}
-	
+
 	active (arguments[2] = 'USER_INPUT') :
 	{
 	    stack_var integer keyboardPageState
 	    stack_var integer keypadPageState
-	    
+
 	    keyboardPageState = 0 //assume we're going to close the pages
 	    keypadPageState = 0
-	    
+
 	    switch (atoi(arguments[3]))	// determines the type of input needed
-	    {		
-		case 1: // keyboard input 
+	    {
+		case 1: // keyboard input
 		{
 		    keyboardPageState = 1
 		}
-		case 2: // keypad input 
+		case 2: // keypad input
 		{
 		    //don't pop the keypad over the parental control screen
 		    if(OSDScreen[interfaceRef] != OSD_SCREEN_PARENTAL_CONTROL)
 			keypadPageState = 1
 		}
 	    }
-	       
+
 	    [m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_KEYBOARD_PAGE] = keyboardPageState
 	    [m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_KEYPAD_PAGE] = keypadPageState
-	
+
 	    if(m_VT[VT_INPUT_PROMPT] <> 0) //if the input prompt VT has been defined
 	    {
 		//send the prompt text to the VT
-		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_INPUT_PROMPT], 
+		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_INPUT_PROMPT],
 				arguments[4]"
 	    }
 
 	    if(m_VT[VT_INPUT_FIELD] <> 0) //if the input field VT has been defined
 	    {
 		//send the input field text to the VT
-		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_INPUT_FIELD], 
+		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_INPUT_FIELD],
 				arguments[5]"
 	    }
 	}
-	
-	active (arguments[2] = 'USER_DEFINED_EVENT') :	// To create similar processes for handling volume commands with or without a 
+
+	active (arguments[2] = 'USER_DEFINED_EVENT') :	// To create similar processes for handling volume commands with or without a
 	{						// Controller Zone Name the response to volume events has been moved to
-							// the Kaleidescape Multiple Panel Include file. 
+							// the Kaleidescape Multiple Panel Include file.
 	    if(find_string(arguments[3], 'VOLUME_', 1) || find_string(arguments[3], 'TOGGLE_', 1))
 	    {
 	    	send_string m_Interface[interfaceRef], "'*V', arguments[3]"
@@ -2739,48 +2739,48 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		send_string m_Interface[interfaceRef], "'~U', arguments[3]"
 	    }
 	}
-	
+
 	active (arguments[2] = 'FRIENDLY_NAME') :
 	{
 	    PlayerName[interfaceRef] = arguments[3]
 	    if(m_VT[VT_PLAYER_NAME] <> 0)
 	    {
-		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_PLAYER_NAME], 
+		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_PLAYER_NAME],
 				arguments[3]"
 	    }
 	}
-	
+
 	active (arguments[2] = 'HIGHLIGHTED_SELECTION') :
 	{
 	    //if either the details info, title, or images values are defined...
-	    if( (m_VT[VT_DETAILS_INFO]) 
+	    if( (m_VT[VT_DETAILS_INFO])
 	     || (m_VT[VT_DETAILS_TITLE])
 	     || (length_string(m_UIImages[IMG_DETAILS]) > 0) )
-	    {		    
+	    {
 		//ask for the details for this handle
 		HighlightedSelectionHandle[interfaceRef] = arguments[3]
-		do_push_timed(m_Interface[interfaceRef], CHN_RESET_HIGHLIGHTED_DETAILS, 
+		do_push_timed(m_Interface[interfaceRef], CHN_RESET_HIGHLIGHTED_DETAILS,
 				TIMEOUT_GET_DETAILS)
 	    }
 	}
-	
+
 	active (sequence = '0') : //trap the now playing update information
 	{
 	    if(arguments[2] = 'CONTENT_DETAILS' && arguments[4] = 'Cover_URL')
 	    {
 		//if a now playing image is defined
-		if( length_array(m_UIImages[IMG_NOW_PLAYING]) )	
+		if( length_array(m_UIImages[IMG_NOW_PLAYING]) )
 		{
 		    call 'SET IMAGE'(interfaceRef, m_UIImages[IMG_NOW_PLAYING], arguments[5])
 		}
-	    }	
+	    }
 	}
-	
+
 	active (arguments[2] = 'CONTENT_DETAILS_OVERVIEW') :
-	{	    
+	{
 	    NumberOfDetails = atoi(arguments[3])
 	    ContentDetail.library = arguments[5]
-	    
+
 	    //Clear all remaining fields
 	    ContentDetail.title = ''
 	    ContentDetail.performer = ''
@@ -2792,61 +2792,61 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 	    ContentDetail.runningTime = ''
 	    ContentDetail.synopsis = ''
 	    ContentDetail.location = ''
-	}   
-	
+	}
+
 	//if this is a detail, and there is detail data
 	active(arguments[2] = 'CONTENT_DETAILS' ) :
-	{  
+	{
 	    select
-	    {		
+	    {
 		active(arguments[4] = 'Artist') : ContentDetail.performer = arguments[5]
 		active(arguments[4] = 'Artists') : ContentDetail.performer = arguments[5]
-		active(arguments[4] = 'Performer') : ContentDetail.performer = arguments[5] 
-		active(arguments[4] = 'Performers') : ContentDetail.performer = arguments[5] 
-		active(arguments[4] = 'Composer') : ContentDetail.composer = arguments[5] 
-		active(arguments[4] = 'Composers') : ContentDetail.composer = arguments[5] 
-		active(arguments[4] = 'Genre') : ContentDetail.genre = arguments[5] 
-		active(arguments[4] = 'Genres') : ContentDetail.genre = arguments[5] 
-		active(arguments[4] = 'Album_title') : ContentDetail.title = arguments[5] 
-		active(arguments[4] = 'Title') : ContentDetail.title = arguments[5] 
-		active(arguments[4] = 'Album_year') : ContentDetail.year = arguments[5] 
+		active(arguments[4] = 'Performer') : ContentDetail.performer = arguments[5]
+		active(arguments[4] = 'Performers') : ContentDetail.performer = arguments[5]
+		active(arguments[4] = 'Composer') : ContentDetail.composer = arguments[5]
+		active(arguments[4] = 'Composers') : ContentDetail.composer = arguments[5]
+		active(arguments[4] = 'Genre') : ContentDetail.genre = arguments[5]
+		active(arguments[4] = 'Genres') : ContentDetail.genre = arguments[5]
+		active(arguments[4] = 'Album_title') : ContentDetail.title = arguments[5]
+		active(arguments[4] = 'Title') : ContentDetail.title = arguments[5]
+		active(arguments[4] = 'Album_year') : ContentDetail.year = arguments[5]
 		active(arguments[4] = 'Rating') : ContentDetail.Rating = arguments[5]
-		active(arguments[4] = 'Rating_reason') : 
+		active(arguments[4] = 'Rating_reason') :
 		    ContentDetail.ratingReason = arguments[5]
 		active(arguments[4] = 'Synopsis') : ContentDetail.synopsis = arguments[5]
 		active(arguments[4] = 'Year') : ContentDetail.year = arguments[5]
 		active(arguments[4] = 'Actors') : ContentDetail.performer = arguments[5]
 		active(arguments[4] = 'Directors') : ContentDetail.composer = arguments[5]
-		active(arguments[4] = 'Running_time') : 
-		    ContentDetail.runningTime = arguments[5]    	
+		active(arguments[4] = 'Running_time') :
+		    ContentDetail.runningTime = arguments[5]
 		active(arguments[4] = 'Cover_URL') : ContentDetail.coverURL = arguments[5]
 		active(arguments[4] = 'Disc_location') : ContentDetail.location = arguments[5]
 		active(1) : call 'TRACE' (interfaceRef, 'Ignoring this detail')
 	    }
-	    
+
 	    //if we've seen the last detail, render the details
 	    if(atoi(arguments[3]) = numberOfDetails) call 'RENDER DETAILS' (interfaceRef)
-	
+
     	return;
 	}
-	
+
 	#IF_DEFINED SATP
-	
+
 	//combine these two notices to have unified local variables
-	active( arguments[2] = 'BROWSE_RESULTS_OVERVIEW' || 
+	active( arguments[2] = 'BROWSE_RESULTS_OVERVIEW' ||
 		arguments[2] = 'BROWSE_RESULT') :
 	{
 	    local_var integer lastItem
 	    stack_var integer lineNumber
-	    
+
 	    //reset the timeout
 	    do_push_timed(m_Interface[interfaceRef], CHN_LIST_ACTIVE, LIST_ACTIVE_TIMEOUT)
-	    
+
 	    if(length_string(arguments[2]) = 23) //this is the overview
 	    {
 		stack_var integer nodeRef
 		nodeRef = BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current
-		
+
 		//the handle is arguments[3]
 		select
 		{
@@ -2854,23 +2854,23 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		    active (length_array(BrowseNodeResource[nodeRef].searchText) = 0):
 		    {
 			//send the list title
-			send_string m_Interface[interfaceRef], "'!T', BTN_LIST_TITLE, 
+			send_string m_Interface[interfaceRef], "'!T', BTN_LIST_TITLE,
 					arguments[4]"
 		    }
 		    //fuzzy search is active (telephone keypad style)
-		    active (isFuzzySearch(nodeRef)): 
+		    active (isFuzzySearch(nodeRef)):
 		    {
-			send_string m_Interface[interfaceRef], "'!T', BTN_LIST_TITLE, 
+			send_string m_Interface[interfaceRef], "'!T', BTN_LIST_TITLE,
 					arguments[4], ' - Matching '"
 		    }
 		    active (1):
 		    {
-			send_string m_Interface[interfaceRef], "'!T', BTN_LIST_TITLE, arguments[4], 
-			    ' - Matching "', toTitleCaps(BrowseNodeResource[nodeRef].searchText), 
+			send_string m_Interface[interfaceRef], "'!T', BTN_LIST_TITLE, arguments[4],
+			    ' - Matching "', toTitleCaps(BrowseNodeResource[nodeRef].searchText),
 			    '"'"
 		    }
 		}
-		    
+
 		lastItem = atoi(arguments[5])
 		ListLength[interfaceRef] = atoi(arguments[6])
 		ListOffset[interfaceRef] = 0 //clear the offset
@@ -2878,32 +2878,32 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		{
 		    BrowseNodeResource[nodeRef].selection = 0		//we can't track the now playing item, so remove the highlight
 		}
-		
+
 		//if the keyboard search is active
-		if(KeyboardStatus[interfaceRef] = KEYB_SEARCH) 
+		if(KeyboardStatus[interfaceRef] = KEYB_SEARCH)
 		{
 		    if( m_VT[VT_INPUT_PROMPT])
 		    {
-			send_string m_Interface[interfaceRef], "'!T', m_VT[VT_INPUT_PROMPT], 
+			send_string m_Interface[interfaceRef], "'!T', m_VT[VT_INPUT_PROMPT],
 					'Search ', arguments[4]"
 		    }
-			
+
 		    if(m_VT[VT_SATP_SEARCH_MATCH]) //if the VT is setup
 		    {
 			if(ListLength[interfaceRef] = 0) //if the list length is zero
 			{
 			    //indicate no matches
-			    send_string m_Interface[interfaceRef], "'!T', 
-					    m_VT[VT_SATP_SEARCH_MATCH], 
+			    send_string m_Interface[interfaceRef], "'!T',
+					    m_VT[VT_SATP_SEARCH_MATCH],
 					    'No matching entries'"
 			}
 			//if more than 1 entry
 			if( (ListLength[interfaceRef] > 1) and (!isFuzzySearch(nodeRef)) )
 			{
 			    //indicate the number
-			    send_string m_Interface[interfaceRef], "'!T', 
+			    send_string m_Interface[interfaceRef], "'!T',
 					    m_VT[VT_SATP_SEARCH_MATCH],
-					    'Matches ', itoa(ListLength[interfaceRef]), 
+					    'Matches ', itoa(ListLength[interfaceRef]),
 					    ' entries'"
 			}
 		    }
@@ -2911,18 +2911,18 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		else //keyboard search is off
 		{
 		    //Check to ensure list is in bounds
-		    
+
 		    //if the list fits in the window
 		    if(ListLength[interfaceRef] <= ListWindowLength[interfaceRef] )
 		    {
 			//if the last item on the list isn't the last item displayed and has been intentionally moved
-			if(lastItem <> ListLength[interfaceRef] and 
+			if(lastItem <> ListLength[interfaceRef] and
 		           BrowseNodeResource[nodeRef].moved )
 			{
 			    BrowseNodeResource[nodeRef].position = 1 //reset to the top of the list
-			    
+
 			    call 'TRACE'(interfaceRef, 'Reposistioning list to fill the top of the window.')
-			    
+
 			    //go get the new list (will double draw the window)
 			    call 'GET LIST'(interfaceRef)
 			}
@@ -2930,33 +2930,33 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		    else   //if the list doesn't fit in the window and hasn't moved
 		    {
 			/*
-			 * if the entire list doesn't fill the window (last item short 
+			 * if the entire list doesn't fill the window (last item short
 			 * of the window length)
 			 * and the list has been intentionally moved
 			 */
-			if(lastItem < ListWindowLength[interfaceRef] and 
+			if(lastItem < ListWindowLength[interfaceRef] and
 		           BrowseNodeResource[nodeRef].moved )
 			{
 			    /*
-			     * reset to the bottom of the list (last item occupies 
+			     * reset to the bottom of the list (last item occupies
 			     * the last spot in the window)
 			     */
-			    BrowseNodeResource[nodeRef].position = ListLength[interfaceRef] - 
+			    BrowseNodeResource[nodeRef].position = ListLength[interfaceRef] -
 				    ListWindowLength[interfaceRef] + 1
-				    
+
 			    call 'TRACE'(interfaceRef, 'Reposistioning list to fill the bottom of the window.')
-				    
+
 			    //go get the new list (will double draw the window)
-			    call 'GET LIST'(interfaceRef) 
+			    call 'GET LIST'(interfaceRef)
 			}
 		    }
-		    		    
+
 		    call 'LIST RENDER SEARCH BUTTON' (interfaceRef)
-		    
+
 		    if(!ListLength[interfaceRef]) //if the length is non zero
 		    {
 			//blank the lines
-			for(lineNumber++; lineNumber <= ListWindowLength[interfaceRef]; 
+			for(lineNumber++; lineNumber <= ListWindowLength[interfaceRef];
 				lineNumber++)
 			{
 			    List[interfaceRef][lineNumber].behavior = 0
@@ -2969,19 +2969,19 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 		    }
 
 		    //if there's a previous node in the stack, render the back button
-		    call 'FB' (m_Interface[interfaceRef], BTN_LIST_BACK + FEEDBACK_OFFSET, 
+		    call 'FB' (m_Interface[interfaceRef], BTN_LIST_BACK + FEEDBACK_OFFSET,
 				BrowseNodeResource[nodeRef].previousNode)
 		}
 	    }
 	    else //this is a result
 	    {
 		lineNumber = atoi(arguments[3])
-		
+
 		//store the functions for each line
 		List[interfaceRef][lineNumber].behavior = atoi(arguments[8])
 		List[interfaceRef][lineNumber].handle = arguments[9]
 		List[interfaceRef][lineNumber].pop = atoi(arguments[10])
-		
+
 		//if the keyboard search is active
 		if(KeyboardStatus[interfaceRef] = KEYB_SEARCH)
 		{
@@ -2990,44 +2990,44 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 			if(ListLength[interfaceRef] = 1) //if there is exactly one match
 			{
 			    //send that named match
-			    send_string m_Interface[interfaceRef], "'!T', 
-					    m_VT[VT_SATP_SEARCH_MATCH], 'Matches "', 
+			    send_string m_Interface[interfaceRef], "'!T',
+					    m_VT[VT_SATP_SEARCH_MATCH], 'Matches "',
 					    arguments[5], '"'"
 			}
 			else if(isFuzzySearch(BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current))
 			{
 			    //send that named match
-			    send_string m_Interface[interfaceRef], "'!T', 
+			    send_string m_Interface[interfaceRef], "'!T',
 					    m_VT[VT_SATP_SEARCH_MATCH], 'Matches "',
 					    arguments[5], '"', TouchPanelNewLine, 'and ',
 					    itoa(ListLength[interfaceRef] - 1), ' more'"
 			}
 		    }
-			
+
 		    //indicate that we're done with the list
 		    do_release(m_Interface[interfaceRef], CHN_LIST_ACTIVE)
-		    
+
 		    call 'LIST RENDER SCROLLBAR' (interfaceRef)
 		}
-		
+
 		else //not in keyboard search
 		{
 		    if(lineNumber = 1) //if this is the first line
 		    {
 		    	stack_var integer nodeRef
-			
+
 			nodeRef = BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current
-			
+
 			//store the actual position of this node
 			BrowseNodeResource[nodeRef].position = atoi(arguments[4])
 			//set the relative position of the entire list
 			ListOffset[interfaceRef] = BrowseNodeResource[nodeRef].position - lineNumber
 			call 'LIST RENDER SCROLLBAR' (interfaceRef)
 		    }
-				    
-		    call 'LIST RENDER WINDOW'(interfaceRef, lineNumber, arguments[5], 
+
+		    call 'LIST RENDER WINDOW'(interfaceRef, lineNumber, arguments[5],
 			    atoi(arguments[6]), List[interfaceRef][lineNumber].behavior)
-		    
+
 		    //if we've reached the last line
 		    if(lineNumber = lastItem)
 		    {
@@ -3035,38 +3035,38 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 			if(lineNumber < ListWindowLength[interfaceRef])
 			{
 			    //blank the last lines
-			    for(lineNumber++; lineNumber <= ListWindowLength[interfaceRef]; 
+			    for(lineNumber++; lineNumber <= ListWindowLength[interfaceRef];
 				    lineNumber++)
 			    {
 				List[interfaceRef][lineNumber].behavior = 0
 				call 'LIST RENDER WINDOW'(interfaceRef, lineNumber, '', 0, 0)
 			    }
 			}
-			
+
 			//indicate that we're done with the list
 			do_release(m_Interface[interfaceRef], CHN_LIST_ACTIVE)
 		    }
 		}
 	    }
-	}	
+	}
 	active(arguments[1] = '017' ) :		//we'll get this error if we've an invalid browse handle
 	{
 	    stack_var integer nodeRef
 	    nodeRef = BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current
-	    
+
 	    if( KeyboardStatus[interfaceRef] = KEYB_OFF and		//if no keyboard search is active
 		BrowseNodeResource[nodeRef].previousNode )		//and there's a previous node
 	    {
 		call 'POP NODE' (interfaceRef, CurrentList[interfaceRef])	//pop the node
 		call 'GET LIST' (interfaceRef)					//and get the new list
-		
+
 	    }
-	        
-	    
+
+
 	}
-	
-	
-	#END_IF    
+
+
+	#END_IF
         //Parse other events here
     }
 }
@@ -3078,34 +3078,34 @@ DEFINE_CALL 'PARSE MESSAGE' (integer interfaceRef, char deviceId[], integer sequ
 DEFINE_CALL 'ERROR DECODER' (integer errorCode, char details[])
 {
     stack_var char description[80]
-    
+
     switch (errorCode)
     {
-	case 1:  
+	case 1:
 	{
 		description =  "'Message too long.'"
 	}
-	case 2:  
+	case 2:
 	{
 		description =  "'Message contains invalid character.'"
 	}
-	case 3:  
+	case 3:
 	{
 		description =  "'Checksum error.'"
 	}
-	case 4:  
+	case 4:
 	{
 		description =  "'Invalid device.'"
 	}
-	case 5:  
+	case 5:
 	{
 		description =  "'Device unavailable.'"
 	}
-	case 10:  
+	case 10:
 	{
 		description =  "'Invalid request.'"
 	}
-	case 11:  
+	case 11:
 	{
 		description =  "'Invalid number of parameters.'"
 	}
@@ -3113,51 +3113,51 @@ DEFINE_CALL 'ERROR DECODER' (integer errorCode, char details[])
 	{
 		description =  "'Invalid parameter.'"
 	}
-	case 13:  
+	case 13:
 	{
 		description =  "'Device identifier conflict.'"
 	}
-	case 14:  
+	case 14:
 	{
 		description =  "'Invalid sequence number.'"
 	}
-	case 15:  
+	case 15:
 	{
 		description =  "'Disallowed due to parental control.'"
 	}
-	case 16:  
+	case 16:
 	{
 		description =  "'Invalid passcode.'"
 	}
-	case 17:  
+	case 17:
 	{
 		description =  "'Invalid content handle.'"
 	}
-	case 28:  
+	case 28:
 	{
 		description =  "'Incompatible video configuration.'"
 	}
-	case 29:  
+	case 29:
 	{
 		description =  "'Incompatible video configuration.'"
 	}
-	case 999:  
+	case 999:
 	{
 		description =  "'Undetermined error.'"
 	}
-	default:  
+	default:
 	{
 		description =  "'Unknown error.'"
 	}
     }
-    
+
     call 'TRACE' (0, "'Error ', itoa(errorCode), ': ', description, ' ', details")
 }
 
 DEFINE_CALL 'VIDEO MODE TRACE' (char output[], integer videoMode, integer interfaceRef)
 {
     stack_var char description[20]
-    
+
     switch (videoMode)
     {
 	case 0:
@@ -3253,21 +3253,21 @@ DEFINE_CALL 'VIDEO MODE TRACE' (char output[], integer videoMode, integer interf
 	    description = "'1080p24 64x27'"
 	}
     }
-    
+
     call 'TRACE' (interfaceRef, "output,' video mode: ',description")
 }
 
 DEFINE_CALL 'SEND_KPORT' (messageToSend[256])
 {
-    if(length_string(messageToSend) = 0) return //do not process blank sends 
-    
+    if(length_string(messageToSend) = 0) return //do not process blank sends
+
     if(portOpened)
     {
 	send_string m_Kport, "messageToSend, $0D"
-	
+
 	call 'TRACE' (0, "'Sending command "', messageToSend, '"'")
-	
-	
+
+
 	wait 50 'Send Timeout' //if no response in 5 seconds
 	{
 	    setPortInitialized(false)
@@ -3276,7 +3276,7 @@ DEFINE_CALL 'SEND_KPORT' (messageToSend[256])
     else
     {
 	call 'TRACE' (0, 'Not sending string, port closed.')
-	
+
 	if(IPPortStatus = IP_PORT_CLOSED)
 	{
 	    managePort(IP_PORT_RESET, 0)
@@ -3289,16 +3289,16 @@ DEFINE_CALL 'SEND TO TARGET'(char deviceId[], integer deviceZoneId, integer sequ
     stack_var char 	dataOut[256]
     stack_var char 	checksum
     stack_var integer 	index
-    
+
     //Build the whole command.
     dataOut = deviceId //set the device ID
 
     //if there's a stream ID, set the stream ID
-    if(deviceZoneId != 0) dataOut = "dataOut, format('.%02d', deviceZoneId)"	 
-    
+    if(deviceZoneId != 0) dataOut = "dataOut, format('.%02d', deviceZoneId)"
+
     //add in the sequence and command
     dataOut = "dataOut, '/', sequence, '/', commandData, '/'"
-    
+
     //Calculate the checksum.
     checksum = 0
 
@@ -3306,18 +3306,18 @@ DEFINE_CALL 'SEND TO TARGET'(char deviceId[], integer deviceZoneId, integer sequ
     {
         checksum = (checksum + dataOut[index]) % 100
     }
-    
+
     //Add checksum to request, always two digits, zero-padded.
     dataOut = "dataOut, format('%02d', checksum)"
-    
+
     call 'SEND_KPORT' (dataOut)
 }
 
 DEFINE_CALL 'SEND_REQUEST' (integer interfaceRef, char commandData[256])
 {
     stack_var char deviceId[13]
-    
-    /* 
+
+    /*
      * Kaleidescape requests are of the format:
      *
      *    01/1/COMMAND:ARG1:ARG2:/99
@@ -3325,15 +3325,15 @@ DEFINE_CALL 'SEND_REQUEST' (integer interfaceRef, char commandData[256])
      * 	  01.01/1/COMMAND:ARG1:ARG2:/99
      *
      *    where:
-     *  
+     *
      *      01 is the device you're controlling (01 is the device you're connected to,
      *          but you can assign each device a unique ID using the installer web utility.)
-     *      1 is the sequence number.  
+     *      1 is the sequence number.
      *      COMMAND: is the command, such as "SELECT:" to press the Select button.
      *      ARG1: are the arguments to the command.  Usually there are no arguments.
      *      99 is the checksum, which we calculate.
      */
-    
+
     if(atoi(KaleidescapeID[interfaceRef].deviceId) = 0)
     {
 	deviceId = '01'
@@ -3342,8 +3342,8 @@ DEFINE_CALL 'SEND_REQUEST' (integer interfaceRef, char commandData[256])
     {
 	deviceId = KaleidescapeID[interfaceRef].deviceId
     }
-	
-    call 'SEND TO TARGET' (deviceId, KaleidescapeID[interfaceRef].zoneId, 
+
+    call 'SEND TO TARGET' (deviceId, KaleidescapeID[interfaceRef].zoneId,
 	    KaleidescapeID[interfaceRef].sequence, commandData)
 }
 
@@ -3352,28 +3352,28 @@ DEFINE_CALL 'REFRESH TP' (interfaceRef)
 {
     stack_var loop
     call 'TRACE' (interfaceRef,"'Refreshing TP Feedback'")
-    
+
     if(m_VT[VT_CHAPTER_NUMBER] <> 0)
     {
 	//send chapter info to TP if defined
 	send_string m_Interface[interfaceRef], "'!T', m_VT[VT_CHAPTER_NUMBER],
-			itoa(Chapter[interfaceRef])" 
+			itoa(Chapter[interfaceRef])"
     }
-	
+
     if(m_VT[VT_TRACK_TOTAL_TIME] <> 0)
     {
 	send_string m_Interface[interfaceRef], "'!T', m_VT[VT_TRACK_TOTAL_TIME],
 			displayHMS(TitleLength[interfaceRef])"
     }
-	
+
     if(m_VT[VT_PLAYER_NAME] <> 0)
     {
 	send_string m_Interface[interfaceRef], "'!T', m_VT[VT_PLAYER_NAME],
 			PlayerName[interfaceRef]"
     }
-	
+
     // send page flips
-    
+
     //if a page reference exists for this screen and it's been set
     if (  (max_length_array(m_UIPages) >= OSDScreen[interfaceRef]) &&
        (OSDScreen[interfaceRef] <> 0) )
@@ -3381,11 +3381,11 @@ DEFINE_CALL 'REFRESH TP' (interfaceRef)
 	//if a page has been defined for this screen
 	if(length_array(m_UIPages[OSDScreen[interfaceRef]]) > 0)
 	{
-	    send_string m_Interface[interfaceRef], "'PAGE-', 
+	    send_string m_Interface[interfaceRef], "'PAGE-',
 			    m_UIPages[OSDScreen[interfaceRef]]"
 	}
     }
-    
+
     for(loop = max_length_array(m_UIPopups); loop > 0; loop--)
     {
 	call 'SET POPUP STATE'(interfaceRef, loop)
@@ -3410,7 +3410,7 @@ DEFINE_CALL 'ENABLE EVENTS' (integer interfaceRef)
     else //if we are controlling a stream
     {
 	//enable events for the stream ID
-	call 'SEND TO TARGET' ('01', 0, '0', "'ENABLE_EVENTS:', KaleidescapeID[interfaceRef].deviceId, '.', itoa(KaleidescapeID[interfaceRef].zoneId), ':'")	
+	call 'SEND TO TARGET' ('01', 0, '0', "'ENABLE_EVENTS:', KaleidescapeID[interfaceRef].deviceId, '.', itoa(KaleidescapeID[interfaceRef].zoneId), ':'")
     }
 }
 
@@ -3424,18 +3424,18 @@ DEFINE_CALL 'REFACTOR DEVICE ID' (integer interfaceRef, char serialNumber[], cha
 
     //if it's non routable (0), it's actaully 1 (local)
     if(realDeviceId = '00') realDeviceId = '01'
-    
+
     oldDeviceId = KaleidescapeID[interfaceRef].deviceId
-    
+
     if(KaleidescapeID[interfaceRef].deviceId = '01') //if the stated device ID is a control ID (not a serial number) and is 1
     {
 	//use the connected device ID
 	set_length_array(KaleidescapeID[interfaceRef].deviceId, 2)
 	KaleidescapeID[interfaceRef].deviceId = ConnectedDeviceID
     }
-    
+
     //if the serial number is the same as the connected device's SN
-    if(serialNumber = ConnectedDeviceSN) 
+    if(serialNumber = ConnectedDeviceSN)
     {
 	DeviceIndirect[interfaceRef] = false //then we're directly connected
     }
@@ -3445,17 +3445,17 @@ DEFINE_CALL 'REFACTOR DEVICE ID' (integer interfaceRef, char serialNumber[], cha
     }
 
     call 'ENABLE EVENTS'(interfaceRef)
-    
-    call 'TRACE'(interfaceRef, "'Refactored - old ID=', oldDeviceId, 
+
+    call 'TRACE'(interfaceRef, "'Refactored - old ID=', oldDeviceId,
 		', new ID=', KaleidescapeID[interfaceRef].deviceId,
-		', Stream=' ,itoa(KaleidescapeID[interfaceRef].zoneId), 
-		', Indirect=', itoa(DeviceIndirect[interfaceRef]), 
+		', Stream=' ,itoa(KaleidescapeID[interfaceRef].zoneId),
+		', Indirect=', itoa(DeviceIndirect[interfaceRef]),
 		', SN=', serialNumber")
 }
 
 //when the device starts up...
 DEFINE_CALL 'INITIALIZE DEVICE' (integer interfaceRef)
-{    
+{
     if(portPassingCommands)
     {
 	//retrieve what type of device we're talking to
@@ -3470,8 +3470,8 @@ DEFINE_CALL 'GET ADDITIONAL DEVICE DATA' (integer interfaceRef)
     call 'SEND_REQUEST' (interfaceRef, 'GET_NUM_ZONES:')   //find out how many zones are available on the device
     call 'SEND_REQUEST' (interfaceRef, 'GET_CINEMASCAPE_MODE:')
     call 'SEND_REQUEST' (interfaceRef, 'GET_SYSTEM_READINESS_STATE:')
-    
-    
+
+
     call 'SEND_REQUEST' (interfaceRef, "'SEND_EVENT:VOLUME_CAPABILITIES=', itoa(VolumeCapability[interfaceRef]), ':'")	//Send Volume capabilities to the player when the IP port is opened
 }
 
@@ -3509,12 +3509,12 @@ DEFINE_CALL 'CHECK CONFIGURATION'(interfaceRef, vid_zones, aud_zones)
     {
 	DeviceTypeName[interfaceRef] = 'device'
     }
-    
+
     if( KaleidescapeID[interfaceRef].zoneID = 0 )	//OSD control
     {
 	if( vid_zones >= 1 )				//if there's at least 1 video zones
 	{
-	    ON[m_Interface[interfaceRef], CHN_CONFIGURATION_VALID]	    
+	    ON[m_Interface[interfaceRef], CHN_CONFIGURATION_VALID]
 	}
 	else
 	{
@@ -3541,7 +3541,7 @@ DEFINE_CALL 'CHECK CONFIGURATION'(interfaceRef, vid_zones, aud_zones)
 DEFINE_CALL 'CHECK PORT' ()
 {
     //the DEVICE_POWER_STATE message should return even if the device is in standby
-    call 'SEND TO TARGET'('01', 0, '0', 'GET_DEVICE_POWER_STATE:')    
+    call 'SEND TO TARGET'('01', 0, '0', 'GET_DEVICE_POWER_STATE:')
 }
 
 //verify that the port is routing traffic
@@ -3555,16 +3555,16 @@ DEFINE_CALL 'CHECK COMMAND PASSING' ()
 DEFINE_CALL 'SET POPUP STATE'(interfaceRef, popupRef)
 {
     stack_var loop
-    
+
     //ensure this page is defined
     if(m_UIPopups[popupRef] = '')
 	return
-	
+
     if([m_Interface[interfaceRef], CHN_POPUP_OFFSET + popupRef])
     {
 	send_string m_Interface[interfaceRef], "'@PPN-',
 	    m_UIPopups[popupRef]"
-	    
+
 	//for these popups, set on all pages
 	if(popupRef =  POP_NOW_PLAYING or
 	   popupRef =  POP_DETAILS_PAGE or
@@ -3575,7 +3575,7 @@ DEFINE_CALL 'SET POPUP STATE'(interfaceRef, popupRef)
 		if(not (m_UIPages[loop] = '')) //if this page is used
 		{
 		    //enable the popup on this page
-		    send_string m_Interface[interfaceRef], "'@PPN-', 
+		    send_string m_Interface[interfaceRef], "'@PPN-',
 				    m_UIPopups[popupRef], ';', m_UIPages[loop]"
 		}
 	    }
@@ -3592,21 +3592,21 @@ DEFINE_CALL 'SET POPUP STATE'(interfaceRef, popupRef)
 DEFINE_CALL 'CLEAR FEEDBACK'(integer interfaceRef)
 {
     stack_var integer chn, linenumber
-    
+
     //clear any button feedback
     for(chn = 1; chn <= LAST_BUTTON; chn++)
     {
 	if(chn <> BTN_POWER_OFF)		//don't clear the power off FB
 	    call 'FB'(m_Interface[interfaceRef], chn, 0)
     }
-    
+
     //clear the popups
     for(chn = CHN_POPUP_OFFSET + max_length_array(m_UIPopUps); chn > CHN_POPUP_OFFSET; chn--)
     {
 	if(chn != POP_CONNECTION_STATUS + CHN_POPUP_OFFSET)		//don't clear the connection pop up
 	    OFF[m_interface[interfaceRef], chn]
     }
-    
+
     #IF_DEFINED SATP
 
     if(KaleidescapeID[interfaceRef].zoneId)	//if this is an SATP device
@@ -3616,9 +3616,9 @@ DEFINE_CALL 'CLEAR FEEDBACK'(integer interfaceRef)
 	//?BrowseNodeResource[nodeRef].selection = 0		//we can't track the now playing item, so remove the highlight
 	ListLength[interfaceRef] = 0
 	ListOffset[interfaceRef] = 0
-	
+
 	//blank the lines
-	for(lineNumber++; lineNumber <= ListWindowLength[interfaceRef]; 
+	for(lineNumber++; lineNumber <= ListWindowLength[interfaceRef];
 		lineNumber++)
 	{
 	    List[interfaceRef][lineNumber].behavior = 0
@@ -3635,19 +3635,19 @@ DEFINE_CALL 'HANDLE COORDINATE PRESS' (integer interfaceRef)
     //the Coordinate array consists of [1]=X Coordinate, [2]=Y Coordinate, [3]=Press active
 
     //if the press isn't already active (this should always be true
-    if(Coordinate[interfaceRef][3] = 0) 
+    if(Coordinate[interfaceRef][3] = 0)
     {
 	Coordinate[interfaceRef][3] = 1 //indicate that we're going
 
 	//wait for the X and Y Coordinates to settle or wait until the Press active expires
-	wait_until ( ( (Coordinate[interfaceRef][1] <> 0) 
-		    && (Coordinate[interfaceRef][2] <> 0) ) 
+	wait_until ( ( (Coordinate[interfaceRef][1] <> 0)
+		    && (Coordinate[interfaceRef][2] <> 0) )
 		    ||  (Coordinate[interfaceRef][3]  = 0) )
 	{
 	    if(Coordinate[interfaceRef][3] = 1) //if the Press active hasn't expired
 	    {
 		//send the command
-		call 'SEND_REQUEST' (interfaceRef, "'POSITION_SELECT:', 
+		call 'SEND_REQUEST' (interfaceRef, "'POSITION_SELECT:',
 			itoa(Coordinate[interfaceRef][1]), ':',
 			itoa(Coordinate[interfaceRef][2]), ':'")
 	    }
@@ -3661,7 +3661,7 @@ DEFINE_CALL 'HANDLE COORDINATE PRESS' (integer interfaceRef)
 
 DEFINE_CALL 'HANDLE COORDINATE RELEASE' (integer interfaceRef)
 {
-    call 'TRACE' (interfaceRef, "'Coordinate release.  Coordinate= ', 
+    call 'TRACE' (interfaceRef, "'Coordinate release.  Coordinate= ',
 	    itoa(Coordinate[interfaceRef][1]), ',',
 	    itoa(Coordinate[interfaceRef][2]), ',',
 	    itoa(Coordinate[interfaceRef][3])")
@@ -3669,7 +3669,7 @@ DEFINE_CALL 'HANDLE COORDINATE RELEASE' (integer interfaceRef)
     Coordinate[interfaceRef][2] = 0
 
     //reset flag to expire any pending wait_until, and clear coordinates
-    Coordinate[interfaceRef][3] = 0 
+    Coordinate[interfaceRef][3] = 0
 }
 
 
@@ -3683,15 +3683,15 @@ DEFINE_CALL 'HANDLE PLAY PAUSE PRESS' (integer interfaceRef)
     {
 	call 'SEND_REQUEST'(interfaceRef, 'PLAY:') //otherwise, send the play command
     }
-    
+
 }
 
 //function to substitute any char for any other
-DEFINE_CALL 'STRING SUBSTITUTE' (char sourceString[], char stringToReplace, 
+DEFINE_CALL 'STRING SUBSTITUTE' (char sourceString[], char stringToReplace,
 				 char replacementString[], char resultString[])
 {
     stack_var integer loop
-    
+
     //step through every character of source
     for(loop = 1; loop <= length_string(sourceString); loop++)
     {
@@ -3714,17 +3714,17 @@ DEFINE_CALL 'RENDER DETAILS' (integer interfaceRef)
     char 	timeString[255]
     char 	details[2048]
     integer 	loop
-    
+
     totalSeconds = atoi(ContentDetail.runningTime)
-    
+
     call 'SET IMAGE' (interfaceRef, m_UIImages[IMG_DETAILS], ContentDetail.coverURL)
-    
+
     if(ContentDetail.library = 'albums')
     {
 	call 'TRACE' (interfaceRef, 'Rendering Album Details')
 	if(m_VT[VT_DETAILS_TITLE]) //if the details title is defined
 	{
-	    send_string m_Interface[interfaceRef], "'!T', m_VT[VT_DETAILS_TITLE], 
+	    send_string m_Interface[interfaceRef], "'!T', m_VT[VT_DETAILS_TITLE],
 			    ContentDetail.performer, ' - ', ContentDetail.title"
 	}
 
@@ -3733,18 +3733,18 @@ DEFINE_CALL 'RENDER DETAILS' (integer interfaceRef)
 	    hours = totalSeconds / 3600
 	    minutes = (totalSeconds mod 3600) / 60
 	    timeString = formatHMS(hours, minutes, 0)
-	    
+
 	    details = "'Released ', ContentDetail.year, ', ', timeString, TouchPanelNewLine,
 			TouchPanelNewLine"
-	    
-	    if(length_string(ContentDetail.genre) > 0)	
+
+	    if(length_string(ContentDetail.genre) > 0)
 	    {
 		//if there's more than one genre
 		if(find_string(ContentDetail.genre, "13", 1) > 0)
 		{
 		    //add the plural description
 		    details = "details, 'GENRES', TouchPanelNewLine"
-		    
+
 		    //substitute commas for line feeds
 		    call 'STRING SUBSTITUTE' (ContentDetail.genre, 13, ', ', details)
 		    details = "details, TouchPanelNewLine, TouchPanelNewLine"
@@ -3756,68 +3756,68 @@ DEFINE_CALL 'RENDER DETAILS' (integer interfaceRef)
 				TouchPanelNewLine, TouchPanelNewLine"
 		}
 	    }
-		    
+
 	    if(length_string(ContentDetail.performer) > 0)
 	    {
-		details = "details, 'PERFORMER', TouchPanelNewLine, ContentDetail.performer, 
+		details = "details, 'PERFORMER', TouchPanelNewLine, ContentDetail.performer,
 			    TouchPanelNewLine, TouchPanelNewLine"
 	    }
-	    
-	    if(length_string(ContentDetail.location) > 0)	
+
+	    if(length_string(ContentDetail.location) > 0)
 	    {
 		details = "details, 'LOCATION', TouchPanelNewLine, ContentDetail.location"
 	    }
 	}
     }
-    
-    else if(ContentDetail.library = 'movies')	
+
+    else if(ContentDetail.library = 'movies')
     {
 	call 'TRACE' (interfaceRef, 'Rendering Movie Details')
-	
-	    
+
+
 	if(m_VT[VT_DETAILS_TITLE]) //if the details title is defined
 	{
-	    send_string m_Interface[interfaceRef], "'!T', m_VT[VT_DETAILS_TITLE], 
+	    send_string m_Interface[interfaceRef], "'!T', m_VT[VT_DETAILS_TITLE],
 			    ContentDetail.title"
 	}
-	
+
 	if(m_VT[VT_DETAILS_INFO]) //if the details info is defined
 	{
 	    //For movies, running time incorrectly returns minutes instead of seconds.
 	    hours = totalSeconds / 60
 	    minutes = totalSeconds mod 60
-	    
+
 	    timeString = formatHMS(hours, minutes, 0)
-	    
+
 	    //if there's both a time and year
 	    if( (length_string(timeString) > 0) && (length_string(ContentDetail.year) > 0) )
 	    {
 		timeString = "timeString, ', '"
 	    }
-	    
+
 	    details = "'Rated ', ContentDetail.rating"
-	    
+
 	    if(length_string(ContentDetail.ratingReason) > 0)
 	    {
 		details = "details, ' for ', ContentDetail.ratingReason"
 	    }
-	
-	    details = "details, '; ', timeString, ContentDetail.year, TouchPanelNewLine, 
+
+	    details = "details, '; ', timeString, ContentDetail.year, TouchPanelNewLine,
 		TouchPanelNewLine"
-	    
+
 	    if(length_string(ContentDetail.synopsis) > 0)
 	    {
 		details = "details, 'SYNOPSIS', TouchPanelNewLine, ContentDetail.synopsis, TouchPanelNewLine, TouchPanelNewLine"
 	    }
-	    
-	    if(length_string(ContentDetail.genre) > 0)	
+
+	    if(length_string(ContentDetail.genre) > 0)
 	    {
 		//if there's more than one genre
 		if(find_string(ContentDetail.genre, "13", 1) > 0)
 		{
 		    //add the plural description
 		    details = "details, 'GENRES', TouchPanelNewLine"
-		    
+
 		    //substitute commas for line feeds
 		    call 'STRING SUBSTITUTE' (ContentDetail.genre, 13, ', ', details)
 		    details = "details, TouchPanelNewLine, TouchPanelNewLine"
@@ -3825,92 +3825,92 @@ DEFINE_CALL 'RENDER DETAILS' (integer interfaceRef)
 		else
 		{
 		    //add the singular description
-		    details = "details, 'GENRE', TouchPanelNewLine, ContentDetail.genre, 
+		    details = "details, 'GENRE', TouchPanelNewLine, ContentDetail.genre,
 			TouchPanelNewLine, TouchPanelNewLine"
 		}
 	    }
-		    
+
 	    if(length_string(ContentDetail.performer) > 0)
 	    {
 		details = "details, 'CAST', TouchPanelNewLine"
 		call 'STRING SUBSTITUTE' (ContentDetail.performer, 13, ', ', details)
 		details = "details, TouchPanelNewLine, TouchPanelNewLine"
 	    }
-		    
-	    if(length_string(ContentDetail.composer) > 0)	
+
+	    if(length_string(ContentDetail.composer) > 0)
 	    {
 		//if there's more than one director
 		if(find_string(ContentDetail.composer, "13", 1) > 0)
 		{
 		    //add the plural description
-		    details = "details, 'DIRECTORS', TouchPanelNewLine"	
-		    
+		    details = "details, 'DIRECTORS', TouchPanelNewLine"
+
 		    //substitute commas for line feeds
 		    call 'STRING SUBSTITUTE' (ContentDetail.composer, 13, ', ', details)
 		}
 		else
 		{
 		    //add the singular description
-		    details = "details, 'DIRECTOR', TouchPanelNewLine, 
+		    details = "details, 'DIRECTOR', TouchPanelNewLine,
 			ContentDetail.composer"
 		}
 		details = "details, TouchPanelNewLine, TouchPanelNewLine"
 	    }
-	    if(length_string(ContentDetail.location) > 0)	
+	    if(length_string(ContentDetail.location) > 0)
 	    {
 		details = "details, 'LOCATION', TouchPanelNewLine, ContentDetail.location"
 	    }
 	}
     }
-    
+
     if(m_VT[VT_DETAILS_INFO]) //if there is a details info VT field
     {
 	call 'SEND LONG TEXT'(interfaceRef, m_VT[VT_DETAILS_INFO], details)
     }
-    
+
     ON[m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_DETAILS_PAGE]
 
 }
 
-//set the image on a touch panel when given a full URL 
+//set the image on a touch panel when given a full URL
 DEFINE_CALL 'SET IMAGE' (integer interfaceRef, char resource[], char givenURL[])
 {
     char junk[10]
     char host[50]
     char URI[500]
-    
+
     URI = givenURL
-    
+
     junk = remove_string(URI, "'//'", 1) //remove the http://
     host = remove_string(URI, "'/'", 1) //pull out the host name
-    
+
     host = left_string(host, length_string(host) - 1) //remove the first character
-    
+
     if(length_string(CoverHostOverride)) //if we've been given a different URL
     {
 	host = CoverHostOverride //use it instead
     }
-    
+
     if(length_string(resource)) //if this is a non-zero length
     {
-	send_string m_Interface[interfaceRef], "'^RMF-', resource, ',%H', 
+	send_string m_Interface[interfaceRef], "'^RMF-', resource, ',%H',
 			host, '%F', URI"
 	call 'TRACE'(interfaceRef, "'Updating cover - Resource: ', resource, ', Host: ',
 		host, ','")
 	call 'TRACE'(interfaceRef, "'Path: ', URI")
     }
-    
+
 }
 
 #IF_DEFINED SATP
 /*******************************************************************************************
  **                  SATP-Only routines                                                   **
- *******************************************************************************************/ 
+ *******************************************************************************************/
 
 DEFINE_FUNCTION integer boundsCheckListPosition(interfaceRef, integer listPosition)
 {
     if(listPosition < 2) return(1) //if the position is 0 or 1, just return 1
-    
+
     //if there's more list than window
     if(ListLength[interfaceRef] > ListWindowLength[interfaceRef])
     {
@@ -3922,35 +3922,35 @@ DEFINE_FUNCTION integer boundsCheckListPosition(interfaceRef, integer listPositi
 	}
 	return(listPosition) //otherwise, just return listPosition
     }
-    
+
     return(1) //if not (more list than window), then just set the position to 1
-    
+
 }
 
 DEFINE_CALL 'LIST RENDER SEARCH BUTTON' (integer interfaceRef)
 {
     stack_var integer nodeRef
-    
-    if(!m_VT[VT_SATP_SEARCH_BUTTON]) return; //if the button isn't defined, do nothing    
-    
+
+    if(!m_VT[VT_SATP_SEARCH_BUTTON]) return; //if the button isn't defined, do nothing
+
     //Get the active browse node for this interface.
     nodeRef = BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current
-    
+
     //if the list doesn't fit the window, or the search is already active
     if( (ListLength[interfaceRef] > ListWindowLength[interfaceRef]) ||
 	(KeyboardStatus[interfaceRef] = KEYB_SEARCH)
 	 || length_string(BrowseNodeResource[nodeRef].searchText)  ) //or if a search is currently part of the result set
 	if(BrowseNodeResource[nodeRef].previousNode ) 	    //and only if we're not on the top node
 	{
-	    if(m_VT[VT_SATP_SEARCH_BUTTON]) 
+	    if(m_VT[VT_SATP_SEARCH_BUTTON])
 	    {
 		//show the search button
-		send_string m_Interface[interfaceRef], "'@SHO', 
+		send_string m_Interface[interfaceRef], "'@SHO',
 				m_VT[VT_SATP_SEARCH_BUTTON], 1"
 	    }
 
 	    //if there is an active search or the keyboard is up
-	    if(length_string(BrowseNodeResource[nodeRef].searchText) || 
+	    if(length_string(BrowseNodeResource[nodeRef].searchText) ||
 		[m_Interface, CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH])
 	    {
 		//turn on the feedback
@@ -3964,7 +3964,7 @@ DEFINE_CALL 'LIST RENDER SEARCH BUTTON' (integer interfaceRef)
 	    return
 	}
     //otherwise
-    if(m_VT[VT_SATP_SEARCH_BUTTON]) 
+    if(m_VT[VT_SATP_SEARCH_BUTTON])
     {
 	//remove the search button
 	send_string m_Interface[interfaceRef], "'@SHO', m_VT[VT_SATP_SEARCH_BUTTON], 0"
@@ -3977,18 +3977,18 @@ DEFINE_CALL 'LIST RENDER SCROLLBAR' (integer interfaceRef)
     stack_var integer sliderTop
     stack_var integer sliderBottom
     stack_var integer nodeRef
-    
-    nodeRef = BrowseNodeStack[interfaceRef][ CurrentList[interfaceRef] ].current 
-    
+
+    nodeRef = BrowseNodeStack[interfaceRef][ CurrentList[interfaceRef] ].current
+
     if(ListLength[interfaceRef]) //prevent any divide-by-zero errors
     {
 	sliderTop = 255 - ( (255 * (BrowseNodeResource[nodeRef].position-1) ) / ListLength[interfaceRef] )
-	
+
 	//if the list doesn't fit in the window
 	if(ListLength[interfaceRef] > ListWindowLength[interfaceRef])
 	{
-	    sliderBottom = 255 - ( (255 * (BrowseNodeResource[nodeRef].position - 1 + 
-		ListWindowLength[interfaceRef])) / ListLength[interfaceRef] )	    
+	    sliderBottom = 255 - ( (255 * (BrowseNodeResource[nodeRef].position - 1 +
+		ListWindowLength[interfaceRef])) / ListLength[interfaceRef] )
 	}
 	else
 	{
@@ -4001,19 +4001,19 @@ DEFINE_CALL 'LIST RENDER SCROLLBAR' (integer interfaceRef)
 	sliderBottom = 0
     }
     send_level m_Interface[interfaceRef], LVL_SCROLL_BAR_TOP, sliderTop
-    send_level m_Interface[interfaceRef], LVL_SCROLL_BAR_BOTTOM, sliderBottom		
+    send_level m_Interface[interfaceRef], LVL_SCROLL_BAR_BOTTOM, sliderBottom
 }
 
 
-DEFINE_CALL 'LIST RENDER WINDOW' (integer interfaceRef, integer lineNumber, 
-				    char displayText[], integer displayIcon, 
+DEFINE_CALL 'LIST RENDER WINDOW' (integer interfaceRef, integer lineNumber,
+				    char displayText[], integer displayIcon,
 				    integer behavior)
 {
     stack_var char childIndicator[3]
     stack_var integer icon
     stack_var char textPrefix[5]
     stack_var integer nodeRef
-    
+
     if(behavior = LIST_BEHAVIOR_BROWSE) //if this line had children
     {
 	childIndicator = '  >' //add an indicator
@@ -4030,32 +4030,32 @@ DEFINE_CALL 'LIST RENDER WINDOW' (integer interfaceRef, integer lineNumber,
     {
 	icon = m_UIIcons[displayIcon] //otherwise use the icon provided
     }
-    
+
     textPrefix = ''
-    
+
     //set the text
-    send_string m_Interface[interfaceRef], "'!T', (BTN_LIST_LINE1 - 1 + lineNumber), 
+    send_string m_Interface[interfaceRef], "'!T', (BTN_LIST_LINE1 - 1 + lineNumber),
 		    textPrefix, displayText, childIndicator"
-    
+
     //set the status icon
-    send_string m_Interface[interfaceRef], "'@ICO', (FB_LIST_LINE1_STATUS - 1 + lineNumber), 
+    send_string m_Interface[interfaceRef], "'@ICO', (FB_LIST_LINE1_STATUS - 1 + lineNumber),
 		    icon"
-    
+
     //FB if this line is selected
     nodeRef = BrowseNodeStack[interfaceRef][ CurrentList[interfaceRef] ].current
-    
+
     //if we show the play icon on the now playing page
     if(displayIcon = 1 && CurrentList[interfaceRef] = LIST_SHOW_NOWPLAYING)
     {
 	//set this line to the selection
 	BrowseNodeResource[nodeRef].selection = lineNumber + ListOffset[interfaceRef]
     }
-    
+
     //only show the highlight if there's something we can do on this line
     if(behavior)
     {
 	call 'FB' (m_Interface[interfaceRef], (BTN_LIST_LINE1 - 1 + lineNumber + FEEDBACK_OFFSET),
-		    (BrowseNodeResource[nodeRef].selection = lineNumber + ListOffset[interfaceRef]))    
+		    (BrowseNodeResource[nodeRef].selection = lineNumber + ListOffset[interfaceRef]))
     }
     else
     {
@@ -4068,16 +4068,16 @@ DEFINE_CALL 'LIST UPDATE SELECTION' (integer interfaceRef)
 {
     stack_var integer lineNumber
     stack_var integer nodeRef
-    
+
     call 'TRACE' (interfaceRef, 'Updating list selection highlight.')
-    
+
     nodeRef = BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current
-    
-    if(BrowseNodeResource[nodeRef].selection > ListLength[interfaceRef]) 
+
+    if(BrowseNodeResource[nodeRef].selection > ListLength[interfaceRef])
     {
 	BrowseNodeResource[nodeRef].selection = 0
     }
-    
+
     for(lineNumber = 1; lineNumber <= ListWindowLength[interfaceRef]; lineNumber++)
     {
 	if(lineNumber <= ListLength[interfaceRef])
@@ -4087,7 +4087,7 @@ DEFINE_CALL 'LIST UPDATE SELECTION' (integer interfaceRef)
 	}
 	else
 	{
-	    call 'FB' (m_interface[interfaceRef], 
+	    call 'FB' (m_interface[interfaceRef],
 		BTN_LIST_LINE1 - 1 + lineNumber + FEEDBACK_OFFSET, FALSE)
 	}
     }
@@ -4098,83 +4098,83 @@ DEFINE_FUNCTION integer allocateNode()
 {
     stack_var integer interfaceRef
     stack_var integer browseType
-    
+
     stack_var integer largestStackInterface
     stack_var integer largestStackType
     stack_var integer largestStackSize
-    
+
     stack_var integer nodeRef
-    
+
     stack_var integer node1
     stack_var integer node2
     stack_var integer node3
-    
+
     if(AvailableResources > 0) //if there's memory available for more nodes
     {
 	AvailableResources-- //decrement the number free
-	nodeRef = NextFreeNode //get the next free node 
+	nodeRef = NextFreeNode //get the next free node
 	NextFreeNode = BrowseNodeResource[nodeRef].previousNode //move the free node back one
-	
+
 	if(AvailableResources > 0) //if we haven't used up available memory
 	{
 	    BrowseNodeResource[NextFreeNode].nextNode = 0 //indicate that we're at the head
-	}	
-	
-	call 'TRACE' (0, "'Allocating node ', itoa(nodeRef)")	    
+	}
+
+	call 'TRACE' (0, "'Allocating node ', itoa(nodeRef)")
     }
     else //There is insufficient memory to allocate a browse node.
-    {    
+    {
 	//first, discover the largest stack.
 	largestStackSize = 0
-	
+
 	//step through all the stacks
 	for(interfaceRef = 1; interfaceRef <= MAX_NUMBER_OF_PLAYERS; interfaceRef++)
 	{
 	    //for both lists per player
-	    for(browseType = 1; browseType <= 2; browseType++) 
+	    for(browseType = 1; browseType <= 2; browseType++)
 	    {
 		//if this list has the longest count
-		if(BrowseNodeStack[interfaceRef][browseType].size > largestStackSize) 
+		if(BrowseNodeStack[interfaceRef][browseType].size > largestStackSize)
 		{
 		    //remember the count, and the list
-		    largestStackSize = BrowseNodeStack[interfaceRef][browseType].size 
+		    largestStackSize = BrowseNodeStack[interfaceRef][browseType].size
 		    largestStackInterface = interfaceRef
 		    largestStackType = browseType
 		}
 	    }
-	    
+
 	}
-	
+
 	//remove the bottom item in the stack and allocate it fresh.
-	
+
 	//Shrink the stack size by one.
 	BrowseNodeStack[largestStackInterface][largestStackType].size--
-	
+
 	//Grab references to the first three nodes in the stack.
 	node1 = BrowseNodeStack[largestStackInterface][largestStackType].bottom
 	node2 = BrowseNodeResource[node1].nextNode
 	node3 = BrowseNodeResource[node2].nextNode
-	
+
 	//Remove the second node from the list.
 	BrowseNodeResource[node1].nextNode = node3
 	BrowseNodeResource[node3].previousNode = node1
-	
+
 	//Take the second node as our new node.
 	nodeRef = node2
-	
+
 	call 'TRACE' (0, "'Allocating node ', itoa(nodeRef),
 		'.  Taken from list ', itoa(largestStackInterface), ',', itoa(largestStackType)")
     }
-    
+
     //clean the pointers before returning
-    BrowseNodeResource[nodeRef].nextNode = 0 
+    BrowseNodeResource[nodeRef].nextNode = 0
     BrowseNodeResource[nodeRef].previousNode = 0
-    
+
     return(nodeRef) //return the new node
 }
 
 //Deallocate memory for the specified node.
-DEFINE_CALL 'FREE NODE' (integer nodeRef) 
+DEFINE_CALL 'FREE NODE' (integer nodeRef)
 {
     if(!nodeRef) //if trying to free a null node
     {
@@ -4186,15 +4186,15 @@ DEFINE_CALL 'FREE NODE' (integer nodeRef)
 
     //Increase the amount of available resources.
     AvailableResources = AvailableResources + 1
-    
+
     if(AvailableResources != 1) //if this is not the first node.
     {
 	//store the link to this new node.
 	BrowseNodeResource[NextFreeNode].nextNode = nodeRef
     }
-    
+
     BrowseNodeResource[nodeRef].previousNode = NextFreeNode //store the link to the old node.
-    
+
     NextFreeNode = nodeRef //mark this new node as the new free node.
     BrowseNodeResource[nodeRef].nextNode = 0 //The next node is always blank.
 }
@@ -4204,56 +4204,56 @@ DEFINE_CALL 'RESET STACK' (integer interfaceRef, integer listShow)
 {
     stack_var integer nodeRef
     stack_var integer nodeToFree
-    
+
     //start with the current node.
     nodeRef = BrowseNodeStack[interfaceRef][listShow].current
-    
+
     call 'TRACE' (interfaceRef, "'Making First Node.  Current is ', itoa(nodeRef) ")
-    
+
     if(nodeRef = 0)
     {
 	call 'TRACE' (interfaceRef, "'Error!  Current node pointer is null'")
 	return
     }
-    
+
     //Free the memory associated with the stack.
-    while(BrowseNodeStack[interfaceRef][listShow].size > 1 && 
+    while(BrowseNodeStack[interfaceRef][listShow].size > 1 &&
 	    BrowseNodeResource[nodeRef].previousNode != 0)
     {
 	//Quick-pop the stack.
 	BrowseNodeStack[interfaceRef][listShow].size-- //decrement the stack size.
-	nodeToFree = nodeRef //retain the reference to free in a moment.		
+	nodeToFree = nodeRef //retain the reference to free in a moment.
 	nodeRef = BrowseNodeResource[nodeToFree].previousNode  //Move backwards in the stack.
-	
+
 	//Free the memory associated with the popped node.
 	call 'FREE NODE' (nodeToFree)
     }
-    
+
     //At this point, the stack size should be 1.
-    if(BrowseNodeStack[interfaceRef][listShow].size != 1) 
+    if(BrowseNodeStack[interfaceRef][listShow].size != 1)
     {
 	if(BrowseNodeStack[interfaceRef][listShow].size > 1)
 	{
-	    call 'TRACE' (interfaceRef, "'ERROR!  Stack ', 
-			    itoa(interfaceRef), '-', itoa(listShow), 
-			    ' leaked ', itoa(BrowseNodeStack[interfaceRef][listShow].size - 1), 
+	    call 'TRACE' (interfaceRef, "'ERROR!  Stack ',
+			    itoa(interfaceRef), '-', itoa(listShow),
+			    ' leaked ', itoa(BrowseNodeStack[interfaceRef][listShow].size - 1),
 			    ' nodes.'")
 	}
 	else
 	{
-	    call 'TRACE' (interfaceRef, 
+	    call 'TRACE' (interfaceRef,
 			    "'ERROR!  stack had 0 nodes, expected 1'")
 	}
-	    
+
 	//Force the stack size to be 1.
 	BrowseNodeStack[interfaceRef][listShow].size = 1
     }
-    
+
     //at this point, the previous node should be null. We should be at the stack head.
-    if(BrowseNodeResource[nodeRef].previousNode != 0) 
+    if(BrowseNodeResource[nodeRef].previousNode != 0)
     {
-	call 'TRACE' (interfaceRef, "'ERROR!  Stack ', 
-		itoa(interfaceRef), '-', itoa(listShow), 
+	call 'TRACE' (interfaceRef, "'ERROR!  Stack ',
+		itoa(interfaceRef), '-', itoa(listShow),
 		' references a previous node (', itoa(BrowseNodeResource[nodeRef].previousNode),
 		'), but the stack size is 1.  Resetting previous node to 0.'")
 	BrowseNodeResource[nodeRef].previousNode = 0
@@ -4261,25 +4261,25 @@ DEFINE_CALL 'RESET STACK' (integer interfaceRef, integer listShow)
 
     //set the top node
     BrowseNodeStack[interfaceRef][listShow].current = nodeRef
-    
+
     //at this point, we should be at the bottom of the stack
     if(BrowseNodeStack[interfaceRef][listShow].bottom <> nodeRef)
     {
-	call 'TRACE' (interfaceRef, 
+	call 'TRACE' (interfaceRef,
 		"'ERROR!  BrowseNodeStack.bottom doesn''t point to the bottom of the list.'")
     }
 
     //Clear the node data
-    BrowseNodeResource[nodeRef].position = 0 
+    BrowseNodeResource[nodeRef].position = 0
     clear_buffer BrowseNodeResource[nodeRef].searchText
     BrowseNodeResource[nodeRef].selection = 0
     BrowseNodeResource[nodeRef].moved = false
-    
-    //Break the links on the node.    	
+
+    //Break the links on the node.
     BrowseNodeResource[nodeRef].previousNode = 0
     BrowseNodeResource[nodeRef].nextNode = 0
-    
-    switch (listShow) //set the handle based on the list 
+
+    switch (listShow) //set the handle based on the list
     {
 	case LIST_SHOW_BROWSE: BrowseNodeResource[nodeRef].handle = ListBrowseStart
 	case LIST_SHOW_NOWPLAYING: BrowseNodeResource[nodeRef].handle = ListNowPlayingStart
@@ -4291,28 +4291,28 @@ DEFINE_CALL 'PUSH NODE' (integer interfaceRef, integer listShow, char handle[])
 {
     stack_var integer newTopNode
     stack_var integer oldTopNode
-    
+
     call 'TRACE' (interfaceRef, "'Pushing Node'")
-    
+
     //Create a new node.
     newTopNode = allocateNode()
-    
+
     //Put the new node onto the stack.
     BrowseNodeStack[interfaceRef][listShow].size++ //increment the stack size
     oldTopNode = BrowseNodeStack[interfaceRef][listShow].current //get the previous top node
     BrowseNodeStack[interfaceRef][listShow].current = newTopNode //Drop the new new node in.
-    
+
     if(oldTopNode != 0) //If the previous top node was a real node...
     {
 	//Link the old top node to the new top node.
-	BrowseNodeResource[oldTopNode].nextNode = newTopNode 
+	BrowseNodeResource[oldTopNode].nextNode = newTopNode
     }
     else //The previous top node was not real.
     {
 	//Without a previous node, this is both the bottom and top of the stack now.
 	BrowseNodeStack[interfaceRef][listShow].bottom = newTopNode
     }
-        
+
     //Configure the new top node.
     BrowseNodeResource[newTopNode].previousNode = oldTopNode //Link the new node to the old node.
     BrowseNodeResource[newTopNode].handle = handle //store the new handle
@@ -4327,29 +4327,29 @@ DEFINE_CALL 'POP NODE' (integer interfaceRef, integer listShow)
 {
     stack_var integer oldTopNode
     stack_var integer newTopNode
-    
+
     call 'TRACE' (interfaceRef, "'Popping Node'")
-    
+
     //Grab the top two nodes on the stack.
-    oldTopNode = BrowseNodeStack[interfaceRef][listShow].current    
+    oldTopNode = BrowseNodeStack[interfaceRef][listShow].current
     newTopNode = BrowseNodeResource[oldTopNode].previousNode
-    
+
     //If the search is active, then clear the search and be done.
     if(length_array(BrowseNodeResource[oldTopNode].searchText))
     {
 	clear_buffer BrowseNodeResource[oldTopNode].searchText
-    }    
+    }
     else if(newTopNode = 0) //if the second node isn't a real node...s
     {
 	//set the current top node as the bottom node.
 	call 'RESET STACK' (interfaceRef, listShow)
     }
     else //We can perform the actual pop operation.
-    {    
-	BrowseNodeStack[interfaceRef][listShow].current = newTopNode 
+    {
+	BrowseNodeStack[interfaceRef][listShow].current = newTopNode
 	BrowseNodeResource[newTopNode].nextNode = 0 //zero out the next node, this is the new top node.
 	BrowseNodeStack[interfaceRef][listShow].size-- //decrease the size of the stack.
-    
+
 	//Deallocate the old top node.
 	call 'FREE NODE'(oldTopNode)
     }
@@ -4359,20 +4359,20 @@ DEFINE_CALL 'POP NODE' (integer interfaceRef, integer listShow)
 DEFINE_CALL 'GET LIST' (integer interfaceRef)
 {
     stack_var char handle[MAX_HANDLE_LENGTH]
-    
+
     //needs to be larger than MAX_SEARCH_TEXT_LENGTH to handle the FILTER= and escaped form
-    stack_var char flag[255] 
+    stack_var char flag[255]
     stack_var integer listShow
     stack_var integer nodeRef
     stack_var integer lastItem
     stack_var integer position
-    
+
     /*
-     * if the list window contains no lines, do nothing 
+     * if the list window contains no lines, do nothing
      * (hasn't yet been configured or using blind keypad)
      */
-    if(ListWindowLength[interfaceRef] = 0) return 
-    
+    if(ListWindowLength[interfaceRef] = 0) return
+
     //if a list update is already in progress
     if([m_Interface[interfaceRef], CHN_LIST_ACTIVE])
     {
@@ -4382,68 +4382,68 @@ DEFINE_CALL 'GET LIST' (integer interfaceRef)
     }
     do_push_timed(m_Interface[interfaceRef], CHN_LIST_ACTIVE, LIST_ACTIVE_TIMEOUT)
     on[m_Interface[interfaceRef], CHN_LIST_ACTIVE]
-    
+
     call 'TRACE' (interfaceRef, "'Getting List'")
-    
+
     if(CurrentList[interfaceRef] = 0)
     {
 	//if the current list isn't set, set it to browse
 	CurrentList[interfaceRef] = LIST_SHOW_BROWSE
     }
-    
+
     //Get the current browse node.
     listShow = CurrentList[interfaceRef]
     nodeRef = BrowseNodeStack[interfaceRef][listShow].current
-    
+
     if(nodeRef = 0) //if it isn't defined.
-    {	
+    {
 	//Push the Browse list starting point onto the stack.
 	call 'PUSH NODE' (interfaceRef, listShow, ListBrowseStart)
 	nodeRef = BrowseNodeStack[interfaceRef][listShow].current
     }
-    
+
     //Get the current handle.
-    handle = BrowseNodeResource[nodeRef].handle 
+    handle = BrowseNodeResource[nodeRef].handle
     if(BrowseNodeResource[nodeRef].position = 0)
     {
 	BrowseNodeResource[nodeRef].position = 1
 	BrowseNodeResource[nodeRef].moved = false
     }
-    
+
     flag = BrowseNodeResource[nodeRef].searchText //get the current search text.
-    
+
     //if it is non-null or the search is active
     if(length_array(flag) || (KeyboardStatus[interfaceRef] = KEYB_SEARCH))
     {
 	/*
 	 * prepend the search keyword and handle invalid chars
-	 * when the search is active, but there is no text, this will send a blank 
+	 * when the search is active, but there is no text, this will send a blank
 	 * filter, which will remove non-data options from the result
 	 */
-	flag = "'FILTER=', escapeInvalidChars(flag)"		
+	flag = "'FILTER=', escapeInvalidChars(flag)"
     }
     else if(not BrowseNodeResource[nodeRef].moved)	//if the list hasn't been moved
     {
 	flag = 'SUGGEST'				//turn on suggest
     }
-    
+
     if(KeyboardStatus[interfaceRef] = KEYB_SEARCH) //if the search keyboard is active
     {
 	position = 1 //only get the first line
 	lastItem = 1
-	
+
 	if(m_VT[VT_SATP_KEYBOARD_TEXT]) //if defined
 	{
 	    if(isFuzzySearch(nodeRef)) //if it's fuzzy
 	    {
-		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_SATP_KEYBOARD_TEXT], 
+		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_SATP_KEYBOARD_TEXT],
 				'***'"
 	    }
 	    else
 	    {
 		//send the search text to the keyboard entry window
 		send_string m_Interface[interfaceRef], "'!T', m_VT[VT_SATP_KEYBOARD_TEXT],
-				BrowseNodeResource[nodeRef].searchText"	
+				BrowseNodeResource[nodeRef].searchText"
 	    }
 	}
     }
@@ -4453,14 +4453,14 @@ DEFINE_CALL 'GET LIST' (integer interfaceRef)
 	lastItem = position + ListWindowLength[interfaceRef] - 1 //determine the last item
     }
 
-    call 'FB'(m_Interface[interfaceRef], BTN_LIST_BROWSE_SELECT + FEEDBACK_OFFSET, 
+    call 'FB'(m_Interface[interfaceRef], BTN_LIST_BROWSE_SELECT + FEEDBACK_OFFSET,
 	    (listShow = LIST_SHOW_BROWSE) )
-    call 'FB'(m_Interface[interfaceRef], BTN_LIST_NOW_PLAYING_SELECT + FEEDBACK_OFFSET, 
+    call 'FB'(m_Interface[interfaceRef], BTN_LIST_NOW_PLAYING_SELECT + FEEDBACK_OFFSET,
 	    (listShow = LIST_SHOW_NOWPLAYING) )
-    
+
     call 'LIST RENDER SCROLLBAR'(interfaceRef) //update the scroll bar
-    
-    call 'SEND_REQUEST'(interfaceRef, "'BROWSE:', handle, '::', itoa(position), '-', 
+
+    call 'SEND_REQUEST'(interfaceRef, "'BROWSE:', handle, '::', itoa(position), '-',
 	    itoa(lastItem), ':', flag,':'")
 }
 
@@ -4468,37 +4468,37 @@ DEFINE_CALL 'GET LIST' (integer interfaceRef)
 DEFINE_CALL 'LIST LINE COMMAND'(integer interfaceRef, integer lineNumber)
 {
     stack_var integer loop
-    
-    /* if the list window contains no lines, do nothing 
+
+    /* if the list window contains no lines, do nothing
      * (hasn't yet been configured or using keypad)
      */
-    if(ListWindowLength[interfaceRef] = 0) return 
+    if(ListWindowLength[interfaceRef] = 0) return
 
     switch (List[interfaceRef][lineNumber].behavior)
     {
 	case LIST_BEHAVIOR_BROWSE:
 	{
-	    call 'PUSH NODE'(interfaceRef, CurrentList[interfaceRef], 
+	    call 'PUSH NODE'(interfaceRef, CurrentList[interfaceRef],
 		    List[interfaceRef][lineNumber].handle)
 	    call 'GET LIST' (interfaceRef)
-	    
+
 	    return
 	}
 	case LIST_BEHAVIOR_ACTION:
 	{
-	    call 'SEND_REQUEST'(interfaceRef, "'PERFORM_ACTION:', 
+	    call 'SEND_REQUEST'(interfaceRef, "'PERFORM_ACTION:',
 		    List[interfaceRef][lineNumber].handle, ':::'")
-	    
+
 	    //if there's no pop defined, finish
 	    if(NOT List[interfaceRef][lineNumber].pop) return
-		
+
 	    //pop the number of pops defined
 	    for(loop = 1; loop <= List[interfaceRef][lineNumber].pop; loop++)
 	    {
 		call 'POP NODE' (interfaceRef, CurrentList[interfaceRef])
 	    }
-	    
-	    call 'GET LIST' (interfaceRef) //re-request the list	    
+
+	    call 'GET LIST' (interfaceRef) //re-request the list
 	}
 	case LIST_BEHAVIOR_DETAILS:
 	{
@@ -4511,28 +4511,28 @@ DEFINE_FUNCTION char centerNowPlayingList(integer interfaceRef)
 {
     stack_var integer nodeRef
     stack_var integer newPosition
-    
+
     //if the flag to not follow the NP is on, do nothing
     if( [m_Interface[interfaceRef],CHN_OVERRIDE_NP_FOLLOW] ) return 0
-	
+
     nodeRef = BrowseNodeStack[interfaceRef][LIST_SHOW_NOWPLAYING].current
-	
+
     if(!nodeRef) return 0 //if there is no current node, do nothing
-    	
+
     BrowseNodeResource[nodeRef].moved = false //indicate we've not moved
-    
-    return 1 //indicate that we've changed the position    
+
+    return 1 //indicate that we've changed the position
 }
 
 DEFINE_CALL 'MOVE LIST' (integer interfaceRef, sinteger direction)
 {
     stack_var integer nodeRef
     stack_var integer newPosition
-    
+
     //retreive the current browse node
     nodeRef = BrowseNodeStack[interfaceRef][ CurrentList[interfaceRef] ].current
     if(!nodeRef) return //if there is no browse node, stop
-    
+
     if(direction < 0) //if direction is negative
     {
 	//if it's a bigger absolute move than the position
@@ -4550,22 +4550,22 @@ DEFINE_CALL 'MOVE LIST' (integer interfaceRef, sinteger direction)
     {
 	newPosition = BrowseNodeResource[nodeRef].Position + abs_value(direction)	//add the direction
     }
-    
+
     newPosition = boundsCheckListPosition(interfaceRef, newPosition)
-    
+
     if(CurrentList[interfaceRef] = LIST_SHOW_NOWPLAYING) //if we're showing now playing
     {
 	//tell the interface not to follow the current playing item for a bit
 	do_push_timed(m_Interface[interfaceRef], CHN_OVERRIDE_NP_FOLLOW, TIMEOUT_NOW_PLAYING_MOVE)
     }
-    
+
     if(newPosition != BrowseNodeResource[nodeRef].position)
     {
 	BrowseNodeResource[nodeRef].position = newPosition //set the new position
 	BrowseNodeResource[nodeRef].moved = true		//note that the list was intentionally moved
 	call 'TRACE'(interfaceRef, "'Moving list to ', itoa(newPosition)")
 	call 'GET LIST' (interfaceRef) //refresh the list
-    }    
+    }
 }
 
 
@@ -4573,12 +4573,12 @@ DEFINE_CALL 'MOVE LIST' (integer interfaceRef, sinteger direction)
 DEFINE_CALL 'SET HIGHLIGHT' (integer interfaceRef, integer newSelection)
 {
     stack_var integer nodeRef
-    
+
     call 'TRACE' (interfaceRef, "'Moving selection highlight to ', itoa(newSelection)")
-    
+
     nodeRef = BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current
     if(nodeRef = 0) return //if there is no browse node, stop
-    
+
     if(newSelection < BrowseNodeResource[nodeRef].selection)
     {
 	//Bounds check the highlight.
@@ -4592,14 +4592,14 @@ DEFINE_CALL 'SET HIGHLIGHT' (integer interfaceRef, integer newSelection)
 	}
 
 	//Now handle the situation where the list selection went off screen.
-	if(BrowseNodeResource[nodeRef].selection <= ListOffset[interfaceRef]) 
+	if(BrowseNodeResource[nodeRef].selection <= ListOffset[interfaceRef])
 	{
-	    call 'MOVE LIST' (interfaceRef, type_cast(BrowseNodeResource[nodeRef].selection - 
+	    call 'MOVE LIST' (interfaceRef, type_cast(BrowseNodeResource[nodeRef].selection -
 		    ListOffset[interfaceRef] - 1))
 	}
-		
+
 	//If we're not already in the process of grabbing a list, then update the selection.
-	if(! [m_Interface[interfaceRef], CHN_LIST_ACTIVE]) 
+	if(! [m_Interface[interfaceRef], CHN_LIST_ACTIVE])
 	{
 	    call 'LIST UPDATE SELECTION' (interfaceRef);
 	}
@@ -4607,7 +4607,7 @@ DEFINE_CALL 'SET HIGHLIGHT' (integer interfaceRef, integer newSelection)
     else if(newSelection > BrowseNodeResource[nodeRef].selection)
     {
 	//Bounds check the highlight
-	if(newSelection > ListLength[interfaceRef]) 
+	if(newSelection > ListLength[interfaceRef])
 	{
 	    BrowseNodeResource[nodeRef].selection = ListLength[interfaceRef];
 	}
@@ -4617,13 +4617,13 @@ DEFINE_CALL 'SET HIGHLIGHT' (integer interfaceRef, integer newSelection)
 	}
 
 	//Now handle the situation where the list selection went off screen.
-	if(BrowseNodeResource[nodeRef].selection > ListOffset[interfaceRef] + 
+	if(BrowseNodeResource[nodeRef].selection > ListOffset[interfaceRef] +
 		ListWindowLength[interfaceRef])
 	{
-	    call 'MOVE LIST' (interfaceRef, type_cast(BrowseNodeResource[nodeRef].selection - 
+	    call 'MOVE LIST' (interfaceRef, type_cast(BrowseNodeResource[nodeRef].selection -
 		(ListOffset[interfaceRef] + ListWindowLength[interfaceRef])));
 	}
-		
+
 	//If we're not already in the process of grabbing a list, then update the selection.
 	if(! [m_Interface[interfaceRef], CHN_LIST_ACTIVE])
 	{
@@ -4639,37 +4639,37 @@ DEFINE_CALL 'SET HIGHLIGHT' (integer interfaceRef, integer newSelection)
 DEFINE_CALL 'LIST COMMAND HANDLER' (integer interfaceRef, integer channel, integer state)
 {
     stack_var integer nodeRef
-    
+
     nodeRef = BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current
 
     if(!state)
     {
 	if (channel = BTN_LIST_UP || channel = BTN_LIST_DOWN)
 	{
-	    do_release(m_Interface[interfaceRef], channel)	    
+	    do_release(m_Interface[interfaceRef], channel)
 	}
 	return
     }
-    
+
     //if the chan is one of the selected lines
     if(channel >= BTN_LIST_LINE1 && channel < BTN_LIST_LINE1 + MAX_LIST_WINDOW_LENGTH)
     {
 	stack_var integer line
 	line = channel - BTN_LIST_LINE1 + 1
-	
-	if(List[interfaceRef][line].behavior) //if there's a behavior for this line	
+
+	if(List[interfaceRef][line].behavior) //if there's a behavior for this line
 	{
 	    //remember the line
-	    BrowseNodeResource[nodeRef].selection = line + ListOffset[interfaceRef] 
-	    
+	    BrowseNodeResource[nodeRef].selection = line + ListOffset[interfaceRef]
+
 	    //turn on the feedback
 	    call 'LIST UPDATE SELECTION' (interfaceRef)
 	}
-	    
+
 	call 'LIST LINE COMMAND' (interfaceRef, line)
     }
     //if the chan is one of the keypad keys
-    else  if(channel >= BTN_KEYPAD_KEY && channel <= BTN_KEYPAD_KEY + 9) 
+    else  if(channel >= BTN_KEYPAD_KEY && channel <= BTN_KEYPAD_KEY + 9)
     {
 	//send to the keyboard handler
 	call 'KEYBOARD BUTTON' (interfaceRef, "channel - BTN_KEYPAD_KEY + '0'")
@@ -4679,28 +4679,28 @@ DEFINE_CALL 'LIST COMMAND HANDLER' (integer interfaceRef, integer channel, integ
 	case BTN_LIST_BROWSE_SELECT :
 	{
 	    /*
-	     * if the list window contains no lines, do nothing 
+	     * if the list window contains no lines, do nothing
 	     * (hasn't yet been configured or using keypad)
 	     */
 	    if(ListWindowLength[interfaceRef] > 0)
 	    {
-		
+
 		//if we're already looking at this list
-		if(CurrentList[interfaceRef] = LIST_SHOW_BROWSE) 
+		if(CurrentList[interfaceRef] = LIST_SHOW_BROWSE)
 		{
 		    //set to home
 		    call 'RESET STACK' (interfaceRef, LIST_SHOW_BROWSE)
 		    KeyboardStatus[interfaceRef] = KEYB_OFF //clear the keyboard if it's up
 		}
 		CurrentList[interfaceRef] = LIST_SHOW_BROWSE
-		
+
 		//pop or clear the page
-		[m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH] = 
+		[m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH] =
 		    (KeyboardStatus[interfaceRef] = KEYB_SEARCH)
 		call 'GET LIST' (interfaceRef) //get the list
 	    }
 	}
-	
+
 	case BTN_LIST_NOW_PLAYING_SELECT :
 	{
 	    /*
@@ -4717,54 +4717,54 @@ DEFINE_CALL 'LIST COMMAND HANDLER' (integer interfaceRef, integer channel, integ
 		}
 		CurrentList[interfaceRef] = LIST_SHOW_NOWPLAYING
 		KeyboardStatus[interfaceRef] = KEYB_OFF
-		
+
 		//update the new nodeRef
-		nodeRef = BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current	
+		nodeRef = BrowseNodeStack[interfaceRef][CurrentList[interfaceRef]].current
 		//indicate we've not moved the list
 		BrowseNodeResource[nodeRef].moved = false
-		
+
 		//hide the search page if it's showing
 		off[m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH]
 		call 'GET LIST' (interfaceRef) //get the list
 	    }
 	}
-	
+
 	case BTN_LIST_HOME :
 	{
-	    /* 
-	     * if the list window contains no lines, do nothing 
+	    /*
+	     * if the list window contains no lines, do nothing
 	     * (hasn't yet been configured or using keypad)
 	     */
 	    if(ListWindowLength[interfaceRef] > 0)
 	    {
 		call 'RESET STACK' (interfaceRef, CurrentList[interfaceRef])
-		
+
 		//hide the search page if it's showing
-		off[m_Interface[interfaceRef],CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH]	
+		off[m_Interface[interfaceRef],CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH]
 		call 'GET LIST' (interfaceRef)
 	    }
 	}
-	
+
 	case BTN_LIST_BACK :
 	{
 	    /*
-	     * if the list window contains no lines, do nothing 
+	     * if the list window contains no lines, do nothing
 	     * (hasn't yet been configured or using blind keypad)
 	     */
 	    if(ListWindowLength[interfaceRef] > 0)
 	    {
 		call 'POP NODE' (interfaceRef, CurrentList[interfaceRef])
-	    
+
 		//hide the search page if it's showing
-		off[m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH] 
+		off[m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH]
 		call 'GET LIST' (interfaceRef)
 	    }
 	}
-	
+
 	case BTN_LIST_UP :
 	{
 	    /*
-	     * if the list window contains no lines, do nothing 
+	     * if the list window contains no lines, do nothing
 	     * (hasn't yet been configured or using keypad)
 	     */
 	    if(ListWindowLength[interfaceRef] > 0)
@@ -4772,11 +4772,11 @@ DEFINE_CALL 'LIST COMMAND HANDLER' (integer interfaceRef, integer channel, integ
 		do_push_timed(m_Interface[interfaceRef], channel, do_push_timed_infinite)
 	    }
 	}
-	
+
 	case BTN_LIST_DOWN :
 	{
 	    /*
-	     * if the list window contains no lines, do nothing 
+	     * if the list window contains no lines, do nothing
 	     *(hasn't yet been configured or using keypad)
 	     */
 	    if(ListWindowLength[interfaceRef] > 0)
@@ -4784,22 +4784,22 @@ DEFINE_CALL 'LIST COMMAND HANDLER' (integer interfaceRef, integer channel, integ
 		do_push_timed(m_Interface[interfaceRef], channel, do_push_timed_infinite)
 	    }
 	}
-		
+
 	case BTN_LIST_KEYB_SPACE :
 	{
 	    call 'KEYBOARD BUTTON' (interfaceRef, "' '")
 	}
-	
+
 	case BTN_LIST_KEYB_BACKSP :
 	{
 	    call 'KEYBOARD BUTTON' (interfaceRef, "BACKSPACE")
 	}
-	
+
 	case BTN_LIST_KEYB_CLEAR :
 	{
 	    call 'KEYBOARD BUTTON' (interfaceRef, "CLEAR")
 	}
-	
+
 	case BTN_LIST_KEYB_CANCEL :
 	{
 	    if(KeyboardStatus[interfaceRef] = KEYB_SEARCH) //if the search is active
@@ -4807,21 +4807,21 @@ DEFINE_CALL 'LIST COMMAND HANDLER' (integer interfaceRef, integer channel, integ
 		//hide the search page
 		off[m_Interface[interfaceRef],CHN_POPUP_OFFSET+POP_SATP_KEYBOARD_SEARCH]
 	    }
-		    
+
 	    KeyboardStatus[interfaceRef] = KEYB_OFF
 	    clear_buffer BrowseNodeResource[nodeRef].searchText	 //clear the search
-	    
+
 	    call 'GET LIST'(interfaceRef)
 	}
-	
+
 	case BTN_LIST_SEARCH :
 	{
 	    /*
-	     * if the list window contains no lines, do nothing 
+	     * if the list window contains no lines, do nothing
 	     * (hasn't yet been configured or using keypad)
 	     */
-	    if(ListWindowLength[interfaceRef] = 0) return; 
-	    
+	    if(ListWindowLength[interfaceRef] = 0) return;
+
 	    if(KeyboardStatus[interfaceRef] <> KEYB_SEARCH) //if the search isn't active
 	    {
 		KeyboardStatus[interfaceRef] = KEYB_SEARCH
@@ -4831,38 +4831,38 @@ DEFINE_CALL 'LIST COMMAND HANDLER' (integer interfaceRef, integer channel, integ
 	    {
 		KeyboardStatus[interfaceRef] = KEYB_OFF
 	    }
-	    
+
 	    //pop or clear the page
-	    [m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH] = 
-		(KeyboardStatus[interfaceRef] = KEYB_SEARCH)	
-	    
+	    [m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH] =
+		(KeyboardStatus[interfaceRef] = KEYB_SEARCH)
+
 	    call 'GET LIST'(interfaceRef)
 	}
-	
+
 	case BTN_LIST_SEARCH_RESULT :
 	case BTN_LIST_KEYB_ENTER :
 	{
 	    /*
-	     * if the list window contains no lines, do nothing 
+	     * if the list window contains no lines, do nothing
 	     * (hasn't yet been configured or using keypad)
 	     */
 	    if(ListWindowLength[interfaceRef] = 0) return;
-	    
+
 	    if(KeyboardStatus[interfaceRef] = KEYB_SEARCH) //if the search is active
 	    {
 		//hide the search page
 		off[m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_SATP_KEYBOARD_SEARCH]
 	    }
-		    
+
 	    KeyboardStatus[interfaceRef] = KEYB_OFF
-	    
+
 	    //if there's only a single item in the search result
-	    if(ListLength[interfaceRef] = 1) 
+	    if(ListLength[interfaceRef] = 1)
 	    {
 		clear_buffer BrowseNodeResource[nodeRef].searchText //clear the search
 		call 'LIST LINE COMMAND'(interfaceRef, 1) //perform the action on the single item
 	    }
-	    
+
 	    call 'GET LIST'(interfaceRef)
 	}
     }
@@ -4882,29 +4882,29 @@ DEFINE_CALL 'KEYBOARD BUTTON' (integer interfaceRef, char character[])
 	    stack_var integer nodeRef
 	    stack_var integer loop
 	    listShow = CurrentList[interfaceRef] //determine the currently shown list
-	    
+
 	    //Grab the current browse node.
 	    nodeRef = BrowseNodeStack[interfaceRef][listShow].current
-	    
+
 	    switch(character[1])
 	    {
 		case BACKSPACE: //backspace
 		{
 		    /*
-		     * if it's the closing bracket in a fuzzy search, pull out the 
+		     * if it's the closing bracket in a fuzzy search, pull out the
 		     * entire set within the brackets [abc]
 		     */
-		    if(right_string(BrowseNodeResource[nodeRef].searchText, 1) = ']')	
+		    if(right_string(BrowseNodeResource[nodeRef].searchText, 1) = ']')
 		    {
 			loop = length_string(BrowseNodeResource[nodeRef].searchText)
-			
+
 			//step through the string until we find the open bracket
 			while((BrowseNodeResource[nodeRef].searchText[loop]) <> '[' && loop > 1)
 			{
 			    loop = loop - 1
 			}
 			//trim down the string by this much
-			BrowseNodeResource[nodeRef].searchText = 
+			BrowseNodeResource[nodeRef].searchText =
 			    left_string(BrowseNodeResource[nodeRef].searchText, loop - 1)
 		    }
 		    else
@@ -4912,7 +4912,7 @@ DEFINE_CALL 'KEYBOARD BUTTON' (integer interfaceRef, char character[])
 			BrowseNodeResource[nodeRef].searchText = left_string(BrowseNodeResource[nodeRef].searchText,
 			    length_array(BrowseNodeResource[nodeRef].searchText) - 1)
 		    }
-		}    
+		}
 		case CLEAR: //clear the string
 		{
 		    clear_buffer BrowseNodeResource[nodeRef].searchText
@@ -4920,18 +4920,18 @@ DEFINE_CALL 'KEYBOARD BUTTON' (integer interfaceRef, char character[])
 		case '[': //multi-letter entry (for keypad alphabet - ABC2, DEF3, etc)
 		{
 		    BrowseNodeResource[nodeRef].searchText = "BrowseNodeResource[nodeRef].searchText, character"
-		    
+
 		    //if it didn't start fuzzy and there's already text there
-		    if((length_string(BrowseNodeResource[nodeRef].searchText)>0) && 
+		    if((length_string(BrowseNodeResource[nodeRef].searchText)>0) &&
 			    !isFuzzySearch(nodeRef))
 		    {
 			//make it fuzzy by surrounding the first char in brackets
 			BrowseNodeResource[nodeRef].searchText = "'[', BrowseNodeResource[nodeRef].searchText[1], ']',
-			    right_string(BrowseNodeResource[nodeRef].searchText, 
+			    right_string(BrowseNodeResource[nodeRef].searchText,
 			    length_string(BrowseNodeResource[nodeRef].searchText) - 1)"
 		    }
 		}
-		    
+
 		default:
 		{
 		    //append the keyboard character
@@ -4953,9 +4953,9 @@ DEFINE_CALL 'KEYBOARD BUTTON' (integer interfaceRef, char character[])
  ******************************************************************************************/
 
 DEFINE_CALL 'FEEDBACK PRESET' (integer interfaceRef, char presetHandle[])
-{    
+{
     stack_var integer presetNumber
-	
+
     for( presetNumber = 1; presetNumber <= MAX_PRESETS; presetNumber++ )
     {
 	//Check to see if the handle matches.
@@ -4966,7 +4966,7 @@ DEFINE_CALL 'FEEDBACK PRESET' (integer interfaceRef, char presetHandle[])
 	    ON[m_Interface[interfaceRef], BTN_PRESET1 - 1 + presetNumber + FEEDBACK_OFFSET]
 	    PresetFeedback[interfaceRef][presetNumber] = true;
 	}
-	else //The preset isn't active.		
+	else //The preset isn't active.
 	{
 	    //Turn the preset feedback off.
 	    OFF[m_Interface[interfaceRef], BTN_PRESET1 - 1 + presetNumber + FEEDBACK_OFFSET]
@@ -4978,9 +4978,9 @@ DEFINE_CALL 'FEEDBACK PRESET' (integer interfaceRef, char presetHandle[])
 DEFINE_CALL 'ACTIVATE PRESET' (integer interfaceRef, integer presetNumber)
 {
     call 'TRACE' (interfaceRef, "'Activating preset ', itoa(presetNumber)")
-    call 'SEND_REQUEST'(interfaceRef, "'PLAY_MUSIC_PRESET:', 
+    call 'SEND_REQUEST'(interfaceRef, "'PLAY_MUSIC_PRESET:',
 	    getPresetTag(interfaceRef, presetNumber),':'")
-    
+
     //Record the number of the last preset selected.
     LastSelectedPreset[interfaceRef] = presetNumber
 }
@@ -4989,7 +4989,7 @@ DEFINE_CALL 'ACTIVATE PRESET' (integer interfaceRef, integer presetNumber)
 DEFINE_FUNCTION char[100] getPresetTag(integer interfaceRef, integer presetNumber)
 {
     stack_var char tag[100]
-    
+
     if(length_array(PresetID[interfaceRef]) = 0)
     {
 	tag = "'AMX Preset', itoa(presetNumber)"
@@ -4998,7 +4998,7 @@ DEFINE_FUNCTION char[100] getPresetTag(integer interfaceRef, integer presetNumbe
     {
 	tag = "escapeInvalidChars(PresetID[interfaceRef]), itoa(presetNumber)"
     }
-	
+
     return tag
 }
 
@@ -5021,7 +5021,7 @@ usingSNAddressing = 0
 //initialize the device ID and stream ID arrays
 {
     stack_var loop
-    
+
     #IF_DEFINED SATP
 	//initialize the browse node resources
 	for(loop = 1; loop <= MAX_BROWSE_NODES; loop++)
@@ -5029,39 +5029,39 @@ usingSNAddressing = 0
 	    BrowseNodeResource[loop].handle = ''
 	    BrowseNodeResource[loop].position = 0
 	    BrowseNodeResource[loop].selection = 0
-	    
+
 	    //Link all of the nodes together.
 	    BrowseNodeResource[loop].nextNode = loop + 1
 	    BrowseNodeResource[loop].previousNode = loop - 1
 	}
 	BrowseNodeResource[MAX_BROWSE_NODES].nextNode = 0
-	
+
 	AvailableResources = MAX_BROWSE_NODES //We start with all resources available.
 	NextFreeNode = MAX_BROWSE_NODES //Grab a link to the top free node.
     #END_IF
-        
+
     for(loop = 1; loop <= MAX_NUMBER_OF_PLAYERS; loop++)
     {
 	KaleidescapeID[loop].deviceId = '01'
 	KaleidescapeID[loop].zoneId = 0
 	KaleidescapeID[loop].sequence = 0
-	
+
 	#IF_DEFINED SATP
 	    //initialize the browse node stacks.
 	    ListWindowLength[loop] = MAX_LIST_WINDOW_LENGTH
-	    
+
 	    CurrentList[loop] = LIST_SHOW_BROWSE
-	    
+
 	    BrowseNodeStack[loop][LIST_SHOW_BROWSE].current = 0
 	    BrowseNodeStack[loop][LIST_SHOW_BROWSE].bottom = 0
 	    BrowseNodeStack[loop][LIST_SHOW_BROWSE].size = 0
-	    
+
 	    BrowseNodeStack[loop][LIST_SHOW_NOWPLAYING].current = 0
 	    BrowseNodeStack[loop][LIST_SHOW_NOWPLAYING].bottom = 0
-	    BrowseNodeStack[loop][LIST_SHOW_NOWPLAYING].size = 0	
+	    BrowseNodeStack[loop][LIST_SHOW_NOWPLAYING].size = 0
 	#END_IF
     }
-    
+
     for(loop = 1; loop <= length_array(m_Interface); loop++)
     {
     	set_virtual_channel_count(m_Interface[loop], 255 + FEEDBACK_OFFSET)
@@ -5079,7 +5079,7 @@ usingSNAddressing = 0
  * PRESS_PLAYPS is a special handler for the play-pause button
  */
 
-Commands[BTN_PLAY	] = "PRESS_DIRECT, 'PLAY'" 
+Commands[BTN_PLAY	] = "PRESS_DIRECT, 'PLAY'"
 Commands[BTN_STOP	] = "PRESS_DIRECT, 'STOP'"
 Commands[BTN_PAUSE	] = "PRESS_DIRECT, 'PAUSE'"
 Commands[BTN_SKIP_FORWARD	] = "PRESS_DIRECT, 'NEXT'"
@@ -5098,16 +5098,16 @@ Commands[BTN_KEYPAD_KEY + 7 ] = "PRESS_PULSED, 'DIGIT:7'"
 Commands[BTN_KEYPAD_KEY + 8 ] = "PRESS_PULSED, 'DIGIT:8'"
 Commands[BTN_KEYPAD_KEY + 9 ] = "PRESS_PULSED, 'DIGIT:9'"
 
-Commands[BTN_KEYPAD_ENTER   ] = "PRESS_PULSED, 'SELECT'" 
+Commands[BTN_KEYPAD_ENTER   ] = "PRESS_PULSED, 'SELECT'"
 
-Commands[BTN_PAGE_UP	    ] = "PRESS_REPEAT, 'PAGE_UP'" 
-Commands[BTN_PAGE_DOWN	    ] = "PRESS_REPEAT, 'PAGE_DOWN'" 
+Commands[BTN_PAGE_UP	    ] = "PRESS_REPEAT, 'PAGE_UP'"
+Commands[BTN_PAGE_DOWN	    ] = "PRESS_REPEAT, 'PAGE_DOWN'"
 
 Commands[BTN_POWER_ON	    ] = "PRESS_DIRECT, 'LEAVE_STANDBY'"
 Commands[BTN_POWER_OFF	    ] = "PRESS_DIRECT, 'ENTER_STANDBY'"
 
-Commands[BTN_INTERMISSION   ] = "PRESS_DIRECT, 'INTERMISSION_TOGGLE'" 
-Commands[BTN_INSTANT_REPLAY ] = "PRESS_PULSED, 'REPLAY'" 
+Commands[BTN_INTERMISSION   ] = "PRESS_DIRECT, 'INTERMISSION_TOGGLE'"
+Commands[BTN_INSTANT_REPLAY ] = "PRESS_PULSED, 'REPLAY'"
 Commands[BTN_START_CHAPTER_ENTRY] = "PRESS_DIRECT, 'START_CHAPTER_ENTRY'"
 Commands[BTN_SET_FAVORITE_START ] = "PRESS_PULSED, 'SET_FAVORITE_SCENE_START'"
 Commands[BTN_SET_FAVORITE_END	] = "PRESS_PULSED, 'SET_FAVORITE_SCENE_END'"
@@ -5167,7 +5167,7 @@ Commands[BTN_RED		] = "PRESS_REPEAT, 'RED'"
 Commands[BTN_BLUE		] = "PRESS_REPEAT, 'BLUE'"
 Commands[BTN_GREEN		] = "PRESS_REPEAT, 'GREEN'"
 Commands[BTN_YELLOW		] = "PRESS_REPEAT, 'YELLOW'"
-        
+
 Commands[BTN_COORDINATES	] = "PRESS_COORDS"
 Commands[BTN_PLAY_OR_PAUSE	] = "PRESS_PLAYPS"
 Commands[BTN_SPECIAL_BLURAY_STOP] = "PRESS_DIRECT, 'BLURAY_SPECIAL_STOP'"
@@ -5176,15 +5176,15 @@ Commands[BTN_SPECIAL_BLURAY_STOP] = "PRESS_DIRECT, 'BLURAY_SPECIAL_STOP'"
 {
     //initialize the Coordinate array
     stack_var integer interfaceRef
-    
+
     //step through each element of this array
-    for(interfaceRef = 1; interfaceRef <= MAX_NUMBER_OF_PLAYERS; interfaceRef++)	
+    for(interfaceRef = 1; interfaceRef <= MAX_NUMBER_OF_PLAYERS; interfaceRef++)
     {
 	Coordinate[interfaceRef][1] = 0
 	Coordinate[interfaceRef][2] = 0
 	Coordinate[interfaceRef][3] = 0 //clear all the values
     }
-    
+
     //set up the levels on all virtual devices
     for(interfaceRef = 1; interfaceRef <= length_array(m_Interface); interfaceRef++)
     {
@@ -5196,9 +5196,9 @@ Commands[BTN_SPECIAL_BLURAY_STOP] = "PRESS_DIRECT, 'BLURAY_SPECIAL_STOP'"
     //initialize the presets stuff.
     stack_var integer interfaceRef
     stack_var integer presetNumber
-    
+
     for(interfaceRef = 1; interfaceRef <= MAX_NUMBER_OF_PLAYERS; interfaceRef++)
-    {   
+    {
 	NumberOfPresets[interfaceRef] = MAX_PRESETS
 	LastSelectedPreset[interfaceRef] = 1
 	for(presetNumber = 1; presetNumber <= MAX_PRESETS; presetNumber++)
@@ -5206,13 +5206,13 @@ Commands[BTN_SPECIAL_BLURAY_STOP] = "PRESS_DIRECT, 'BLURAY_SPECIAL_STOP'"
 	    PresetFeedback[interfaceRef][presetNumber] = false
 	    PresetHeld[interfaceRef][presetNumber] = false
 	    PresetHandleTable[interfaceRef][presetNumber] = ''
-	}	
+	}
     }
 }
 
 /*
  * Indicate if this port is to be used for an IP connection
- * IP devices are attached to the device 0, real devices will have a 
+ * IP devices are attached to the device 0, real devices will have a
  * different dev number
  */
 if(m_Kport.number = 0)
@@ -5235,18 +5235,18 @@ DATA_EVENT [m_KPort]
     ONLINE:
     {
 	//stack_var integer interfaceRef
-	
+
 	call 'TRACE'(0, "'Port online'")
-	
+
 	if(!IPConnection) //test whether this is an IP device or AMX device.
 	{
 	    //if the baud rate command hasn't yet been defined
 	    if(length_string(BaudRateCommand) = 0)
 	    {
 		//set it to the K Player default
-		BaudRateCommand = 'SET BAUD 19200,N,8,1,485 DISABLED'	
+		BaudRateCommand = 'SET BAUD 19200,N,8,1,485 DISABLED'
 	    }
-		
+
 	    SEND_COMMAND m_KPort, BaudRateCommand
 	}
 	else
@@ -5254,17 +5254,17 @@ DATA_EVENT [m_KPort]
 	    //indicate that the port is open
 	    managePort(IP_PORT_OPEN, 0)
 	}
-	
+
 	binaryDelimiters = false			//a fresh port will not use binary delimiters
 	setPortOpened(true)			//indicate that the port is opened
     }
-    
+
     ONERROR:
     {
 	call 'TRACE'(0, "'Port error ', itoa(data.number)")
 	managePort(IP_PORT_ERROR, data.number)
     }
-    
+
     OFFLINE:
     {
 	call 'TRACE'(0, 'Port offline')
@@ -5275,11 +5275,11 @@ DATA_EVENT [m_KPort]
 		managePort(IP_PORT_CLOSED, 0) //indicate that the port closed
 	    }
 	}
-	
+
 	//setPortInitialized(false)
 	setPortOpened(false)
     }
-    
+
     STRING:
     {
 	cancel_wait 'Send Timeout' 		//clear pending connection reset due to non-response
@@ -5314,25 +5314,25 @@ CHANNEL_EVENT[m_Interface, CHN_DEVICE_ONLINE]
     ON:
     {
 	stack_var integer interfaceRef //used to reference which player is being addressed
-	
+
 	interfaceRef = get_last(m_Interface)
-	
+
 	call 'TRACE'(interfaceRef, 'Device online')
-	
+
 	call 'INITIALIZE DEVICE' (interfaceRef) //start the initialization
     }
-    
+
     OFF:
     {
 	stack_var integer interfaceRef //used to reference which player is being addressed
-	
+
 	interfaceRef = get_last(m_Interface)
-	
+
 	call 'TRACE'(interfaceRef, 'Device offline')
-	
+
 	//when the device is offline, we don't know if the config is valid
 	OFF[m_Interface[interfaceRef], CHN_CONFIGURATION_VALID]
-	
+
 	//unsure of the power state, make both low
 	OFF[m_Interface[interfaceRef], BTN_POWER_OFF_FB]
 	OFF[m_Interface[interfaceRef], BTN_POWER_ON_FB]
@@ -5346,9 +5346,9 @@ CHANNEL_EVENT[m_Interface, CHN_CONFIGURATION_VALID]
     {
 	stack_var integer interfaceRef //used to reference which player is being addressed
 	interfaceRef = get_last(m_Interface)
-	
+
 	call 'TRACE'(interfaceRef, 'Device config valid.')
-	
+
 	call 'SEND_REQUEST' (interfaceRef, 'GET_DEVICE_POWER_STATE:')
     }
 }
@@ -5360,15 +5360,15 @@ CHANNEL_EVENT[m_Interface, BTN_POWER_ON_FB]	//also perform this action when leav
 	stack_var integer interfaceRef //used to reference which player is being addressed
 	interfaceRef = get_last(m_Interface)
 	call 'TRACE'(interfaceRef, 'Device powered on')
-	
+
 	OFF[m_Interface[interfaceRef], BTN_POWER_OFF_FB]	//set the enter standby feedback to match
 	pulse[m_Interface[interfaceRef], CHN_REFRESH]		//refresh the data
     }
-    
+
     OFF:
     {
 	stack_var integer interfaceRef //used to reference which player is being addressed
-	interfaceRef = get_last(m_Interface)	
+	interfaceRef = get_last(m_Interface)
 	CALL 'CLEAR FEEDBACK'(interfaceRef)
     }
 }
@@ -5379,9 +5379,9 @@ CHANNEL_EVENT[m_Interface, BTN_POWER_OFF_FB]	//also perform this action when lea
     {
 	stack_var integer interfaceRef //used to reference which player is being addressed
 	interfaceRef = get_last(m_Interface)
-	
+
 	call 'TRACE'(interfaceRef, 'Device powered off')
-	
+
 	OFF[m_Interface[interfaceRef], BTN_POWER_ON_FB]	//set the leave standby feedback to match
     }
 }
@@ -5394,7 +5394,7 @@ CHANNEL_EVENT[m_Interface, CHN_REFRESH]
 	stack_var integer interfaceRef //used to reference which player is being addressed
 	stack_var integer presetNumber
 	interfaceRef = get_last(m_Interface)
-	
+
 	//if the device is off or offline or has invalid configuration
 	if(not [m_Interface[interfaceRef],BTN_POWER_ON_FB] or
 	   not [m_Interface[interfaceRef],CHN_DEVICE_ONLINE] or
@@ -5413,14 +5413,14 @@ CHANNEL_EVENT[m_Interface, CHN_REFRESH]
 		(length_string(m_UIPopups[POP_DETAILS_PAGE]) > 0) )
 	    {
 		//ask for the details for this handle
-		call 'SEND_REQUEST' (interfaceRef, "'GET_CONTENT_DETAILS:', 
+		call 'SEND_REQUEST' (interfaceRef, "'GET_CONTENT_DETAILS:',
 			HighlightedSelectionHandle[interfaceRef], '::'")
 	    }
-	    
+
 	    //call 'REQUEST SYSTEM STATE' (interfaceRef)
-	    
-	    call 'SEND_REQUEST' (interfaceRef, 'GET_FRIENDLY_NAME:')	
-	    
+
+	    call 'SEND_REQUEST' (interfaceRef, 'GET_FRIENDLY_NAME:')
+
 	    //if this isn't an SATP dev, request the OSD state information
 	    if(!KaleidescapeID[interfaceRef].zoneId)
 	    {
@@ -5433,28 +5433,28 @@ CHANNEL_EVENT[m_Interface, CHN_REFRESH]
 		call 'SEND_REQUEST' (interfaceRef, 'GET_HIGHLIGHTED_SELECTION:')
 		call 'SEND_REQUEST' (interfaceRef, 'GET_USER_INPUT:')
 	    }
-	    
+
 	    call 'SEND_REQUEST' (interfaceRef, 'GET_MUSIC_PLAY_STATUS:')
-	    call 'SEND_REQUEST' (interfaceRef, 'GET_MUSIC_TITLE:')    
-	    
+	    call 'SEND_REQUEST' (interfaceRef, 'GET_MUSIC_TITLE:')
+
 	    //Request preset information.
-	    
+
 	    if(PresetID[interfaceRef] != '')
 	    {
 		for(presetNumber = 1; presetNumber <= MAX_PRESETS; presetNumber++)
 		{
-		    if(m_VT[VT_PRESET_LABEL_1 + presetNumber - 1] <> 0) 
+		    if(m_VT[VT_PRESET_LABEL_1 + presetNumber - 1] <> 0)
 		    {
 			//send the preset label text to the VT
-			send_string m_Interface[interfaceRef], "'!T', 
+			send_string m_Interface[interfaceRef], "'!T',
 			    m_VT[VT_PRESET_LABEL_1 + presetNumber - 1], ''"
 		    }
 		    call 'SEND_REQUEST' (interfaceRef, "'GET_MUSIC_PRESET_INFORMATION:', PresetID[interfaceRef], itoa(presetNumber), ':'")
 		}
 	    }
-	    
+
 	    call 'SEND_REQUEST' (interfaceRef, "'GET_PLAYING_MUSIC_INFORMATION:'")
-	    
+
 	    //if any of the fast update fb is desired,
 	    if(  ( m_VT[VT_TRACK_CURRENT_TIME] <> 0 )
 	      || ( m_VT[VT_TRACK_REMAIN_TIME] <> 0 )  )
@@ -5465,13 +5465,13 @@ CHANNEL_EVENT[m_Interface, CHN_REFRESH]
 	    else
 	    {
 		// disable feedback updates during playback
-		call 'SEND_REQUEST' (interfaceRef, 'SET_STATUS_CUE_PERIOD:0:') 
-	    }   
-	    	    
+		call 'SEND_REQUEST' (interfaceRef, 'SET_STATUS_CUE_PERIOD:0:')
+	    }
+
 	    //set this to not playing to force a now playing refresh
 	    //this will refresh the now playing popup and re-request the list (if SATP)
-	    PlayMode[interfaceRef] = PLAY_MODE_UNKNOWN 
-	    	
+	    PlayMode[interfaceRef] = PLAY_MODE_UNKNOWN
+
 	}
 	CALL 'REFRESH TP' (interfaceRef)
     }
@@ -5486,27 +5486,27 @@ DATA_EVENT[m_Interface]
     {
 	stack_var char textCommand[255] //used for command manipulation
 	stack_var integer interfaceRef //used to reference which player is being addressed
-	
+
 	interfaceRef = get_last(m_Interface)
-	
+
 	//convert to upper case and put in temp variable
-	textCommand = upper_string(data.text) 
-	
+	textCommand = upper_string(data.text)
+
 	select
 	{
 	    active(left_string(textCommand,3) = 'IP '): //command to set the IP address
 	    {
 		remove_string(textCommand, 'IP ', 1) //remove the header
-		
-		if(IPAddress <> '') 
+
+		if(IPAddress <> '')
 		{
 		    call 'TRACE'(0, "'Was using IP Address: ',IPAddress")
 		}
-		
+
 		IPAddress = textCommand //set the IP
-		
+
 		call 'TRACE'(0, "'Now using IP Address: ', IPAddress")
-		
+
 		if(IPConnection && IPAddress <> '')		//if this is a IP connection
 		{
 		    if(length_string(KaleidescapeID[interfaceRef].deviceID))
@@ -5515,18 +5515,18 @@ DATA_EVENT[m_Interface]
 		    }
 		}
 	    }
-	    
+
 	    active(left_string(textCommand, 3) = 'ID '): //command to set the Id
 	    {
 		stack_var integer deviceID
 		stack_var integer streamPos
 		stack_var integer seqPos
-		
+
 		remove_string(textCommand, 'ID ', 1) //remove the header
-		
+
 		streamPos = find_string(textCommand, '.', 2)
 		seqPos = find_string(textCommand, '/', 2)
-		
+
 		if(textCommand[1] = '#')
 		{
 		    //note that a device is routing commands using serial number device ids
@@ -5537,7 +5537,7 @@ DATA_EVENT[m_Interface]
 		    //note that a device is routing commands using control protocol device ids
 		    usingCPDaddressing = 1
 		}
-		
+
 		if(streamPos)
 		{
 		    set_length_array(KaleidescapeID[interfaceRef].deviceId, streamPos-1)
@@ -5553,46 +5553,46 @@ DATA_EVENT[m_Interface]
 		    set_length_array(KaleidescapeID[interfaceRef].deviceId, length_string(textCommand))
 		    KaleidescapeID[interfaceRef].deviceId = textCommand
 		}
-		
+
 		formatId(KaleidescapeID[interfaceRef].deviceId)
-		
+
 		if(KaleidescapeID[interfaceRef].deviceId != '01')
 		{
 		    DeviceIndirect[interfaceRef] = 1 //if the ID isn't 1, assume indirect
 		}
-		
+
 		//if there is a stream within the command
-		if(find_string(textCommand, '.', 1)) 
+		if(find_string(textCommand, '.', 1))
 		{
 		    remove_string(textCommand, '.', 1) //remove everything up to the stream
-		    
+
 		    //set the stream
-		    KaleidescapeID[interfaceRef].zoneId = atoi(textCommand) 
+		    KaleidescapeID[interfaceRef].zoneId = atoi(textCommand)
 		    #IF_DEFINED SATP
 			//set the starting node
-			call 'PUSH NODE' (interfaceRef, LIST_SHOW_BROWSE, 
+			call 'PUSH NODE' (interfaceRef, LIST_SHOW_BROWSE,
 				ListBrowseStart)
-				
+
 			//set the starting node
-			call 'PUSH NODE' (interfaceRef, LIST_SHOW_NOWPLAYING, 
+			call 'PUSH NODE' (interfaceRef, LIST_SHOW_NOWPLAYING,
 				ListNowPlayingStart)
 		    #ELSE
-			send_string 0, "13, 
+			send_string 0, "13,
 			    'ERROR!  Kaleidescape SATP commands requested, but SATP not',
 			    'compiled into the module.'"
 		    #END_IF
-		    
+
 		}
 		else
 		{
 		    KaleidescapeID[interfaceRef].zoneId = 0	//clear the stream
 		}
-		
+
 		//if there is a sequence ID within the command
-		if(find_string(textCommand, '/', 1)) 
+		if(find_string(textCommand, '/', 1))
 		{
 		    remove_string(textCommand, '/', 1)	//remove everything up to the sequence number
-		    
+
 		    //set the sequence
 		    KaleidescapeID[interfaceRef].sequence = atoi(textCommand) //copy the sequence number from the string
 		}
@@ -5601,115 +5601,115 @@ DATA_EVENT[m_Interface]
 		    //set the default sequence
 		    KaleidescapeID[interfaceRef].sequence = 1
 		}
-		
+
 		//turn back into ASCII
-		KaleidescapeID[interfaceRef].sequence = 
+		KaleidescapeID[interfaceRef].sequence =
 		    KaleidescapeID[interfaceRef].sequence + '0'
-		
-		
+
+
 		if(KaleidescapeID[interfaceRef].zoneId)//format('%02d', deviceId)
 		    call 'TRACE'(interfaceRef, "'Now using ID: ', KaleidescapeID[interfaceRef].deviceId, format('.%02d', KaleidescapeID[interfaceRef].zoneId), '/',KaleidescapeID[interfaceRef].sequence ")
 		else
 		    call 'TRACE'(interfaceRef, "'Now using ID: ', KaleidescapeID[interfaceRef].deviceId, '/',KaleidescapeID[interfaceRef].sequence")
-		
+
 		//indicate that this device is offline (we don't actually know)
 		OFF[m_Interface[interfaceRef], CHN_DEVICE_ONLINE]
-		
+
 		//try to start communications
 		call 'INITIALIZE DEVICE' (interfaceRef)
 	    }
-	    
+
 	    #IF_DEFINED SATP
 	    //indicate the number of lines available on the touch panel
-	    active(left_string(textCommand,6) = 'LINES '): 
+	    active(left_string(textCommand,6) = 'LINES '):
 	    {
 		remove_string(textCommand, 'LINES ', 1)
 		ListWindowLength[interfaceRef] = atoi(textCommand)
 	    }
 	    #END_IF
-	    
+
 	    //deprecated, the module now figures this out by itself
-	    active(textCommand = 'INDIRECT'): 
+	    active(textCommand = 'INDIRECT'):
 	    {
 		DeviceIndirect[interfaceRef] = 1
 	    }
-	    
+
 	    //deprecated, the module now figures this out by itself
 	    active(textCommand = 'DIRECT'):
 	    {
 		DeviceIndirect[interfaceRef] = 0
 	    }
-	    
+
 	    //command to request a refresh of all TP send strings/levels
 	    active(textCommand = 'REFRESH'):
 	    {
 		pulse[m_Interface[interfaceRef], CHN_REFRESH]
 	    }
-	    
+
 	    active(textCommand = 'DEBUG'): //start debug mode
 	    {
 		SentTraceInfo = 1
-		call 'TRACE' (0, 
+		call 'TRACE' (0,
 			'Enabling debugging trace information for Kaleidescape module')
 	    }
-	    
+
 	    active(textCommand = 'VERSION'):
 	    {
 		send_string 0, ModuleDescription
 	    }
-	    
+
 	    active(left_string(textCommand,6) = 'DEBUG '): //start detailed debug mode
 	    {
 		remove_string(textCommand, 'DEBUG ', 1)
 		SentTraceInfo = atoi(textCommand)
-		
+
 		call 'TRACE' (0,"'Enabling detail ', itoa(SentTraceInfo),
 			' debugging trace information for Kaleidescape module'")
 	    }
-	    
-	    active( (textCommand = 'DEBUG STOP') || //leave debug mode 
+
+	    active( (textCommand = 'DEBUG STOP') || //leave debug mode
 	             (textCommand = 'DEBUG OFF')  ||
 	             (textCommand = 'NO DEBUG')   ||
 	             (textCommand = '!DEBUG')     ||
 	             (textCommand = 'STOP DEBUG') ):
 	    {
-		call 'TRACE' (0, 
+		call 'TRACE' (0,
 			'Disabling debugging trace information for Kaleidescape module')
 		SentTraceInfo = 0
 	    }
-	    
+
 	    //if the user it trying to set the baud rate
 	    active(left_string(textCommand,8) = 'SET BAUD'):
 	    {
-		send_command m_KPort, textCommand //pass it on to the actual port 
+		send_command m_KPort, textCommand //pass it on to the actual port
 		BaudRateCommand = textCommand //remember it for restarts
 	    }
-	    
+
 	    /*
-	     * treat any single character as a keyboard command 
-	     * also, any sequence starting with [ is a alpha keypad set 
+	     * treat any single character as a keyboard command
+	     * also, any sequence starting with [ is a alpha keypad set
 	     * ( [ABC2], [DEF3], etc)
 	     */
-	    active( (length_array(textCommand) = 1) || (textCommand[1] = '[') ): 	    
+	    active( (length_array(textCommand) = 1) || (textCommand[1] = '[') ):
 	    {
 		if(KaleidescapeID[interfaceRef].zoneId) //if using the SATP interface
 		{
 		    #IF_DEFINED SATP
 			//pass the character to the keyboard routine
-			call 'KEYBOARD BUTTON' (interfaceRef, textCommand)	
+			call 'KEYBOARD BUTTON' (interfaceRef, textCommand)
 		    #ELSE
 			send_string 0, "13, 'ERROR!  Kaleidescape SATP commands requested, ',
 			    'but SATP not compiled into the module.'"
 		    #END_IF
 		}
-		
+
 		else //using the OSD interface
 		{
-		    call 'SEND_REQUEST' (interfaceRef, "'KEYBOARD_CHARACTER:', 
+		    call 'SEND_REQUEST' (interfaceRef, "'KEYBOARD_CHARACTER:',
 			    escapeInvalidChars(textCommand), ':'")
 		}
 	    }
-	    
+
 	    active(left_string(textCommand, 5) = 'TEST '):
 	    {
 		textCommand = data.text //kill the upper case thing
@@ -5717,93 +5717,93 @@ DATA_EVENT[m_Interface]
 			itoa(isLowerLetter(textCommand[6])), ' upper:',
 			itoa(isUpperLetter(textCommand[6])) ")
 	    }
-	    
+
 	    active(left_string(textCommand, 6) = 'TEST2 '):
 	    {
 		textCommand = data.text //kill the upper case thing
 		call 'TRACE' (0, "'toTitleCaps:', toTitleCaps(textCommand)")
 	    }
-	    
-	    
+
+
 	    active( left_string(textCommand, 19) = 'COVER HOST OVERRIDE ' ):
 	    {
 		remove_string(textCommand, 'COVER HOST OVERRIDE ', 1)
 		CoverHostOverride = textCommand
-		
+
 		call 'TRACE' (0, "'Setting Cover URL Override to "',
 			CoverHostOverride, '"'")
 	    }
-	    
+
 	    active( left_string(textCommand, 26) = 'CALIBRATE MASKING OVERSCAN'):
 	    {
 		call 'SEND_REQUEST' (interfaceRef, 'GO_CALIBRATE_MASKING_OVERSCAN:')
 	    }
-	    
+
 	    active( left_string(textCommand, 17) = 'CALIBRATE MASKING'):
 	    {
 		call 'SEND_REQUEST' (interfaceRef, 'GO_CALIBRATE_MASKING:')
 	    }
-	    
+
 	    active( left_string(textCommand, 11) = 'PRESET TAG ' ): //'PRESET TAG Kitchen' - alias for the PRESET ID command below.
 	    {
 		//get the proper case
 		textCommand = right_string(data.text,length_string(data.text) - 11)
 		PresetID[interfaceRef] = textCommand
-		call 'TRACE' (interfaceRef, "'Setting the preset tag (ID) to "', 
+		call 'TRACE' (interfaceRef, "'Setting the preset tag (ID) to "',
 			textCommand, '"'")
 	    }
-	    
+
 	    active( left_string(textCommand, 10) = 'PRESET ID ' ): //'PRESET ID Kitchen'
 	    {
 		//get the proper case
 		textCommand = right_string(data.text,length_string(data.text) - 10)
 		PresetID[interfaceRef] = textCommand
-		call 'TRACE' (interfaceRef, "'Setting the preset ID to "', 
+		call 'TRACE' (interfaceRef, "'Setting the preset ID to "',
 			textCommand, '"'")
 	    }
-	    
+
 	    active( textCommand = 'PRESET LOCK' ): //Lock the presets for this device
 	    {
 		PresetLock[interfaceRef] = true
 		call 'TRACE' (interfaceRef, "'Setting the preset lock'")
 	    }
-	    
+
 	    active( textCommand = 'PRESET UNLOCK' ): //Unlock the presets for this device
 	    {
 		PresetLock[interfaceRef] = false
 		call 'TRACE' (interfaceRef, "'Clearing the preset lock'")
 	    }
-	    
+
 	    active( left_string(textCommand, 11) = 'MAX PRESET ' ): //Set the number of presets
 	    {
 		textCommand = right_string(data.text, length_string(data.text) - 11)
 		NumberOfPresets[interfaceRef] = atoi(textCommand)
 		call 'TRACE' (interfaceRef, "'Setting number of presets to ', textCommand")
 	    }
-	    
+
 	    active( left_string(textCommand, 11) = 'COLLECTION ' ): //'COLLECTION 1 Artists'
 	    {
 	    	stack_var integer collectionNumber
-		
+
 		remove_string(textCommand, 'COLLECTION ', 1)
-		
+
 		//pull out the collection number
 		collectionNumber = atoi(remove_string(textCommand, ' ',1))
 
 		if(collectionNumber > MAX_NUMBER_OF_KEYPAD_COLLECTIONS)
 		{
 		    call 'TRACE' (interfaceRef, "'ERROR! There is no collection #',
-			    itoa(collectionNumber), '.  Only 1 to ', 
-			    itoa(MAX_NUMBER_OF_KEYPAD_COLLECTIONS), ' are valid.'") 
+			    itoa(collectionNumber), '.  Only 1 to ',
+			    itoa(MAX_NUMBER_OF_KEYPAD_COLLECTIONS), ' are valid.'")
 		}
 		else
 		{
 		    KeypadCollection[interfaceRef][collectionNumber] = textCommand
-		    call 'TRACE' (interfaceRef, "'Setting keypad collection ', 
+		    call 'TRACE' (interfaceRef, "'Setting keypad collection ',
 			    itoa(collectionNumber), ' to "', textCommand,'"'")
 		}
 	    }
-	    
+
 	    #IF_DEFINED SATP
 	    active( left_string(textCommand, 13) = 'VERIFY CRUMBS' ||
 		     left_string(textCommand, 13) = 'VERIFY STACKS'):
@@ -5814,7 +5814,7 @@ DATA_EVENT[m_Interface]
 		stack_var integer 	node2
 		stack_var integer 	numNodes
 		stack_var integer 	verbose
-		
+
 		if(length_string(textCommand) > 13)
 		{
 		    verbose = 1
@@ -5823,36 +5823,36 @@ DATA_EVENT[m_Interface]
 		{
 		    verbose = 0
 		}
-		
+
 		//Check the size of all the stacks.
-		numNodes = AvailableResources			    
+		numNodes = AvailableResources
 		send_string 0, "'**Sizes**'"
 		send_string 0, "' Free: ', itoa(AvailableResources)"
-		
+
 		for(interfaceRefLoop = 1; interfaceRefLoop <= MAX_NUMBER_OF_PLAYERS; interfaceRefLoop++)
 		{
 		    for(listType = 1; listType <= 2; listType++)
 		    {
 			if(BrowseNodeStack[interfaceRefLoop][listType].size > 0)
 			{
-			    send_string 0, "' ', itoa(interfaceRefLoop), ',', itoa(listType), ': ', 
+			    send_string 0, "' ', itoa(interfaceRefLoop), ',', itoa(listType), ': ',
 				itoa(BrowseNodeStack[interfaceRefLoop][listType].size)"
 			    numNodes = numNodes + BrowseNodeStack[interfaceRefLoop][listType].size
 			}
 		    }
 		}
-		
+
 		send_string 0, "' total: ', itoa(numNodes),13,13"
-		
+
 		send_string 0, "'**Trace**', 13"
-		
+
 		//Check the list of unallocated nodes.
 		send_string 0,  "13, 13, ' Free List: '"
-				
+
 		node1 = NextFreeNode
-		node2 = 0		
+		node2 = 0
 		numNodes = 0
-		
+
 		while(node1 > 0)
 		{
 		    if(BrowseNodeResource[node1].nextNode <> node2)
@@ -5860,25 +5860,25 @@ DATA_EVENT[m_Interface]
 			send_string 0, "'Error in Node ', itoa(node1), ' - next was ',
 			    itoa(BrowseNodeResource[node1].nextNode)"
 		    }
-			
+
 		    node2 = node1
 		    node1 = BrowseNodeResource[node2].previousNode
-		    
+
 		    if(verbose) send_string 0, "itoa(node2), ' > ', itoa(node1), 13"
-		    
+
 		    numNodes++
 		}
-		
+
 		if(numNodes != AvailableResources)
 		{
-		    send_string 0, "'Error in AvailableResources.  Found ', itoa(numNodes), 
+		    send_string 0, "'Error in AvailableResources.  Found ', itoa(numNodes),
 				    ' nodes.'"
 		}
-		else 
+		else
 		{
 		    send_string 0, "'Count matches found nodes: ', itoa(numNodes)"
 		}
-		
+
 		//Check the contents of each stack.
 		for(interfaceRefLoop = 1; interfaceRefLoop <= MAX_NUMBER_OF_PLAYERS; interfaceRefLoop++)
 		{
@@ -5886,13 +5886,13 @@ DATA_EVENT[m_Interface]
 		    {
 			if(BrowseNodeStack[interfaceRefLoop][listType].bottom > 0)
 			{
-			    send_string 0,  "13, 13, ' List: ', itoa(interfaceRefLoop), ',', 
+			    send_string 0,  "13, 13, ' List: ', itoa(interfaceRefLoop), ',',
 				itoa(listType), ': '"
-			    
+
 			    numNodes = 0
 			    node1 = BrowseNodeStack[interfaceRefLoop][listType].bottom
 			    node2 = 0
-			    
+
 			    while(node1 > 0)
 			    {
 				if(BrowseNodeResource[node1].previousNode <> node2)
@@ -5901,54 +5901,54 @@ DATA_EVENT[m_Interface]
 					itoa(node1), ' - last was ',
 					itoa(BrowseNodeResource[node1].previousNode)"
 				}
-				    
+
 				node2 = node1
 				node1 = BrowseNodeResource[node1].nextNode
-				
-				if(verbose) 
+
+				if(verbose)
 				{
 				    send_string 0, "itoa(node2), ' > ', itoa(node1), 13"
 				}
-				
+
 				numNodes++
-				
+
 			    }
-			    
+
 			    if(numNodes != BrowseNodeStack[interfaceRefLoop][listType].size)
 			    {
-				send_string 0, "'Error in .size.  Found ', 
+				send_string 0, "'Error in .size.  Found ',
 				    itoa(numNodes), ' nodes.'"
 			    }
 			    else
 			    {
-				send_string 0, "'.size matches found nodes: ', 
+				send_string 0, "'.size matches found nodes: ',
 				    itoa(numNodes)"
 			    }
-			    
+
 			    if(node1 != BrowseNodeStack[interfaceRefLoop][listType].current)
 			    {
-				send_string 0, "'Error.  .Current (', 
+				send_string 0, "'Error.  .Current (',
 				    itoa(BrowseNodeStack[interfaceRefLoop][listType].current),
 				    ') does not match the last node (', itoa(node1), ')'"
 			    }
 			    else
 			    {
-				send_string 0, "'.Current (', 
+				send_string 0, "'.Current (',
 				    itoa(BrowseNodeStack[interfaceRefLoop][listType].Current),
 				    ') properly matches the last node.'"
 			    }
 			}
 		    }
 		}
-		    
+
 	    }
 	    #END_IF
-	    
+
 	    active (left_string (textCommand,17) = 'VOLUME CAPABILITY'): //command to set the volume capabilities of a player
 	    {
 		VolumeCapability[interfaceRef] = atoi(textCommand)
 	    }
-	    
+
 	    active(1): //default action
 	    {
 		//send all other unknown commands to the player
@@ -5960,31 +5960,31 @@ DATA_EVENT[m_Interface]
 
 channel_event[m_Interface, 0] //trap all events
 {
-    on:  
+    on:
     {
 	stack_var integer 	interfaceRef
 	stack_var integer 	handling
 	stack_var char 	commandString[COMMAND_LENGTH]
-	
+
 	//retreive the device that generated the event
-	interfaceRef = get_last(m_Interface)	
-	
+	interfaceRef = get_last(m_Interface)
+
 	call 'TRACE' (interfaceRef, "'Received push ', itoa(channel.channel)")
 	select
 	{
 	    //ensure that we only process events that are in range
-	    active( channel.channel <= LAST_BUTTON ): 
+	    active( channel.channel <= LAST_BUTTON ):
 	    {
 		if( KaleidescapeID[interfaceRef].zoneId && //Check for defined stream
 		    ( channel.channel >= BTN_FIRST_LIST_COMMAND  || //List command?
 		     (channel.channel >= BTN_KEYPAD_KEY && //Keypad command
-		      channel.channel <= BTN_KEYPAD_ENTER + 9) ) 
+		      channel.channel <= BTN_KEYPAD_ENTER + 9) )
 		  )
 		{
 		    #IF_DEFINED SATP
 			call 'LIST COMMAND HANDLER' (interfaceRef, channel.channel, 1)
 		    #ELSE
-			call 'TRACE' (interfaceRef, 
+			call 'TRACE' (interfaceRef,
 			    'ERROR!!  SATP command requested, but SATP commands not compiled.  Recompile module with #DEFINE SATP.')
 		    #END_IF
 		}
@@ -5992,46 +5992,46 @@ channel_event[m_Interface, 0] //trap all events
 		else if( length_string(Commands[channel.channel]) )
 		{
 		    // retreive the command from the array
-		    commandString = Commands[channel.channel]	
-		    
+		    commandString = Commands[channel.channel]
+
 		    // strip off the handling indicator
 		    handling = get_buffer_char(commandString)
-		    
+
 		    call 'TRACE' (interfaceRef,"'Processing push ', commandString")
-		    
+
 		    switch (handling)
 		    {
 			case PRESS_DIRECT: //non-repeating, no feedback command
 			{
 			    //send the command
-			    call 'SEND_REQUEST' (interfaceRef, "commandString, ':'")	
+			    call 'SEND_REQUEST' (interfaceRef, "commandString, ':'")
 			}
-			    
-			case PRESS_REPEAT: //repeating, no feedback command 
+
+			case PRESS_REPEAT: //repeating, no feedback command
 			{
 			    //send the command with a press
 			    call 'SEND_REQUEST' (interfaceRef, "commandString, '_PRESS:'")
-			    
-			    //turn on the feedback 
-			    on [m_Interface[interfaceRef], 
-				channel.channel + FEEDBACK_OFFSET]	
+
+			    //turn on the feedback
+			    on [m_Interface[interfaceRef],
+				channel.channel + FEEDBACK_OFFSET]
 			}
-			    
+
 			case PRESS_PULSED:
 			{
 			    //send the command
 			    call 'SEND_REQUEST' (interfaceRef, "commandString, ':'")
-			    
-			    //pulse the feedback 
-			    pulse [m_Interface[interfaceRef], 
+
+			    //pulse the feedback
+			    pulse [m_Interface[interfaceRef],
 				channel.channel + FEEDBACK_OFFSET]
 			}
-			
+
 			case PRESS_COORDS:
 			{
 			    call 'HANDLE COORDINATE PRESS' (interfaceRef)
 			}
-			
+
 			case PRESS_PLAYPS:
 			{
 			    call 'HANDLE PLAY PAUSE PRESS' (interfaceRef)
@@ -6041,24 +6041,24 @@ channel_event[m_Interface, 0] //trap all events
 	    }
 	    //do nothing if the channel is under the page offsets
 	    active (channel.channel <= CHN_PAGE_OFFSET):
-	    { 
+	    {
 	    }
 	    //if this is one of the pages, trigger the UI to change to that page
-	    active (channel.channel < CHN_PAGE_OFFSET + max_length_array(m_UIPages) ): 
+	    active (channel.channel < CHN_PAGE_OFFSET + max_length_array(m_UIPages) ):
 	    {
 		//ensure this page is defined
 		if(length_string( m_UIPages[channel.channel - CHN_PAGE_OFFSET] ) > 0)
 		{
-		    send_string m_Interface[interfaceRef], "'PAGE-', 
+		    send_string m_Interface[interfaceRef], "'PAGE-',
 			m_UIPages[channel.channel - CHN_PAGE_OFFSET]"
 		}
 	    }
-	    
+
 	    //do nothing if the channel is under the popup offset
 	    active (channel.channel <= CHN_POPUP_OFFSET):
 	    {
 	    }
-	    
+
 	    //if this is one of the popups, trigger the popup
 	    active (channel.channel < CHN_POPUP_OFFSET + max_length_array(m_UIPopUps) ):
 	    {
@@ -6066,17 +6066,17 @@ channel_event[m_Interface, 0] //trap all events
 	    }
 	}
     }
-    off:  
+    off:
     {
 	stack_var integer 	interfaceRef
 	stack_var integer 	handling
 	stack_var char 		commandString[COMMAND_LENGTH]
-	
+
 	//retreive the device that generated the event
-	interfaceRef = get_last(m_Interface)	
-	
+	interfaceRef = get_last(m_Interface)
+
 	call 'TRACE' (interfaceRef, "'Received release ', itoa(channel.channel)")
-	
+
 	select
 	{
 	    //ensure that we only process events that are in range
@@ -6094,25 +6094,25 @@ channel_event[m_Interface, 0] //trap all events
 		else if( length_string(Commands[channel.channel]) )
 		{
 		    // retreive the command from the array
-		    commandString = Commands[channel.channel]	
-		    
+		    commandString = Commands[channel.channel]
+
 		    // strip off the repeat indicator
 		    handling = get_buffer_char(commandString)
-		    
+
 		    call 'TRACE' (interfaceRef, "'Processing release ', commandString")
-		    
+
 		    switch (handling)
-		    {   case PRESS_REPEAT: //if this is a repeating command 
+		    {   case PRESS_REPEAT: //if this is a repeating command
 			{
 			    //send the command with a press
-			    call 'SEND_REQUEST' (interfaceRef, "commandString, 
+			    call 'SEND_REQUEST' (interfaceRef, "commandString,
 				    '_RELEASE:'")
-				    
-			    //turn off the feedback 
-			    off [m_Interface[interfaceRef], 
+
+			    //turn off the feedback
+			    off [m_Interface[interfaceRef],
 				    channel.channel + FEEDBACK_OFFSET]
 			}
-			
+
 			case PRESS_COORDS:
 			{
 			    call 'HANDLE COORDINATE RELEASE' (interfaceRef)
@@ -6124,7 +6124,7 @@ channel_event[m_Interface, 0] //trap all events
 	    active (channel.channel <= CHN_POPUP_OFFSET):
 	    {
 	    }
-	    //if this is one of the popups, trigger the popup	    
+	    //if this is one of the popups, trigger the popup
 	    active (channel.channel < CHN_POPUP_OFFSET + max_length_array(m_UIPopUps) ):
 	    {
 		call 'SET POPUP STATE' (interfaceRef, channel.channel - CHN_POPUP_OFFSET)
@@ -6138,21 +6138,21 @@ level_event [m_Interface,LVL_COORDINATE_Y]
 {
     stack_var integer interfaceRef
     stack_var integer levelReference
-    
+
     /*
      * This code is intended to retreive the device that triggered this event.
-     * Howver, get_last seems to have a bug when run in a level event against 
-     * a virtual device.  Thus we must retreive the device that triggered this 
+     * Howver, get_last seems to have a bug when run in a level event against
+     * a virtual device.  Thus we must retreive the device that triggered this
      * event the hard way
      */
-    interfaceRef = getDevRef(m_Interface, level.sourcedev)	
+    interfaceRef = getDevRef(m_Interface, level.sourcedev)
 
-    //calculate which level we're looking at 
-    levelReference = level.input.level - LVL_COORDINATE_X + 1	
-    
+    //calculate which level we're looking at
+    levelReference = level.input.level - LVL_COORDINATE_X + 1
+
     //save the coordinate into the coordinate array
-    Coordinate[interfaceRef][levelReference] = level.value	
-    
+    Coordinate[interfaceRef][levelReference] = level.value
+
     call 'TRACE' (interfaceRef, "'Level ref ', itoa(levelReference), ' changed to ',
 	    itoa(Coordinate[interfaceRef][levelReference])")
 }
@@ -6160,37 +6160,37 @@ level_event [m_Interface,LVL_COORDINATE_Y]
 level_event [m_Interface, LVL_VOLUME]
 {
     stack_var integer interfaceRef
-    
+
     /*
      * This code is intended to retreive the device that triggered this event.
-     * Howver, get_last seems to have a bug when run in a level event against 
-     * a virtual device.  Thus we must retreive the device that triggered this 
+     * Howver, get_last seems to have a bug when run in a level event against
+     * a virtual device.  Thus we must retreive the device that triggered this
      * event the hard way
      */
-    interfaceRef = getDevRef(m_Interface, level.sourcedev)	
+    interfaceRef = getDevRef(m_Interface, level.sourcedev)
     Volume[interfaceRef] = level.value
-    
+
     //send the level to the player using SEND_EVENT:VOLUME_LEVEL=XX:
-    call 'SEND_REQUEST' (interfaceRef, "'SEND_EVENT:VOLUME_LEVEL=', itoa(Volume[interfaceRef]), ':'")	
-    
+    call 'SEND_REQUEST' (interfaceRef, "'SEND_EVENT:VOLUME_LEVEL=', itoa(Volume[interfaceRef]), ':'")
+
     call 'TRACE' (interfaceRef, "'Volume level ', itoa(LVL_VOLUME), 'changed to ',
 	    itoa(Volume[interfaceRef])")
 }
 
 channel_event [m_Interface, BTN_VOLUME_MUTE]
 {
-    ON: 
+    ON:
     {
 	stack_var integer interfaceRef
 	    interfaceRef = get_last(m_Interface)
-	    
+
 	call 'SEND_REQUEST' (interfaceRef, "'SEND_EVENT:MUTE_ON_FB:'")
     }
-    OFF: 
+    OFF:
     {
 	stack_var integer interfaceRef
 	    interfaceRef = get_last(m_Interface)
-	    
+
 	call 'SEND_REQUEST' (interfaceRef, "'SEND_EVENT:MUTE_OFF_FB:'")
     }
 }
@@ -6202,25 +6202,25 @@ channel_event [m_Interface, BTN_VOLUME_MUTE]
 	stack_var integer interfaceRef
 	stack_var integer newPosition
 	stack_var integer nodeRef
-	
+
 	/*
 	 * This code is intended to retreive the device that sent this level.
-	 * Howver, get_last seems to have a bug when run in a level event against 
-	 * a virtual device.  Thus we must retreive the device that triggered this 
+	 * Howver, get_last seems to have a bug when run in a level event against
+	 * a virtual device.  Thus we must retreive the device that triggered this
 	 * event the hard way
-	 */	
+	 */
 	interfaceRef = getDevRef(m_Interface, level.sourcedev)
-	
+
 	//if the list doesn't fit the window...
 	if(ListLength[interfaceRef] > ListWindowLength[interfaceRef])
 	{
 	    newPosition = ( (level.value) * (ListLength[interfaceRef] + 1) / 255 ) + 1
-	    
+
 	    /*
-	     * make range within half of the bug size (relative window length) 
+	     * make range within half of the bug size (relative window length)
 	     * of each end of the bar
 	     */
-	     
+
 	     //if the list position is at less than half the window length
 	    if(newPosition <= ListWindowLength[interfaceRef]/2)
 	    {
@@ -6231,23 +6231,23 @@ channel_event [m_Interface, BTN_VOLUME_MUTE]
 		//otherwise, knock off the top half of the window
 		newPosition = newPosition - ListWindowLength[interfaceRef] / 2
 	    }
-		
+
 	    //bounds check to make out of bound values legit
 	    newPosition = boundsCheckListPosition(interfaceRef, newPosition)
-	    
+
 	    if(CurrentList[interfaceRef] = LIST_SHOW_NOWPLAYING) //if we're showing now playing
 	    {
 		//tell the interface not to follow the current playing item for a bit
-		do_push_timed(m_Interface[interfaceRef], CHN_OVERRIDE_NP_FOLLOW, 
+		do_push_timed(m_Interface[interfaceRef], CHN_OVERRIDE_NP_FOLLOW,
 		    TIMEOUT_NOW_PLAYING_MOVE)
 	    }
-		
+
 	    nodeRef = BrowseNodeStack[interfaceRef][ CurrentList[interfaceRef] ].current
-	    	    
+
 	    if(nodeRef !=  0) //if there is an active browse node...
 	    {
 		//and if the position is actually different
-		if(newPosition != BrowseNodeResource[nodeRef].Position) 
+		if(newPosition != BrowseNodeResource[nodeRef].Position)
 		{
 		    BrowseNodeResource[nodeRef].position = newPosition //set the position
 		    BrowseNodeResource[nodeRef].moved = true		//note that it's been intentionally moved
@@ -6265,22 +6265,22 @@ channel_event [m_Interface, BTN_VOLUME_MUTE]
 	}
 	else
 	{
-	    call 'TRACE'(interfaceRef, 
-		"'Scroll bar moved, but list already fits in window.  List:', 
+	    call 'TRACE'(interfaceRef,
+		"'Scroll bar moved, but list already fits in window.  List:',
 		itoa(ListLength[interfaceRef]), ' window:', itoa(ListWindowLength[interfaceRef])")
-	    
-	    call 'TRACE'(interfaceRef, "itoa(level.sourcedev.number), ' and ', 
+
+	    call 'TRACE'(interfaceRef, "itoa(level.sourcedev.number), ' and ',
 		itoa(m_Interface[interfaceRef].number)")
 	}
     }
-    
+
     //triggered from the DO_PUSH within the list command handler to allow the hold
-    button_event [m_Interface, BTN_LIST_UP] 
+    button_event [m_Interface, BTN_LIST_UP]
     {
 	push:
 	{
 	    stack_var integer interfaceRef
-	    
+
 	    interfaceRef = get_last(m_Interface)
 	    call 'MOVE LIST'(interfaceRef, (-1 * (ListWindowLength[interfaceRef] - 1)) )
 	}
@@ -6288,43 +6288,43 @@ channel_event [m_Interface, BTN_VOLUME_MUTE]
 	{
 	    stack_var integer interfaceRef
 	    stack_var sinteger step
-	    
+
 	    interfaceRef = get_last(m_Interface)
 	    step = type_cast(button.holdtime / 1000) //get how long this button has been held
-	    
+
 	    step = step * (ListWindowLength[interfaceRef] -1) * -1
-	    
+
 	    call 'MOVE LIST'(interfaceRef, step)
 	}
     }
 
     //triggered from the DO_PUSH within the list command handler to allow the hold
-    button_event [m_Interface, BTN_LIST_DOWN] 
+    button_event [m_Interface, BTN_LIST_DOWN]
     {
 	push:
 	{
 	    stack_var integer interfaceRef
-	    
-	    interfaceRef = get_last(m_Interface)	    
-	    
+
+	    interfaceRef = get_last(m_Interface)
+
 	    call 'MOVE LIST'(interfaceRef, (ListWindowLength[interfaceRef] - 1))
 	}
 	hold[15, REPEAT]:
 	{
 	    stack_var integer 	interfaceRef
 	    stack_var sinteger 	step
-	    
+
 	    interfaceRef = get_last(m_Interface)
-	    
+
 	    //get how long this button has been held
 	    step = type_cast(button.holdtime / 1000)
-	    
+
 	    step = step * (ListWindowLength[interfaceRef] - 1)
-	    
+
 	    call 'MOVE LIST'(interfaceRef, step)
 	}
     }
-    
+
 
     //handle resending a get list in an intelligent manner
     button_event [m_Interface, CHN_LIST_ACTIVE]
@@ -6340,11 +6340,11 @@ channel_event [m_Interface, BTN_VOLUME_MUTE]
 	release:
 	{
 	    stack_var integer interfaceRef
-	    
+
 	    interfaceRef = get_last(m_Interface)
-	    
+
 	    off[m_Interface[interfaceRef], CHN_LIST_ACTIVE] //turn off the feedback channel
-	    
+
 	    if([m_Interface[interfaceRef], CHN_LIST_PENDING]) //if there's a list pending
 	    {
 		off[m_Interface[interfaceRef], CHN_LIST_PENDING] //clear the flag
@@ -6352,17 +6352,17 @@ channel_event [m_Interface, BTN_VOLUME_MUTE]
 	    }
 	}
     }
-    
+
     //handler to get the list after a slight delay
     button_event [m_Interface, CHN_GET_LIST_DELAYED]
     {
 	push:
 	{
 	    /*
-	     * do nothing.  This is defined to prevent the processor from running 
+	     * do nothing.  This is defined to prevent the processor from running
 	     * mainline to find a handler
 	     */
-	}	
+	}
 	hold[100]: //this should never stay high, this is a safety
 	{
 	    do_release(button.sourcedev, CHN_GET_LIST_DELAYED)
@@ -6370,35 +6370,35 @@ channel_event [m_Interface, BTN_VOLUME_MUTE]
 	release:
 	{
 	    stack_var integer interfaceRef
-	    
+
 	    interfaceRef = get_last(m_Interface)
-	    
+
 	    call 'GET LIST' (interfaceRef)
 	}
     }
-    
+
     //when this goes low, recenter the now playing list
     button_event [m_Interface, CHN_OVERRIDE_NP_FOLLOW]
     {
 	push:
 	{
 	    stack_var integer interfaceRef
-	    
+
 	    interfaceRef = get_last(m_Interface)
 	    on[m_Interface[interfaceRef], CHN_OVERRIDE_NP_FOLLOW]
 	}
 	release:
 	{
 	    stack_var integer interfaceRef
-    	    
+
 	    interfaceRef = get_last(m_Interface)
-	    
+
 	    off[m_Interface[interfaceRef], CHN_OVERRIDE_NP_FOLLOW]
-	    
+
 	    if(centerNowPlayingList(interfaceRef)) //if the center has changed
 	    {
 		//and if we're looking at the now playing window
-		if(CurrentList[interfaceRef] = LIST_SHOW_NOWPLAYING) 
+		if(CurrentList[interfaceRef] = LIST_SHOW_NOWPLAYING)
 		{
 		    call 'GET LIST' (interfaceRef) //reload the list
 		}
@@ -6412,25 +6412,25 @@ button_event [m_Interface, CHN_RESET_HIGHLIGHTED_DETAILS]
     push:
     {
 	stack_var integer interfaceRef
-	
+
 	interfaceRef = get_last(m_Interface)
-	
+
 	OFF[m_Interface[interfaceRef], CHN_POPUP_OFFSET + POP_DETAILS_PAGE]
-    }    
+    }
     release:
     {
 	stack_var integer interfaceRef
-	
+
 	interfaceRef = get_last(m_Interface)
-	
+
 	//if a content handle is provided and if the details page is defined
 	if( (length_string(HighlightedSelectionHandle[interfaceRef]) > 0) &&
 	    (length_string(m_UIPopups[POP_DETAILS_PAGE]) > 0)       )
 	{
 	    //ask for the details for this handle
-	    call 'SEND_REQUEST' (interfaceRef, "'GET_CONTENT_DETAILS:', 
+	    call 'SEND_REQUEST' (interfaceRef, "'GET_CONTENT_DETAILS:',
 		    HighlightedSelectionHandle[interfaceRef], '::'")
-	}    
+	}
     }
 }
 
@@ -6490,53 +6490,53 @@ button_event [m_Interface, BTN_PRESET10]
     {
 	stack_var integer presetNumber
 	stack_var integer interfaceRef
-	
-	//determine which preset we're setting	    
+
+	//determine which preset we're setting
 	presetNumber = button.input.channel - BTN_PRESET1 + 1
 	interfaceRef = getDevRef(m_Interface, button.input.device)
-	
+
 	//clear the feedback to allow a re-trigger or to save the preset
 	PresetHeld[interfaceRef][presetNumber] = false
-	
+
 	if(PresetLock[interfaceRef])
 	{
 	    call 'ACTIVATE PRESET' (interfaceRef, presetNumber)
 	}
     }
-    
+
     hold[20]:
     {
 	stack_var integer presetNumber
 	stack_var integer interfaceRef
-	
+
 	//determine which preset we're setting
-	presetNumber = button.input.channel - BTN_PRESET1 + 1	
+	presetNumber = button.input.channel - BTN_PRESET1 + 1
 	interfaceRef = getDevRef(m_Interface, button.input.device)
-	
+
 	if(NOT PresetLock[interfaceRef])
 	{
 	    call 'SEND_REQUEST'(interfaceRef, "'ASSIGN_PLAYING_MUSIC_TO_PRESET:',
 		    getPresetTag(interfaceRef, presetNumber),':'")
-		    
+
 	    //set the feedback to prevent the release routine from resetting the preset
 	    PresetHeld[interfaceRef][presetNumber] = true
 	}
     }
-    
+
     release:
     {
 	stack_var integer presetNumber
 	stack_var integer interfaceRef
-	
+
 	//determine which preset we're setting
 	presetNumber = button.input.channel - BTN_PRESET1 + 1
 	interfaceRef = getDevRef(m_Interface, button.input.device)
-	
+
 	if( (NOT PresetLock[interfaceRef]) && (NOT PresetHeld[interfaceRef][presetNumber]) )
 	{
 	    call 'ACTIVATE PRESET' (interfaceRef, presetNumber)
 	}
-	
+
 	//Clear the preset held flag.
 	PresetHeld[interfaceRef][presetNumber] = false;
     }
@@ -6573,11 +6573,11 @@ channel_event [m_Interface, BTN_COLLECTION3_FIRST]
     {
 	stack_var integer collection
 	stack_var integer interfaceRef
-	
+
 	//determine which collection we're working with
-	collection = (channel.channel - BTN_COLLECTION1_FIRST) / 3 + 1	
+	collection = (channel.channel - BTN_COLLECTION1_FIRST) / 3 + 1
 	interfaceRef = get_last(m_Interface)
-	
+
 	if(length_string(KeypadCollection[interfaceRef][collection]) = 0)
 	{
 	    call 'TRACE'(interfaceRef, "'Request to play first in collection #',
@@ -6594,16 +6594,16 @@ channel_event [m_Interface, BTN_COLLECTION3_FIRST]
 channel_event [m_Interface, BTN_COLLECTION1_NEXT]
 channel_event [m_Interface, BTN_COLLECTION2_NEXT]
 channel_event [m_Interface, BTN_COLLECTION3_NEXT]
-{                                   
+{
     on:
     {
 	stack_var integer collection
 	stack_var integer interfaceRef
-	
+
 	//determine which collection we're working with
 	collection = (channel.channel - BTN_COLLECTION1_FIRST) / 3 + 1
 	interfaceRef = get_last(m_Interface)
-	
+
 	if(length_string(KeypadCollection[interfaceRef][collection]) = 0)
 	{
 	    call 'TRACE'(interfaceRef, "'Request to play next in collection #',
@@ -6620,16 +6620,16 @@ channel_event [m_Interface, BTN_COLLECTION3_NEXT]
 channel_event [m_Interface, BTN_COLLECTION1_PREVIOUS]
 channel_event [m_Interface, BTN_COLLECTION2_PREVIOUS]
 channel_event [m_Interface, BTN_COLLECTION3_PREVIOUS]
-{                                       
+{
     on:
     {
 	stack_var integer collection
 	stack_var integer interfaceRef
-	
+
 	//determine which collection we're working with
-	collection = (channel.channel - BTN_COLLECTION1_FIRST) / 3 + 1	
+	collection = (channel.channel - BTN_COLLECTION1_FIRST) / 3 + 1
 	interfaceRef = get_last(m_Interface)
-	
+
 	if(length_string(KeypadCollection[interfaceRef][collection]) = 0)
 	{
 	    call 'TRACE'(interfaceRef, "'Request to play previous in collection #',
@@ -6649,12 +6649,12 @@ channel_event [m_Interface, BTN_PRESET_FIRST]
     {
     	stack_var integer interfaceRef
 	stack_var integer presetNumber
-	
+
 	interfaceRef = get_last(m_Interface)
-	
+
 	//Activate the first defined preset.
 	for(presetNumber = 1; presetNumber <= NumberOfPresets[interfaceRef]; presetNumber++)
-	{	
+	{
 	    if(PresetHandleTable[interfaceRef][presetNumber] != '')
 	    {
 		call 'ACTIVATE PRESET' (interfaceRef, 1)
@@ -6666,32 +6666,32 @@ channel_event [m_Interface, BTN_PRESET_FIRST]
 channel_event [m_Interface, BTN_PRESET_NEXT]
 {
     on:
-    {	
+    {
     	stack_var integer 	interfaceRef
 	stack_var integer 	presetNumber
 	stack_var integer 	currentPreset
 	stack_var char		presetActivated
-	
+
 	//Identify the interface through which this event came.
 	interfaceRef = get_last(m_Interface)
-	
+
 	//Identify what will be used as the "current" preset.
 	currentPreset = LastSelectedPreset[interfaceRef]
 	while(! PresetFeedback[interfaceRef][currentPreset])
 	{
 	    //Check the next preset.
 	    currentPreset = currentPreset + 1
-		
+
 	    //check the bounds for currentPreset
-	    if(currentPreset > NumberOfPresets[interfaceRef]) 
+	    if(currentPreset > NumberOfPresets[interfaceRef])
 	    {
 		currentPreset = 1
 	    }
-		
+
 	    //See if we've looped all the way back around.
 	    if (currentPreset = LastSelectedPreset[interfaceRef]) break
 	}
-	
+
 	//Now set that preset.
 	presetActivated = false
 	for(presetNumber = currentPreset + 1; presetNumber <= NumberOfPresets[interfaceRef]; presetNumber++)
@@ -6703,20 +6703,20 @@ channel_event [m_Interface, BTN_PRESET_NEXT]
 		presetActivated = true
 		break
 	    }
-	} 
-	
+	}
+
 	//if process falls here, we didn't find a defined preset after the current preset.
 	if(!presetActivated)
 	{
 	    //begin looking at the beginning
-	    for(presetNumber = 1; presetNumber <= currentPreset - 1; presetNumber++) 
+	    for(presetNumber = 1; presetNumber <= currentPreset - 1; presetNumber++)
 	    {
 		if(PresetHandleTable[interfaceRef][presetNumber] != '')
 		{
 		    call 'ACTIVATE PRESET' (interfaceRef, presetNumber)
 		    break
 		}
-	    }	
+	    }
 	}
     }
 }
@@ -6729,27 +6729,27 @@ channel_event [m_Interface, BTN_PRESET_PREVIOUS]
 	stack_var integer 	presetNumber
 	stack_var integer 	currentPreset
 	stack_var char		presetActivated
-	
+
 	//Identify the interface through which this event came.
 	interfaceRef = get_last(m_Interface)
-	
+
 	//Identify what will be used as the "current" preset.
 	currentPreset = LastSelectedPreset[interfaceRef]
 	while(! PresetFeedback[interfaceRef][currentPreset])
 	{
 	    //Check the next preset.
 	    currentPreset = currentPreset - 1
-		
+
 	    //check the bounds for currentPreset
-	    if(currentPreset < 1) 
+	    if(currentPreset < 1)
 	    {
 		currentPreset = NumberOfPresets[interfaceRef]
 	    }
-		
+
 	    //See if we've looped all the way back around.
 	    if (currentPreset = LastSelectedPreset[interfaceRef]) break
 	}
-	
+
 	//begin walking back to the beginning
 	presetActivated = false
 	for(presetNumber = currentPreset - 1; presetNumber >= 1; presetNumber--)
@@ -6761,13 +6761,13 @@ channel_event [m_Interface, BTN_PRESET_PREVIOUS]
 		presetActivated = true
 		break
 	    }
-	} 
-	
+	}
+
 	//if process falls here, we didn't find a defined preset after the current preset.
 	if(!presetActivated)
 	{
 	    //start from the end, and walk back to the active preset
-	    for(presetNumber = NumberOfPresets[interfaceRef]; presetNumber >= currentPreset + 1; presetNumber--) 
+	    for(presetNumber = NumberOfPresets[interfaceRef]; presetNumber >= currentPreset + 1; presetNumber--)
 	    {
 		if(PresetHandleTable[interfaceRef][presetNumber] != '')
 		{
@@ -6775,7 +6775,7 @@ channel_event [m_Interface, BTN_PRESET_PREVIOUS]
 		    break
 		}
 	    }
-	}	
+	}
     }
 }
 
@@ -6796,7 +6796,7 @@ timeline_event [TL_CONNECTION_TIMEOUT]
 	{
 	    tlConnectionTimes[1] = 10
 	    manageTimeline(CHANGE_TIMELINE, TL_ANIMATE_PROGRESS_BAR, tlConnectionTimes, 1, 0, 0, 0)
-	    
+
 	    wait_until(!timeline_active(TL_ANIMATE_PROGRESS_BAR))
 	    {
 		if(IPPortStatus != IP_PORT_OPEN)
@@ -6826,7 +6826,7 @@ timeline_event [TL_ANIMATE_PROGRESS_BAR]
     else if(timeline.repetition = 256)
     {
 	manageTimeline(END_TIMELINE, TL_ANIMATE_PROGRESS_BAR, tlConnectionTimes, 0, 0, 0, 0)
-	
+
 	if(IPPortStatus != IP_PORT_OPEN)
 	{
 	    pauseSendingToPort = False

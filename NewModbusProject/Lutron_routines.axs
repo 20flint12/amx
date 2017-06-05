@@ -96,8 +96,8 @@ COMBINE_CHANNELS (vdv_LUTRON, 219, ipad, 219)
 COMBINE_CHANNELS (vdv_LUTRON, 220, ipad, 220)
 COMBINE_CHANNELS (vdv_LUTRON, 221, ipad, 221)
 COMBINE_CHANNELS (vdv_LUTRON, 222, ipad, 222)
-COMBINE_CHANNELS (vdv_LUTRON, 223, ipad, 223)  
-COMBINE_CHANNELS (vdv_LUTRON, 224, ipad, 224)  
+COMBINE_CHANNELS (vdv_LUTRON, 223, ipad, 223)
+COMBINE_CHANNELS (vdv_LUTRON, 224, ipad, 224)
 
 CREATE_BUFFER Lutron, Lutron_buffer;
 
@@ -314,8 +314,8 @@ DATA_EVENT[Lutron]
     ONLINE:
     {
 	SEND_COMMAND Lutron,'SET BAUD 9600,N,8,1'
-	SEND_STRING  Lutron,"'KLMON',$0D" 
-	WAIT 20 
+	SEND_STRING  Lutron,"'KLMON',$0D"
+	WAIT 20
 	{
 	    SEND_STRING  Lutron,"'RKLS,[01:06:01]',13"
 	}
@@ -332,7 +332,7 @@ DEFINE_PROGRAM
 
 Wait 5
 {
-IF (FIND_STRING (Lutron_buffer, "$0D",1)) 
+IF (FIND_STRING (Lutron_buffer, "$0D",1))
     {
         REMOVE_STRING (Lutron_buffer,"$0D",1);
 	REMOVE_STRING (Lutron_buffer,'KLS, [01:06:01], ',1);
@@ -342,7 +342,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,203] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 1, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 1, 1),'0'))
 	{
 	    [vdv_LUTRON,203] = 0;
 	}
@@ -350,7 +350,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,208] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 2, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 2, 1),'0'))
 	{
 	    [vdv_LUTRON,208] = 0;
 	}
@@ -358,7 +358,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,220] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 3, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 3, 1),'0'))
 	{
 	    [vdv_LUTRON,220] = 0;
 	}
@@ -366,7 +366,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,219] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 4, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 4, 1),'0'))
 	{
 	    [vdv_LUTRON,219] = 0;
 	}
@@ -374,7 +374,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,214] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 6, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 6, 1),'0'))
 	{
 	    [vdv_LUTRON,214] = 0;
 	}
@@ -382,7 +382,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,201] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 9, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 9, 1),'0'))
 	{
 	    [vdv_LUTRON,201] = 0;
 	}
@@ -390,7 +390,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,202] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 10, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 10, 1),'0'))
 	{
 	    [vdv_LUTRON,202] = 0;
 	}
@@ -398,7 +398,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,209] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 11, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 11, 1),'0'))
 	{
 	    [vdv_LUTRON,209] = 0;
 	}
@@ -406,7 +406,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,210] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 12, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 12, 1),'0'))
 	{
 	    [vdv_LUTRON,210] = 0;
 	}
@@ -414,7 +414,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,211] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 13, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 13, 1),'0'))
 	{
 	    [vdv_LUTRON,211] = 0;
 	}
@@ -422,7 +422,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,213] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 14, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 14, 1),'0'))
 	{
 	    [vdv_LUTRON,213] = 0;
 	}
@@ -430,7 +430,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,200] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 17, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 17, 1),'0'))
 	{
 	    [vdv_LUTRON,200] = 0;
 	}
@@ -438,7 +438,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,204] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 18, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 18, 1),'0'))
 	{
 	    [vdv_LUTRON,204] = 0;
 	}
@@ -446,7 +446,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,205] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 19, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 19, 1),'0'))
 	{
 	    [vdv_LUTRON,205] = 0;
 	}
@@ -454,7 +454,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,206] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 20, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 20, 1),'0'))
 	{
 	    [vdv_LUTRON,206] = 0;
 	}
@@ -462,7 +462,7 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,207] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 21, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 21, 1),'0'))
 	{
 	    [vdv_LUTRON,207] = 0;
 	}
@@ -470,11 +470,11 @@ IF (FIND_STRING (Lutron_buffer, "$0D",1))
 	{
 	    [vdv_LUTRON,212] = 1;
 	}
-	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 22, 1),'0'))   
+	IF (COMPARE_STRING (MID_STRING(Lutron_buffer, 22, 1),'0'))
 	{
 	    [vdv_LUTRON,212] = 0;
 	}
-    }    
+    }
     CLEAR_BUFFER Lutron_buffer;
 }
 

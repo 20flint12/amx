@@ -13,7 +13,16 @@ PROGRAM_NAME='SubRoutines'
 (***********************************************************)
 (*          DEVICE NUMBER DEFINITIONS GO BELOW             *)
 (***********************************************************)
+
+//http://microsin.net/programming/avr/ring-buffer.html
+
 DEFINE_DEVICE
+
+
+#IF_NOT_DEFINED dvPanel
+    //#WARN 'RMS: This Device Needs to be Defined in your Main Program: dvPanel'
+    dvPanel    = 11001:1:1;
+#END_IF
 
 
 
@@ -21,6 +30,10 @@ DEFINE_DEVICE
 (*               CONSTANT DEFINITIONS GO BELOW             *)
 (***********************************************************)
 DEFINE_CONSTANT
+
+INTEGER BUF_SIZE = 32 //размер буфера обязательно равен степени двойки!
+INTEGER BUF_MASK = BUF_SIZE-1
+ 
 
 (***********************************************************)
 (*              DATA TYPE DEFINITIONS GO BELOW             *)
@@ -33,9 +46,21 @@ STRUCTURE _Alarm
 {
   //INTEGER iAlarmNo
   CHAR    cAlarmTextDisplay[500]
-  CHAR    cCause[500]   
+  CHAR    cCause[500]
   //CHAR	HeatPumpAction[500]
-  //CHAR    MayBeDueTo[500]
+}
+
+
+// Temperatures array type
+STRUCTURE _Temperature
+{
+  //FLOAT fRoomTemperature
+  //FLOAT fOutdoorTemperature
+  INTEGER fRoomTemperature;
+  INTEGER fOutdoorTemperature;
+
+  TIME  tDateMark;
+  CHAR  cTextDisplay[500];
 }
 
 
@@ -45,9 +70,24 @@ STRUCTURE _Alarm
 (***********************************************************)
 DEFINE_VARIABLE
 
-_Alarm AlarmList[500] 
+_Alarm AlarmList[500]
 
+SINTEGER CURR_HOUR
+PERSISTENT SINTEGER LAST_HOUR
 
+PERSISTENT INTEGER idxIN = 0;
+PERSISTENT INTEGER idxOUT = 0;
+PERSISTENT _Temperature TemperatureArr[BUF_SIZE]
+
+INTEGER i;
+CHAR    sData[512];
+
+#IF_NOT_DEFINED VAR_ROOM_TEMPERATURE
+    VOLATILE INTEGER VAR_ROOM_TEMPERATURE
+#END_IF
+#IF_NOT_DEFINED VAR_OUTDOOR_TEMPERATURE
+    VOLATILE SINTEGER VAR_OUTDOOR_TEMPERATURE
+#END_IF
 
 
 (***********************************************************)
@@ -73,9 +113,9 @@ DEFINE_FUNCTION TemperatureText(DEV dvDevice, INTEGER iAddrCode, SINTEGER Temper
 {
     LOCAL_VAR CHAR cText[20]
     //cText = "ITOA(Temperature),'°C', '++++'"
-    
+
     LOCAL_VAR SINTEGER rest
-    
+
     rest = Temperature % 5;
     if( rest < 3 )
     {
@@ -85,7 +125,7 @@ DEFINE_FUNCTION TemperatureText(DEV dvDevice, INTEGER iAddrCode, SINTEGER Temper
     {
 	Temperature = Temperature - rest + 5
     }
-    
+
     cText = "ITOA(Temperature/10), '.', ITOA(ABS_VALUE(Temperature%10)),'°C'"
     SEND_COMMAND dvDevice, "'^TXT-',ITOA(iAddrCode),',0,',cText"
 }
@@ -132,7 +172,6 @@ AlarmList[1].cCause = 'No contact with the sensor. (Temperature sensor, Outdoor)
 AlarmList[3].cAlarmTextDisplay = 'Sensor flt:BT3'
 AlarmList[3].cCause = 'No contact with the sensor. (Temperature sensor, Heating medium return))'
 
-
 AlarmList[181].cAlarmTextDisplay = 'Problems at periodic increasing'
 AlarmList[181].cCause = 'Periodic hot water in- Only information crease did not reach the stop temperature in 5 hours.'
 
@@ -140,6 +179,14 @@ AlarmList[182].cAlarmTextDisplay = 'Load monitor active'
 AlarmList[182].cCause = 'Measured power consumption exceeds set fuse size in menu 5.1.12.'
 
 
+/*
+For (i = 1; i <= BUF_SIZE; i++) 
+{ 
+    //bData = TemperatureArr[i].fRoomTemperature; 
+    sData = "sData, Format('%02X', i)"; 
+}
+Send_Command 0, "'TemperatureArr = ', sData";
+*/
 
 (***********************************************************)
 (*                THE EVENTS GO BELOW                      *)
@@ -151,20 +198,52 @@ DEFINE_EVENT
 (***********************************************************)
 DEFINE_PROGRAM
 
-/*
-Wait 17
+
+Wait 600
 {
-    //CHAR TimeStr[ ] = '9:30:08'
-    //SINTEGER nMinute
-    CURR_MINUTE = TIME_TO_MINUTE (TIME)
-    IF( CURR_MINUTE != LAST_MINUTE )
+    local_var volatile Integer i;
+    local_var volatile Integer bData;
+    local_var volatile Char    sData[512];
+    local_var volatile Char    sData2[512];
+    local_var volatile Char    sData3[512];
+
+    CURR_HOUR = TIME_TO_MINUTE (TIME)	// every 10 minutes
+
+    IF( CURR_HOUR != LAST_HOUR )
     {
-	LAST_MINUTE = CURR_MINUTE;
-	TIMER_MINUTES = TIMER_MINUTES + 1
+	LAST_HOUR = CURR_HOUR;
+	//Send_String 0,"'1 +++++++++++++++++++ idxIN=',ITOA(idxIN),' idxOUT=',ITOA(idxOUT)";
+	TemperatureArr[idxIN].fRoomTemperature = VAR_ROOM_TEMPERATURE; //RANDOM_NUMBER(100);
+	TemperatureArr[idxIN].fOutdoorTemperature = VAR_OUTDOOR_TEMPERATURE;
+	TemperatureArr[idxIN].tDateMark = TIME;
+	idxIN = idxIN + 1;
+	idxIN = idxIN & BUF_MASK;	
+	Send_String 0,"'2 +++++++++++++++++++ idxIN=',ITOA(idxIN),' idxOUT=',ITOA(idxOUT)";
     }
-    Send_String 0,"'******** CURR_MINUTE= ',ITOA(CURR_MINUTE),' ****************',ITOA(TIMER_MINUTES)"
+    Send_String 0,"'******** CURR_HOUR= ',ITOA(CURR_HOUR),' **************** LAST_HOUR=',ITOA(LAST_HOUR)"
+    
+    sData = "";
+    sData2 = "";
+    sData3 = "";
+    For (i = 1; i <= BUF_SIZE; i++) 
+    { 
+	bData = TemperatureArr[i].fRoomTemperature; 
+	sData = "sData, Format('%02X ', bData)"; 
+	SEND_LEVEL dvPanel, i+10, bData
+	
+	bData = TemperatureArr[i].fOutdoorTemperature; 
+	sData2 = "sData2, Format('%02X ', bData)"; 
+	SEND_LEVEL dvPanel, i+50, bData
+
+	bData = TemperatureArr[i].tDateMark; 
+	sData3 = "sData3, Format('%02X ', bData)";
+    }
+    Send_String 0, "'fRoomTemperature =    ', sData";
+    Send_String 0, "'fOutdoorTemperature = ', sData2";
+    Send_String 0, "'tDateMark =           ', sData3";
 }
-*/
+
+
 
 
 (***********************************************************)

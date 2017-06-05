@@ -22,7 +22,6 @@ PROGRAM_NAME='NewModbusProject'
 (* System Type : Netlinx                                   *)
 (***********************************************************)
 
-#INCLUDE 'SubRoutines.axs'
 
 /*
 IP 193.178.251.2
@@ -96,9 +95,9 @@ INTEGER REG_ROOM_TEMPERATURE_SETPOINT  = 47398
 //Hot water mode 0=Economy 1=Normal 2=Luxury 47041 s8 1 R/W
 INTEGER REG_HOT_WATER_MODE  = 47041
 //HW Comfort hotwater temperature The desired hotwater temperature 48148 °C s8 10 R/W
-INTEGER REG_COMFORT_HOTWATER_TEMPERATURE  = 40014 //48148
-
-
+INTEGER REG_COMFORT_HOTWATER_TEMPERATURE  = 48148
+//BT6 Hot Water load 40014 °C s16 10 R
+INTEGER REG_HOTWATER_LOAD  = 40014
 
 //Alarm lower room temp.
 //Lowers the room temperature during red light alarms to notify the occupants of the
@@ -132,6 +131,7 @@ addr_room_temperature		= 2
 addr_room_temperature_setpoint	= 3
 addr_hotwater_mode		= 4
 addr_comfort_hotwater_temperature = 5
+addr_hotwater_load		= 5
 addr_brine_in			= 6
 addr_brine_out			= 7
 addr_return_temperature 	= 8
@@ -165,6 +165,8 @@ VOLATILE INTEGER VAR_PREP_COMFORT_HOTWATER_TEMPERATURE
 
 PERSISTENT INTEGER VAR_TERM_LUXURY
 
+INTEGER VAR_HOTWATER_LOAD
+
 
 // Touch Panel Buttons
 VOLATILE INTEGER controlPanelButtons[] =
@@ -196,10 +198,12 @@ PERSISTENT SINTEGER TIMER_MINUTES
 PERSISTENT SINTEGER SET_MINUTES
 
 
-
 (***********************************************************)
 (*        SUBROUTINE/FUNCTION DEFINITIONS GO BELOW         *)
 (***********************************************************)
+
+#INCLUDE 'SubRoutines.axs'
+
 
 (* ***************************** ModBus ************************************ *)
 
@@ -249,7 +253,15 @@ Define_Call 'Modbus - Write Multiple Coils' (Char DeviceAddress,
 	Bits = "$01, $02, $04, $08, $10, $20, $40, $80";
 	bByteCount = Type_Cast((QuantityOfCoils - 1) / 8 + 1);
 	sData = "Format('%02X', DeviceAddress), Format('%02X', $0F), Format('%04X', StartRegisterAddress), Format('%04X', QuantityOfCoils), Format('%02X', bByteCount)";
-	bData = $00; For (i = 1; i <= QuantityOfCoils; i++) { bData = bData | (Bits[(i - 1) % 8 + 1] * Coils[i]); If (i % 8 == 0) { sData = "sData, Format('%02X', bData)"; bData = $00; } }
+	bData = $00; 
+	For (i = 1; i <= QuantityOfCoils; i++) 
+	{ 
+	    bData = bData | (Bits[(i - 1) % 8 + 1] * Coils[i]); 
+	    If (i % 8 == 0) 
+	    { 
+		sData = "sData, Format('%02X', bData)"; bData = $00; 
+	    } 
+	}
 	If (i % 8 != 1)
 	{
 	    sData = "sData, Format('%02X', bData)";
@@ -257,6 +269,7 @@ Define_Call 'Modbus - Write Multiple Coils' (Char DeviceAddress,
 	Send_Command vdvModbus, "'ADDCOMMAND = ', sData";
     }
 }
+
 
 
 Define_Call 'Modbus - Write Multiple Coils - Single coil' (Char DeviceAddress, Integer RegisterAddress, Char Coil)
@@ -378,6 +391,13 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    SEND_COMMAND dvPanel, "'^TXT-5,0,', cText"
 	    // ****************************************************************
 	}
+	Active (Function == 3 && Address == REG_HOTWATER_LOAD)  : {
+	    VAR_HOTWATER_LOAD  = Value
+	    TemperatureText(dvPanel, addr_hotwater_load, VAR_HOTWATER_LOAD)
+	    //cText = "ITOA(VAR_HOTWATER_LOAD),'°C'"
+	    //SEND_COMMAND dvPanel, "'^TXT-5,0,', cText"
+	    // ****************************************************************
+	}
 	Active (Function == 3 && Address == REG_BT10) : {
 	    VAR_BT10 = Value
 	    SEND_COMMAND dvPanel, "'^TXT-6,0,', ITOA(VAR_BT10)"
@@ -420,7 +440,6 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 (*                THE EVENTS GOES BELOW                    *)
 (***********************************************************)
 DEFINE_EVENT
-
 
 
 DATA_EVENT [vdvModbus]
@@ -757,6 +776,7 @@ BUTTON_EVENT[dvPanel,195]
 {
     PUSH:
     {
+	/*
 	send_string 0,"'SEND_COMMAND dvPanel, *********************************'"
 
 	//Deletes any existing data list at address 1
@@ -788,7 +808,10 @@ BUTTON_EVENT[dvPanel,195]
 	{
 	    [dvPanel,195] = 0
 	}
-
+	*/
+	
+	SEND_LEVEL dvPanel, 8, 55
+	SEND_LEVEL dvPanel, 9, 100
     }
 }
 
@@ -805,7 +828,7 @@ LEVEL_EVENT[dvPanel,8]
     //cTemp = AlarmText( 1 )
     Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' **************** ', AlarmList[2].cAlarmTextDisplay"
 
-    //Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' ****************'"
+    //Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' ****************'"    
 
 }
 
@@ -878,10 +901,9 @@ Wait 300 'Modbus Requests'
     wait 100
     {
 	send_string 0, "'=== Wait 100 ==='";
-	Call 'ModBus - Call Function' (3, 1, REG_COMFORT_HOTWATER_TEMPERATURE, 1);
-	//SEND_COMMAND dvPanel, "'^TXT-5,0,', 'wait...'"
+	//Call 'ModBus - Call Function' (3, 1, REG_COMFORT_HOTWATER_TEMPERATURE, 1);
+	Call 'ModBus - Call Function' (3, 1, REG_HOTWATER_LOAD, 1);
 	SimpleText(dvPanel, addr_comfort_hotwater_temperature, 'wait...')
-
     }
     wait 125
     {
@@ -940,7 +962,6 @@ Wait 200
 	{
 	    SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' / ', ITOA(SET_MINUTES), ' minutes'"
 	}
-
     }
     ELSE
     {
@@ -950,9 +971,7 @@ Wait 200
 	[dvPanel, ch_heating_5_hour] = 0;
     }
 
-
 }
-
 
 
 
