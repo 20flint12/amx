@@ -1,6 +1,6 @@
 MODULE_NAME='Module_Condition_v1'
 (DEV MVP[], DEV vdvDevice, DEV IR, INTEGER BUTTONS[], INTEGER CASE_BUTTON, CHAR REJIM [], INTEGER PAUSE_CASE, INTEGER PAUSE_START )
-                                                                                       
+
 (***********************************************************)
 (***********************************************************)
 (*  FILE_LAST_MODIFIED_ON: 04/04/2006  AT: 11:33:16        *)
@@ -11,7 +11,7 @@ MODULE_NAME='Module_Condition_v1'
 (***********************************************************)
 (*
     $History: $
-*)    
+*)
 (***********************************************************)
 (*          DEVICE NUMBER DEFINITIONS GO BELOW             *)
 (***********************************************************)
@@ -53,7 +53,7 @@ DEFINE_START
 
 for(index = 1; index<=LENGTH_ARRAY(BUTTONS); index++)
 {
-COMBINE_CHANNELS (vdvDevice, BUTTONS[index], MVP[1], BUTTONS[index], MVP[2], BUTTONS[index], MVP[3], BUTTONS[index])  
+COMBINE_CHANNELS (vdvDevice, BUTTONS[index], MVP[1], BUTTONS[index], MVP[2], BUTTONS[index], MVP[3], BUTTONS[index])
 }
 WAIT 300 {IF (PAUSE_CASE = 0) ON_BUTTON(CASE_BUTTON)}
 
@@ -94,7 +94,7 @@ COMMAND:{
 				    }
 		CASE 'COND_HEAT':   {
 				     SHOW_BUTTON (REJIM)
-				     SET_PULSE_TIME(10) PULSE [IR,41] 
+				     SET_PULSE_TIME(10) PULSE [IR,41]
 				     wait 300
 				        {
 					    SELECT
@@ -105,7 +105,7 @@ COMMAND:{
 					    }
 				        }
 				    }
-				    
+
 		}
 	}
 
@@ -119,7 +119,7 @@ COMMAND:{
 (***********************************************************)
 DEFINE_PROGRAM
 
-WAIT 50 
+WAIT 50
 {
 	SWITCH (PAUSE_START)
 	{

@@ -10,7 +10,7 @@ MODULE_NAME='Reboot_SAT_IO'
 (***********************************************************)
 (*
     $History: $
-*)    
+*)
 (***********************************************************)
 (*          DEVICE NUMBER DEFINITIONS GO BELOW             *)
 (***********************************************************)
@@ -35,9 +35,9 @@ DEFINE_EVENT
 BUTTON_EVENT [MVP, BUTTONS]
     {
     PUSH:   {
-            TIMER_SELECT_ = TIMER_WAIT  TIMER_STATUS_ON = 1  
-	    SEND_COMMAND MVP,"'^TXT-',itoa (BUTTONS[1]),',0,',itoa (TIMER_SELECT_),' sec'" 
-	    SET_PULSE_TIME(50) PULSE[IO, 2]  
+            TIMER_SELECT_ = TIMER_WAIT  TIMER_STATUS_ON = 1
+	    SEND_COMMAND MVP,"'^TXT-',itoa (BUTTONS[1]),',0,',itoa (TIMER_SELECT_),' sec'"
+	    SET_PULSE_TIME(50) PULSE[IO, 2]
 	    }
     }
 
@@ -59,7 +59,7 @@ IF (SECOND_ != TIME_TO_SECOND ( TIME ))
 				    {
 					CASE 0:{TIMER_STATUS_ON = 0 }
 				    }
-				    SEND_COMMAND MVP,"'^TXT-',itoa (BUTTONS[1]),',0,',itoa (TIMER_SELECT_),' sec'"    
+				    SEND_COMMAND MVP,"'^TXT-',itoa (BUTTONS[1]),',0,',itoa (TIMER_SELECT_),' sec'"
 				    }
 }
 }
@@ -69,5 +69,5 @@ IF (SECOND_ != TIME_TO_SECOND ( TIME ))
 wait 2
 {
 [MVP,BUTTONS[1]] = (TIMER_STATUS_ON = 1)
-}                     
+}
 

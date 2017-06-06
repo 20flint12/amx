@@ -60,6 +60,7 @@ STRUCTURE _Temperature
   INTEGER fOutdoorTemperature;
 
   TIME  tDateMark;
+  //CHAR  tDateMark[100];
   CHAR  cTextDisplay[500];
 }
 
@@ -80,7 +81,8 @@ PERSISTENT INTEGER idxOUT = 0;
 PERSISTENT _Temperature TemperatureArr[BUF_SIZE]
 
 INTEGER i;
-CHAR    sData[512];
+CHAR    sData[1024];
+INTEGER idxGET;
 
 #IF_NOT_DEFINED VAR_ROOM_TEMPERATURE
     VOLATILE INTEGER VAR_ROOM_TEMPERATURE
@@ -179,15 +181,6 @@ AlarmList[182].cAlarmTextDisplay = 'Load monitor active'
 AlarmList[182].cCause = 'Measured power consumption exceeds set fuse size in menu 5.1.12.'
 
 
-/*
-For (i = 1; i <= BUF_SIZE; i++) 
-{ 
-    //bData = TemperatureArr[i].fRoomTemperature; 
-    sData = "sData, Format('%02X', i)"; 
-}
-Send_Command 0, "'TemperatureArr = ', sData";
-*/
-
 (***********************************************************)
 (*                THE EVENTS GO BELOW                      *)
 (***********************************************************)
@@ -198,24 +191,24 @@ DEFINE_EVENT
 (***********************************************************)
 DEFINE_PROGRAM
 
-
-Wait 600
+Wait 50 // every 5 sec
 {
     local_var volatile Integer i;
+    local_var volatile Integer idxGET;
     local_var volatile Integer bData;
-    local_var volatile Char    sData[512];
+    local_var volatile Char    sData[1024];
     local_var volatile Char    sData2[512];
     local_var volatile Char    sData3[512];
 
-    CURR_HOUR = TIME_TO_MINUTE (TIME)	// every 10 minutes
+    CURR_HOUR = TIME_TO_HOUR (TIME)	
 
     IF( CURR_HOUR != LAST_HOUR )
     {
 	LAST_HOUR = CURR_HOUR;
-	//Send_String 0,"'1 +++++++++++++++++++ idxIN=',ITOA(idxIN),' idxOUT=',ITOA(idxOUT)";
-	TemperatureArr[idxIN].fRoomTemperature = VAR_ROOM_TEMPERATURE; //RANDOM_NUMBER(100);
-	TemperatureArr[idxIN].fOutdoorTemperature = VAR_OUTDOOR_TEMPERATURE;
-	TemperatureArr[idxIN].tDateMark = TIME;
+	Send_String 0,"'1 +++++++++++++++++++ idxIN=',ITOA(idxIN),' idxOUT=',ITOA(idxOUT)";
+	TemperatureArr[idxIN+1].fRoomTemperature = VAR_ROOM_TEMPERATURE; //RANDOM_NUMBER(100);
+	TemperatureArr[idxIN+1].fOutdoorTemperature = VAR_OUTDOOR_TEMPERATURE;
+	TemperatureArr[idxIN+1].tDateMark = LDATE;
 	idxIN = idxIN + 1;
 	idxIN = idxIN & BUF_MASK;	
 	Send_String 0,"'2 +++++++++++++++++++ idxIN=',ITOA(idxIN),' idxOUT=',ITOA(idxOUT)";
@@ -225,18 +218,20 @@ Wait 600
     sData = "";
     sData2 = "";
     sData3 = "";
-    For (i = 1; i <= BUF_SIZE; i++) 
+    For (i = 1; i < BUF_SIZE; i++) 
     { 
-	bData = TemperatureArr[i].fRoomTemperature; 
-	sData = "sData, Format('%02X ', bData)"; 
+	idxGET = (idxIN + i - 1) & BUF_MASK + 1;
+	Send_String 0, "'idxGET = ', Format('%d ', idxGET)";
+	bData = TemperatureArr[idxGET].fRoomTemperature; 
+	sData = "sData, Format('%03d ', bData)"; 
 	SEND_LEVEL dvPanel, i+10, bData
 	
-	bData = TemperatureArr[i].fOutdoorTemperature; 
-	sData2 = "sData2, Format('%02X ', bData)"; 
+	bData = TemperatureArr[idxGET].fOutdoorTemperature; 
+	sData2 = "sData2, Format('%03d ', bData)"; 
 	SEND_LEVEL dvPanel, i+50, bData
 
-	bData = TemperatureArr[i].tDateMark; 
-	sData3 = "sData3, Format('%02X ', bData)";
+	bData = TemperatureArr[idxGET].tDateMark; 
+	sData3 = "sData3, ' ', bData";
     }
     Send_String 0, "'fRoomTemperature =    ', sData";
     Send_String 0, "'fOutdoorTemperature = ', sData2";

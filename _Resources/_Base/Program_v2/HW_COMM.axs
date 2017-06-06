@@ -1,4 +1,4 @@
-MODULE_NAME='HW_COMM' 
+MODULE_NAME='HW_COMM'
 (DEV dvHW, DEV vdvHW_STR, DEV vdvHW[], CHAR HWAddress[][], INTEGER DEVICE_OnLine, INTEGER NUM_LED_TO_PANEL[],DEV vdvONLINE_S1)
 
 DEFINE_VARIABLE
@@ -13,8 +13,8 @@ VOLATILE integer VIRTUAL_PANEL = 2
 VOLATILE integer VIRTUAL_PANEL_NUM[2]
 
 (*
-Press Keypad | #DEVICE,2,4,3<CR><LF>         | This command (3) presses button  number 1 of a keypad (2) ,,,,, command (43) releases  
-Dimmer %     | #OUTPUT,1,1,75,01:30<CR><LF>  | This command sets a dimmer (1) level to 75% with a 1 minute and 30 second fade time  
+Press Keypad | #DEVICE,2,4,3<CR><LF>         | This command (3) presses button  number 1 of a keypad (2) ,,,,, command (43) releases
+Dimmer %     | #OUTPUT,1,1,75,01:30<CR><LF>  | This command sets a dimmer (1) level to 75% with a 1 minute and 30 second fade time
 Monitoring   | #MONITORING,4,1<CR><LF>       | LED Monitoring 3, Zone Level Monitoring 4
 GET LED state| ?DEVICE,2,81,9<CR><LF>        | GET LED status 1 Button 9 action
 
@@ -44,9 +44,9 @@ DEFINE_START
 CREATE_BUFFER dvHW, HW_BUFFER
 CREATE_BUFFER vdvHW_STR, vdvBufferString
 
-for(i = 1; i <= VIRTUAL_PANEL; i++) 
+for(i = 1; i <= VIRTUAL_PANEL; i++)
 	{
-	VIRTUAL_PANEL_NUM[i] = LENGTH_ARRAY (vdvHW) - VIRTUAL_PANEL + i 
+	VIRTUAL_PANEL_NUM[i] = LENGTH_ARRAY (vdvHW) - VIRTUAL_PANEL + i
 	}
 
 
@@ -62,10 +62,10 @@ DATA_EVENT[vdvHW]
 	{
 		LOCAL_VAR VOLATILE CHAR CMD[32]
 		STACK_VAR INTEGER nKEYPAD
-		
+
 		CMD = REMOVE_STRING(DATA.TEXT,':',1)
 		nKEYPAD = GET_LAST(vdvHW)
-		
+
 		SELECT
 		{
 			ACTIVE(FIND_STRING(CMD,'PUSH_BUTTON',1)):
@@ -86,7 +86,7 @@ DATA_EVENT[vdvHW]
 }
 DATA_EVENT[dvHW]
 {
-	ONLINE:{ DEVICE_OnLine=0 } 
+	ONLINE:{ DEVICE_OnLine=0 }
 	OFFLINE:{DEVICE_OnLine=0 B = 1 cancel_wait 'ONLINE'  IP_CLIENT_CLOSE(dvHW.Port) ConnectToDEVICE()}
 	ONERROR:{if(DEVICE_OnLine=1){DEVICE_OnLine=0 B = 1 cancel_wait 'ONLINE' IP_CLIENT_CLOSE(dvHW.Port)} cancel_wait 'ONLINE' ConnectToDEVICE()}
 	STRING :{
@@ -96,16 +96,16 @@ DATA_EVENT[dvHW]
 	LOCAL_VAR VOLATILE CHAR CMD[40]
 	LOCAL_VAR VOLATILE CHAR KEYPAD[20]
 	LOCAL_VAR VOLATILE CHAR NumBut[20]
-	
+
 	STACK_VAR INTEGER nKEYPAD
 	STACK_VAR INTEGER DIMMER
-		
+
 		SEND_STRING 0 , "'+++',DATA.TEXT"
-		IF ( DEVICE_OnLine=0 ) 
+		IF ( DEVICE_OnLine=0 )
 		{
 		    IF (FIND_STRING (DATA.TEXT,'login:',1) > 0) // 2,81,9,1<CR>
 			    { wait 10 { SEND_STRING dvHW,"'AMX',$0D,$0A" SEND_STRING 0,"'AMX',$0D,$0A"}}
-			    
+
 		    IF (FIND_STRING (DATA.TEXT,'password:',1) > 0) // 2,81,9,1<CR>
 			    {wait 10 { SEND_STRING dvHW,"'AMX',$0D,$0A" SEND_STRING 0,"'AMX',$0D,$0A"
 	                     wait 30 { SEND_STRING dvHW,"'#MONITORING,4,1',$0D,$0A" DEVICE_OnLine=1 wait 40 {B = 2}} //  Monitoring Led State Keypad
@@ -114,7 +114,7 @@ DATA_EVENT[dvHW]
 		while (FIND_STRING(HW_BUFFER,"$0D, $0A",1))
 		{
 		    Masseger = REMOVE_STRING(HW_BUFFER,"$0D, $0A",1)
-	
+
 		    IF (FIND_STRING (Masseger,'~DEVICE,',1) > 0) // 2,81,9,1<CR>
 			    {
 				REMOVE_STRING(Masseger,'~DEVICE,',1)
@@ -127,7 +127,7 @@ DATA_EVENT[dvHW]
 				if(nKEYPAD)
 				SEND_STRING vdvHW[nKEYPAD], "'KEYPAD_STATUS:',MESSAGE_SEND"  // KEYPAD_STATUS: 81,9,1<CR>
 			    }
-			    
+
 		}
 		}
 }
@@ -149,7 +149,7 @@ SEND_STRING 0, CMD_SEND
 IF (FIND_STRING (vdvBufferString, "$0D,$0A",1)=0) {vdvBufferString = ''}
 }}
 
-wait 2	
+wait 2
     {
 	if (B = 2  &&  DEVICE_OnLine = 1)
 		{ B = 1

@@ -13,7 +13,7 @@ DEFINE_VARIABLE
 
 VOLATILE INTEGER STATUS_ALARM, STATUS_ALARM_
 VOLATILE INTEGER STATUS_
-VOLATILE INTEGER STATUS_POWER 
+VOLATILE INTEGER STATUS_POWER
 VOLATILE INTEGER STATUS_SKOROST_CURRENT
 VOLATILE INTEGER STATUS_TEMP_1
 VOLATILE INTEGER STATUS_TEMP_2
@@ -49,13 +49,13 @@ Define_Call 'Modbus - Write Multiple Coils' (Char DeviceAddress, Integer StartRe
                local_var volatile Char    bData;
                local_var volatile Char    sData[512];
                local_var volatile Integer i;
-               
+
             Bits = "$01, $02, $04, $08, $10, $20, $40, $80";
                bByteCount = Type_Cast((QuantityOfCoils - 1) / 8 + 1);
                sData = "Format('%02X', DeviceAddress), Format('%02X', $0F), Format('%04X', StartRegisterAddress), Format('%04X', QuantityOfCoils), Format('%02X', bByteCount)";
                bData = $00; For (i = 1; i <= QuantityOfCoils; i++) { bData = bData | (Bits[(i - 1) % 8 + 1] * Coils[i]); If (i % 8 == 0) { sData = "sData, Format('%02X', bData)"; bData = $00; } }
                If (i % 8 != 1) { sData = "sData, Format('%02X', bData)"; }
-               
+
                Send_Command vdvModbus, "'ADDCOMMAND = ', sData";
        }
 }
@@ -73,12 +73,12 @@ Define_Call 'Modbus - Write Multiple Registers' (Char DeviceAddress, Integer Sta
        {
                local_var volatile Char    sData[512];
                local_var volatile Integer i;
-               
+
                sData = "Format('%02X', DeviceAddress), Format('%02X', $10), Format('%04X', StartRegisterAddress), Format('%04X', QuantityOfRegisters), Format('%02X', QuantityOfRegisters * 2)";
-       
+
                For (i = 1; i <= QuantityOfRegisters; i++)
                        sData = "sData, Format('%04X', Values[i])";
-               
+
                Send_Command vdvModbus, "'ADDCOMMAND = ', sData";
        }
 }
@@ -92,9 +92,9 @@ Define_Call 'Modbus - Write Multiple Registers - Single register' (Char DeviceAd
 Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Address, Integer Value)
 {
     local_var volatile SINTEGER siValue;
-    
+
     siValue = Type_Cast(Value);
-    
+
 	// TODO : Process answers there
        SEND_STRING 0 , "'SEND_VALUE',Device, Value"
 	Select
@@ -102,57 +102,57 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 		// Обработка ответа от устройства с адресом $10 на запрос функции 4 с регистровым адресом $1400
 		Active (Function == 4 && Address == 0009) : // Питание
 		{STATUS_POWER  = Value & $0800 	STATUS_ = value	}
-		
+
 		Active (Function == 3 && Address == 0007) : // Скорость вентилятора
 		{STATUS_SKOROST_CURRENT  = Value
 		SEND_COMMAND MVP, "'^TXT-',ITOA (KEYPAD[4]),',0,',ITOA (Value),' %'"}
-		
-		Active (Function == 3 && Address == 0003) : // ТЗаданная температура приточного воздуха 
+
+		Active (Function == 3 && Address == 0003) : // ТЗаданная температура приточного воздуха
 		{
 		STATUS_TEMP_1 = Value
 		SEND_COMMAND MVP, "'^TXT-',ITOA (KEYPAD[3]),',0,',TemperatureToStr(STATUS_TEMP_1), ' C'"}
-		
-		Active (Function == 4 && Address == 0002) : // Температура наружного воздуха 
+
+		Active (Function == 4 && Address == 0002) : // Температура наружного воздуха
 		{
 		STATUS_TEMP_2 = Value
 		SEND_COMMAND MVP, "'^TXT-',ITOA (KEYPAD[5]),',0,',TemperatureToStr(STATUS_TEMP_2), ' C'"}
-		
-		Active (Function == 4 && Address == 0003) : // Температура приточного воздуха 
+
+		Active (Function == 4 && Address == 0003) : // Температура приточного воздуха
 		{
 		STATUS_TEMP_3 = Value
 		SEND_COMMAND MVP, "'^TXT-',ITOA (KEYPAD[6]),',0,',TemperatureToStr(STATUS_TEMP_3), ' C'"}
-		
+
 		Active (Function == 4 && Address == 0004) : // Температура обратного теплоносителя
 		{
 		STATUS_TEMP_4 = Value
 		SEND_COMMAND MVP, "'^TXT-',ITOA (KEYPAD[7]),',0,',TemperatureToStr(STATUS_TEMP_4), ' C'"}
-		
+
 		Active (Function == 4 && Address == 0000) : // Авария 1
 		{
-		STATUS_ALARM = Value 
-		ALARM[1]  = Value & $0000  // наличие аварии приточного вентилятор	
-		ALARM[2]  = Value & $0001  //наличие аварии двигателя            	
-		ALARM[3]  = Value & $0002  // наличие аварии засорения фильтра    	
-		ALARM[4]  = Value & $0004 // наличие аварии ККБ                  	
-		ALARM[5]  = Value & $0008  // наличие аварии Пуск вне графика     	
-		ALARM[6]  = Value & $0010  // наличие аварии Угроза по воздуху    	
-		ALARM[7]  = Value & $0020  // наличие аварии Угроза по воде       	
-		ALARM[8]  = Value & $0040  // наличие аварии Недогрев             	
-		ALARM[9]  = Value & $0080  // наличие аварии Макс. кол-во угроз   	
-		ALARM[10] = Value & $0100  // наличие аварии Стоп при раб. по графику 	
-		}                                                                                                                        
-		
+		STATUS_ALARM = Value
+		ALARM[1]  = Value & $0000  // наличие аварии приточного вентилятор
+		ALARM[2]  = Value & $0001  //наличие аварии двигателя
+		ALARM[3]  = Value & $0002  // наличие аварии засорения фильтра
+		ALARM[4]  = Value & $0004 // наличие аварии ККБ
+		ALARM[5]  = Value & $0008  // наличие аварии Пуск вне графика
+		ALARM[6]  = Value & $0010  // наличие аварии Угроза по воздуху
+		ALARM[7]  = Value & $0020  // наличие аварии Угроза по воде
+		ALARM[8]  = Value & $0040  // наличие аварии Недогрев
+		ALARM[9]  = Value & $0080  // наличие аварии Макс. кол-во угроз
+		ALARM[10] = Value & $0100  // наличие аварии Стоп при раб. по графику
+		}
+
 		Active (Function == 4 && Address == 0001) : // Авария 2
 		{
 		STATUS_ALARM_ = Value
-		ALARM[11]  = Value & $0000  // наличие аварии Датчик Тпрв   
-		ALARM[12]  = Value & $0001  // наличие аварии Датчик Тнв    
-		ALARM[13]  = Value & $0002  // наличие аварии Датчик Тобр   
-		ALARM[14]  = Value & $0004  // наличие аварии AirEl         
-		}                                                                                                                               
-		
-		
-		
+		ALARM[11]  = Value & $0000  // наличие аварии Датчик Тпрв
+		ALARM[12]  = Value & $0001  // наличие аварии Датчик Тнв
+		ALARM[13]  = Value & $0002  // наличие аварии Датчик Тобр
+		ALARM[14]  = Value & $0004  // наличие аварии AirEl
+		}
+
+
+
 	}
 }
 
@@ -195,8 +195,8 @@ CASE 2:{ // Off
 
 
 CASE 3:{ // ТЕМП +
-IF (STATUS_TEMP_1 < 300)  
-{ 
+IF (STATUS_TEMP_1 < 300)
+{
 	STATUS_TEMP_1 = STATUS_TEMP_1 + 10
 	Call 'Modbus - Write Multiple Registers - Single register' (111, 3, STATUS_TEMP_1)
 	WAIT 2 {Call 'ModBus - Call Function' (3, 111, 3, 1)}
@@ -211,8 +211,8 @@ ELSE
 
 
 CASE 4:{ // ТЕМП -
-IF (STATUS_TEMP_1 > 10)  
-{ 
+IF (STATUS_TEMP_1 > 10)
+{
 	STATUS_TEMP_1 = STATUS_TEMP_1 - 10
 	Call 'Modbus - Write Multiple Registers - Single register' (111, 3, STATUS_TEMP_1)
 	WAIT 2 {Call 'ModBus - Call Function' (3, 111, 3, 1)}
@@ -226,14 +226,14 @@ ELSE
 }
 
 CASE 5:{ // СКОРОСТЬ +
-IF (STATUS_SKOROST_CURRENT < 100)  
-{ 
+IF (STATUS_SKOROST_CURRENT < 100)
+{
 	STATUS_SKOROST_CURRENT = STATUS_SKOROST_CURRENT + 10
 	Call 'Modbus - Write Multiple Registers - Single register' (111, 7, STATUS_SKOROST_CURRENT)
 	WAIT 2 {Call 'ModBus - Call Function' (3, 111, 7, 1)}
 }
-else 
-{ 
+else
+{
 	STATUS_SKOROST_CURRENT = 100
 	Call 'Modbus - Write Multiple Registers - Single register' (111, 7, STATUS_SKOROST_CURRENT)
 	WAIT 2 {Call 'ModBus - Call Function' (3, 111, 7, 1)}
@@ -242,14 +242,14 @@ else
 
 
 CASE 6:{ // СКОРОСТЬ -
-IF (STATUS_SKOROST_CURRENT > 0)  
-{ 
+IF (STATUS_SKOROST_CURRENT > 0)
+{
 	STATUS_SKOROST_CURRENT = STATUS_SKOROST_CURRENT - 10
 	Call 'Modbus - Write Multiple Registers - Single register' (111, 7, STATUS_SKOROST_CURRENT)
 	WAIT 2 {Call 'ModBus - Call Function' (3, 111, 7, 1)}
 }
-else 
-{ 
+else
+{
 	STATUS_SKOROST_CURRENT = 0
 	Call 'Modbus - Write Multiple Registers - Single register' (111, 7, STATUS_SKOROST_CURRENT)
 	WAIT 2 {Call 'ModBus - Call Function' (3, 111, 7, 1)}
@@ -298,14 +298,14 @@ DATA_EVENT [vdvModbus]
 			  Set_Length_String(Data.Text, iPos - 1);
 			  REMOVE_STRING (STRING_NOT_ANSWER, '; ON_COMMAND = ', 1);
 			 }
-                
-                      
+
+
 		Select
 		{
 			Active (RemoveCmdLeft(Data.Text, 'VALUE = ')):
 			{
 				// REGISTER VALUE RECEIVED FROM DEVICE
-				
+
 				// Received data from Device
 				// VALUE = 04 01 000A 000F
 				// Where:
@@ -313,7 +313,7 @@ DATA_EVENT [vdvModbus]
 				//   01   - Device address
 				//   000A - Register address
 				//   000F - Register value
-				
+
 				Call 'ModBus - Process Answer' (hextoi(Mid_String(Data.Text, 1, 2)), hextoi(Mid_String(Data.Text, 4, 2)), hextoi(Mid_String(Data.Text, 7, 4)), hextoi(Mid_String(Data.Text, 12, 4)));
 			}
 
@@ -321,7 +321,7 @@ DATA_EVENT [vdvModbus]
 			Active (RemoveCmdLeft(Data.Text, 'ANSWER = ')):
 			{
 				// FULL RESPONSE THAT RECEIVED ON THE REQUEST
-				
+
 				/*
 				local_var volatile Char Answer[256], AnswerHex[512];
 
@@ -337,7 +337,7 @@ DATA_EVENT [vdvModbus]
 			Active (RemoveCmdLeft(Data.Text, 'WRONG_ANSWER = ')):
 			{
 				// FULL RESPONSE THAT RECEIVED FROM OTHER DEVICE OR FROM OTHER FUNCTION
-				
+
 				/*
 				local_var volatile Char Answer[256], AnswerHex[512];
 
@@ -351,9 +351,9 @@ DATA_EVENT [vdvModbus]
 
 
 			Active (RemoveCmdFull(Data.Text, 'ANSWER_TIMEOUT')):
-			{        
-				
-				(*IF (STRING_NOT_ANSWER != SEND_NOT_ANSWER) 
+			{
+
+				(*IF (STRING_NOT_ANSWER != SEND_NOT_ANSWER)
 				{
 				Send_Command vdvModbus, "'ADDPRIORITYCOMMAND = ', STRING_NOT_ANSWER";
 				SEND_STRING 0, "'ADDCOMMAND = ', STRING_NOT_ANSWER";
@@ -376,9 +376,9 @@ DATA_EVENT [vdvModbus]
 		// *************************************************************************************
 		// Заменить на правильный код модуля, иначе система будет перезагружаться каждые 5 минут
 		// *************************************************************************************
-		Send_Command Data.Device, 'SERIAL = 4632'; // 
+		Send_Command Data.Device, 'SERIAL = 4632'; //
 
-		
+
 		(***********************************************************)
 		(* To setup of com-port configuration use this command     *)
 		(* that have to be sent to virtual device                  *)
@@ -387,7 +387,7 @@ DATA_EVENT [vdvModbus]
 		(*       connection                                        *)
 		(***********************************************************)
 		// Для конфигурирования скорости COM-порта
-		// Для двухпроводного подключения для родных AMX Com-портов обязательно необходимо использовать команду "485 DISABLE" и команду 'RS485_2WIRE = ON' для 
+		// Для двухпроводного подключения для родных AMX Com-портов обязательно необходимо использовать команду "485 DISABLE" и команду 'RS485_2WIRE = ON' для
 		// подавления "эха" отправленной посылки (описана ниже)
 		//Send_Command Data.Device, 'SET BAUD 9600,N,8,1 485 DISABLE';
 
@@ -460,7 +460,6 @@ WAIT 10 {
 [MVP,KEYPAD[19]]  = (ALARM[12]!= 0)
 [MVP,KEYPAD[20]]  = (ALARM[13]!= 0)
 [MVP,KEYPAD[21]]  = (ALARM[14]!= 0)
-                          
 
 
 
@@ -470,12 +469,13 @@ WAIT 10 {
 
 
 
-[MVP, KEYPAD[22]] = (	ALARM[1] || ALARM[11] ||  
-			ALARM[2] || ALARM[12] ||  
-                        ALARM[3] || ALARM[13] ||  
-                        ALARM[4] || ALARM[14] ||  
-                        ALARM[5] || ALARM[6]  ||         
-                        ALARM[7] || ALARM[8]  ||   
+
+[MVP, KEYPAD[22]] = (	ALARM[1] || ALARM[11] ||
+			ALARM[2] || ALARM[12] ||
+                        ALARM[3] || ALARM[13] ||
+                        ALARM[4] || ALARM[14] ||
+                        ALARM[5] || ALARM[6]  ||
+                        ALARM[7] || ALARM[8]  ||
                         ALARM[9] || ALARM[10] )
 	}
 
@@ -484,16 +484,16 @@ WAIT 10 {
 WAIT 50
     {
 		Call 'ModBus - Call Function' (4, 111, 9, 1) // Обратка состояние вентиляции
-	WAIT 5 {Call 'ModBus - Call Function' (3, 111, 3, 1) // температура приточного воздуха 
+	WAIT 5 {Call 'ModBus - Call Function' (3, 111, 3, 1) // температура приточного воздуха
 	WAIT 5 {Call 'ModBus - Call Function' (3, 111, 7, 1) // Скорость
 	WAIT 5 {Call 'ModBus - Call Function' (4, 111, 0, 1) // Аварии 1
 	WAIT 5 {Call 'ModBus - Call Function' (4, 111, 1, 1) // Аварии 2
 	WAIT 5 {Call 'ModBus - Call Function' (4, 111, 2, 1) // Температура наружного воздуха
-	WAIT 5 {Call 'ModBus - Call Function' (4, 111, 3, 1) // Температура приточного воздуха 
-	WAIT 5 {Call 'ModBus - Call Function' (4, 111, 4, 1) // Температура обратного теплоносителя 
-	}}}}}}}                                       
+	WAIT 5 {Call 'ModBus - Call Function' (4, 111, 3, 1) // Температура приточного воздуха
+	WAIT 5 {Call 'ModBus - Call Function' (4, 111, 4, 1) // Температура обратного теплоносителя
+	}}}}}}}
     }
- 
+
 
 (***********************************************************)
 (*                     END OF PROGRAM                      *)

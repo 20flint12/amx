@@ -111,9 +111,9 @@ ch_heating_temperature_up	= 130
 ch_heating_temperature_down	= 131
 ch_heating_temperature_ok 	= 132
 ch_heating_temperature_view 	= 133
-ch_heating_1_hour		= 135
-ch_heating_2_hour		= 136
-ch_heating_5_hour		= 137
+ch_heating_normal		= 135
+ch_heating_economy		= 136
+//ch_heating_economy		= 137
 
 ch_hotwater_temperature_up	= 140
 ch_hotwater_temperature_down	= 141
@@ -122,6 +122,9 @@ ch_hotwater_temperature_view	= 143
 ch_hotwater_mode_economy	= 145
 ch_hotwater_mode_normal		= 146
 ch_hotwater_mode_luxury		= 147
+ch_hotwater_1_hour		= 148
+ch_hotwater_2_hour		= 149
+ch_hotwater_5_hour		= 150
 
 ch_alarm_message 		= 160
 
@@ -175,9 +178,8 @@ VOLATILE INTEGER controlPanelButtons[] =
     ch_heating_temperature_down,
     ch_heating_temperature_ok,
     ch_heating_temperature_view,
-    ch_heating_1_hour,
-    ch_heating_2_hour,
-    ch_heating_5_hour,
+    ch_heating_normal,
+    ch_heating_economy,
 
     ch_hotwater_temperature_up,
     ch_hotwater_temperature_down,
@@ -186,6 +188,9 @@ VOLATILE INTEGER controlPanelButtons[] =
     ch_hotwater_mode_economy,
     ch_hotwater_mode_normal,
     ch_hotwater_mode_luxury,
+    ch_hotwater_1_hour,
+    ch_hotwater_2_hour,
+    ch_hotwater_5_hour,
 
     ch_alarm_message
 }
@@ -347,6 +352,24 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    }
 	    TemperatureText(dvPanel, addr_room_temperature_setpoint, VAR_PREP_ROOM_TEMPERATURE_SETPOINT)
 
+       	    if( VAR_ROOM_TEMPERATURE_SETPOINT <= 190 and VAR_ROOM_TEMPERATURE_SETPOINT > 160 )	// 19.0 grad
+	    {
+		[dvPanel, ch_heating_normal] = 1;
+		[dvPanel, ch_heating_economy] = 0;
+	    }
+	    else
+	    if( VAR_ROOM_TEMPERATURE_SETPOINT <= 160 )	// 16.0 grad
+	    {
+		[dvPanel, ch_heating_normal] = 0;
+		[dvPanel, ch_heating_economy] = 1;
+	    }
+	    else
+	    if( VAR_ROOM_TEMPERATURE_SETPOINT >= 190 )
+	    {
+		[dvPanel, ch_heating_normal] = 0;
+		[dvPanel, ch_heating_economy] = 0;	    
+	    }
+
 	}
 	Active (Function == 3 && Address == REG_HOT_WATER_MODE) : {
 	    VAR_HOT_WATER_MODE  = Value
@@ -362,16 +385,16 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    if( VAR_HOT_WATER_MODE == 2 ) { [dvPanel,ch_hotwater_mode_luxury] = 1 }
 	    else { [dvPanel,ch_hotwater_mode_luxury] = 0 }
 
-	    IF( VAR_TERM_LUXURY == 1 ) [dvPanel, ch_heating_1_hour] = 1;
+	    IF( VAR_TERM_LUXURY == 1 ) [dvPanel, ch_hotwater_1_hour] = 1;
 	    ELSE
-	    IF( VAR_TERM_LUXURY == 2 ) [dvPanel, ch_heating_2_hour] = 1;
+	    IF( VAR_TERM_LUXURY == 2 ) [dvPanel, ch_hotwater_2_hour] = 1;
 	    ELSE
-	    IF( VAR_TERM_LUXURY == 3 ) [dvPanel, ch_heating_5_hour] = 1;
+	    IF( VAR_TERM_LUXURY == 3 ) [dvPanel, ch_hotwater_5_hour] = 1;
 	    ELSE
 	    {
-		[dvPanel, ch_heating_1_hour] = 0;
-		[dvPanel, ch_heating_2_hour] = 0;
-		[dvPanel, ch_heating_5_hour] = 0;
+		[dvPanel, ch_hotwater_1_hour] = 0;
+		[dvPanel, ch_hotwater_2_hour] = 0;
+		[dvPanel, ch_hotwater_5_hour] = 0;
 	    }
 	    // ****************************************************************
 	}
@@ -394,21 +417,23 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	Active (Function == 3 && Address == REG_HOTWATER_LOAD)  : {
 	    VAR_HOTWATER_LOAD  = Value
 	    TemperatureText(dvPanel, addr_hotwater_load, VAR_HOTWATER_LOAD)
-	    //cText = "ITOA(VAR_HOTWATER_LOAD),'°C'"
-	    //SEND_COMMAND dvPanel, "'^TXT-5,0,', cText"
 	    // ****************************************************************
 	}
 	Active (Function == 3 && Address == REG_BT10) : {
 	    VAR_BT10 = Value
-	    SEND_COMMAND dvPanel, "'^TXT-6,0,', ITOA(VAR_BT10)"
+	    //SEND_COMMAND dvPanel, "'^TXT-6,0,', ITOA(VAR_BT10)"
+	    TemperatureText(dvPanel, addr_brine_in, VAR_BT10)
 	}
 	Active (Function == 3 && Address == REG_BT11) : {
 	    VAR_BT11 = Value
-	    SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_BT11)"
+	    //SEND_COMMAND dvPanel, "'^TXT-7,0,', ITOA(VAR_BT11)"
+	    TemperatureText(dvPanel, addr_brine_out, VAR_BT11)
 	}
 	Active (Function == 3 && Address == REG_BT3) : {
 	    VAR_BT3 = Value
-	    SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_BT3)"
+	    //SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_BT3)"
+	    TemperatureText(dvPanel, addr_return_temperature, VAR_BT3)
+	    
 	}
 	Active (Function == 3 && Address == REG_ALARM) : {
 	    VAR_ALARM = Value
@@ -688,33 +713,39 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 	    }
 
     	    //  #############################################
-	    CASE ch_heating_1_hour:
+	    CASE ch_hotwater_1_hour:
 	    {
-		send_string 0, "'ch_heating_1_hour'";
-		SET_MINUTES = 5;
+		send_string 0, "'ch_hotwater_1_hour'";
+		SET_MINUTES = 60;
 		TIMER_MINUTES = 0;
 		VAR_TERM_LUXURY = 1;
-		[dvPanel, ch_heating_1_hour] = 1;
+		[dvPanel, ch_hotwater_1_hour] = 1;
+		[dvPanel, ch_hotwater_2_hour] = 0;
+		[dvPanel, ch_hotwater_5_hour] = 0;
 		SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }
-	    CASE ch_heating_2_hour:
+	    CASE ch_hotwater_2_hour:
 	    {
-		send_string 0, "'ch_heating_2_hour'";
-		SET_MINUTES = 10;
+		send_string 0, "'ch_hotwater_2_hour'";
+		SET_MINUTES = 120;
 		TIMER_MINUTES = 0;
 		VAR_TERM_LUXURY = 2;
-		[dvPanel, ch_heating_2_hour] = 1;
+		[dvPanel, ch_hotwater_1_hour] = 0;
+		[dvPanel, ch_hotwater_2_hour] = 1;
+		[dvPanel, ch_hotwater_5_hour] = 0;
 		SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }
-	    CASE ch_heating_5_hour:
+	    CASE ch_hotwater_5_hour:
 	    {
-		send_string 0, "'ch_heating_5_hour'";
-		SET_MINUTES = 20;
+		send_string 0, "'ch_hotwater_5_hour'";
+		SET_MINUTES = 300;
 		TIMER_MINUTES = 0;
 		VAR_TERM_LUXURY = 3;
-		[dvPanel, ch_heating_5_hour] = 1;
+		[dvPanel, ch_hotwater_1_hour] = 0;
+		[dvPanel, ch_hotwater_2_hour] = 0;
+		[dvPanel, ch_hotwater_5_hour] = 1;
 		SEND_COMMAND dvPanel, "'^TXT-20,0,', ITOA(TIMER_MINUTES), ' minutes'"
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2)
 	    }
@@ -755,18 +786,41 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
 	    // REG_HOT_WATER_MODE #############################################
 	    CASE ch_hotwater_mode_economy:
 	    {
+		SET_MINUTES = -1;	// stop timer
+		SEND_COMMAND dvPanel, "'^TXT-20,0,', ' stopped'"
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0);
 		//send_string 0, "'btn_economy'";
 	    }
 	    CASE ch_hotwater_mode_normal:
 	    {
+		SET_MINUTES = -1;	// stop timer
+		SEND_COMMAND dvPanel, "'^TXT-20,0,', ' stopped'"
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 1);
 	    }
+	    /*
 	    CASE ch_hotwater_mode_luxury:
 	    {
 		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 2);
 	    }
+	    */
 
+	    CASE ch_heating_normal:
+	    {
+		VAR_PREP_ROOM_TEMPERATURE_SETPOINT = 190;
+		send_string 0, "'ch_heating_normal'";
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_PREP_ROOM_TEMPERATURE_SETPOINT);
+    		[dvPanel, ch_heating_normal] = 1;
+		[dvPanel, ch_heating_economy] = 0;
+	    }
+	    CASE ch_heating_economy:
+	    {
+		VAR_PREP_ROOM_TEMPERATURE_SETPOINT = 160;
+		send_string 0, "'ch_heating_economy'";
+		Call 'Modbus - Write Multiple Registers - Single register' (1, REG_ROOM_TEMPERATURE_SETPOINT, VAR_PREP_ROOM_TEMPERATURE_SETPOINT);
+    		[dvPanel, ch_heating_normal] = 0;
+		[dvPanel, ch_heating_economy] = 1;
+	    }
+	    
 	}
     }
 }
@@ -954,9 +1008,9 @@ Wait 200
 	    SEND_COMMAND dvPanel, "'^TXT-20,0,', ' stopped'"
 	    Call 'Modbus - Write Multiple Registers - Single register' (1, REG_HOT_WATER_MODE, 0) // Economy
 
-    	    [dvPanel, ch_heating_1_hour] = 0;
-	    [dvPanel, ch_heating_2_hour] = 0;
-	    [dvPanel, ch_heating_5_hour] = 0;
+    	    [dvPanel, ch_hotwater_1_hour] = 0;
+	    [dvPanel, ch_hotwater_2_hour] = 0;
+	    [dvPanel, ch_hotwater_5_hour] = 0;
 	}
 	ELSE
 	{
@@ -966,9 +1020,9 @@ Wait 200
     ELSE
     {
 	VAR_TERM_LUXURY = 0;
-	[dvPanel, ch_heating_1_hour] = 0;
-	[dvPanel, ch_heating_2_hour] = 0;
-	[dvPanel, ch_heating_5_hour] = 0;
+	[dvPanel, ch_hotwater_1_hour] = 0;
+	[dvPanel, ch_hotwater_2_hour] = 0;
+	[dvPanel, ch_hotwater_5_hour] = 0;
     }
 
 }
