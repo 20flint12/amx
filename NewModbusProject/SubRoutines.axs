@@ -200,20 +200,22 @@ Wait 50 // every 5 sec
     local_var volatile Char    sData2[512];
     local_var volatile Char    sData3[512];
 
-    CURR_HOUR = TIME_TO_HOUR (TIME)	
-
-    IF( CURR_HOUR != LAST_HOUR )
+    if( VAR_ROOM_TEMPERATURE != 0 and VAR_OUTDOOR_TEMPERATURE != 0 ) // only while valid temperatures
     {
-	LAST_HOUR = CURR_HOUR;
-	Send_String 0,"'1 +++++++++++++++++++ idxIN=',ITOA(idxIN),' idxOUT=',ITOA(idxOUT)";
-	TemperatureArr[idxIN+1].fRoomTemperature = VAR_ROOM_TEMPERATURE; //RANDOM_NUMBER(100);
-	TemperatureArr[idxIN+1].fOutdoorTemperature = VAR_OUTDOOR_TEMPERATURE;
-	TemperatureArr[idxIN+1].tDateMark = LDATE;
-	idxIN = idxIN + 1;
-	idxIN = idxIN & BUF_MASK;	
-	Send_String 0,"'2 +++++++++++++++++++ idxIN=',ITOA(idxIN),' idxOUT=',ITOA(idxOUT)";
+	CURR_HOUR = TIME_TO_HOUR (TIME)	
+	IF( CURR_HOUR != LAST_HOUR )
+	{
+	    LAST_HOUR = CURR_HOUR;
+	    Send_String 0,"'1 +++++++++++++++++++ idxIN=',ITOA(idxIN),' idxOUT=',ITOA(idxOUT)";
+	    TemperatureArr[idxIN+1].fRoomTemperature = VAR_ROOM_TEMPERATURE; //RANDOM_NUMBER(100);
+	    TemperatureArr[idxIN+1].fOutdoorTemperature = VAR_OUTDOOR_TEMPERATURE;
+	    TemperatureArr[idxIN+1].tDateMark = LDATE;
+	    idxIN = idxIN + 1;
+	    idxIN = idxIN & BUF_MASK;	
+	    Send_String 0,"'2 +++++++++++++++++++ idxIN=',ITOA(idxIN),' idxOUT=',ITOA(idxOUT)";
+	}
+	Send_String 0,"'******** CURR_HOUR= ',ITOA(CURR_HOUR),' **************** LAST_HOUR=',ITOA(LAST_HOUR)"
     }
-    Send_String 0,"'******** CURR_HOUR= ',ITOA(CURR_HOUR),' **************** LAST_HOUR=',ITOA(LAST_HOUR)"
     
     sData = "";
     sData2 = "";
