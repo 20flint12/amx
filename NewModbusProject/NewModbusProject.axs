@@ -258,14 +258,14 @@ Define_Call 'Modbus - Write Multiple Coils' (Char DeviceAddress,
 	Bits = "$01, $02, $04, $08, $10, $20, $40, $80";
 	bByteCount = Type_Cast((QuantityOfCoils - 1) / 8 + 1);
 	sData = "Format('%02X', DeviceAddress), Format('%02X', $0F), Format('%04X', StartRegisterAddress), Format('%04X', QuantityOfCoils), Format('%02X', bByteCount)";
-	bData = $00; 
-	For (i = 1; i <= QuantityOfCoils; i++) 
-	{ 
-	    bData = bData | (Bits[(i - 1) % 8 + 1] * Coils[i]); 
-	    If (i % 8 == 0) 
-	    { 
-		sData = "sData, Format('%02X', bData)"; bData = $00; 
-	    } 
+	bData = $00;
+	For (i = 1; i <= QuantityOfCoils; i++)
+	{
+	    bData = bData | (Bits[(i - 1) % 8 + 1] * Coils[i]);
+	    If (i % 8 == 0)
+	    {
+		sData = "sData, Format('%02X', bData)"; bData = $00;
+	    }
 	}
 	If (i % 8 != 1)
 	{
@@ -367,7 +367,7 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    if( VAR_ROOM_TEMPERATURE_SETPOINT >= 190 )
 	    {
 		[dvPanel, ch_heating_normal] = 0;
-		[dvPanel, ch_heating_economy] = 0;	    
+		[dvPanel, ch_heating_economy] = 0;
 	    }
 
 	}
@@ -433,7 +433,7 @@ Define_Call 'ModBus - Process Answer' (Char Function, Char Device, Integer Addre
 	    VAR_BT3 = Value
 	    //SEND_COMMAND dvPanel, "'^TXT-8,0,', ITOA(VAR_BT3)"
 	    TemperatureText(dvPanel, addr_return_temperature, VAR_BT3)
-	    
+
 	}
 	Active (Function == 3 && Address == REG_ALARM) : {
 	    VAR_ALARM = Value
@@ -820,7 +820,7 @@ BUTTON_EVENT[dvPanel, controlPanelButtons]
     		[dvPanel, ch_heating_normal] = 0;
 		[dvPanel, ch_heating_economy] = 1;
 	    }
-	    
+
 	}
     }
 }
@@ -863,7 +863,7 @@ BUTTON_EVENT[dvPanel,195]
 	    [dvPanel,195] = 0
 	}
 	*/
-	
+
 	SEND_LEVEL dvPanel, 8, 55
 	SEND_LEVEL dvPanel, 9, 100
     }
@@ -882,7 +882,7 @@ LEVEL_EVENT[dvPanel,8]
     //cTemp = AlarmText( 1 )
     Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' **************** ', AlarmList[2].cAlarmTextDisplay"
 
-    //Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' ****************'"    
+    //Send_String 0,"'******** LEVEL_EVENT= ',ITOA(LEVEL.VALUE),' ****************'"
 
 }
 
@@ -928,60 +928,56 @@ Wait 300 'Modbus Requests'
     {
 	send_string 0, "'=== Wait 0 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_OUTDOOR_TEMPERATURE, 1);
-	//SEND_COMMAND dvPanel, "'^TXT-1,0,', 'wait...'"
-	SimpleText(dvPanel, addr_outdoor_temperature, 'wait...')
+	//SimpleText(dvPanel, addr_outdoor_temperature, 'wait...')
     }
     wait 25
     {
 	send_string 0, "'=== Wait 25 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE, 1);
-	//SEND_COMMAND dvPanel, "'^TXT-2,0,', 'wait...'"
-	SimpleText(dvPanel, addr_room_temperature, 'wait...')
+	//SimpleText(dvPanel, addr_room_temperature, 'wait...')
     }
     wait 50
     {
 	send_string 0, "'=== Wait 50 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_ROOM_TEMPERATURE_SETPOINT, 1);
-	//SEND_COMMAND dvPanel, "'^TXT-3,0,', 'wait...'"
-	SimpleText(dvPanel, addr_room_temperature_setpoint, 'wait...')
+	//SimpleText(dvPanel, addr_room_temperature_setpoint, 'wait...')
     }
     wait 75
     {
 	send_string 0, "'=== Wait 75 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_HOT_WATER_MODE, 1);
-	//SEND_COMMAND dvPanel, "'^TXT-4,0,', 'wait...'"
-	SimpleText(dvPanel, addr_hotwater_mode, 'wait...')
+	//SimpleText(dvPanel, addr_hotwater_mode, 'wait...')
     }
     wait 100
     {
 	send_string 0, "'=== Wait 100 ==='";
 	//Call 'ModBus - Call Function' (3, 1, REG_COMFORT_HOTWATER_TEMPERATURE, 1);
 	Call 'ModBus - Call Function' (3, 1, REG_HOTWATER_LOAD, 1);
-	SimpleText(dvPanel, addr_comfort_hotwater_temperature, 'wait...')
+	//SimpleText(dvPanel, addr_comfort_hotwater_temperature, 'wait...')
     }
     wait 125
     {
 	send_string 0, "'=== Wait 125 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_BT10, 1);
-	SimpleText(dvPanel, addr_brine_in, 'wait...')
+	//SimpleText(dvPanel, addr_brine_in, 'wait...')
     }
     wait 150
     {
 	send_string 0, "'=== Wait 150 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_BT11, 1);
-	SimpleText(dvPanel, addr_brine_out, 'wait...')
+	//SimpleText(dvPanel, addr_brine_out, 'wait...')
     }
     wait 200
     {
 	send_string 0, "'=== Wait 200 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_BT3, 1);
-	SimpleText(dvPanel, addr_return_temperature, 'wait...')
+	//SimpleText(dvPanel, addr_return_temperature, 'wait...')
     }
     wait 225
     {
 	send_string 0, "'=== Wait 225 ==='";
 	Call 'ModBus - Call Function' (3, 1, REG_ALARM, 1);
-	SimpleText(dvPanel, addr_alarm_number, 'wait...')
+	//SimpleText(dvPanel, addr_alarm_number, 'wait...')
     }
 
 }
